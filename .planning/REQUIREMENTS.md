@@ -67,6 +67,37 @@ Derived from `.planning/PROJECT.md`. Visual/theme specifics are intentionally de
 
 ## Traceability
 
-<!-- Filled by roadmap: maps each REQ-ID to its phase. -->
+Maps each v1 REQ-ID to its phase. v2/Later and Out-of-Scope items are not mapped.
 
-(Pending roadmap generation)
+**Coverage: 28/28 v1 requirements mapped (100%). No orphans, no duplicates.**
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| FOUND-01 | Phase 1 — The Look | Pending |
+| FOUND-02 | Phase 1 — The Look | Pending |
+| FOUND-03 | Phase 1 — The Look | Pending |
+| FOUND-04 | Phase 1 — The Look | Pending |
+| HERO-01 | Phase 2 — The First Impression | Pending |
+| HERO-02 | Phase 2 — The First Impression | Pending |
+| HERO-03 | Phase 2 — The First Impression | Pending |
+| HERO-04 | Phase 2 — The First Impression | Pending |
+| NAV-02 | Phase 2 — The First Impression | Pending |
+| LINK-01 | Phase 2 — The First Impression | Pending |
+| LINK-02 | Phase 2 — The First Impression | Pending |
+| NAV-01 | Phase 3 — The Story | Pending |
+| NAV-03 | Phase 3 — The Story | Pending |
+| CONT-01 | Phase 3 — The Story | Pending |
+| CONT-03 | Phase 3 — The Story | Pending |
+| CONT-04 | Phase 3 — The Story | Pending |
+| MOTION-01 | Phase 3 — The Story | Pending |
+| MOTION-02 | Phase 3 — The Story | Pending |
+| CONT-02 | Phase 4 — The Showcase | Pending |
+| PROJ-01 | Phase 4 — The Showcase | Pending |
+| PROJ-02 | Phase 4 — The Showcase | Pending |
+| PROJ-03 | Phase 4 — The Showcase | Pending |
+| LINK-03 | Phase 4 — The Showcase | Pending |
+| RESP-01 | Phase 5 — Ready to Share | Pending |
+| PERF-01 | Phase 5 — Ready to Share | Pending |
+| PERF-02 | Phase 5 — Ready to Share | Pending |
+| SEO-01 | Phase 5 — Ready to Share | Pending |
+| A11Y-01 | Phase 5 — Ready to Share | Pending |
