@@ -24,6 +24,7 @@ When someone opens the page, they should immediately think **"wow — this perso
 - [ ] An immersive single-scroll main page holding the most relevant info (Hero → Story/About → Featured Projects → How I Work With AI → Contact)
 - [ ] Separate deeper page(s) for individual project case studies (multi-page architecture, not just one scroll)
 - [ ] A dedicated "How I Work With AI" angle that showcases AI-assisted building (the *grano salis* philosophy)
+- [ ] An interactive "Ask AI about me" concierge bar (high on the page) — self-demoing, portfolio-grounded, favourable-but-truthful answers; itself a live demonstration of building with AI
 - [ ] Scroll-triggered / cursor-reactive animations conveying "automation" (things assemble, lines draw themselves, particles flow)
 - [ ] Responsive and presentable on mobile (recruiters open links on phones)
 - [ ] Deployable as a static site to **GitHub Pages**
@@ -33,7 +34,7 @@ When someone opens the page, they should immediately think **"wow — this perso
 
 <!-- Explicit boundaries with reasoning. -->
 
-- Backend / server-side logic — site is static (GitHub Pages constraint, and a portfolio needs none) — revisit only if a contact form needs a backend (can use a serverless form service instead)
+- Full backend / server / database — the site stays static on GitHub Pages. **Exception:** the AI Concierge (Phase 3) may add a single thin serverless API route (e.g. Cloudflare Worker / Vercel function) purely to proxy the LLM call and hide the API key — a hybrid, not a full backend. Alternative is a fully static curated-Q&A with no key. No general server-side app logic, auth, or DB.
 - CMS / blog engine — not needed for v1; content is curated and hand-built
 - Final written copy and exact project selection — deferred; content discussion happens *after* the visual/structural skeleton exists (user's explicit request)
 - E-commerce, auth, user accounts — irrelevant to a portfolio
@@ -68,6 +69,8 @@ When someone opens the page, they should immediately think **"wow — this perso
 | GitHub Pages hosting (static build) | User selected; free, clean link, matches inspiration; custom domain can be added later | — Pending |
 | Claude leads design with per-step user approval | User explicitly asked Claude to design it while staying in the loop to react/refine | — Pending |
 | Defer final content/copy and project selection until skeleton exists | User asked to settle look & structure first, discuss content later | — Pending |
+| Add an "Ask AI about me" concierge as a dedicated phase (Phase 3) | User idea; signature interactive feature that doubles as proof of his AI-building skill | — Pending |
+| AI Concierge backend: hybrid serverless proxy vs static curated-Q&A | Need an LLM answer without exposing an API key; pick at Phase 3 plan time | — Pending |
 
 ## Evolution
 

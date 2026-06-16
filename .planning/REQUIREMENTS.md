@@ -21,6 +21,14 @@ Derived from `.planning/PROJECT.md`. Visual/theme specifics are intentionally de
 - [ ] **NAV-02**: Smooth scrolling with section anchors and a persistent/access nav
 - [ ] **NAV-03**: Tasteful transitions when moving between home and deeper pages
 
+### AI Concierge ("Ask AI about me")
+- [ ] **ASKAI-01**: An "Ask AI about me" prompt bar is present high on the page (≈ section 2–3), visible without deep scrolling
+- [ ] **ASKAI-02**: The bar self-demos — on load/idle it auto-types an example question and shows an answer, inviting the visitor to try
+- [ ] **ASKAI-03**: Several example/suggested questions are offered (clickable or cycling)
+- [ ] **ASKAI-04**: A visitor can submit their own question and receive an answer grounded in Sirio's portfolio
+- [ ] **ASKAI-05**: Answers are concise and well-structured with selective **bold** emphasis; truthful (no fabrication) while representing Sirio favourably
+- [ ] **ASKAI-06**: The answer backend exposes no secret API key in the shipped site (serverless proxy OR static curated-Q&A, decided at plan time); basic abuse/rate protection if a live LLM is used
+
 ### Main-Scroll Content
 - [ ] **CONT-01**: About/Story section narrating the biotech → design/automation pivot
 - [ ] **CONT-02**: Featured Projects section (3–5 highlight cards linking to detail pages)
@@ -69,7 +77,7 @@ Derived from `.planning/PROJECT.md`. Visual/theme specifics are intentionally de
 
 Maps each v1 REQ-ID to its phase. v2/Later and Out-of-Scope items are not mapped.
 
-**Coverage: 28/28 v1 requirements mapped (100%). No orphans, no duplicates.**
+**Coverage: 34/34 v1 requirements mapped (100%). No orphans, no duplicates.**
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
@@ -84,20 +92,26 @@ Maps each v1 REQ-ID to its phase. v2/Later and Out-of-Scope items are not mapped
 | NAV-02 | Phase 2 — The First Impression | Pending |
 | LINK-01 | Phase 2 — The First Impression | Pending |
 | LINK-02 | Phase 2 — The First Impression | Pending |
-| NAV-01 | Phase 3 — The Story | Pending |
-| NAV-03 | Phase 3 — The Story | Pending |
-| CONT-01 | Phase 3 — The Story | Pending |
-| CONT-03 | Phase 3 — The Story | Pending |
-| CONT-04 | Phase 3 — The Story | Pending |
-| MOTION-01 | Phase 3 — The Story | Pending |
-| MOTION-02 | Phase 3 — The Story | Pending |
-| CONT-02 | Phase 4 — The Showcase | Pending |
-| PROJ-01 | Phase 4 — The Showcase | Pending |
-| PROJ-02 | Phase 4 — The Showcase | Pending |
-| PROJ-03 | Phase 4 — The Showcase | Pending |
-| LINK-03 | Phase 4 — The Showcase | Pending |
-| RESP-01 | Phase 5 — Ready to Share | Pending |
-| PERF-01 | Phase 5 — Ready to Share | Pending |
-| PERF-02 | Phase 5 — Ready to Share | Pending |
-| SEO-01 | Phase 5 — Ready to Share | Pending |
-| A11Y-01 | Phase 5 — Ready to Share | Pending |
+| ASKAI-01 | Phase 3 — The AI Concierge | Pending |
+| ASKAI-02 | Phase 3 — The AI Concierge | Pending |
+| ASKAI-03 | Phase 3 — The AI Concierge | Pending |
+| ASKAI-04 | Phase 3 — The AI Concierge | Pending |
+| ASKAI-05 | Phase 3 — The AI Concierge | Pending |
+| ASKAI-06 | Phase 3 — The AI Concierge | Pending |
+| NAV-01 | Phase 4 — The Story | Pending |
+| NAV-03 | Phase 4 — The Story | Pending |
+| CONT-01 | Phase 4 — The Story | Pending |
+| CONT-03 | Phase 4 — The Story | Pending |
+| CONT-04 | Phase 4 — The Story | Pending |
+| MOTION-01 | Phase 4 — The Story | Pending |
+| MOTION-02 | Phase 4 — The Story | Pending |
+| CONT-02 | Phase 5 — The Showcase | Pending |
+| PROJ-01 | Phase 5 — The Showcase | Pending |
+| PROJ-02 | Phase 5 — The Showcase | Pending |
+| PROJ-03 | Phase 5 — The Showcase | Pending |
+| LINK-03 | Phase 5 — The Showcase | Pending |
+| RESP-01 | Phase 6 — Ready to Share | Pending |
+| PERF-01 | Phase 6 — Ready to Share | Pending |
+| PERF-02 | Phase 6 — Ready to Share | Pending |
+| SEO-01 | Phase 6 — Ready to Share | Pending |
+| A11Y-01 | Phase 6 — Ready to Share | Pending |

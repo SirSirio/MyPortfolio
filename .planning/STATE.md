@@ -2,7 +2,7 @@
 gsd_state_version: '1.0'  # placeholder; syncStateFrontmatter overwrites on first state.* call
 status: planning
 progress:
-  total_phases: 5
+  total_phases: 6
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -20,10 +20,10 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 
 ## Current Position
 
-Phase: 1 of 5 (The Look)
+Phase: 1 of 6 (The Look)
 Plan: 0 of TBD in current phase
 Status: Ready to plan
-Last activity: 2026-06-16 — Roadmap reframed to content-shaped phases (The Look → First Impression → Story → Showcase → Ready to Share); 28 v1 requirements re-mapped at 100% coverage
+Last activity: 2026-06-16 — Added Phase 3 "The AI Concierge" (Ask-AI-about-me feature, promoted from a captured todo). Roadmap now 6 content-shaped phases: The Look → First Impression → AI Concierge → Story → Showcase → Ready to Share; 34 v1 requirements mapped at 100% coverage
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -54,7 +54,9 @@ Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
 - [Roadmap]: Phases are CONTENT-SHAPED, not technical layers (user feedback: dev-style layer phases felt "dry and meaningless"). Each phase = a meaningful chunk a visitor experiences; technical plumbing (build/deploy/perf) folded invisibly into the relevant phase.
-- [Roadmap]: Order = The Look → First Impression → Story → Showcase → Ready to Share. Story placed BEFORE Showcase per explicit user choice.
+- [Roadmap]: Order = The Look → First Impression → AI Concierge → Story → Showcase → Ready to Share. Story placed BEFORE Showcase per explicit user choice.
+- [Roadmap]: Added Phase 3 "The AI Concierge" — interactive "Ask AI about me" bar (promoted from captured todo). New requirement group ASKAI-01..06.
+- [Architecture]: AI Concierge needs an LLM without exposing a key. Likely path = HYBRID (static site stays on GitHub Pages + a serverless API route on Cloudflare Worker/Vercel proxies the LLM). Alternative = fully static curated-Q&A (no key). Decision deferred to Phase 3 plan time. Revisit PROJECT.md "no backend" out-of-scope accordingly.
 - [Roadmap]: Visual theme deferred ("design on hold") — it plugs into Phase 2 (The First Impression / magic engine); per-phase research runs at plan time once theme is chosen
 - [Roadmap]: No standalone "write all copy" phase — each phase settles its own real content at phase start (profile is the source); final project selection/wording handled per-phase
 
@@ -62,7 +64,7 @@ Recent decisions affecting current work:
 
 [From .planning/todos/pending/ — ideas captured during sessions]
 
-- **Add AI "ask me about Sirio" chat feature** (area: ui) — self-demoing prompt bar, portfolio-grounded answers. ⚠ Needs an LLM API key → conflicts with "static/no-backend" decision; resolve real-LLM-via-serverless vs static-curated-Q&A. See `.planning/todos/pending/2026-06-16-add-ai-ask-me-about-sirio-chat-feature.md`.
+- ✓ *Promoted to Phase 3 "The AI Concierge"* — Add AI "ask me about Sirio" chat feature (was a captured todo; now a roadmap phase, requirements ASKAI-01..06). Architecture decision (serverless proxy vs static curated-Q&A) carried into Phase 3 planning.
 
 ### Blockers/Concerns
 
