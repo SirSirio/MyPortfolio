@@ -62,7 +62,7 @@ Recent decisions affecting current work:
 
 [From .planning/todos/pending/ — ideas captured during sessions]
 
-None yet.
+- **Add AI "ask me about Sirio" chat feature** (area: ui) — self-demoing prompt bar, portfolio-grounded answers. ⚠ Needs an LLM API key → conflicts with "static/no-backend" decision; resolve real-LLM-via-serverless vs static-curated-Q&A. See `.planning/todos/pending/2026-06-16-add-ai-ask-me-about-sirio-chat-feature.md`.
 
 ### Blockers/Concerns
 
