@@ -65,6 +65,7 @@ Recent decisions affecting current work:
 [From .planning/todos/pending/ — ideas captured during sessions]
 
 - ✓ *Promoted to Phase 3 "The AI Concierge"* — Add AI "ask me about Sirio" chat feature (was a captured todo; now a roadmap phase, requirements ASKAI-01..06). Architecture decision (serverless proxy vs static curated-Q&A) carried into Phase 3 planning.
+- **Hero typewriter rotating-role animation** (area: ui) — "I'm a " + typed/deleted cycling words (Engineer, Biotechnologist, Product Designer, Developer…), each a different color. Belongs to Phase 2 (First Impression / HERO-03). See `.planning/todos/pending/2026-06-17-hero-typewriter-rotating-role-animation.md`.
 
 ### Blockers/Concerns
 
