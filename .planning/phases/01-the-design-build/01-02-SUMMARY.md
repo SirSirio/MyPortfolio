@@ -56,11 +56,14 @@ patterns-established:
   - "Engine-written CSS vars (--b, --glow, --core, ...) live on the hero element, so every consumer must be a hero descendant"
   - "The design's non-standard hover attribute is always translated into a real :hover rule"
 
-requirements-completed: []  # PENDING — D-04 + D-01 deferred to 01-03's checkpoint. See "Checkpoint Status".
+# Approved by Sirio at the Task 3 human-verify checkpoint ("approved").
+# NAV-02 is deliberately EXCLUDED — see "Requirements" below.
+requirements-completed: [FOUND-03, HERO-01, HERO-02, HERO-03, HERO-04, LINK-01, LINK-02]
+requirements-deferred: [NAV-02]  # -> Plan 01-03 (persistent nav unverifiable without scroll; #index anchor does not exist yet)
 
 # Metrics
 duration: ~55min
-completed: PENDING
+completed: 2026-07-16
 ---
 
 # Phase 01 Plan 02: The Living GOLD Cosmos Summary
@@ -69,16 +72,32 @@ completed: PENDING
 
 ## Checkpoint Status — READ FIRST
 
-**Task 3 got a partial approval + one defect, now fixed. Task 3 is still not signed off.**
+**Task 3 is COMPLETE.** Sirio approved the rendered hero ("approved") after reloading the
+fixed build and confirming both re-checks: the phantom scroll is gone (cursor no longer
+drags the page, scrollbar absent) and the D-05 drift still feels right.
 
 Sirio's verdict at the Task 3 checkpoint:
 
 | Item | Verdict | Consequence |
 |------|---------|-------------|
-| **D-02** — the approved star, in gold | **APPROVED as-is** | Do not touch the star, its gold treatment, the 20s breath, or the i-dot orbits. |
-| **D-05** — pointer reactivity | **APPROVED in feel** ("yes fine") | Feel is locked. It was also the direct cause of the defect below — fixed by containment, *not* by reducing the drift constants. |
-| **D-04** — deep-field continuity across the hero's bottom edge | **NOT VERIFIABLE — deferred to 01-03** | See below. |
-| **D-01** — nav docking (incl. the "pops vs fades" question) | **NOT VERIFIABLE — deferred to 01-03** | See below. |
+| **D-02** — the approved star, in gold | **APPROVED as-is** | **Locked.** Do not touch the star, its gold treatment, the 20s breath, or the i-dot orbits. |
+| **D-05** — pointer reactivity | **APPROVED in feel** ("yes fine") | **Locked** — see "Locked Values" below. It was also the direct cause of the phantom-scroll defect, which was fixed by *containment*, not by reducing the drift constants. |
+| **D-04** — deep-field continuity across the hero's bottom edge | **NOT VERIFIABLE here — deferred to 01-03** | See below. |
+| **D-01** — nav docking (incl. the "pops vs fades" question) | **NOT VERIFIABLE here — deferred to 01-03** | See below. Requirement **NAV-02 stays Pending**. |
+
+### Locked Values — do not change without Sirio's say
+
+Sirio approved this specific feel. Later plans must not quietly retune it:
+
+| Constant | Value | File |
+|----------|-------|------|
+| `STAR_DRIFT` | `10` (px) | `site/main.js` |
+| `CANVAS_DRIFT` | `6` (px) | `site/main.js` |
+| `DRIFT_EASE` | `0.06` (per frame) | `site/main.js` |
+
+If a future layout problem appears to require changing these, **it does not** — the
+phantom-scroll defect looked exactly like that and the correct fix was containment at
+`.hero`, with the drift left untouched.
 
 ### Why D-04 and the nav docking are deferred (checkpoint design error, not an implementation gap)
 
@@ -97,24 +116,48 @@ Both carry forward to **Plan 01-03's checkpoint**, where real sections sit below
 Scroll space was deliberately **not** manufactured to test them — a synthetic scroll would
 prove nothing about the real composition.
 
-**Task 3 remains unapproved on the deferred items, so `requirements-completed` stays empty
-and Plan 01-03 must not be started off this summary.**
-
-The tuning knobs Task 3 exists to settle, all single constants in `site/main.js`:
+The knobs still open for 01-03, both single constants in `site/main.js`:
 
 | Knob | Current | Status |
 |------|---------|--------|
-| Pointer drift | `STAR_DRIFT = 10`, `CANVAS_DRIFT = 6`, `DRIFT_EASE = 0.06` | **Locked** — approved in feel; do not change to work around layout issues |
-| Hero star density | `star.stars = []` | Deferred to 01-03 (a D-04 judgement) — re-seed 30–40 stars if the hero reads sparse |
-| Dock threshold | `DOCK_AT = 70` | Deferred to 01-03 |
+| Hero star density | `star.stars = []` | Open — a D-04 judgement. Re-seed ~30–40 stars if the hero reads sparse against real content below. |
+| Dock threshold | `DOCK_AT = 70` | Open — a D-01 judgement. Matches the design's `scroll-margin-top: 70px`. |
+
+## Requirements
+
+**Completed and approved (7):** `FOUND-03`, `HERO-01`, `HERO-02`, `HERO-03`, `HERO-04`,
+`LINK-01`, `LINK-02`. Marked complete in `.planning/REQUIREMENTS.md` (checkbox + traceability row).
+
+| Req | Text | Why it is genuinely met |
+|-----|------|-------------------------|
+| FOUND-03 | Dark-themed design-token system (colors, type scale, spacing) applied site-wide | 17 tokens on `:root` covering all three axes; applied to 100% of what exists; zero inline `style="` in `index.html`. 01-03 consumes them (see "Next Phase Readiness"). |
+| HERO-01 | Landing hero presents an animated "wow" centerpiece on load | The living gold star, approved by Sirio side-by-side against the design snapshot. **Caveat below.** |
+| HERO-02 | Hero motion reacts to cursor and/or scroll | D-05 pointer drift, approved in feel. Gated off on touch + reduced motion. |
+| HERO-03 | Hero states the identity in one line (design & engineering, biotech hint, automation thread) | The typewriter cycles all three threads — Engineer/Designer (design & engineering), Biotechnologist (biotech hint), Lab Automator (automation) — under `Hello, I am` + the wordmark. This is the *hero-level* identity; the Mission one-liner that introduces the *page* is a separate thing and ships in 01-03. |
+| HERO-04 | Hero exposes primary actions: View CV and LinkedIn | The bar is `position: absolute; top: 0` **inside the hero and visible at rest** — it needs no scroll and no docking. Sirio approved the rendered hero with it. |
+| LINK-01 | CV is viewable and/or downloadable (PDF and/or Canva link) | Canva link byte-identical to PROJECT.md's source of truth. |
+| LINK-02 | LinkedIn link present and correct | URL byte-identical to PROJECT.md's source of truth. |
+
+**Deferred (1): `NAV-02`** — *"Smooth scrolling with section anchors and a persistent/access
+nav."* Deliberately left **Pending**, for three independent reasons:
+
+1. The **persistent** nav is the docking behaviour (D-01), which cannot fire without scroll and is therefore unverified.
+2. The **section anchors** are incomplete: `#top` exists, but `[data-scrollhint]`'s `href="#index"` is a **dangling anchor** — `#index` ships with 01-03's Mission section.
+3. Only the `scroll-behavior: smooth` clause is actually delivered.
+
+**Notes on two completions, so nobody is misled later:**
+
+- **HERO-01's requirement text says "WebGL/3D"**; this ships **Canvas 2D**. That is not a shortfall — CLAUDE.md records that the approved Claude Design *supersedes* the earlier WebGL/Three.js intent ("achieves the wow-moment with Canvas 2D and stays lighter on mobile"). The *capability* (animated wow centerpiece on load) is delivered and approved. **`REQUIREMENTS.md:16` and `PROJECT.md`'s tech-stack constraint still say WebGL/Three.js and should be reconciled at the phase transition** — flagged, not edited here (PROJECT.md is not this plan's to write).
+- **LINK-01/LINK-02 were verified by URL identity, not by an HTTP 200.** `curl` gets `403` from Canva and `999` from LinkedIn — both are standard anti-bot responses to a non-browser user agent, not evidence of breakage. Sirio, who owns both accounts, approved the rendered bar.
 
 ## Performance
 
-- **Duration:** ~55 min (Tasks 1–2 + the post-checkpoint defect fix)
-- **Tasks:** 2 of 3 complete; Task 3 partially approved (D-02, D-05) with D-04 + D-01 deferred to 01-03
-- **Files modified:** 5
-- **Net:** +842 / −29 lines
-- **Commits:** 3 (`0b5cabf` feat, `fa835eb` feat, `badbcdf` fix)
+- **Duration:** ~55 min (Tasks 1–3 + the defect found at the Task 3 checkpoint)
+- **Tasks:** 3 of 3 complete (Task 3 approved by Sirio; D-04 + D-01 deferred to 01-03)
+- **Requirements:** 7 completed, 1 deferred (NAV-02)
+- **Files modified:** 6 (5 under `site/` + `.planning/REQUIREMENTS.md`)
+- **Net:** +842 / −29 lines under `site/`
+- **Commits:** 3 code (`0b5cabf` feat, `fa835eb` feat, `badbcdf` fix) + docs
 
 ## Accomplishments
 
@@ -191,17 +234,31 @@ bottom edge, and the clip would cut the glow into exactly the hard line D-04 for
    the clip (`position: fixed` descendants are not clipped by a non-transformed ancestor);
    verified `true` at every viewport.
 
-**On "legitimate vs phantom" scroll.** With the 620px floor, viewports shorter than 620px
-(e.g. 1920x500) do scroll — by exactly `620 − viewportHeight`. That is *real* content scroll
-to a real element and is what the approved design specifies. The discriminator is
-`driftOver − restOver`: baseline was `0 → 10` (drift adds 10 = phantom); shipped is
-`20 → 20` (drift adds 0). At every viewport where the hero fits, both are 0.
+### ⚠ Legitimate vs phantom scroll — READ BEFORE VERIFYING 01-03
+
+**The 620px floor means any viewport shorter than 620px scrolls by exactly
+`620 − viewportHeight`. This is CORRECT and is NOT a regression of the phantom-scroll bug.**
+
+It is *real content scroll*: the hero is 620px tall and simply does not fit, exactly as the
+approved design (V4:33) specifies. Whoever verifies 01-03 must not "fix" it.
+
+**The discriminator is `driftOver − restOver`** — i.e. does moving the cursor *add* scroll?
+
+| | at rest | drifted | drift adds | verdict |
+|---|---|---|---|---|
+| Before the fix (any viewport) | 0 | 10 | **+10px** | **phantom — the bug** |
+| Shipped, 1920x500 (hero doesn't fit) | 120 | 120 | **0px** | legitimate content scroll |
+| Shipped, any viewport ≥620px tall | 0 | 0 | **0px** | clean |
+
+The bug's signature was that **the cursor dragged the page**. If scroll exists but does not
+grow when the pointer moves, it is not this bug. Once 01-03 adds real sections below the
+hero the page scrolls anyway, and the distinction becomes moot.
 
 ## Task Commits
 
 1. **Task 1: The living GOLD cosmos — tokens, hero DOM, gold star, deep field, composition (D-04)** — `0b5cabf` (feat)
 2. **Task 2: Reactivity and persistent access — pointer parallax (D-05) + docking nav (D-01) + CV/LinkedIn** — `fa835eb` (feat)
-3. **Task 3: Sirio approves the rendered hero** — D-02 approved, D-05 approved in feel; D-04 + D-01 deferred to 01-03. Defect fix: **`badbcdf`** (fix)
+3. **Task 3: Sirio approves the rendered hero** — **COMPLETE.** Sirio: *"approved"*. D-02 approved as-is, D-05 approved in feel; D-04 + D-01 deferred to 01-03 as unverifiable here. Defect found and fixed at this checkpoint: **`badbcdf`** (fix). Checkpoint tasks produce no code of their own; closure is recorded in this SUMMARY + `REQUIREMENTS.md`.
 
 ## Files Created/Modified
 
@@ -268,14 +325,16 @@ None — no external service configuration required.
 
 ## Next Phase Readiness
 
-**D-02 and D-05 are approved and locked. D-04 and D-01 are inherited as open checkpoint
-items that Plan 01-03 MUST verify** — they were not verifiable here (no scroll). 01-03's
-checkpoint must explicitly ask Sirio to confirm:
+**Plan 01-02 is complete and signed off.** D-02 and D-05 are approved and **locked**.
+**D-04 and D-01 are inherited as open checkpoint items that Plan 01-03 MUST verify** —
+they were not verifiable here (no scroll), and `NAV-02` stays Pending until they are.
+01-03's checkpoint must explicitly ask Sirio to confirm:
 
 1. **D-04** — scroll slowly past the hero's bottom edge: no horizontal line where star
    density or brightness changes. If the hero reads sparse, re-seed `star.stars` (~30–40).
 2. **D-01** — the bar docks into a fixed 70px glass nav; check whether the instant
-   `absolute → fixed` switch reads as a pop.
+   `absolute → fixed` switch reads as a pop. **Then mark `NAV-02` complete** — and add the
+   `#index` section so `[data-scrollhint]`'s currently-dangling anchor resolves.
 
 Plan 01-03 inherits and must **not** re-derive:
 
@@ -298,9 +357,13 @@ Plan 01-03 inherits and must **not** re-derive:
 - `diff site/star-engine.js design/star-engine.js` = the two additive hunks only.
 - **Overflow gate (automated, real Chrome over CDP, 8 viewports):** `scrollHeight <= clientHeight + 1` at rest and after pointer drift to the hero's bottom edge; no vertical scrollbar; drift preserved at ~9.6–9.95px of 10px; glow clearance >= 49.96px. All pass.
 
-*Still not self-certified:* the **D-04** and **D-01** visual judgements, deferred to 01-03's
-checkpoint. D-02 and D-05 were approved by Sirio at this plan's checkpoint.
+- Requirements marked in `.planning/REQUIREMENTS.md`: 7 checkboxes + 7 traceability rows flipped to `Complete`; `NAV-02` verified still `Pending`. Tally moved 2 → 9 Complete.
+- `STATE.md` and `ROADMAP.md` deliberately untouched — the orchestrator owns those after merge.
+
+*Not self-certified, by design:* the **D-04** and **D-01** visual judgements, deferred to
+01-03's checkpoint. Everything Sirio did approve (D-02, D-05) is recorded above as his words,
+not as an inference.
 
 ---
 *Phase: 01-the-design-build*
-*Status: Tasks 1–2 complete; D-02 + D-05 approved; phantom-scroll defect fixed and measured; D-04 + D-01 deferred to Plan 01-03's checkpoint*
+*Status: COMPLETE — Tasks 1–3 done, Task 3 approved by Sirio ("approved"); phantom-scroll defect fixed and measured; 7 requirements complete, NAV-02 + D-04/D-01 deferred to Plan 01-03's checkpoint*
