@@ -932,6 +932,222 @@ section[id] {
 }
 
 /* ============================================================
+   EXPERIENCE (#experience)
+   ============================================================ */
+
+.section__blob--experience {
+  right: -18%;
+  top: 14%;
+  width: 48vw;
+  height: 48vw;
+}
+
+.exp {
+  position: relative;
+  margin-top: clamp(44px, 5.5vw, 70px);
+  padding-left: 46px;
+}
+
+/* The timeline spine. Fades out at both ends so it reads as a segment of
+   something longer rather than a bar that starts and stops. */
+.exp__spine {
+  position: absolute;
+  left: 8px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--accent), 0),
+    rgba(var(--accent), 0.55) 16%,
+    rgba(var(--accent), 0.55) 84%,
+    rgba(var(--accent), 0)
+  );
+}
+
+.exp__row {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 40px;
+  padding: clamp(20px, 2.6vw, 30px) 0;
+}
+
+/* Aligned to the row's first text baseline, not its box, so the dot tracks
+   the role title as the row's padding flexes with the viewport. */
+.exp__dot {
+  position: absolute;
+  left: -42px;
+  top: calc(clamp(20px, 2.6vw, 30px) + 0.55em);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgb(var(--accent));
+  box-shadow: 0 0 14px rgba(var(--accent), 0.9);
+}
+
+.exp__period {
+  flex: 0 0 160px;
+  font: 400 14px var(--font-mono);
+  letter-spacing: 0.06em;
+  color: rgba(var(--accent), 0.88);
+}
+
+.exp__row h4 {
+  margin: 0;
+  flex: 1 1 240px;
+  font: 400 clamp(24px, 2.8vw, 34px) var(--font-display);
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.exp__at {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(232, 228, 232, 0.6);
+}
+
+/* ============================================================
+   PUBLICATIONS (#publications)
+   ============================================================ */
+
+.section__blob--publications {
+  left: -16%;
+  top: 20%;
+  width: 46vw;
+  height: 46vw;
+}
+
+.pubs {
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+/* ⚠ BOTH borders are required and lead this rule deliberately.
+   The design spreads them across two rows (border-top on the first,
+   border-top + border-bottom on the last) so the stack shares edges.
+   profile.md supports exactly ONE publication, so that single row is
+   both the first and the last — without both borders the list renders
+   with a hanging open edge. */
+.pub {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 32px;
+  padding: clamp(22px, 2.8vw, 32px) 14px;
+  text-decoration: none;
+  transition: background 0.4s ease;
+}
+
+.pub:hover,
+.pub:focus-visible {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.pub h4 {
+  margin: 0;
+  font: 400 clamp(21px, 2.4vw, 28px) var(--font-display);
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.pub__role {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(214, 206, 255, 0.6);
+}
+
+.pub__venue {
+  font: 400 14px var(--font-mono);
+  letter-spacing: 0.06em;
+  color: rgba(var(--accent), 0.9);
+}
+
+/* ============================================================
+   CONTACT (#contact) + FOOTER
+   ============================================================ */
+
+.section--contact {
+  padding: clamp(100px, 14vh, 180px) clamp(20px, 6vw, 84px)
+    clamp(80px, 10vh, 130px);
+  text-align: center;
+}
+
+.section__blob--contact {
+  left: 50%;
+  top: 30%;
+  width: 60vw;
+  height: 60vw;
+  margin-left: -30vw;
+  background: radial-gradient(
+    circle,
+    rgba(var(--accent), 0.1),
+    rgba(var(--accent), 0) 60%
+  );
+}
+
+.section__label--contact {
+  display: block;
+  color: rgba(var(--accent), 0.8);
+  margin-bottom: 22px;
+}
+
+/* The design authors this as an h3 with no h2 above it in the section.
+   Shipped as an h2 (matching every other section heading) so the document
+   outline is correct for screen readers; the size override keeps it
+   visually identical to the design. */
+.section h2.contact__title {
+  margin: 0;
+  font: 300 clamp(46px, 7vw, 96px) var(--font-display);
+  letter-spacing: -0.035em;
+  color: var(--text-hi);
+  text-shadow: 0 2px 40px rgba(var(--accent), 0.35);
+}
+
+.contact__email {
+  display: inline-block;
+  text-decoration: none;
+  font: 400 clamp(15px, 2.4vw, 26px) var(--font-mono);
+  letter-spacing: 0.08em;
+  color: rgba(var(--accent), 0.95);
+  margin-top: 34px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(var(--accent), 0.3);
+  transition:
+    text-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* Colour is restated here on purpose: the global a:hover rule outranks
+   .contact__email on specificity and would otherwise repaint it. */
+.contact__email:hover,
+.contact__email:focus-visible {
+  color: rgba(var(--accent), 1);
+  text-shadow: 0 0 22px rgba(var(--accent), 0.85);
+  border-color: rgba(var(--accent), 0.9);
+}
+
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  padding: 24px clamp(20px, 6vw, 84px);
+}
+
+.footer__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 32px;
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.18em;
+  color: rgba(228, 236, 255, 0.38);
+}
+
+/* ============================================================
    REDUCED MOTION
    The star still renders — one static, fully-lit gold frame (main.js draws a
    single frame; the engine pins b = 0.72). Motion is replaced, not deleted.
