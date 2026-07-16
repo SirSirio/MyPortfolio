@@ -9,7 +9,7 @@ Derived from `.planning/PROJECT.md`. Visual/theme specifics are intentionally de
 - [x] **FOUND-01**: Project builds to a static bundle deployable to GitHub Pages
 - [x] **FOUND-02**: Site is live at a public URL early (skeleton deploy), with repeatable deploys thereafter
 - [x] **FOUND-03**: Dark-themed design-token system (colors, type scale, spacing) applied site-wide
-- [ ] **FOUND-04**: Multi-page architecture with persistent navigation + a single immersive scroll home page
+- [x] **FOUND-04**: Multi-page architecture with persistent navigation + a single immersive scroll home page
 
 ### Hero & Magic Engine
 
@@ -21,7 +21,7 @@ Derived from `.planning/PROJECT.md`. Visual/theme specifics are intentionally de
 ### Navigation & Structure
 
 - [ ] **NAV-01**: Immersive single-scroll home with distinct, full-height sections
-- [ ] **NAV-02**: Smooth scrolling with section anchors and a persistent/access nav
+- [x] **NAV-02**: Smooth scrolling with section anchors and a persistent/access nav
 - [ ] **NAV-03**: Tasteful transitions when moving between home and deeper pages
 
 ### AI Concierge ("Ask AI about me")
@@ -59,7 +59,7 @@ Derived from `.planning/PROJECT.md`. Visual/theme specifics are intentionally de
 
 ### Media
 
-- [ ] **MEDIA-01**: Media slots are swappable — assets live in a documented folder and filling a slot with a real image/video is a drop-in plus a one-line reference, requiring no re-engineering. Slots ship as labeled striped placeholders until assets exist.
+- [x] **MEDIA-01**: Media slots are swappable — assets live in a documented folder and filling a slot with a real image/video is a drop-in plus a one-line reference, requiring no re-engineering. Slots ship as labeled striped placeholders until assets exist.
 - [ ] **MEDIA-02**: Sirio's real project images/videos fill the home-card and case-study media slots, correctly sized and encoded for web
   - *Blocked on Sirio supplying assets — none exist yet; profile.md carries no media.*
 
@@ -100,15 +100,15 @@ Maps each v1 REQ-ID to its phase. v2/Later and Out-of-Scope items are not mapped
 | FOUND-01 | Phase 1 — The Design Build | Complete |
 | FOUND-02 | Phase 1 — The Design Build | Complete |
 | FOUND-03 | Phase 1 — The Design Build | Complete |
-| FOUND-04 | Phase 1 — The Design Build | Pending |
+| FOUND-04 | Phase 1 — The Design Build | Complete |
 | HERO-01 | Phase 1 — The Design Build | Complete |
 | HERO-02 | Phase 1 — The Design Build | Complete |
 | HERO-03 | Phase 1 — The Design Build | Complete |
 | HERO-04 | Phase 1 — The Design Build | Complete |
-| NAV-02 | Phase 1 — The Design Build | Pending |
+| NAV-02 | Phase 1 — The Design Build | Complete |
 | LINK-01 | Phase 1 — The Design Build | Complete |
 | LINK-02 | Phase 1 — The Design Build | Complete |
-| MEDIA-01 | Phase 1 — The Design Build | Pending |
+| MEDIA-01 | Phase 1 — The Design Build | Complete |
 | NAV-01 | Phase 2 — The Story | Pending |
 | NAV-03 | Phase 2 — The Story | Pending |
 | CONT-01 | Phase 2 — The Story | Pending |
