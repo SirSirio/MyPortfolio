@@ -115,6 +115,10 @@ None remaining — GitHub repo and Pages are configured and live.
 - `app/` source root and live deploy loop are proven; Plans 01-02 (gold star hero) and 01-03 (curated content) can extend `app/index.html`, `styles.css`, `main.js` and reference the deployed site at https://sirsirio.github.io/MyPortfolio/.
 - No open blockers.
 
+## Self-Check: PASSED
+
+All 7 created files and the SUMMARY verified on disk; commits 64e9d19, 86f6002, 5b3405f, 8a82d63 present in git history.
+
 ---
 *Phase: 01-the-design-build*
 *Completed: 2026-07-16*

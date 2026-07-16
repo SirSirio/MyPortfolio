@@ -5,23 +5,27 @@ Derived from `.planning/PROJECT.md`. Visual/theme specifics are intentionally de
 ## v1 Requirements
 
 ### Foundation & Deploy
-- [ ] **FOUND-01**: Project builds to a static bundle deployable to GitHub Pages
-- [ ] **FOUND-02**: Site is live at a public URL early (skeleton deploy), with repeatable deploys thereafter
+
+- [x] **FOUND-01**: Project builds to a static bundle deployable to GitHub Pages
+- [x] **FOUND-02**: Site is live at a public URL early (skeleton deploy), with repeatable deploys thereafter
 - [ ] **FOUND-03**: Dark-themed design-token system (colors, type scale, spacing) applied site-wide
 - [ ] **FOUND-04**: Multi-page architecture with persistent navigation + a single immersive scroll home page
 
 ### Hero & Magic Engine
+
 - [ ] **HERO-01**: Landing hero presents a WebGL/3D animated "wow" centerpiece on load
 - [ ] **HERO-02**: Hero motion reacts to cursor and/or scroll
 - [ ] **HERO-03**: Hero states the identity in one line (design & engineering, biotech hint, automation thread)
 - [ ] **HERO-04**: Hero exposes primary actions: View CV and LinkedIn
 
 ### Navigation & Structure
+
 - [ ] **NAV-01**: Immersive single-scroll home with distinct, full-height sections
 - [ ] **NAV-02**: Smooth scrolling with section anchors and a persistent/access nav
 - [ ] **NAV-03**: Tasteful transitions when moving between home and deeper pages
 
 ### AI Concierge ("Ask AI about me")
+
 - [ ] **ASKAI-01**: An "Ask AI about me" prompt bar is present high on the page (≈ section 2–3), visible without deep scrolling
 - [ ] **ASKAI-02**: The bar self-demos — on load/idle it auto-types an example question and shows an answer, inviting the visitor to try
 - [ ] **ASKAI-03**: Several example/suggested questions are offered (clickable or cycling)
@@ -30,31 +34,37 @@ Derived from `.planning/PROJECT.md`. Visual/theme specifics are intentionally de
 - [ ] **ASKAI-06**: The answer backend exposes no secret API key in the shipped site (serverless proxy OR static curated-Q&A, decided at plan time); basic abuse/rate protection if a live LLM is used
 
 ### Main-Scroll Content
+
 - [ ] **CONT-01**: About/Story section narrating the biotech → design/automation pivot
 - [ ] **CONT-02**: Featured Projects section (3–5 highlight cards linking to detail pages)
 - [ ] **CONT-03**: "How I Work With AI" section conveying the *grano salis* philosophy
 - [ ] **CONT-04**: Contact section with email and social links
 
 ### Project Deep-Dives
+
 - [ ] **PROJ-01**: Reusable project case-study page template
 - [ ] **PROJ-02**: Individual deep-dive pages for flagship projects (thesis dispenser, DALSA OT-2, iGEM EndoSense, EMBO publication, AGC dashboards/app)
 - [ ] **PROJ-03**: Case-study pages support media (images, CAD renders, embeds) and external links (iGEM wiki, EMBO DOI)
 
 ### Motion & Experience
+
 - [ ] **MOTION-01**: Scroll-triggered animations across sections (reveal / assemble / draw-on)
 - [ ] **MOTION-02**: Animations honor `prefers-reduced-motion`
 
 ### Links & Assets
+
 - [ ] **LINK-01**: CV is viewable and/or downloadable (PDF and/or Canva link)
 - [ ] **LINK-02**: LinkedIn link present and correct
 - [ ] **LINK-03**: External project links open in new tab and are verified
 
 ### Responsive & Performance
+
 - [ ] **RESP-01**: Fully responsive across mobile, tablet, desktop
 - [ ] **PERF-01**: 3D/animations stay smooth on mobile with graceful degradation
 - [ ] **PERF-02**: Heavy assets are lazy-loaded; reasonable initial load
 
 ### Discoverability
+
 - [ ] **SEO-01**: Meta tags + Open Graph/Twitter cards for clean link previews when shared
 - [ ] **A11Y-01**: Baseline accessibility (semantic HTML, keyboard navigation, sufficient contrast)
 
@@ -81,8 +91,8 @@ Maps each v1 REQ-ID to its phase. v2/Later and Out-of-Scope items are not mapped
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 — The Look | Pending |
-| FOUND-02 | Phase 1 — The Look | Pending |
+| FOUND-01 | Phase 1 — The Look | Complete |
+| FOUND-02 | Phase 1 — The Look | Complete |
 | FOUND-03 | Phase 1 — The Look | Pending |
 | FOUND-04 | Phase 1 — The Look | Pending |
 | HERO-01 | Phase 2 — The First Impression | Pending |
