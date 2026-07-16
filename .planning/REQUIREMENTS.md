@@ -57,6 +57,12 @@ Derived from `.planning/PROJECT.md`. Visual/theme specifics are intentionally de
 - [ ] **LINK-02**: LinkedIn link present and correct
 - [ ] **LINK-03**: External project links open in new tab and are verified
 
+### Media
+
+- [ ] **MEDIA-01**: Media slots are swappable — assets live in a documented folder and filling a slot with a real image/video is a drop-in plus a one-line reference, requiring no re-engineering. Slots ship as labeled striped placeholders until assets exist.
+- [ ] **MEDIA-02**: Sirio's real project images/videos fill the home-card and case-study media slots, correctly sized and encoded for web
+  - *Blocked on Sirio supplying assets — none exist yet; profile.md carries no media.*
+
 ### Responsive & Performance
 
 - [ ] **RESP-01**: Fully responsive across mobile, tablet, desktop
@@ -87,21 +93,24 @@ Derived from `.planning/PROJECT.md`. Visual/theme specifics are intentionally de
 
 Maps each v1 REQ-ID to its phase. v2/Later and Out-of-Scope items are not mapped.
 
-**Coverage: 34/34 v1 requirements mapped (100%). No orphans, no duplicates.**
+**Coverage: 36/36 v1 requirements mapped (100%). No orphans, no duplicates.**
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 — The Look | Complete |
-| FOUND-02 | Phase 1 — The Look | Complete |
-| FOUND-03 | Phase 1 — The Look | Pending |
-| FOUND-04 | Phase 1 — The Look | Pending |
-| HERO-01 | Phase 2 — The First Impression | Pending |
-| HERO-02 | Phase 2 — The First Impression | Pending |
-| HERO-03 | Phase 2 — The First Impression | Pending |
-| HERO-04 | Phase 2 — The First Impression | Pending |
-| NAV-02 | Phase 2 — The First Impression | Pending |
-| LINK-01 | Phase 2 — The First Impression | Pending |
-| LINK-02 | Phase 2 — The First Impression | Pending |
+| FOUND-01 | Phase 1 — The Design Build | Complete |
+| FOUND-02 | Phase 1 — The Design Build | Complete |
+| FOUND-03 | Phase 1 — The Design Build | Pending |
+| FOUND-04 | Phase 1 — The Design Build | Pending |
+| HERO-01 | Phase 1 — The Design Build | Pending |
+| HERO-02 | Phase 1 — The Design Build | Pending |
+| HERO-03 | Phase 1 — The Design Build | Pending |
+| HERO-04 | Phase 1 — The Design Build | Pending |
+| NAV-02 | Phase 1 — The Design Build | Pending |
+| LINK-01 | Phase 1 — The Design Build | Pending |
+| LINK-02 | Phase 1 — The Design Build | Pending |
+| MEDIA-01 | Phase 1 — The Design Build | Pending |
+| RESP-01 | Phase 2 — The Pocket Build | Pending |
+| PERF-01 | Phase 2 — The Pocket Build | Pending |
 | ASKAI-01 | Phase 3 — The AI Concierge | Pending |
 | ASKAI-02 | Phase 3 — The AI Concierge | Pending |
 | ASKAI-03 | Phase 3 — The AI Concierge | Pending |
@@ -120,8 +129,7 @@ Maps each v1 REQ-ID to its phase. v2/Later and Out-of-Scope items are not mapped
 | PROJ-02 | Phase 5 — The Showcase | Pending |
 | PROJ-03 | Phase 5 — The Showcase | Pending |
 | LINK-03 | Phase 5 — The Showcase | Pending |
-| RESP-01 | Phase 6 — Ready to Share | Pending |
-| PERF-01 | Phase 6 — Ready to Share | Pending |
+| MEDIA-02 | Phase 5 — The Showcase | Pending |
 | PERF-02 | Phase 6 — Ready to Share | Pending |
 | SEO-01 | Phase 6 — Ready to Share | Pending |
 | A11Y-01 | Phase 6 — Ready to Share | Pending |

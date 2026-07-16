@@ -14,10 +14,11 @@ This roadmap is shaped around the **content and experience** of the site, not te
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: The Design Build** - Implement the approved Claude Design (Sirio V4 Deep Field × Hyperlight page + real Sirio Star gold hero) with curated portfolio content, live on GitHub Pages
-- [ ] **Phase 2: The AI Concierge** - "Ask AI about me" bar high on the page: self-demoing, portfolio-grounded, favourable-but-truthful answers
-- [ ] **Phase 3: The Story** - Immersive single-scroll narrative: About/journey, How-I-Work-With-AI, Contact, with scroll motion
-- [ ] **Phase 4: The Showcase** - Featured projects on the home page + dedicated case-study pages for flagship work
-- [ ] **Phase 5: Ready to Share** - Responsive/3D performance, accessibility, SEO/Open Graph, launch
+- [ ] **Phase 2: The Pocket Build** - Make the site genuinely great on a smartphone: layout, touch, and a star that stays smooth on real phones
+- [ ] **Phase 3: The AI Concierge** - "Ask AI about me" bar high on the page: self-demoing, portfolio-grounded, favourable-but-truthful answers
+- [ ] **Phase 4: The Story** - Immersive single-scroll narrative: About/journey, How-I-Work-With-AI, Contact, with scroll motion
+- [ ] **Phase 5: The Showcase** - Featured projects on the home page + dedicated case-study pages for flagship work, with real media
+- [ ] **Phase 6: Ready to Share** - Lazy-loading, accessibility, SEO/Open Graph, launch
 
 ## Phase Details
 
@@ -33,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   - Local snapshots of all three files live in `.planning/phases/01-the-design-build/design/`
   - `_Archive/` (old `site/` mockup + the Fable Brief) is git-ignored and off-limits — not a design, content, or context source
 
-**Requirements**: FOUND-01, FOUND-02, FOUND-03, FOUND-04, HERO-01, HERO-02, HERO-03, HERO-04, NAV-02, LINK-01, LINK-02
+**Requirements**: FOUND-01, FOUND-02, FOUND-03, FOUND-04, HERO-01, HERO-02, HERO-03, HERO-04, NAV-02, LINK-01, LINK-02, MEDIA-01
 **Success Criteria** (what must be TRUE):
 
   1. A visitor can open a public GitHub Pages URL and see the implemented Deep Field × Hyperlight design: dark cosmic single-scroll page matching the approved Claude Design
@@ -41,6 +42,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Sections (work, experience, publications, contact) are filled with real, curated portfolio content — the most important items first, page deliberately not exhaustive
   4. A persistent nav exposes working "View CV" and "LinkedIn" actions, and a one-line identity statement is readable in the hero
   5. Pushing a change redeploys the live site through a repeatable build/deploy step
+  6. Media slots stay empty labeled placeholders, but are **swappable**: assets live in a documented folder and adding a real image/video is a drop-in + one-line reference, with no re-engineering (MEDIA-01)
 
 **Plans**: 3 plans
 **Wave 1**
@@ -57,7 +59,24 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 **UI hint**: yes
 
-### Phase 2: The AI Concierge
+### Phase 2: The Pocket Build
+
+**Goal**: Recruiters open links on their phone — so the site has to be *born* good there, not retrofitted at the end. Take the Phase 1 page from "stacks acceptably" to "genuinely great in the hand": the gold star hero reads and performs on a real mid-range phone, the long scroll feels right under a thumb, type and spacing are tuned for small screens, and the canvas degrades gracefully instead of janking or draining battery.
+**Mode:** mvp
+**Depends on**: Phase 1. Deliberately placed *before* features (AI concierge, story, showcase) so every later phase inherits a mobile-correct baseline rather than owing a retrofit.
+**Requirements**: RESP-01, PERF-01
+**Success Criteria** (what must be TRUE):
+
+  1. On a real smartphone the hero is legible and striking — the wordmark, the star, and the typewriter all read without zooming, and nothing overflows horizontally
+  2. The star animation holds a smooth frame rate on a mid-range phone, and degrades gracefully (fewer particles / simpler effects) on weak devices instead of janking
+  3. Every section (Work cards, Experience timeline, Publications, Contact) stacks into a comfortable single column with touch-sized tap targets
+  4. The page is usable and presentable across phone, tablet, and desktop widths
+  5. Scrolling and the deep-field parallax stay smooth under touch, and battery/CPU cost is reasonable
+
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 3: The AI Concierge
 
 **Goal**: A signature interactive feature that *is* a demonstration of Sirio's "build with AI" skill — an "Ask AI about me" prompt bar placed high on the page (around section 2–3, clearly visible). It self-demos by auto-typing an example question and answering, then lets visitors ask their own questions and get concise, **bold**-highlighted, truthful answers grounded in Sirio's portfolio and tuned to represent him favourably.
 **Mode:** mvp
@@ -74,11 +93,11 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: TBD
 **UI hint**: yes
 
-### Phase 3: The Story
+### Phase 4: The Story
 
 **Goal**: Turn "impressive" into "I want to talk to this person" — the home becomes an immersive single-scroll narrative of who Sirio is: the biotech → design/automation pivot (About/journey), the "how I work with AI" philosophy, and a Contact close, with scroll-triggered motion that conveys "automation." Built with profile-sourced content settled at phase start.
 **Mode:** mvp
-**Depends on**: Phase 2
+**Depends on**: Phase 3
 **Requirements**: NAV-01, NAV-03, CONT-01, CONT-03, CONT-04, MOTION-01, MOTION-02
 **Success Criteria** (what must be TRUE):
 
@@ -91,35 +110,35 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: TBD
 **UI hint**: yes
 
-### Phase 4: The Showcase
+### Phase 5: The Showcase
 
-**Goal**: Show the work that makes recruiters lean in — a Featured Projects section on the home scroll plus a reusable case-study template filled into dedicated deep-dive pages for the flagship projects, with media and verified external links.
+**Goal**: Show the work that makes recruiters lean in — a Featured Projects section on the home scroll plus a reusable case-study template filled into dedicated deep-dive pages for the flagship projects, with media and verified external links. This is also where Sirio's real images/videos land in the media slots built in Phase 1.
 **Mode:** mvp
-**Depends on**: Phase 3
-**Requirements**: CONT-02, PROJ-01, PROJ-02, PROJ-03, LINK-03
+**Depends on**: Phase 4. **Content dependency:** requires Sirio to supply project images/videos (see `.planning/todos/pending/` — assets do not exist yet; profile.md carries no media). Until supplied, slots remain the labeled striped placeholders from Phase 1.
+**Requirements**: CONT-02, PROJ-01, PROJ-02, PROJ-03, LINK-03, MEDIA-02
 **Success Criteria** (what must be TRUE):
 
   1. A Featured Projects section presents 3–5 project cards on the home page, each linking to a detail page
   2. Each flagship project (thesis dispenser, DALSA OT-2, iGEM EndoSense, EMBO publication, AGC dashboards/app) has its own page built from one shared template
   3. Case-study pages display media (images, CAD renders, embeds) and link out to external sources (e.g. iGEM wiki, EMBO DOI)
   4. External project links open in a new tab and resolve correctly
+  5. Sirio's real images/videos fill the home-card and case-study media slots, correctly sized and encoded for web (MEDIA-02)
 
 **Plans**: TBD
 **UI hint**: yes
 
-### Phase 5: Ready to Share
+### Phase 6: Ready to Share
 
-**Goal**: The final 10% that makes it feel professional — responsive across devices, smooth on mobile with graceful 3D degradation, baseline accessible, and shareable with a clean link-preview card when pasted to a recruiter.
+**Goal**: The final 10% that makes it feel professional — heavy media lazy-loaded for a fast first paint, baseline accessible, and shareable with a clean link-preview card when pasted to a recruiter. (Responsive/mobile performance is no longer parked here — it ships in Phase 2 and every phase after inherits it.)
 **Mode:** mvp
-**Depends on**: Phase 4
-**Requirements**: RESP-01, PERF-01, PERF-02, SEO-01, A11Y-01
+**Depends on**: Phase 5
+**Requirements**: PERF-02, SEO-01, A11Y-01
 **Success Criteria** (what must be TRUE):
 
-  1. The site is fully usable and presentable on mobile, tablet, and desktop
-  2. 3D/animations stay smooth on mobile and degrade gracefully on weaker devices instead of janking
-  3. Heavy assets are lazy-loaded and the initial load is reasonable
-  4. Sharing the URL produces a clean preview card (meta tags + Open Graph/Twitter)
-  5. The site meets baseline accessibility (semantic HTML, keyboard navigation, sufficient contrast)
+  1. Heavy assets (project images/videos) are lazy-loaded and the initial load is reasonable
+  2. Sharing the URL produces a clean preview card (meta tags + Open Graph/Twitter)
+  3. The site meets baseline accessibility (semantic HTML, keyboard navigation, sufficient contrast)
+  4. The mobile quality bar set in Phase 2 still holds after all later phases' additions (no regression)
 
 **Plans**: TBD
 **UI hint**: yes
@@ -127,12 +146,13 @@ Decimal phases appear between their surrounding integers in numeric order.
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. The Design Build | 1/3 | In Progress|  |
-| 2. The AI Concierge | 0/TBD | Not started | - |
-| 3. The Story | 0/TBD | Not started | - |
-| 4. The Showcase | 0/TBD | Not started | - |
-| 5. Ready to Share | 0/TBD | Not started | - |
+| 2. The Pocket Build | 0/TBD | Not started | - |
+| 3. The AI Concierge | 0/TBD | Not started | - |
+| 4. The Story | 0/TBD | Not started | - |
+| 5. The Showcase | 0/TBD | Not started | - |
+| 6. Ready to Share | 0/TBD | Not started | - |
