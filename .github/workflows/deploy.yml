@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+# Publishes the static site in app/ to GitHub Pages on every push.
+# Uses only pinned first-party actions/* (T-01-01), with least-privilege
+# token scope (T-01-02). Only app/ is uploaded as the artifact (T-01-03).
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+# Least privilege: read repo contents, write Pages, mint the OIDC token.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; do not cancel an in-progress publish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./app
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
