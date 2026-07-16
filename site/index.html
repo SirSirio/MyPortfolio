@@ -113,6 +113,35 @@
         </a>
       </section>
 
+      <!-- ================= MISSION =================
+           id="index" is what resolves the hero scroll hint's href="#index",
+           which shipped as a dangling anchor in Plan 01-02 (NAV-02).
+
+           [data-reveal] attributes below are ported inert for Phase 2
+           (MOTION-01). updateReveals() is what sets opacity:0, so with it
+           deferred these simply render normally. styles.css must therefore
+           carry NO [data-reveal] rule — that would ship an invisible page. -->
+      <section id="index" class="section section--mission">
+        <div data-para="0.16" class="section__blob section__blob--mission"></div>
+        <div class="section__inner">
+          <div data-reveal="0" class="section__label section__label--lead">DEEP FIELD — OBSERVATION LOG · 2026</div>
+
+          <!-- The identity one-liner. LOCKED and verbatim — do not reword,
+               retitle or "improve" it. The gradient span is the PAL spectrum. -->
+          <p data-reveal="1" class="mission__line">Biotechnology MSc at DTU Copenhagen. I design and build the <span class="grad">hardware, software and automation</span> that free scientists from repetitive lab work.</p>
+
+          <div data-reveal="2" class="pills">
+            <a data-jump class="pill pill--work" href="#work">01&nbsp;WORK&nbsp;&#8600;</a>
+            <a data-jump class="pill pill--experience" href="#experience">02&nbsp;EXPERIENCE&nbsp;&#8600;</a>
+            <a data-jump class="pill pill--publications" href="#publications">03&nbsp;PUBLICATIONS&nbsp;&#8600;</a>
+            <a data-jump class="pill pill--contact" href="#contact">04&nbsp;TRANSMISSION&nbsp;&#8600;</a>
+            <!-- The design's trailing caption promising a short warp burst on
+                 sector jumps is deliberately NOT ported: that motion is Phase
+                 2/4, and the copy would promise a behaviour this page lacks. -->
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
   <script type="module" src="./main.js"></script>

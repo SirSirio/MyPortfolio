@@ -540,6 +540,233 @@ section[id] {
 }
 
 /* ============================================================
+   SECTION SYSTEM
+   Every content section in the design is structurally identical
+   (V4:69-104 === V4:107-138 === V4:141-161) and ONLY the accent
+   triplet changes. So there is exactly one .section class, and each
+   section sets --accent to the PAL stop it owns. That is what makes
+   plate reordering free and the file portable.
+
+   ⚠ NEVER add a rule selecting the reveal attribute to this file.
+   updateReveals() (V4:579-585) is what sets opacity:0, and it is
+   deferred to Phase 2 (MOTION-01). The attributes ship inert; a
+   hiding rule here would ship an INVISIBLE page to every visitor.
+   (Written without the literal bracketed selector on purpose — the
+   verification gate greps this file for it.)
+
+   ⚠ --accent is section-driven, never plate-driven. V4:92-100 gives
+   Work plate 002 an Aldebaran accent INSIDE the Antares section —
+   that is a bug in the design file, not a pattern to reproduce.
+   ============================================================ */
+
+.section {
+  position: relative;
+  padding: var(--pad-section);
+  scroll-margin-top: var(--nav-h);
+}
+
+/* The accent map — PAL stops, mirroring star-engine.js:4-10.
+   ⚠ --gold-glow (255,196,110) is the HERO STAR and is NOT
+   --star-antares (244,182,89). Two different golds; --gold-glow
+   must never appear in a section. */
+#index {
+  --accent: var(--star-sirius);
+}
+
+#work {
+  --accent: var(--star-antares);
+}
+
+#experience {
+  --accent: var(--star-aldebaran);
+}
+
+#publications {
+  --accent: var(--star-vega);
+}
+
+#contact {
+  --accent: var(--star-sirius);
+}
+
+/* The giant outlined sector numeral. Parallaxed by applyPara() from 01-02. */
+.section__numeral {
+  position: absolute;
+  top: -2%;
+  font: 500 clamp(170px, 27vw, 400px) / 0.8 var(--font-display);
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(var(--accent), 0.22);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Numeral side alternates down the page (V4:70,108,142). */
+.section__numeral--right {
+  right: 1vw;
+}
+
+.section__numeral--left {
+  left: 1vw;
+}
+
+.section__blob {
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(var(--accent), 0.1),
+    rgba(var(--accent), 0) 62%
+  );
+  pointer-events: none;
+}
+
+.section__inner {
+  position: relative;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.section__head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.section__label {
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.26em;
+  color: rgba(var(--accent), 0.85);
+  white-space: nowrap;
+}
+
+.section__rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--accent), 0.4),
+    rgba(var(--accent), 0)
+  );
+}
+
+.section h2 {
+  margin: 14px 0 0;
+  font: 300 clamp(40px, 6vw, 86px) var(--font-display);
+  letter-spacing: -0.035em;
+  color: var(--text-hi);
+}
+
+/* ============================================================
+   MISSION (#index)
+   Carries the locked identity one-liner that introduces the page.
+   This id also resolves the hero's [data-scrollhint] href="#index",
+   which was a dangling anchor at the end of Plan 01-02 (NAV-02).
+   ============================================================ */
+
+/* The design gives Mission its own padding rhythm (V4:53) — a taller
+   lead-in and a shorter tail than the shared --pad-section. */
+.section--mission {
+  padding: clamp(90px, 13vh, 150px) clamp(20px, 6vw, 84px)
+    clamp(60px, 8vh, 100px);
+}
+
+.section__blob--mission {
+  right: -14%;
+  top: -8%;
+  width: 54vw;
+  height: 54vw;
+  background: radial-gradient(
+    circle,
+    rgba(var(--accent), 0.11),
+    rgba(var(--accent), 0) 62%
+  );
+}
+
+/* Mission's label is a standalone lead line, not part of a .section__head. */
+.section__label--lead {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: rgba(228, 236, 255, 0.45);
+  margin-bottom: clamp(38px, 5vw, 64px);
+}
+
+.mission__line {
+  margin: 0;
+  max-width: 1050px;
+  font: 300 clamp(28px, 4.3vw, 60px) / 1.18 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--text-hi);
+  text-wrap: pretty;
+}
+
+/* The PAL spectrum as text — the same four stops the sections use, in
+   page order, so the one-liner previews the journey down the page. */
+.grad {
+  background-image: linear-gradient(
+    90deg,
+    #96c4ff,
+    #f4b659 40%,
+    #ff7a59 68%,
+    #ab8cff
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
+  margin-top: clamp(36px, 4.5vw, 56px);
+}
+
+/* Each pill sets its own --accent to the section it points at, so the
+   pill row itself previews the spectrum. */
+.pill {
+  text-decoration: none;
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.2em;
+  color: rgba(var(--accent), 0.95);
+  border: 1px solid rgba(var(--accent), 0.35);
+  border-radius: 999px;
+  padding: 10px 20px;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Real :hover. The design expressed this as style-hover, which browsers
+   ignore silently — a verbatim port looks right and is completely dead. */
+.pill:hover,
+.pill:focus-visible {
+  border-color: rgba(var(--accent), 0.8);
+  box-shadow: 0 0 18px rgba(var(--accent), 0.25);
+  color: rgba(var(--accent), 1);
+}
+
+.pill--work {
+  --accent: var(--star-antares);
+}
+
+.pill--experience {
+  --accent: var(--star-aldebaran);
+}
+
+.pill--publications {
+  --accent: var(--star-vega);
+}
+
+.pill--contact {
+  --accent: var(--star-sirius);
+}
+
+/* ============================================================
    REDUCED MOTION
    The star still renders — one static, fully-lit gold frame (main.js draws a
    single frame; the engine pins b = 0.72). Motion is replaced, not deleted.
