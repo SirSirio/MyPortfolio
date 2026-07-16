@@ -1,39 +1,459 @@
-/* Sirio Feltrin — portfolio. Minimal Walking Skeleton styles (Plan 01-01).
-   The full design-token system + galaxy sections land in Plans 01-02 / 01-03. */
+/* Sirio Feltrin — portfolio.
+   Design tokens (FOUND-03) + page shell + the living gold Sirio Star hero.
+   Ported from the approved design snapshots in
+   .planning/phases/01-the-design-build/design/. Content sections land in 01-03. */
+
+/* ============================================================
+   TOKENS (FOUND-03)
+   Colour tokens are bare R,G,B triplets so they compose inside
+   rgba(var(--x), a). Hex tokens are for direct use only.
+   ============================================================ */
+
+:root {
+  /* Deep-field palette stops — these mirror PAL in star-engine.js:4-10. */
+  --star-sirius: 150, 196, 255;
+  --star-antares: 244, 182, 89;
+  --star-aldebaran: 255, 122, 89;
+  --star-vega: 171, 140, 255;
+
+  /* The hero star. NOTE: --gold-glow (255,196,110) is the STAR.
+     --star-antares (244,182,89) is the Work section. Two different golds. */
+  --gold-glow: 255, 196, 110;
+  --gold-core: 255, 236, 200;
+
+  /* Surfaces + text */
+  --bg-0: #04050c;
+  --text-hi: #eef2ff;
+  --text-body: rgba(228, 232, 244, 0.76);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.1);
+
+  /* Type */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Hanken Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Layout */
+  --pad-section: clamp(80px, 12vh, 150px) clamp(20px, 6vw, 84px);
+  --max-w: 1180px;
+  --nav-h: 70px;
+}
+
+/* ============================================================
+   RESET / SHELL
+   ============================================================ */
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Do NOT set height:100% or overflow:hidden here. The design's star snapshot
+   does (it was authored as a standalone full-viewport screen) — copying that
+   would kill the scrolling page. */
 html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  background: var(--bg-0);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-body {
-  background: #04050c;
-  color: #eef2ff;
-  font-family: 'Hanken Grotesk', sans-serif;
+::selection {
+  background: rgba(var(--star-sirius), 0.22);
 }
+
+a {
+  color: #96c4ff;
+}
+
+a:hover {
+  color: #bcd9ff;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinRev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes scrollDot {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  14% {
+    opacity: 1;
+  }
+  72% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(58px);
+    opacity: 0;
+  }
+}
+
+/* overflow-x: clip (never overflow: hidden) — clip contains the wide glow
+   bleeds without making the wrapper a scroll container. */
+.page {
+  position: relative;
+  width: 100%;
+  overflow-x: clip;
+  color: var(--text-hi);
+  font-family: var(--font-body);
+  background: linear-gradient(
+    180deg,
+    #04050c 0%,
+    #0c0a09 24%,
+    #110b0a 46%,
+    #100a14 68%,
+    #080a16 86%,
+    #05060d 100%
+  );
+}
+
+/* Fixed deep field — sits under everything, shows through the hero (D-04). */
+.deep {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.field {
+  position: relative;
+  z-index: 1;
+}
+
+section[id] {
+  scroll-margin-top: var(--nav-h);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
 
 .hero {
+  position: relative; /* the engine computes hero-relative coords — required */
   min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+}
+
+/* D-04: the hero canvas is transparent, so the breathing background tint lives
+   here instead. The engine publishes --b on the hero element every frame. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: rgba(10, 15, 32, calc(var(--b, 0) * 0.42));
+}
+
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hero__parallax {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero__intro {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(18px, 2.4vw, 30px);
+  letter-spacing: 0.005em;
+  color: rgba(200, 214, 250, 0.78);
+  margin-bottom: 8px;
+}
+
+/* The h1's font must match the design exactly — the engine measures 'o' against
+   its computed font to pin the star. */
+.wordmark {
+  margin: 0;
+  font: 300 clamp(58px, 12.5vw, 184px) / 0.98 var(--font-display);
+  letter-spacing: -0.04em;
+  color: var(--text-hi);
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.55);
+}
+
+.wordmark__i {
+  position: relative;
+}
+
+/* The star is drawn where this glyph is. It must stay a real, transparent
+   text node — the engine measures its box. */
+.wordmark__o {
+  color: transparent;
+  display: inline-block;
+}
+
+.hero__type {
+  margin: 34px 0 0;
+  min-height: 1.7em;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #04050c;
+  gap: 0;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(18px, 2.3vw, 28px);
+  line-height: 1.4;
+  color: rgba(220, 228, 250, 0.72);
 }
 
-.hero h1 {
-  margin: 0;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 300;
-  color: #eef2ff;
-  font-size: clamp(3rem, 12vw, 9rem);
-  letter-spacing: 0.02em;
+.typer {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
 }
+
+/* The engine sets background-image (the per-term gradient) on this element. */
+.typer__word {
+  font-weight: 600;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(90deg, #7dd3fc, #38bdf8);
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  border-radius: 1px;
+  background: rgba(196, 214, 255, 0.9);
+  animation: blink 1.05s step-end infinite;
+  margin-left: 0.12ch;
+}
+
+/* ============================================================
+   THE STAR
+   Every sub-element is sized in em. The engine sets the layer's font-size from
+   the h1's computed size, plus left/top — never hard-code px here.
+   ============================================================ */
+
+.star {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.star > span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+.star svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform: scale(var(--flare-scale, 0.28));
+  transform-origin: center;
+}
+
+.star__halo {
+  width: 2.7em;
+  height: 2.7em;
+  margin-left: -1.35em;
+  margin-top: -1.35em;
+  border-radius: 50%;
+  opacity: var(--halo-op, 0.05);
+  background: radial-gradient(
+    circle,
+    rgba(var(--glow, 255, 196, 110), 0.95),
+    rgba(var(--glow, 255, 196, 110), 0) 62%
+  );
+}
+
+.star__flare--a {
+  width: 2em;
+  height: 2em;
+  margin-left: -1em;
+  margin-top: -1em;
+  animation: spinRev 56s linear infinite;
+  opacity: calc(var(--flare-op, 0) * 0.5);
+}
+
+.star__flare--a svg {
+  filter: blur(1.1px);
+}
+
+.star__flare--b {
+  width: 1.45em;
+  height: 1.45em;
+  margin-left: -0.725em;
+  margin-top: -0.725em;
+  animation: spin 46s linear infinite;
+  opacity: var(--flare-op, 0);
+}
+
+.star__flare--b svg {
+  filter: blur(0.6px);
+}
+
+.star__flare--c {
+  width: 0.96em;
+  height: 0.96em;
+  margin-left: -0.48em;
+  margin-top: -0.48em;
+  animation: spinRev 32s linear infinite;
+  opacity: var(--flare-op, 0);
+}
+
+.star__glass {
+  width: 0.92em;
+  height: 0.92em;
+  margin-left: -0.46em;
+  margin-top: -0.46em;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, var(--glass-op, 0.05));
+  border: 1px solid rgba(255, 255, 255, calc(var(--glass-op, 0.05) * 2.2));
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.star__ring {
+  width: 0.78em;
+  height: 0.78em;
+  margin-left: -0.39em;
+  margin-top: -0.39em;
+  animation: spin 17s linear infinite;
+  opacity: var(--ring-op, 0.55);
+}
+
+.star__core {
+  width: 0.5em;
+  height: 0.5em;
+  margin-left: -0.25em;
+  margin-top: -0.25em;
+  border-radius: 50%;
+  background: var(--core, #06060e);
+  box-shadow:
+    0 0 var(--core-blur, 6px) rgba(var(--glow, 255, 196, 110), 0.85),
+    0 0 calc(var(--core-blur, 6px) * 0.45) rgba(255, 255, 255, calc(var(--b, 0) * 0.7));
+}
+
+/* The engine owns width/height/left/top/transform/zIndex/opacity/background/
+   box-shadow on the planets — declare only what it does not touch. */
+.planet {
+  position: absolute;
+  left: -99px;
+  top: -99px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============================================================
+   HERO FURNITURE
+   ============================================================ */
+
+.corner-mark {
+  position: absolute;
+  bottom: 30px;
+  left: clamp(22px, 5vw, 56px);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: rgba(228, 236, 255, 0.32);
+  z-index: 5;
+}
+
+.scrollhint {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: opacity 0.6s ease;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.scrollhint__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.34em;
+  color: rgba(228, 236, 255, 0.42);
+  padding-left: 0.34em;
+}
+
+.scrollhint__rail {
+  position: relative;
+  width: 1px;
+  height: 52px;
+  display: block;
+  background: rgba(228, 236, 255, 0.13);
+  overflow: hidden;
+}
+
+.scrollhint__dot {
+  position: absolute;
+  left: -1.5px;
+  top: -10px;
+  width: 4px;
+  height: 10px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, rgba(var(--star-sirius), 0), #bcd9ff);
+  animation: scrollDot 2.7s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+/* ============================================================
+   REDUCED MOTION
+   The star still renders — one static, fully-lit gold frame (main.js draws a
+   single frame; the engine pins b = 0.72). Motion is replaced, not deleted.
+   ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
   *,

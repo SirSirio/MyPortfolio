@@ -40,6 +40,7 @@ export class HeroStar {
     this.reduced = opts.reduced !== undefined ? opts.reduced : REDUCED;
     this.dpr = DPR;
     this.periodMs = (opts.periodSec || 15) * 1000;
+    this.transparent = !!opts.transparent;
     this.pal = { glow: [150, 196, 255], core: [255, 251, 242] };
     this.canvas = heroEl.querySelector('canvas');
     this.starLayer = heroEl.querySelector('[data-star]');
@@ -182,9 +183,13 @@ export class HeroStar {
       this.starLayer.style.top = cy + 'px';
     }
 
-    const bg = lerp3([4, 5, 12], [10, 15, 32], b);
-    ctx.fillStyle = 'rgb(' + bg[0] + ',' + bg[1] + ',' + bg[2] + ')';
-    ctx.fillRect(0, 0, W, H);
+    if (this.transparent) {
+      ctx.clearRect(0, 0, W, H);
+    } else {
+      const bg = lerp3([4, 5, 12], [10, 15, 32], b);
+      ctx.fillStyle = 'rgb(' + bg[0] + ',' + bg[1] + ',' + bg[2] + ')';
+      ctx.fillRect(0, 0, W, H);
+    }
 
     const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * 0.62);
     g.addColorStop(0, rgba(pal.glow, 0.05 + 0.18 * b));
