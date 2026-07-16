@@ -109,27 +109,27 @@ Maps each v1 REQ-ID to its phase. v2/Later and Out-of-Scope items are not mapped
 | LINK-01 | Phase 1 — The Design Build | Pending |
 | LINK-02 | Phase 1 — The Design Build | Pending |
 | MEDIA-01 | Phase 1 — The Design Build | Pending |
-| RESP-01 | Phase 2 — The Pocket Build | Pending |
-| PERF-01 | Phase 2 — The Pocket Build | Pending |
-| ASKAI-01 | Phase 3 — The AI Concierge | Pending |
-| ASKAI-02 | Phase 3 — The AI Concierge | Pending |
-| ASKAI-03 | Phase 3 — The AI Concierge | Pending |
-| ASKAI-04 | Phase 3 — The AI Concierge | Pending |
-| ASKAI-05 | Phase 3 — The AI Concierge | Pending |
-| ASKAI-06 | Phase 3 — The AI Concierge | Pending |
-| NAV-01 | Phase 4 — The Story | Pending |
-| NAV-03 | Phase 4 — The Story | Pending |
-| CONT-01 | Phase 4 — The Story | Pending |
-| CONT-03 | Phase 4 — The Story | Pending |
-| CONT-04 | Phase 4 — The Story | Pending |
-| MOTION-01 | Phase 4 — The Story | Pending |
-| MOTION-02 | Phase 4 — The Story | Pending |
-| CONT-02 | Phase 5 — The Showcase | Pending |
-| PROJ-01 | Phase 5 — The Showcase | Pending |
-| PROJ-02 | Phase 5 — The Showcase | Pending |
-| PROJ-03 | Phase 5 — The Showcase | Pending |
-| LINK-03 | Phase 5 — The Showcase | Pending |
-| MEDIA-02 | Phase 5 — The Showcase | Pending |
-| PERF-02 | Phase 6 — Ready to Share | Pending |
-| SEO-01 | Phase 6 — Ready to Share | Pending |
-| A11Y-01 | Phase 6 — Ready to Share | Pending |
+| NAV-01 | Phase 2 — The Story | Pending |
+| NAV-03 | Phase 2 — The Story | Pending |
+| CONT-01 | Phase 2 — The Story | Pending |
+| CONT-03 | Phase 2 — The Story | Pending |
+| CONT-04 | Phase 2 — The Story | Pending |
+| MOTION-01 | Phase 2 — The Story | Pending |
+| MOTION-02 | Phase 2 — The Story | Pending |
+| RESP-01 | Phase 3 — The Pocket Build | Pending |
+| PERF-01 | Phase 3 — The Pocket Build | Pending |
+| CONT-02 | Phase 4 — The Showcase | Pending |
+| PROJ-01 | Phase 4 — The Showcase | Pending |
+| PROJ-02 | Phase 4 — The Showcase | Pending |
+| PROJ-03 | Phase 4 — The Showcase | Pending |
+| LINK-03 | Phase 4 — The Showcase | Pending |
+| MEDIA-02 | Phase 4 — The Showcase | Pending |
+| PERF-02 | Phase 5 — Ready to Share | Pending |
+| SEO-01 | Phase 5 — Ready to Share | Pending |
+| A11Y-01 | Phase 5 — Ready to Share | Pending |
+| ASKAI-01 | Phase 6 — The AI Concierge | Pending |
+| ASKAI-02 | Phase 6 — The AI Concierge | Pending |
+| ASKAI-03 | Phase 6 — The AI Concierge | Pending |
+| ASKAI-04 | Phase 6 — The AI Concierge | Pending |
+| ASKAI-05 | Phase 6 — The AI Concierge | Pending |
+| ASKAI-06 | Phase 6 — The AI Concierge | Pending |

@@ -1,7 +1,7 @@
 ---
 created: 2026-07-16
 type: content-dependency
-resolves_phase: 5
+resolves_phase: 4
 blocks: MEDIA-02
 ---
 
@@ -25,10 +25,10 @@ pages. Candidates from profile.md:
 
 Phase 1 (MEDIA-01) builds the swappable pipeline: assets land in a documented folder under
 `site/` and filling a slot is a drop-in + a one-line reference. So Sirio can add media at any
-time without waiting for a phase — Phase 5 (MEDIA-02) is just the formal fill + web encoding pass.
+time without waiting for a phase — Phase 4 (MEDIA-02) is just the formal fill + web encoding pass.
 
 ## Notes
 
 - Design rule: **no stock or AI-generated imagery** — placeholders stay until real assets exist.
 - Check AGC material for confidentiality before publishing.
-- Heavy assets get lazy-loaded in Phase 6 (PERF-02).
+- Heavy assets get lazy-loaded in Phase 5 (PERF-02).
