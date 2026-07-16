@@ -17,7 +17,7 @@ Each phase is a meaningful chunk a visitor actually feels, not a technical layer
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: The Design Build** - The minimal real site: approved cosmic design + gold Sirio Star hero + a few curated entries per section + empty labelled media slots, live on GitHub Pages
+- [x] **Phase 1: The Design Build** - The minimal real site: approved cosmic design + gold Sirio Star hero + a few curated entries per section + empty labelled media slots, live on GitHub Pages (completed 2026-07-16)
 - [ ] **Phase 2: The Story** - Who Sirio is, in words: the biotech → design/automation pivot, how he works with AI, and a Contact close. All from profile.md — needs no media
 - [ ] **Phase 3: The Pocket Build** - Make it genuinely great on a smartphone: layout, touch, and a star that stays smooth on real phones
 - [ ] **Phase 4: The Showcase** - Go deep: full project case-study pages, the real images/videos, and the fuller profile
@@ -59,7 +59,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-  - [ ] 01-03-PLAN.md — Curated content sections: Mission, Selected Work, Experience, Publications, Contact
+  - [x] 01-03-PLAN.md — Curated content sections: Mission, Selected Work, Experience, Publications, Contact
 
 **UI hint**: yes
 
@@ -154,7 +154,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. The Design Build | 2/3 | In Progress|  |
+| 1. The Design Build | 3/3 | Complete   | 2026-07-16 |
 | 2. The Story | 0/TBD | Not started | - |
 | 3. The Pocket Build | 0/TBD | Not started | - |
 | 4. The Showcase | 0/TBD | Not started | - |
