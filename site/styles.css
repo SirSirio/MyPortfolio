@@ -767,6 +767,171 @@ section[id] {
 }
 
 /* ============================================================
+   SELECTED WORK (#work) — the plates
+   Plates are ordered by IMPORTANCE, not chronology (the design leads
+   with EndoSense). Because accent is section-driven, reordering costs
+   nothing — no per-plate colour to rewrite.
+
+   The design's plates are cursor:pointer and open a warp overlay.
+   That machinery is Phase 2/4 and is deliberately absent here, so
+   nothing on this page looks clickable unless it really is. Plate 003
+   is the one exception: a real outbound link to the iGEM wiki.
+   ============================================================ */
+
+.section__blob--work {
+  left: -18%;
+  top: 24%;
+}
+
+.plate {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(28px, 4vw, 58px);
+  margin-top: clamp(46px, 6vw, 80px);
+}
+
+/* Plates after the first sit further apart (V4:92). */
+.plate + .plate {
+  margin-top: clamp(60px, 8vw, 110px);
+}
+
+/* Alternation: every even plate mirrors, so the media side zig-zags.
+   wrap-reverse keeps the media above the text once it wraps on narrow
+   viewports, rather than stranding it below. */
+.plate--flip {
+  flex-wrap: wrap-reverse;
+  flex-direction: row-reverse;
+}
+
+.plate__media {
+  flex: 1.35 1 460px;
+  min-width: 290px;
+}
+
+.plate__body {
+  flex: 1 1 300px;
+  min-width: 280px;
+}
+
+.plate__meta {
+  font: 400 12px var(--font-mono);
+  letter-spacing: 0.2em;
+  color: rgba(var(--accent), 0.85);
+}
+
+.plate h3 {
+  margin: 14px 0 0;
+  font: 400 clamp(36px, 4.4vw, 60px) / 0.98 var(--font-display);
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.plate p {
+  margin: 18px 0 0;
+  max-width: 420px;
+  font-size: 17px;
+  line-height: 1.62;
+  font-weight: 300;
+  color: var(--text-body);
+}
+
+.plate__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  text-decoration: none;
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.18em;
+  color: rgba(var(--accent), 0.95);
+  border: 1px solid rgba(var(--accent), 0.4);
+  border-radius: 999px;
+  padding: 9px 18px;
+  transition:
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.plate__link:hover,
+.plate__link:focus-visible {
+  border-color: rgba(var(--accent), 0.9);
+  box-shadow: 0 0 20px rgba(var(--accent), 0.3);
+  color: rgba(var(--accent), 1);
+}
+
+/* ============================================================
+   THE SWAPPABLE MEDIA SLOT (MEDIA-01)
+   The design supplies the slot's SHAPE only — it hard-codes a
+   placeholder and toggles nothing. This is the mechanism, and it is
+   pure CSS: no JS, no config array, no build step.
+
+   To fill a slot: drop a file in site/assets/media/ and paste ONE
+   <img> or <video> inside the <figure>. The placeholder chrome then
+   stops matching and disappears on its own. See assets/media/README.md.
+
+   ⚠ :has(), never :empty. :empty matches only elements with NO child
+   nodes at all, and whitespace counts as a text node — so normally
+   formatted markup (closing tag on its own line) is never :empty, and
+   the placeholder would silently never render. :has() is immune to
+   whitespace and has been Baseline widely available since Dec 2023.
+
+   ⚠ The ratio is 16/9, read directly from V4:82 and V4:94. STATE.md
+   records "16:10" — that is drift: a sixteen-by-ten ratio appears in
+   no design file at all. The design wins.
+   ============================================================ */
+
+.media-slot {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* In the base rule (not the empty-state rule) so both the placeholder
+     and a filled asset ease on hover rather than snapping. */
+  transition:
+    box-shadow 0.5s ease,
+    border-color 0.5s ease;
+}
+
+/* EMPTY STATE — the striped, labelled placeholder. */
+.media-slot:not(:has(> img, > video)) {
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(var(--accent), 0.09) 0 11px,
+    rgba(var(--accent), 0.02) 11px 22px
+  );
+  border: 1px dashed rgba(var(--accent), 0.32);
+  box-shadow: 0 30px 90px rgba(var(--accent), 0.1);
+}
+
+.media-slot:not(:has(> img, > video))::after {
+  content: attr(data-label);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(var(--accent), 0.65);
+}
+
+/* FILLED STATE — the placeholder chrome above simply stops matching. */
+.media-slot > img,
+.media-slot > video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.media-slot:hover {
+  box-shadow: 0 40px 110px rgba(var(--accent), 0.24);
+  border-color: rgba(var(--accent), 0.7);
+}
+
+/* ============================================================
    REDUCED MOTION
    The star still renders — one static, fully-lit gold frame (main.js draws a
    single frame; the engine pins b = 0.72). Motion is replaced, not deleted.
