@@ -39,7 +39,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. A persistent nav exposes working "View CV" and "LinkedIn" actions, and a one-line identity statement is readable in the hero
   5. Pushing a change redeploys the live site through a repeatable build/deploy step
 
-**Plans**: TBD
+**Plans**: 3 plans
+  - [ ] 01-01-PLAN.md — Walking Skeleton: app/ scaffold + GitHub Actions Pages pipeline, live at a public URL
+  - [ ] 01-02-PLAN.md — Living GOLD Sirio Star hero + deep-field parallax + persistent nav (CV/LinkedIn) + design tokens
+  - [ ] 01-03-PLAN.md — Curated content sections: Mission, Selected Work, Experience, Publications, Contact
 **UI hint**: yes
 
 ### Phase 2: The AI Concierge
@@ -116,7 +119,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. The Design Build | 0/TBD | Not started | - |
+| 1. The Design Build | 0/3 | Not started | - |
 | 2. The AI Concierge | 0/TBD | Not started | - |
 | 3. The Story | 0/TBD | Not started | - |
 | 4. The Showcase | 0/TBD | Not started | - |
