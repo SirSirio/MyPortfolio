@@ -55,7 +55,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-  - [ ] 01-02-PLAN.md — Living GOLD Sirio Star hero + deep-field parallax + persistent nav (CV/LinkedIn) + design tokens
+  - [x] 01-02-PLAN.md — Living GOLD Sirio Star hero + deep-field parallax + persistent nav (CV/LinkedIn) + design tokens
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
@@ -154,7 +154,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. The Design Build | 1/3 | In Progress|  |
+| 1. The Design Build | 2/3 | In Progress|  |
 | 2. The Story | 0/TBD | Not started | - |
 | 3. The Pocket Build | 0/TBD | Not started | - |
 | 4. The Showcase | 0/TBD | Not started | - |
