@@ -11,7 +11,7 @@ A personal portfolio website for **Sirio Vittorio Feltrin** — a Biotechnology 
 ### Constraints
 
 - **Hosting**: Static site on **GitHub Pages** — no server-side runtime; everything client-side. *Why:* free, clean shareable link, fits a portfolio; matches the inspiration reference's setup.
-- **Tech stack**: Full **WebGL / Three.js** (or shader-based) for the 3D "magic engine," plus modern HTML/CSS/JS. *Why:* user chose maximum wow ceiling; must still build to a static bundle deployable to GitHub Pages.
+- **Tech stack**: **Canvas-2D "cosmic engine"** (`star-engine.js` — starfields, galaxies, the living Sirio Star) plus modern HTML/CSS/JS, per the approved Claude Design ("Sirio V4 - Deep Field × Hyperlight"). Supersedes the earlier WebGL/Three.js intent — the approved design achieves the wow-moment with Canvas 2D and stays lighter on mobile. Builds to a static bundle deployable to GitHub Pages.
 - **Theme**: **Dark** only. *Why:* explicit user preference; suits the bioluminescent-glow aesthetic.
 - **Performance**: Must stay smooth and load reasonably on mobile despite 3D. *Why:* recruiters open links on phones; a janky "wow" effect backfires.
 - **Design ownership**: Claude leads design, Sirio approves/steers each step. *Why:* user explicitly delegated design direction while wanting to react and refine.
