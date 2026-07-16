@@ -113,6 +113,208 @@
         </a>
       </section>
 
+      <!-- ================= MISSION =================
+           id="index" is what resolves the hero scroll hint's href="#index",
+           which shipped as a dangling anchor in Plan 01-02 (NAV-02).
+
+           [data-reveal] attributes below are ported inert for Phase 2
+           (MOTION-01). updateReveals() is what sets opacity:0, so with it
+           deferred these simply render normally. styles.css must therefore
+           carry NO [data-reveal] rule — that would ship an invisible page. -->
+      <section id="index" class="section section--mission">
+        <div data-para="0.16" class="section__blob section__blob--mission"></div>
+        <div class="section__inner">
+          <div data-reveal="0" class="section__label section__label--lead">DEEP FIELD — OBSERVATION LOG · 2026</div>
+
+          <!-- The identity one-liner. LOCKED and verbatim — do not reword,
+               retitle or "improve" it. The gradient span is the PAL spectrum. -->
+          <p data-reveal="1" class="mission__line">Biotechnology MSc at DTU Copenhagen. I design and build the <span class="grad">hardware, software and automation</span> that free scientists from repetitive lab work.</p>
+
+          <div data-reveal="2" class="pills">
+            <a data-jump class="pill pill--work" href="#work">01&nbsp;WORK&nbsp;&#8600;</a>
+            <a data-jump class="pill pill--experience" href="#experience">02&nbsp;EXPERIENCE&nbsp;&#8600;</a>
+            <a data-jump class="pill pill--publications" href="#publications">03&nbsp;PUBLICATIONS&nbsp;&#8600;</a>
+            <a data-jump class="pill pill--contact" href="#contact">04&nbsp;TRANSMISSION&nbsp;&#8600;</a>
+            <!-- The design's trailing caption promising a short warp burst on
+                 sector jumps is deliberately NOT ported: that motion is Phase
+                 2/4, and the copy would promise a behaviour this page lacks. -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 01 SELECTED WORK =================
+           Plates run in IMPORTANCE order, inverting the design's chronology
+           (which leads with EndoSense). Leading with the wet-lab biosensor
+           would invert the intended identity: engineering/design first,
+           biotech as the hint. Accent is section-driven, so this is free.
+
+           Every description below is written from ../00_Profile/profile.md.
+           The design's placeholder copy (incl. the lorem string on the
+           EndoSense plate) is not ported. -->
+      <section id="work" class="section">
+        <span aria-hidden="true" data-para="-0.07" class="section__numeral section__numeral--right">01</span>
+        <div data-para="0.13" class="section__blob section__blob--work"></div>
+        <div class="section__inner">
+          <div data-reveal="0" class="section__head">
+            <span class="section__label">01 — ANTARES SECTOR</span>
+            <span class="section__rule"></span>
+          </div>
+          <h2 data-reveal="0">Selected Work</h2>
+
+          <!-- Plate 001 — the flagship: design + hardware + automation + AI in
+               one artefact. profile.md:57. Year is 2026 (thesis deadline Aug
+               2026, MSc runs to Sep 2026), not the design's 2025. -->
+          <article data-reveal="1" class="plate">
+            <div class="plate__media">
+              <figure data-para="0.05" class="media-slot" data-label="[ device render / gif ]"></figure>
+            </div>
+            <div class="plate__body">
+              <div class="plate__meta">PLATE 001 · 2026</div>
+              <h3>Portable Precision Liquid Dispenser</h3>
+              <p>A self-designed MSc thesis: a modular, field-deployable device for accurate liquid dispensing in point-of-care diagnostics, pandemic monitoring and field research. Fusion360 CAD tool for the mechanics, Arduino with electronics and motors, 3D printing, and a custom AI-assisted testing app that runs automated sample analysis using Design of Experiments.</p>
+            </div>
+          </article>
+
+          <!-- Plate 002 — leads with the quantified automation win, the most
+               concrete result in the profile. profile.md:87-103. Acronyms
+               expanded and tool descriptors added per profile.md:8-9. -->
+          <article data-reveal="1" class="plate plate--flip">
+            <div class="plate__media">
+              <figure data-para="0.05" class="media-slot" data-label="[ project video / image ]"></figure>
+            </div>
+            <div class="plate__body">
+              <div class="plate__meta">PLATE 002 · 2025</div>
+              <h3>Automated Gel Electrophoresis</h3>
+              <p>Up to 144 samples per run, roughly 10 minutes per gel. A ~785-line custom Python protocol for the Opentrons OT-2 liquid-handling robot, plus five 3D-printed components designed in the Fusion360 CAD tool. Built solo at DALSA (DTU Arena for Life Science Automation) through the full Double Diamond process, including user interviews with the lab workforce. Graded 12/12.</p>
+            </div>
+          </article>
+
+          <!-- Plate 003 — the biotech hint. profile.md:193-204. The iGEM wiki
+               URL is mandatory whenever EndoSense is listed (profile.md:11):
+               it is a public, verifiable record. This is the only plate with a
+               link, and it goes somewhere real. -->
+          <article data-reveal="1" class="plate">
+            <div class="plate__media">
+              <figure data-para="0.05" class="media-slot" data-label="[ project image ]"></figure>
+            </div>
+            <div class="plate__body">
+              <div class="plate__meta">PLATE 003 · 2024</div>
+              <h3>EndoSense</h3>
+              <p>A cell-free biosensor for detecting endocrine-disrupting compounds in drinking water, built as Wet Lab Lead of the DTU iGEM team. Allosteric transcription factors act as the sensing elements, with a Broccoli RNA aptamer reporter and a light-based readout. Awarded an iGEM Gold Medal at the 2024 Paris Jamboree.</p>
+              <a class="plate__link" href="https://2024.igem.wiki/DTU-Denmark/" target="_blank" rel="noopener">IGEM WIKI&nbsp;&#8599;</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================= 02 EXPERIENCE =================
+           Four rows, reverse-chronological, every one traced to profile.md.
+           The design ships three, two of which are factually wrong; the
+           corrections are recorded in 01-03-SUMMARY.md rather than quoted
+           here, because the verification gate greps this file for the very
+           strings that must never reach the page. In short:
+             - AGC Biologics is absent from the design entirely — it is the
+               CURRENT job (profile.md:155) and a recruiter would notice its
+               absence immediately, so it leads the list.
+             - the design's iGEM role title is wrong; profile.md:16 mandates
+               the exact phrasing used below.
+             - the design's third row is a role with no support anywhere in
+               profile.md. It is replaced by the real CIBIO internship
+               (profile.md:208), which is also the provenance of the
+               publication below — dropping it would leave that row
+               unexplained. -->
+      <section id="experience" class="section">
+        <span aria-hidden="true" data-para="-0.07" class="section__numeral section__numeral--left">02</span>
+        <div data-para="0.13" class="section__blob section__blob--experience"></div>
+        <div class="section__inner">
+          <div data-reveal="0" class="section__head">
+            <span class="section__label">02 — ALDEBARAN SECTOR</span>
+            <span class="section__rule"></span>
+          </div>
+          <h2 data-reveal="0">Experience</h2>
+          <div data-reveal="1" class="exp">
+            <span class="exp__spine"></span>
+
+            <div class="exp__row">
+              <span class="exp__dot"></span>
+              <span class="exp__period">2024 — Present</span>
+              <h4>Student Assistant — PM Team</h4>
+              <span class="exp__at">AGC Biologics, Copenhagen</span>
+            </div>
+
+            <div class="exp__row">
+              <span class="exp__dot"></span>
+              <span class="exp__period">2024 — 2026</span>
+              <h4>MSc Biotechnology</h4>
+              <span class="exp__at">DTU Copenhagen</span>
+            </div>
+
+            <div class="exp__row">
+              <span class="exp__dot"></span>
+              <span class="exp__period">2024</span>
+              <h4>iGEM Wet Lab Lead — EndoSense Biosensor</h4>
+              <span class="exp__at">iGEM Gold Medal</span>
+            </div>
+
+            <div class="exp__row">
+              <span class="exp__dot"></span>
+              <span class="exp__period">2023</span>
+              <h4>Research Intern — CIBIO, UniTrento</h4>
+              <span class="exp__at">EMBO publication</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 03 PUBLICATIONS =================
+           EXACTLY ONE row. profile.md supports exactly one publication.
+           The design ships a second, iGEM-registry-related entry that has
+           zero support in profile.md — it is not ported, and no substitute
+           is invented to fill the space it leaves.
+
+           The design also gets both fields of the real row wrong (title and
+           role label). Both are corrected from profile.md:328. Per
+           profile.md:28 the position number is deliberately NOT listed. -->
+      <section id="publications" class="section">
+        <span aria-hidden="true" data-para="-0.07" class="section__numeral section__numeral--right">03</span>
+        <div data-para="0.13" class="section__blob section__blob--publications"></div>
+        <div class="section__inner">
+          <div data-reveal="0" class="section__head">
+            <span class="section__label">03 — VEGA SECTOR</span>
+            <span class="section__rule"></span>
+          </div>
+          <h2 data-reveal="0">Publications</h2>
+          <div data-reveal="1" class="pubs">
+            <a class="pub" href="https://doi.org/10.1038/s44318-025-00567-1" target="_blank" rel="noopener">
+              <h4>Mapping cryptic phosphorylation sites in the human proteome <span class="pub__role">— Contributing author</span></h4>
+              <span class="pub__venue">The EMBO Journal &#183; 2025 &#183; 44:6704&#8211;6731&nbsp;&#8599;</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 04 CONTACT =================
+           sirio.feltrin@gmail.com is the correct, locked public address
+           (V4:169 and profile.md:42 agree). It is deliberately NOT the
+           account address. -->
+      <section id="contact" class="section section--contact">
+        <div data-para="0.1" class="section__blob section__blob--contact"></div>
+        <div class="section__inner">
+          <div data-reveal="0" class="section__label section__label--contact">04 — TRANSMISSION · SIRIUS SECTOR</div>
+          <h2 data-reveal="1" class="contact__title">Let's build something.</h2>
+          <div data-reveal="2">
+            <a class="contact__email" href="mailto:sirio.feltrin@gmail.com">sirio.feltrin@gmail.com</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer__inner">
+          <span>SF — SIRIO VITTORIO FELTRIN</span>
+          <span>COPENHAGEN · 2026</span>
+        </div>
+      </footer>
+
     </div>
   </div>
   <script type="module" src="./main.js"></script>

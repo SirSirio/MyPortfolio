@@ -540,6 +540,614 @@ section[id] {
 }
 
 /* ============================================================
+   SECTION SYSTEM
+   Every content section in the design is structurally identical
+   (V4:69-104 === V4:107-138 === V4:141-161) and ONLY the accent
+   triplet changes. So there is exactly one .section class, and each
+   section sets --accent to the PAL stop it owns. That is what makes
+   plate reordering free and the file portable.
+
+   ⚠ NEVER add a rule selecting the reveal attribute to this file.
+   updateReveals() (V4:579-585) is what sets opacity:0, and it is
+   deferred to Phase 2 (MOTION-01). The attributes ship inert; a
+   hiding rule here would ship an INVISIBLE page to every visitor.
+   (Written without the literal bracketed selector on purpose — the
+   verification gate greps this file for it.)
+
+   ⚠ --accent is section-driven, never plate-driven. V4:92-100 gives
+   Work plate 002 an Aldebaran accent INSIDE the Antares section —
+   that is a bug in the design file, not a pattern to reproduce.
+   ============================================================ */
+
+.section {
+  position: relative;
+  padding: var(--pad-section);
+  scroll-margin-top: var(--nav-h);
+}
+
+/* The accent map — PAL stops, mirroring star-engine.js:4-10.
+   ⚠ --gold-glow (255,196,110) is the HERO STAR and is NOT
+   --star-antares (244,182,89). Two different golds; --gold-glow
+   must never appear in a section. */
+#index {
+  --accent: var(--star-sirius);
+}
+
+#work {
+  --accent: var(--star-antares);
+}
+
+#experience {
+  --accent: var(--star-aldebaran);
+}
+
+#publications {
+  --accent: var(--star-vega);
+}
+
+#contact {
+  --accent: var(--star-sirius);
+}
+
+/* The giant outlined sector numeral. Parallaxed by applyPara() from 01-02. */
+.section__numeral {
+  position: absolute;
+  top: -2%;
+  font: 500 clamp(170px, 27vw, 400px) / 0.8 var(--font-display);
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(var(--accent), 0.22);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Numeral side alternates down the page (V4:70,108,142). */
+.section__numeral--right {
+  right: 1vw;
+}
+
+.section__numeral--left {
+  left: 1vw;
+}
+
+.section__blob {
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(var(--accent), 0.1),
+    rgba(var(--accent), 0) 62%
+  );
+  pointer-events: none;
+}
+
+.section__inner {
+  position: relative;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.section__head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.section__label {
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.26em;
+  color: rgba(var(--accent), 0.85);
+  white-space: nowrap;
+}
+
+.section__rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--accent), 0.4),
+    rgba(var(--accent), 0)
+  );
+}
+
+.section h2 {
+  margin: 14px 0 0;
+  font: 300 clamp(40px, 6vw, 86px) var(--font-display);
+  letter-spacing: -0.035em;
+  color: var(--text-hi);
+}
+
+/* ============================================================
+   MISSION (#index)
+   Carries the locked identity one-liner that introduces the page.
+   This id also resolves the hero's [data-scrollhint] href="#index",
+   which was a dangling anchor at the end of Plan 01-02 (NAV-02).
+   ============================================================ */
+
+/* The design gives Mission its own padding rhythm (V4:53) — a taller
+   lead-in and a shorter tail than the shared --pad-section. */
+.section--mission {
+  padding: clamp(90px, 13vh, 150px) clamp(20px, 6vw, 84px)
+    clamp(60px, 8vh, 100px);
+}
+
+.section__blob--mission {
+  right: -14%;
+  top: -8%;
+  width: 54vw;
+  height: 54vw;
+  background: radial-gradient(
+    circle,
+    rgba(var(--accent), 0.11),
+    rgba(var(--accent), 0) 62%
+  );
+}
+
+/* Mission's label is a standalone lead line, not part of a .section__head. */
+.section__label--lead {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  color: rgba(228, 236, 255, 0.45);
+  margin-bottom: clamp(38px, 5vw, 64px);
+}
+
+.mission__line {
+  margin: 0;
+  max-width: 1050px;
+  font: 300 clamp(28px, 4.3vw, 60px) / 1.18 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--text-hi);
+  text-wrap: pretty;
+}
+
+/* The PAL spectrum as text — the same four stops the sections use, in
+   page order, so the one-liner previews the journey down the page. */
+.grad {
+  background-image: linear-gradient(
+    90deg,
+    #96c4ff,
+    #f4b659 40%,
+    #ff7a59 68%,
+    #ab8cff
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
+  margin-top: clamp(36px, 4.5vw, 56px);
+}
+
+/* Each pill sets its own --accent to the section it points at, so the
+   pill row itself previews the spectrum. */
+.pill {
+  text-decoration: none;
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.2em;
+  color: rgba(var(--accent), 0.95);
+  border: 1px solid rgba(var(--accent), 0.35);
+  border-radius: 999px;
+  padding: 10px 20px;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Real :hover. The design expressed this as style-hover, which browsers
+   ignore silently — a verbatim port looks right and is completely dead. */
+.pill:hover,
+.pill:focus-visible {
+  border-color: rgba(var(--accent), 0.8);
+  box-shadow: 0 0 18px rgba(var(--accent), 0.25);
+  color: rgba(var(--accent), 1);
+}
+
+.pill--work {
+  --accent: var(--star-antares);
+}
+
+.pill--experience {
+  --accent: var(--star-aldebaran);
+}
+
+.pill--publications {
+  --accent: var(--star-vega);
+}
+
+.pill--contact {
+  --accent: var(--star-sirius);
+}
+
+/* ============================================================
+   SELECTED WORK (#work) — the plates
+   Plates are ordered by IMPORTANCE, not chronology (the design leads
+   with EndoSense). Because accent is section-driven, reordering costs
+   nothing — no per-plate colour to rewrite.
+
+   The design's plates are cursor:pointer and open a warp overlay.
+   That machinery is Phase 2/4 and is deliberately absent here, so
+   nothing on this page looks clickable unless it really is. Plate 003
+   is the one exception: a real outbound link to the iGEM wiki.
+   ============================================================ */
+
+.section__blob--work {
+  left: -18%;
+  top: 24%;
+}
+
+.plate {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(28px, 4vw, 58px);
+  margin-top: clamp(46px, 6vw, 80px);
+}
+
+/* Plates after the first sit further apart (V4:92). */
+.plate + .plate {
+  margin-top: clamp(60px, 8vw, 110px);
+}
+
+/* Alternation: every even plate mirrors, so the media side zig-zags.
+   wrap-reverse keeps the media above the text once it wraps on narrow
+   viewports, rather than stranding it below. */
+.plate--flip {
+  flex-wrap: wrap-reverse;
+  flex-direction: row-reverse;
+}
+
+.plate__media {
+  flex: 1.35 1 460px;
+  min-width: 290px;
+}
+
+.plate__body {
+  flex: 1 1 300px;
+  min-width: 280px;
+}
+
+.plate__meta {
+  font: 400 12px var(--font-mono);
+  letter-spacing: 0.2em;
+  color: rgba(var(--accent), 0.85);
+}
+
+.plate h3 {
+  margin: 14px 0 0;
+  font: 400 clamp(36px, 4.4vw, 60px) / 0.98 var(--font-display);
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.plate p {
+  margin: 18px 0 0;
+  max-width: 420px;
+  font-size: 17px;
+  line-height: 1.62;
+  font-weight: 300;
+  color: var(--text-body);
+}
+
+.plate__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  text-decoration: none;
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.18em;
+  color: rgba(var(--accent), 0.95);
+  border: 1px solid rgba(var(--accent), 0.4);
+  border-radius: 999px;
+  padding: 9px 18px;
+  transition:
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.plate__link:hover,
+.plate__link:focus-visible {
+  border-color: rgba(var(--accent), 0.9);
+  box-shadow: 0 0 20px rgba(var(--accent), 0.3);
+  color: rgba(var(--accent), 1);
+}
+
+/* ============================================================
+   THE SWAPPABLE MEDIA SLOT (MEDIA-01)
+   The design supplies the slot's SHAPE only — it hard-codes a
+   placeholder and toggles nothing. This is the mechanism, and it is
+   pure CSS: no JS, no config array, no build step.
+
+   To fill a slot: drop a file in site/assets/media/ and paste ONE
+   <img> or <video> inside the <figure>. The placeholder chrome then
+   stops matching and disappears on its own. See assets/media/README.md.
+
+   ⚠ :has(), never :empty. :empty matches only elements with NO child
+   nodes at all, and whitespace counts as a text node — so normally
+   formatted markup (closing tag on its own line) is never :empty, and
+   the placeholder would silently never render. :has() is immune to
+   whitespace and has been Baseline widely available since Dec 2023.
+
+   ⚠ The ratio is 16/9, read directly from V4:82 and V4:94. STATE.md
+   records "16:10" — that is drift: a sixteen-by-ten ratio appears in
+   no design file at all. The design wins.
+   ============================================================ */
+
+.media-slot {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* In the base rule (not the empty-state rule) so both the placeholder
+     and a filled asset ease on hover rather than snapping. */
+  transition:
+    box-shadow 0.5s ease,
+    border-color 0.5s ease;
+}
+
+/* EMPTY STATE — the striped, labelled placeholder. */
+.media-slot:not(:has(> img, > video)) {
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(var(--accent), 0.09) 0 11px,
+    rgba(var(--accent), 0.02) 11px 22px
+  );
+  border: 1px dashed rgba(var(--accent), 0.32);
+  box-shadow: 0 30px 90px rgba(var(--accent), 0.1);
+}
+
+.media-slot:not(:has(> img, > video))::after {
+  content: attr(data-label);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(var(--accent), 0.65);
+}
+
+/* FILLED STATE — the placeholder chrome above simply stops matching. */
+.media-slot > img,
+.media-slot > video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.media-slot:hover {
+  box-shadow: 0 40px 110px rgba(var(--accent), 0.24);
+  border-color: rgba(var(--accent), 0.7);
+}
+
+/* ============================================================
+   EXPERIENCE (#experience)
+   ============================================================ */
+
+.section__blob--experience {
+  right: -18%;
+  top: 14%;
+  width: 48vw;
+  height: 48vw;
+}
+
+.exp {
+  position: relative;
+  margin-top: clamp(44px, 5.5vw, 70px);
+  padding-left: 46px;
+}
+
+/* The timeline spine. Fades out at both ends so it reads as a segment of
+   something longer rather than a bar that starts and stops. */
+.exp__spine {
+  position: absolute;
+  left: 8px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--accent), 0),
+    rgba(var(--accent), 0.55) 16%,
+    rgba(var(--accent), 0.55) 84%,
+    rgba(var(--accent), 0)
+  );
+}
+
+.exp__row {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 40px;
+  padding: clamp(20px, 2.6vw, 30px) 0;
+}
+
+/* Aligned to the row's first text baseline, not its box, so the dot tracks
+   the role title as the row's padding flexes with the viewport. */
+.exp__dot {
+  position: absolute;
+  left: -42px;
+  top: calc(clamp(20px, 2.6vw, 30px) + 0.55em);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgb(var(--accent));
+  box-shadow: 0 0 14px rgba(var(--accent), 0.9);
+}
+
+.exp__period {
+  flex: 0 0 160px;
+  font: 400 14px var(--font-mono);
+  letter-spacing: 0.06em;
+  color: rgba(var(--accent), 0.88);
+}
+
+.exp__row h4 {
+  margin: 0;
+  flex: 1 1 240px;
+  font: 400 clamp(24px, 2.8vw, 34px) var(--font-display);
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.exp__at {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(232, 228, 232, 0.6);
+}
+
+/* ============================================================
+   PUBLICATIONS (#publications)
+   ============================================================ */
+
+.section__blob--publications {
+  left: -16%;
+  top: 20%;
+  width: 46vw;
+  height: 46vw;
+}
+
+.pubs {
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+/* ⚠ BOTH borders are required and lead this rule deliberately.
+   The design spreads them across two rows (border-top on the first,
+   border-top + border-bottom on the last) so the stack shares edges.
+   profile.md supports exactly ONE publication, so that single row is
+   both the first and the last — without both borders the list renders
+   with a hanging open edge. */
+.pub {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 32px;
+  padding: clamp(22px, 2.8vw, 32px) 14px;
+  text-decoration: none;
+  transition: background 0.4s ease;
+}
+
+.pub:hover,
+.pub:focus-visible {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.pub h4 {
+  margin: 0;
+  font: 400 clamp(21px, 2.4vw, 28px) var(--font-display);
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.pub__role {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(214, 206, 255, 0.6);
+}
+
+.pub__venue {
+  font: 400 14px var(--font-mono);
+  letter-spacing: 0.06em;
+  color: rgba(var(--accent), 0.9);
+}
+
+/* ============================================================
+   CONTACT (#contact) + FOOTER
+   ============================================================ */
+
+.section--contact {
+  padding: clamp(100px, 14vh, 180px) clamp(20px, 6vw, 84px)
+    clamp(80px, 10vh, 130px);
+  text-align: center;
+}
+
+.section__blob--contact {
+  left: 50%;
+  top: 30%;
+  width: 60vw;
+  height: 60vw;
+  margin-left: -30vw;
+  background: radial-gradient(
+    circle,
+    rgba(var(--accent), 0.1),
+    rgba(var(--accent), 0) 60%
+  );
+}
+
+.section__label--contact {
+  display: block;
+  color: rgba(var(--accent), 0.8);
+  margin-bottom: 22px;
+}
+
+/* The design authors this as an h3 with no h2 above it in the section.
+   Shipped as an h2 (matching every other section heading) so the document
+   outline is correct for screen readers; the size override keeps it
+   visually identical to the design. */
+.section h2.contact__title {
+  margin: 0;
+  font: 300 clamp(46px, 7vw, 96px) var(--font-display);
+  letter-spacing: -0.035em;
+  color: var(--text-hi);
+  text-shadow: 0 2px 40px rgba(var(--accent), 0.35);
+}
+
+.contact__email {
+  display: inline-block;
+  text-decoration: none;
+  font: 400 clamp(15px, 2.4vw, 26px) var(--font-mono);
+  letter-spacing: 0.08em;
+  color: rgba(var(--accent), 0.95);
+  margin-top: 34px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(var(--accent), 0.3);
+  transition:
+    text-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* Colour is restated here on purpose: the global a:hover rule outranks
+   .contact__email on specificity and would otherwise repaint it. */
+.contact__email:hover,
+.contact__email:focus-visible {
+  color: rgba(var(--accent), 1);
+  text-shadow: 0 0 22px rgba(var(--accent), 0.85);
+  border-color: rgba(var(--accent), 0.9);
+}
+
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  padding: 24px clamp(20px, 6vw, 84px);
+}
+
+.footer__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 32px;
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.18em;
+  color: rgba(228, 236, 255, 0.38);
+}
+
+/* ============================================================
    REDUCED MOTION
    The star still renders — one static, fully-lit gold frame (main.js draws a
    single frame; the engine pins b = 0.72). Motion is replaced, not deleted.
