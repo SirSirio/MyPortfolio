@@ -72,7 +72,7 @@ Recent decisions affecting current work:
 - [Roadmap]: ~~Visual theme deferred~~ → RESOLVED 2026-07-16: theme settled in Claude Design — "Sirio Star" hero (gold variant) + "Sirio V4 - Deep Field × Hyperlight" full page (cosmic dark, star-spectrum sections). Sources of truth are the .dc.html files in the two Claude Design projects (IDs in ROADMAP.md Phase 1); fetch via DesignSync.
 - [Roadmap]: Old Phases 1 (The Look) + 2 (The First Impression) consolidated into Phase 1 "The Design Build" per user choice — one phase implements the approved design end-to-end; later phases renumbered 3–6 → 2–5.
 - [Content]: Page fills with curated portfolio content from the parent Job & Applications folder (00_Profile/profile.md is the source) — most important projects/experience first, deliberately not exhaustive.
-- [Assets]: The untracked `site/` folder is an old discarded mockup (user: "disregard it for the moment") — do not build on it or delete it without asking.
+- [Assets]: ARCHIVED 2026-07-16 → `_Archive/` (git-ignored, off-limits): the old `site/` mockup and `Sirio Portfolio - Fable Brief.md`. Both predate the approved Claude Design and are NOT sources of truth — never use them as planning context, design reference, or content. Sources of truth: design snapshots in `.planning/phases/01-the-design-build/design/`, `../00_Profile/profile.md` for content, ROADMAP/REQUIREMENTS for scope. See `_Archive/README.md` and CLAUDE.md "Sources of Truth".
 - [Roadmap]: No standalone "write all copy" phase — each phase settles its own real content at phase start (profile is the source); final project selection/wording handled per-phase
 
 ### Pending Todos

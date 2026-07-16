@@ -1,8 +1,16 @@
 # Phase 1: The Design Build - Context
 
+> ## ⚠ INVALID — DO NOT USE
+> This CONTEXT.md was generated from `Sirio Portfolio - Fable Brief.md`, which is an
+> **outdated** document now archived to `_Archive/` (see `_Archive/README.md`). Its
+> content decisions, "canonical refs", and specifics are therefore untrustworthy.
+> It is retained only until Phase 1 is re-planned properly (research → fresh context).
+> **Do not read this file as user decisions.** Sources of truth: CLAUDE.md → "Sources of Truth".
+> — flagged 2026-07-16
+
 **Gathered:** 2026-07-16
-**Status:** Ready for planning
-**Source:** PRD Express Path (Sirio Portfolio - Fable Brief.md)
+**Status:** INVALID — superseded, awaiting re-plan
+**Source:** PRD Express Path (`_Archive/Sirio Portfolio - Fable Brief.md` — OUTDATED)
 
 <domain>
 ## Phase Boundary

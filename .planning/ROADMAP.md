@@ -30,7 +30,8 @@ Decimal phases appear between their surrounding integers in numeric order.
   - Hero: `Sirio Star.dc.html` in Claude Design project `4328e41c-9f30-4c64-98f9-2445eb57d486` ("Sirio Feltrin Portfolio Design") — user prefers the **gold** tweak
   - Full page: `Sirio V4 - Deep Field × Hyperlight.dc.html` + `star-engine.js` in project `42d7cdbc-c6e1-47dd-aaef-a49e89035dce`
   - The V4 file contains only a mockup star — the real Sirio Star must replace it
-  - The untracked `site/` folder is an old discarded mockup — do not build on it
+  - Local snapshots of all three files live in `.planning/phases/01-the-design-build/design/`
+  - `_Archive/` (old `site/` mockup + the Fable Brief) is git-ignored and off-limits — not a design, content, or context source
 
 **Requirements**: FOUND-01, FOUND-02, FOUND-03, FOUND-04, HERO-01, HERO-02, HERO-03, HERO-04, NAV-02, LINK-01, LINK-02
 **Success Criteria** (what must be TRUE):

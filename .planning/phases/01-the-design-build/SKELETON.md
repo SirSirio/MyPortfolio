@@ -17,7 +17,7 @@
 | "Data layer" | Static curated content hand-authored in `app/index.html` | No backend allowed (Pages). Content is curated from `../00_Profile/profile.md`. |
 | Rendering engine | Canvas-2D via `star-engine.js` (`HeroStar`, deep-field parallax) | The approved Claude Design implements the "wow" hero as an animated Canvas-2D star. This supersedes the earlier "WebGL/Three.js" aspiration in REQUIREMENTS/CLAUDE.md — the later-approved design is the source of truth. |
 | Deployment target | GitHub Pages via GitHub Actions workflow (`.github/workflows/deploy.yml`) uploading `app/` | Repeatable "push -> redeploy" (FOUND-02); keeps site source in a clean subfolder separate from planning docs; no Jekyll surprises; `gh` CLI is absent so repo/Pages creation is a one-time human checkpoint. |
-| Directory layout | Site source under `app/`; CI under `.github/workflows/`; planning under `.planning/` | `app/` is the Pages artifact root. The untracked `site/` folder is a DISCARDED mockup — never built on or reused. |
+| Directory layout | Site source under `app/`; CI under `.github/workflows/`; planning under `.planning/` | `app/` is the Pages artifact root. Superseded material lives in the git-ignored `_Archive/` and is never built on, reused, or read as context. |
 | Fonts | Google Fonts CDN: Space Grotesk (display), Hanken Grotesk (body), Space Mono (labels) | Mandated by the design/brief §2. |
 | Hero palette | GOLD variant — glow `rgb(255,196,110)`, core `rgb(255,236,200)` | Locked by CONTEXT/ROADMAP (user prefers the gold Sirio Star tweak). |
 

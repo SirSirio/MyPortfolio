@@ -13,7 +13,7 @@ A personal portfolio website for **Sirio Vittorio Feltrin** — a Biotechnology 
 - **Hosting**: Static site on **GitHub Pages** — no server-side runtime; everything client-side. *Why:* free, clean shareable link, fits a portfolio; matches the inspiration reference's setup.
 - **Tech stack**: **Canvas-2D "cosmic engine"** (`star-engine.js` — starfields, galaxies, the living Sirio Star) plus modern HTML/CSS/JS, per the approved Claude Design ("Sirio V4 - Deep Field × Hyperlight"). Supersedes the earlier WebGL/Three.js intent — the approved design achieves the wow-moment with Canvas 2D and stays lighter on mobile. Builds to a static bundle deployable to GitHub Pages.
 - **Theme**: **Dark** only. *Why:* explicit user preference; suits the bioluminescent-glow aesthetic.
-- **Performance**: Must stay smooth and load reasonably on mobile despite 3D. *Why:* recruiters open links on phones; a janky "wow" effect backfires.
+- **Performance**: Must stay smooth and load reasonably on mobile despite the animated canvas. *Why:* recruiters open links on phones; a janky "wow" effect backfires.
 - **Design ownership**: Claude leads design, Sirio approves/steers each step. *Why:* user explicitly delegated design direction while wanting to react and refine.
 - **Identity balance**: Engineering/design is the primary visual identity; biotech is a *hint* (the glow), automation is the *motion*. *Why:* reflects where Sirio is heading professionally, not just where he came from.
 
@@ -69,3 +69,24 @@ Do not make direct repo edits outside a GSD workflow unless the user explicitly 
 > Profile not yet configured. Run `/gsd-profile-user` to generate your developer profile.
 > This section is managed by `generate-claude-profile` -- do not edit manually.
 <!-- GSD:profile-end -->
+
+## Sources of Truth
+
+Use **only** these when planning or building. Anything not listed is not authoritative.
+
+| For | Source |
+|-----|--------|
+| Design (visual language, layout, motion) | The approved Claude Design snapshots in `.planning/phases/01-the-design-build/design/` — `Sirio Star.dc.html` (hero, **gold** variant), `Sirio V4 - Deep Field x Hyperlight.dc.html` (full page), `star-engine.js` (engine) |
+| Content (projects, experience, publications, bio) | `../00_Profile/profile.md` — the master profile |
+| Scope, goals, requirements | `.planning/ROADMAP.md`, `.planning/REQUIREMENTS.md`, `.planning/PROJECT.md` |
+| Live site source | `app/` (published to GitHub Pages from this folder) |
+
+### `_Archive/` is off-limits
+
+`_Archive/` holds superseded material (an old build brief, an early `site/` mockup). It is
+git-ignored and **must never be used as planning context, design reference, or a content
+source** — it predates the approved Claude Design and contains stale placeholder content.
+See `_Archive/README.md`.
+
+Before treating any pre-existing document as current, check it against git history and the
+table above; if it conflicts, flag it rather than planning from it.
