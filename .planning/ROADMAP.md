@@ -26,10 +26,12 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Goal**: Implement the approved Claude Design as the real site — the "Sirio V4 - Deep Field × Hyperlight" long-scroll page (cosmic dark theme, star-spectrum sections, nav, glass cards) with the real "Sirio Star" hero (**gold variant** preferred) integrated in place of the mockup — filled with curated content from Sirio's portfolio (profile is the source; most important projects/experience first, page stays tight, not exhaustive) and live on GitHub Pages.
 **Mode:** mvp
 **Depends on**: Nothing (first phase). **Design sources of truth** (fetch via DesignSync at plan/execute time):
+
   - Hero: `Sirio Star.dc.html` in Claude Design project `4328e41c-9f30-4c64-98f9-2445eb57d486` ("Sirio Feltrin Portfolio Design") — user prefers the **gold** tweak
   - Full page: `Sirio V4 - Deep Field × Hyperlight.dc.html` + `star-engine.js` in project `42d7cdbc-c6e1-47dd-aaef-a49e89035dce`
   - The V4 file contains only a mockup star — the real Sirio Star must replace it
   - The untracked `site/` folder is an old discarded mockup — do not build on it
+
 **Requirements**: FOUND-01, FOUND-02, FOUND-03, FOUND-04, HERO-01, HERO-02, HERO-03, HERO-04, NAV-02, LINK-01, LINK-02
 **Success Criteria** (what must be TRUE):
 
@@ -40,9 +42,18 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. Pushing a change redeploys the live site through a repeatable build/deploy step
 
 **Plans**: 3 plans
+**Wave 1**
+
   - [ ] 01-01-PLAN.md — Walking Skeleton: app/ scaffold + GitHub Actions Pages pipeline, live at a public URL
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
   - [ ] 01-02-PLAN.md — Living GOLD Sirio Star hero + deep-field parallax + persistent nav (CV/LinkedIn) + design tokens
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
   - [ ] 01-03-PLAN.md — Curated content sections: Mission, Selected Work, Experience, Publications, Contact
+
 **UI hint**: yes
 
 ### Phase 2: The AI Concierge
