@@ -16,7 +16,7 @@ marker disables Jekyll so module/underscore-prefixed files are served verbatim.
 Serve this folder over HTTP (ES modules require a server, not `file://`):
 
 ```bash
-npx --yes serve app
+npx --yes serve site
 # or
 python -m http.server -d site 8080
 ```

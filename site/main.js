@@ -12,7 +12,24 @@ import { HeroStar, REDUCED, DPR, tintAt, rgba } from './star-engine.js';
 
 const heroEl = document.querySelector('[data-hero]');
 const deepEl = document.querySelector('[data-deep]');
+const navEl = document.querySelector('[data-nav]');
+const parallaxEl = heroEl && heroEl.querySelector('[data-parallax]');
+const heroCanvas = heroEl && heroEl.querySelector('canvas');
 const paraEls = Array.from(document.querySelectorAll('[data-para]'));
+
+/* Tuning knobs — all three are single values, deliberately. */
+const DOCK_AT = 70;        /* px: dock once hero.bottom crosses the nav height */
+const STAR_DRIFT = 10;     /* px: max pointer drift of the star layer + orbs */
+const CANVAS_DRIFT = 6;    /* px: the rings drift ~0.6x as far, reading as depth */
+const DRIFT_EASE = 0.06;   /* per frame: drift-and-settle, not cursor tracking */
+
+/* The hero rect is cached on scroll/resize and read everywhere else. The engine
+   already interleaves a layout read and writes every frame — never add another
+   getBoundingClientRect to the pointer handler or the loop. */
+let heroRect = null;
+function cacheHeroRect() {
+  if (heroEl) heroRect = heroEl.getBoundingClientRect();
+}
 
 /* ---------- the star ---------- */
 
@@ -91,16 +108,67 @@ function applyPara() {
   }
 }
 
+/* ---------- nav docking (D-01) ---------- */
+
+function syncNav() {
+  if (!navEl || !heroRect) return;
+  navEl.classList.toggle('nav--docked', heroRect.bottom <= DOCK_AT);
+}
+
+/* ---------- pointer parallax (D-05) ---------- */
+
+/* Two gates: no drift under reduced motion, and none on touch devices where
+   there is no cursor to drift toward. */
+const POINTER_OK = !REDUCED && window.matchMedia('(hover: hover)').matches;
+
+let ptTargetX = 0, ptTargetY = 0, ptX = 0, ptY = 0;
+
+/* Stores the target only — the loop applies it. No layout reads here. */
+function onPointerMove(e) {
+  if (!heroRect || !heroRect.width || !heroRect.height) return;
+  const nx = (e.clientX - (heroRect.left + heroRect.width / 2)) / (heroRect.width / 2);
+  const ny = (e.clientY - (heroRect.top + heroRect.height / 2)) / (heroRect.height / 2);
+  ptTargetX = Math.max(-1, Math.min(1, nx));
+  ptTargetY = Math.max(-1, Math.min(1, ny));
+}
+
+/* Drift the [data-parallax] wrapper, never the planets — the engine overwrites
+   their transform every frame. The wrapper is inset:0 on the hero, so moving it
+   drifts the star and both orbs together and preserves the engine's coordinates. */
+function applyPointer() {
+  if (!POINTER_OK) return;
+  ptX += (ptTargetX - ptX) * DRIFT_EASE;
+  ptY += (ptTargetY - ptY) * DRIFT_EASE;
+  if (parallaxEl) {
+    parallaxEl.style.transform =
+      'translate3d(' + (ptX * STAR_DRIFT).toFixed(2) + 'px,' +
+      (ptY * STAR_DRIFT).toFixed(2) + 'px,0)';
+  }
+  if (heroCanvas) {
+    heroCanvas.style.transform =
+      'translate3d(' + (ptX * CANVAS_DRIFT).toFixed(2) + 'px,' +
+      (ptY * CANVAS_DRIFT).toFixed(2) + 'px,0)';
+  }
+}
+
 /* ---------- loop ---------- */
 
 function loop(now) {
   requestAnimationFrame(loop);
   drawDeep(now);
   star.frame(now);
+  applyPointer();
 }
 
 function onScroll() {
+  cacheHeroRect();
+  syncNav();
   applyPara();
+}
+
+function onResize() {
+  cacheHeroRect();
+  syncNav();
 }
 
 function renderStatic() {
@@ -110,16 +178,23 @@ function renderStatic() {
 }
 
 function boot() {
+  cacheHeroRect();
+  syncNav();
   applyPara();
   window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onResize, { passive: true });
 
   /* Reduced motion: render exactly one frame and never loop. The engine pins
      b = 0.72 internally, so this is a static, fully-lit gold star — not a blank
-     canvas. Re-render on resize since nothing else will. */
+     canvas. Re-render on resize since nothing else will. The nav still docks;
+     the CSS reduced-motion block flattens its transition. */
   if (REDUCED) {
     renderStatic();
     window.addEventListener('resize', renderStatic, { passive: true });
     return;
+  }
+  if (POINTER_OK) {
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
   }
   requestAnimationFrame(loop);
 }

@@ -21,6 +21,20 @@
     <div data-field class="field">
 
       <section id="top" class="hero" data-hero>
+        <!-- Docking nav (D-01). At rest this is the design's in-hero bar; once the
+             visitor scrolls past the hero, main.js adds .nav--docked and it becomes
+             a fixed 70px glass bar. 70px is exactly the scroll-margin-top every
+             section honours, so anchored headings land clear of it.
+             Both outbound links open in a new tab and MUST keep their noopener
+             relationship — it is what blocks reverse tabnabbing. -->
+        <header data-nav class="nav">
+          <span class="nav__name">SIRIO VITTORIO FELTRIN</span>
+          <div class="nav__links">
+            <a class="nav__link" href="https://canva.link/5a5yj5bdg78axhv" target="_blank" rel="noopener">CV&nbsp;&#8599;</a>
+            <a class="nav__link" href="https://www.linkedin.com/in/sirio-vittorio-feltrin/" target="_blank" rel="noopener">LinkedIn&nbsp;&#8599;</a>
+          </div>
+        </header>
+
         <!-- The hero canvas is REQUIRED: HeroStar.frame() bails immediately if
              [data-hero] has no <canvas>, and the entire hero draw never runs. -->
         <canvas class="hero__canvas"></canvas>

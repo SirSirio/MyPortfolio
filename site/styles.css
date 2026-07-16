@@ -392,6 +392,71 @@ section[id] {
 }
 
 /* ============================================================
+   NAV (D-01)
+   Two states on one element. At rest: the design's transparent in-hero bar.
+   Docked: a fixed 70px glass bar. Only opacity/background/backdrop-filter/
+   border-color transition — no transform, no bounce.
+   ============================================================ */
+
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px clamp(22px, 5vw, 56px);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    opacity 0.45s ease,
+    background 0.45s ease,
+    backdrop-filter 0.45s ease,
+    border-color 0.45s ease;
+}
+
+.nav--docked {
+  position: fixed;
+  height: var(--nav-h);
+  padding-top: 0;
+  padding-bottom: 0;
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: var(--glass-border);
+}
+
+.nav__name {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: rgba(228, 236, 255, 0.55);
+}
+
+.nav__links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav__link {
+  text-decoration: none;
+  color: rgba(228, 236, 255, 0.6);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  transition: color 0.3s ease;
+}
+
+/* Real :hover. The design expressed this with a non-standard attribute that
+   browsers ignore silently, so a verbatim port would look right and be dead. */
+.nav__link:hover,
+.nav__link:focus-visible {
+  color: rgba(228, 236, 255, 0.95);
+}
+
+/* ============================================================
    HERO FURNITURE
    ============================================================ */
 
