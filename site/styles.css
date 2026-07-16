@@ -154,8 +154,33 @@ section[id] {
 
 .hero {
   position: relative; /* the engine computes hero-relative coords — required */
-  min-height: 100vh;
-  min-height: 100svh;
+
+  /* The 620px floor is the design's (V4:33). It is not cosmetic: it guarantees
+     the star's halo always has room inside the hero, which is what makes the
+     clip below safe. Without it, a wide+short window (e.g. 1920x500) pushes the
+     halo past the hero's bottom edge and the clip would cut it into exactly the
+     hard line D-04 forbids. Measured: glow clearance stays >= ~50px at every
+     viewport with the floor; it goes to -50px at 1920x420 without it. */
+  min-height: max(100vh, 620px);
+  min-height: max(100svh, 620px);
+
+  /* Contains the decorative pointer drift (D-05). [data-parallax] and the hero
+     canvas are both inset:0 (hero-sized) and get translated a few px, so their
+     boxes protrude below the hero and contribute ~10px of SCROLLABLE overflow —
+     a scrollbar on a page with nothing to scroll to, and the cursor dragging the
+     page down. `clip` (not hidden) keeps this a non-scroll-container.
+
+     This does NOT create a D-04 seam:
+       - [data-deep] is a fixed sibling OUTSIDE the hero, so the deep field is
+         not clipped and reads continuously across the hero's bottom edge;
+       - the hero canvas already terminates at its own bounds by construction
+         (a canvas clips its own drawing), so nothing new is cut;
+       - the star's glow stops ~50px+ short of the edge at every viewport (above).
+     Do NOT swap this for overflow:hidden, and do NOT move it to .page/html/body —
+     that would kill the real scroll Plan 01-03 needs.
+     Measured (1280x647, dpr 1.25): scrollHeight 657 -> 647 vs clientHeight 647. */
+  overflow: clip;
+
   display: flex;
   flex-direction: column;
   align-items: center;
