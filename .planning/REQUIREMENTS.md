@@ -8,15 +8,15 @@ Derived from `.planning/PROJECT.md`. Visual/theme specifics are intentionally de
 
 - [x] **FOUND-01**: Project builds to a static bundle deployable to GitHub Pages
 - [x] **FOUND-02**: Site is live at a public URL early (skeleton deploy), with repeatable deploys thereafter
-- [ ] **FOUND-03**: Dark-themed design-token system (colors, type scale, spacing) applied site-wide
+- [x] **FOUND-03**: Dark-themed design-token system (colors, type scale, spacing) applied site-wide
 - [ ] **FOUND-04**: Multi-page architecture with persistent navigation + a single immersive scroll home page
 
 ### Hero & Magic Engine
 
-- [ ] **HERO-01**: Landing hero presents a WebGL/3D animated "wow" centerpiece on load
-- [ ] **HERO-02**: Hero motion reacts to cursor and/or scroll
-- [ ] **HERO-03**: Hero states the identity in one line (design & engineering, biotech hint, automation thread)
-- [ ] **HERO-04**: Hero exposes primary actions: View CV and LinkedIn
+- [x] **HERO-01**: Landing hero presents a WebGL/3D animated "wow" centerpiece on load
+- [x] **HERO-02**: Hero motion reacts to cursor and/or scroll
+- [x] **HERO-03**: Hero states the identity in one line (design & engineering, biotech hint, automation thread)
+- [x] **HERO-04**: Hero exposes primary actions: View CV and LinkedIn
 
 ### Navigation & Structure
 
@@ -53,8 +53,8 @@ Derived from `.planning/PROJECT.md`. Visual/theme specifics are intentionally de
 
 ### Links & Assets
 
-- [ ] **LINK-01**: CV is viewable and/or downloadable (PDF and/or Canva link)
-- [ ] **LINK-02**: LinkedIn link present and correct
+- [x] **LINK-01**: CV is viewable and/or downloadable (PDF and/or Canva link)
+- [x] **LINK-02**: LinkedIn link present and correct
 - [ ] **LINK-03**: External project links open in new tab and are verified
 
 ### Media
@@ -99,15 +99,15 @@ Maps each v1 REQ-ID to its phase. v2/Later and Out-of-Scope items are not mapped
 |-------------|-------|--------|
 | FOUND-01 | Phase 1 — The Design Build | Complete |
 | FOUND-02 | Phase 1 — The Design Build | Complete |
-| FOUND-03 | Phase 1 — The Design Build | Pending |
+| FOUND-03 | Phase 1 — The Design Build | Complete |
 | FOUND-04 | Phase 1 — The Design Build | Pending |
-| HERO-01 | Phase 1 — The Design Build | Pending |
-| HERO-02 | Phase 1 — The Design Build | Pending |
-| HERO-03 | Phase 1 — The Design Build | Pending |
-| HERO-04 | Phase 1 — The Design Build | Pending |
+| HERO-01 | Phase 1 — The Design Build | Complete |
+| HERO-02 | Phase 1 — The Design Build | Complete |
+| HERO-03 | Phase 1 — The Design Build | Complete |
+| HERO-04 | Phase 1 — The Design Build | Complete |
 | NAV-02 | Phase 1 — The Design Build | Pending |
-| LINK-01 | Phase 1 — The Design Build | Pending |
-| LINK-02 | Phase 1 — The Design Build | Pending |
+| LINK-01 | Phase 1 — The Design Build | Complete |
+| LINK-02 | Phase 1 — The Design Build | Complete |
 | MEDIA-01 | Phase 1 — The Design Build | Pending |
 | NAV-01 | Phase 2 — The Story | Pending |
 | NAV-03 | Phase 2 — The Story | Pending |

@@ -13,9 +13,108 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <main class="hero" style="background:#04050c">
-    <h1>Sirio</h1>
-  </main>
+  <div class="page">
+    <!-- Fixed deep-field starfield. Drawn by drawDeep() in main.js; parallaxes
+         behind every section and shows through the transparent hero canvas. -->
+    <canvas data-deep class="deep"></canvas>
+
+    <div data-field class="field">
+
+      <section id="top" class="hero" data-hero>
+        <!-- Docking nav (D-01). At rest this is the design's in-hero bar; once the
+             visitor scrolls past the hero, main.js adds .nav--docked and it becomes
+             a fixed 70px glass bar. 70px is exactly the scroll-margin-top every
+             section honours, so anchored headings land clear of it.
+             Both outbound links open in a new tab and MUST keep their noopener
+             relationship — it is what blocks reverse tabnabbing. -->
+        <header data-nav class="nav">
+          <span class="nav__name">SIRIO VITTORIO FELTRIN</span>
+          <div class="nav__links">
+            <a class="nav__link" href="https://canva.link/5a5yj5bdg78axhv" target="_blank" rel="noopener">CV&nbsp;&#8599;</a>
+            <a class="nav__link" href="https://www.linkedin.com/in/sirio-vittorio-feltrin/" target="_blank" rel="noopener">LinkedIn&nbsp;&#8599;</a>
+          </div>
+        </header>
+
+        <!-- The hero canvas is REQUIRED: HeroStar.frame() bails immediately if
+             [data-hero] has no <canvas>, and the entire hero draw never runs. -->
+        <canvas class="hero__canvas"></canvas>
+
+        <!-- Pointer-drift wrapper (D-05). inset:0 on the hero, so it preserves the
+             engine's hero-relative coordinate space exactly. The engine owns the
+             planets' transform and the star layer's left/top -- drift is applied
+             here, on the shared parent, never on those elements. -->
+        <div data-parallax class="hero__parallax">
+          <div data-planet="far" class="planet"></div>
+          <div data-planet="near" class="planet"></div>
+
+          <!-- Star layer. Sized entirely in em; the engine sets font-size from the
+               h1's computed size each frame, so the whole star scales with the name.
+               Sub-spans are in z-order and must stay in this order. -->
+          <div data-star class="star">
+            <span class="star__halo"></span>
+            <span class="star__flare star__flare--a">
+              <svg viewBox="0 0 100 100"><path d="M50 3 C52 37 63 48 97 50 C63 52 52 63 50 97 C48 63 37 52 3 50 C37 48 48 37 50 3 Z" fill="rgba(var(--glow,255,196,110),0.8)"></path></svg>
+            </span>
+            <span class="star__flare star__flare--b">
+              <svg viewBox="0 0 100 100"><path d="M50 1 C53 36 64 47 99 50 C64 53 53 64 50 99 C47 64 36 53 1 50 C36 47 47 36 50 1 Z" fill="rgba(255,255,255,0.85)"></path></svg>
+            </span>
+            <span class="star__flare star__flare--c">
+              <svg viewBox="0 0 100 100"><path d="M50 6 C52 38 62 48 94 50 C62 52 52 62 50 94 C48 62 38 52 6 50 C38 48 48 38 50 6 Z" fill="rgba(var(--glow,255,196,110),0.9)"></path></svg>
+            </span>
+            <span class="star__glass"></span>
+            <span class="star__ring">
+              <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="rgba(196,214,255,0.9)" stroke-width="3.2" stroke-dasharray="5 11" stroke-linecap="round"></circle></svg>
+            </span>
+            <span class="star__core"></span>
+          </div>
+        </div>
+
+        <div class="hero__content">
+          <div class="hero__intro">Hello, I am</div>
+
+          <!--
+            THE WORDMARK IS LOAD-BEARING. Do not "fix" the gap that reads as "Sir".
+
+            1. The two i's are U+0131 LATIN SMALL LETTER DOTLESS I, NOT the
+               letter i. The engine finds the orbs' home positions by matching
+               textContent === 'i-without-dot' and requires EXACTLY TWO of them.
+               A normal i skips the entire planet block silently -- no error, the
+               orbs simply never appear. The missing dots ARE the orbs.
+
+            2. The final "o" is a real text node rendered transparent. The engine
+               measures it to pin the star to its optical centre. The star IS the o.
+               Delete the span, empty it, or use ::after and the star loses its anchor.
+          -->
+          <!-- The line breaks below sit INSIDE the tags on purpose: breaking
+               between the spans instead would inject whitespace text nodes and
+               render the name as "S i r i o". Do not reflow this. -->
+          <h1 class="wordmark">S<span
+            class="wordmark__i">&#305;</span>r<span
+            class="wordmark__i">&#305;</span><span
+            class="wordmark__o">o</span></h1>
+
+          <!-- [data-art] and [data-typer] are required by the engine. Without
+               [data-typer] the typewriter early-returns and silently never runs. -->
+          <p class="hero__type">
+            <span>I am a</span>
+            <span class="typer">
+              <span data-art class="typer__art"></span>
+              <span data-typer class="typer__word"></span>
+              <span class="caret"></span>
+            </span>
+          </p>
+        </div>
+
+        <div class="corner-mark">COPENHAGEN · 2026</div>
+
+        <a data-scrollhint data-jump href="#index" class="scrollhint">
+          <span class="scrollhint__label">SCROLL</span>
+          <span class="scrollhint__rail"><span class="scrollhint__dot"></span></span>
+        </a>
+      </section>
+
+    </div>
+  </div>
   <script type="module" src="./main.js"></script>
 </body>
 </html>
