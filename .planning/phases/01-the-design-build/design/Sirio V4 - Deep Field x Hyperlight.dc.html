@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&amp;family=Hanken+Grotesk:wght@300;400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  html,body{ margin:0; padding:0; background:#04050c; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  ::selection{ background:rgba(150,196,255,0.22); }
+  a{ color:#96c4ff; }
+  a:hover{ color:#bcd9ff; }
+  @keyframes scrollDot{ 0%{ transform:translateY(0); opacity:0; } 14%{ opacity:1; } 72%{ opacity:1; } 100%{ transform:translateY(58px); opacity:0; } }
+  @media (prefers-reduced-motion: reduce){ *{ animation-duration:0.01s !important; animation-iteration-count:1 !important; } html{ scroll-behavior:auto; } }
+</style>
+</helmet>
+<div style="position:relative; width:100%; overflow-x:clip; color:#eef2ff; font-family:'Hanken Grotesk',sans-serif; background:linear-gradient(180deg,#04050c 0%, #0c0a09 24%, #110b0a 46%, #100a14 68%, #080a16 86%, #05060d 100%);">
+  <canvas data-deep style="position:fixed; inset:0; width:100vw; height:100vh; z-index:0; pointer-events:none;"></canvas>
+
+  <!-- ================= DEEP FIELD (main navigator) ================= -->
+  <div data-field style="position:relative; z-index:1; will-change:transform,opacity,filter;">
+
+    <!-- HERO — static placeholder (the living Sirio Star from V1 slots in here unchanged) -->
+    <section id="top" data-screen-label="Hero (static placeholder)" style="position:relative; height:100vh; min-height:620px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 24px;">
+      <div style="position:absolute; top:0; left:0; right:0; padding:30px clamp(22px,5vw,56px); display:flex; align-items:center; justify-content:space-between;">
+        <span style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.2em; color:rgba(228,236,255,0.55);">SIRIO VITTORIO FELTRIN</span>
+        <div style="display:flex; gap:24px;">
+          <a href="https://canva.link/5a5yj5bdg78axhv" target="_blank" rel="noopener" style="text-decoration:none; color:rgba(228,236,255,0.6); font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.1em;" style-hover="color:rgba(228,236,255,0.95)">CV&nbsp;&#8599;</a>
+          <a href="https://www.linkedin.com/in/sirio-vittorio-feltrin/" target="_blank" rel="noopener" style="text-decoration:none; color:rgba(228,236,255,0.6); font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.1em;" style-hover="color:rgba(228,236,255,0.95)">LinkedIn&nbsp;&#8599;</a>
+        </div>
+      </div>
+      <div style="font-family:'Hanken Grotesk',sans-serif; font-weight:300; font-size:clamp(18px,2.4vw,30px); color:rgba(200,214,250,0.78); margin-bottom:8px;">Hello, I am</div>
+      <h1 style="margin:0; font-family:'Space Grotesk',sans-serif; font-weight:300; font-size:clamp(58px,12.5vw,184px); line-height:0.98; letter-spacing:-0.04em; color:#eef2ff;">Sirio</h1>
+      <div style="margin-top:26px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:rgba(228,236,255,0.35);">[ STATIC MOCKUP — THE LIVING SIRIO STAR HERO DROPS IN HERE UNCHANGED ]</div>
+      <a data-scrollhint data-jump data-col="150,196,255" href="#index" style="position:absolute; bottom:24px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; text-decoration:none; transition:opacity 0.6s ease; cursor:pointer;">
+        <span style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.34em; color:rgba(228,236,255,0.42); padding-left:0.34em;">SCROLL</span>
+        <span style="position:relative; width:1px; height:52px; display:block; background:rgba(228,236,255,0.13); overflow:hidden;">
+          <span style="position:absolute; left:-1.5px; top:-10px; width:4px; height:10px; border-radius:2px; background:linear-gradient(180deg, rgba(150,196,255,0), #bcd9ff); animation:scrollDot 2.7s cubic-bezier(0.45,0,0.2,1) infinite;"></span>
+        </span>
+      </a>
+    </section>
+
+    <!-- MISSION -->
+    <section id="index" data-screen-label="Mission" style="position:relative; padding:clamp(90px,13vh,150px) clamp(20px,6vw,84px) clamp(60px,8vh,100px); scroll-margin-top:70px;">
+      <div data-para="0.16" style="position:absolute; right:-14%; top:-8%; width:54vw; height:54vw; border-radius:50%; background:radial-gradient(circle, rgba(150,196,255,0.11), rgba(150,196,255,0) 62%); pointer-events:none;"></div>
+      <div style="position:relative; max-width:1180px; margin:0 auto;">
+        <div data-reveal="0" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.24em; color:rgba(228,236,255,0.45); margin-bottom:clamp(38px,5vw,64px);">DEEP FIELD — OBSERVATION LOG · 2026</div>
+        <p data-reveal="1" style="margin:0; max-width:1050px; font-family:'Space Grotesk',sans-serif; font-weight:300; font-size:clamp(28px,4.3vw,60px); line-height:1.18; letter-spacing:-0.02em; color:#eef2ff; text-wrap:pretty;">Biotechnology MSc at DTU Copenhagen. I design and build the <span style="background-image:linear-gradient(90deg,#96c4ff,#f4b659 40%,#ff7a59 68%,#ab8cff); background-clip:text; -webkit-background-clip:text; color:transparent;">hardware, software and automation</span> that free scientists from repetitive lab work.</p>
+        <div data-reveal="2" style="display:flex; flex-wrap:wrap; align-items:center; gap:14px 18px; margin-top:clamp(36px,4.5vw,56px);">
+          <a data-jump href="#work" style="text-decoration:none; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em; color:rgba(255,224,180,0.9); border:1px solid rgba(244,182,89,0.35); border-radius:999px; padding:10px 20px; transition:border-color 0.3s ease, box-shadow 0.3s ease;" style-hover="border-color:rgba(244,182,89,0.8); box-shadow:0 0 18px rgba(244,182,89,0.25)">01&nbsp;WORK&nbsp;&#8600;</a>
+          <a data-jump href="#experience" style="text-decoration:none; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em; color:rgba(255,180,160,0.9); border:1px solid rgba(255,122,89,0.35); border-radius:999px; padding:10px 20px; transition:border-color 0.3s ease, box-shadow 0.3s ease;" style-hover="border-color:rgba(255,122,89,0.8); box-shadow:0 0 18px rgba(255,122,89,0.25)">02&nbsp;EXPERIENCE&nbsp;&#8600;</a>
+          <a data-jump href="#publications" style="text-decoration:none; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em; color:rgba(214,196,255,0.9); border:1px solid rgba(171,140,255,0.35); border-radius:999px; padding:10px 20px; transition:border-color 0.3s ease, box-shadow 0.3s ease;" style-hover="border-color:rgba(171,140,255,0.8); box-shadow:0 0 18px rgba(171,140,255,0.25)">03&nbsp;PUBLICATIONS&nbsp;&#8600;</a>
+          <a data-jump href="#contact" style="text-decoration:none; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em; color:rgba(190,215,255,0.9); border:1px solid rgba(150,196,255,0.35); border-radius:999px; padding:10px 20px; transition:border-color 0.3s ease, box-shadow 0.3s ease;" style-hover="border-color:rgba(150,196,255,0.8); box-shadow:0 0 18px rgba(150,196,255,0.25)">04&nbsp;TRANSMISSION&nbsp;&#8600;</a>
+          <span style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.16em; color:rgba(228,236,255,0.32);">— SECTOR JUMPS ENGAGE A SHORT WARP BURST</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01 WORK -->
+    <section id="work" data-screen-label="Selected Work" style="position:relative; padding:clamp(80px,12vh,150px) clamp(20px,6vw,84px); scroll-margin-top:70px;">
+      <span aria-hidden="true" data-para="-0.07" style="position:absolute; top:-2%; right:1vw; font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:clamp(170px,27vw,400px); line-height:0.8; letter-spacing:-0.04em; color:transparent; -webkit-text-stroke:1px rgba(244,182,89,0.22); pointer-events:none; user-select:none;">01</span>
+      <div data-para="0.13" style="position:absolute; left:-18%; top:24%; width:50vw; height:50vw; border-radius:50%; background:radial-gradient(circle, rgba(244,182,89,0.10), rgba(244,182,89,0) 62%); pointer-events:none;"></div>
+      <div style="position:relative; max-width:1180px; margin:0 auto;">
+        <div data-reveal="0" style="display:flex; align-items:center; gap:20px;">
+          <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.26em; color:rgba(244,182,89,0.85); white-space:nowrap;">01 — ANTARES SECTOR</span>
+          <span style="flex:1; height:1px; background:linear-gradient(90deg, rgba(244,182,89,0.4), rgba(244,182,89,0));"></span>
+        </div>
+        <h2 data-reveal="0" style="margin:14px 0 0; font-family:'Space Grotesk',sans-serif; font-weight:300; font-size:clamp(40px,6vw,86px); letter-spacing:-0.035em; color:#eef2ff;">Selected Work</h2>
+        <div data-reveal="0" style="margin-top:12px; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.2em; color:rgba(255,224,180,0.5);">PLATES ARE CLICKABLE — WARP JUMP TO PROJECT PAGE</div>
+
+        <article data-open="endosense" data-reveal="1" style="display:flex; align-items:center; flex-wrap:wrap; gap:clamp(28px,4vw,58px); margin-top:clamp(46px,6vw,80px); cursor:pointer;">
+          <div style="flex:1.35 1 460px; min-width:290px;">
+            <div data-para="0.05" style="width:100%; aspect-ratio:16/9; border-radius:18px; background:repeating-linear-gradient(135deg, rgba(244,182,89,0.09) 0 11px, rgba(244,182,89,0.02) 11px 22px); border:1px dashed rgba(244,182,89,0.32); display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(244,182,89,0.65); box-shadow:0 30px 90px rgba(220,140,40,0.10); transition:box-shadow 0.5s ease, border-color 0.5s ease;" style-hover="box-shadow:0 40px 110px rgba(240,160,60,0.24); border-color:rgba(244,182,89,0.7)">[ project video / image ]</div>
+          </div>
+          <div style="flex:1 1 300px; min-width:280px;">
+            <div style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.2em; color:rgba(244,182,89,0.85);">PLATE 001 · 2024</div>
+            <h3 style="margin:14px 0 0; font-family:'Space Grotesk',sans-serif; font-weight:400; font-size:clamp(36px,4.4vw,60px); line-height:0.98; letter-spacing:-0.03em; color:#ffffff;">EndoSense</h3>
+            <p style="margin:18px 0 0; max-width:420px; font-size:17px; line-height:1.62; font-weight:300; color:rgba(228,232,244,0.76);">Descriptio od endosese</p>
+            <div style="display:inline-flex; align-items:center; gap:10px; margin-top:24px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:rgba(255,224,180,0.9); border:1px solid rgba(244,182,89,0.4); border-radius:999px; padding:9px 18px; transition:box-shadow 0.35s ease, border-color 0.35s ease;" style-hover="border-color:rgba(244,182,89,0.9); box-shadow:0 0 20px rgba(244,182,89,0.3)">OPEN PLATE — WARP JUMP&nbsp;&#8594;</div>
+          </div>
+        </article>
+
+        <article data-open="liquid-handler" data-reveal="1" style="display:flex; align-items:center; flex-wrap:wrap-reverse; flex-direction:row-reverse; gap:clamp(28px,4vw,58px); margin-top:clamp(60px,8vw,110px); cursor:pointer;">
+          <div style="flex:1.35 1 460px; min-width:290px;">
+            <div data-para="0.05" style="width:100%; aspect-ratio:16/9; border-radius:18px; background:repeating-linear-gradient(135deg, rgba(255,122,89,0.09) 0 11px, rgba(255,122,89,0.02) 11px 22px); border:1px dashed rgba(255,122,89,0.32); display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,122,89,0.65); box-shadow:0 30px 90px rgba(220,90,50,0.10); transition:box-shadow 0.5s ease, border-color 0.5s ease;" style-hover="box-shadow:0 40px 110px rgba(255,110,70,0.22); border-color:rgba(255,122,89,0.7)">[ device render / gif ]</div>
+          </div>
+          <div style="flex:1 1 300px; min-width:280px;">
+            <div style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.2em; color:rgba(255,122,89,0.85);">PLATE 002 · 2025</div>
+            <h3 style="margin:14px 0 0; font-family:'Space Grotesk',sans-serif; font-weight:400; font-size:clamp(36px,4.4vw,60px); line-height:0.98; letter-spacing:-0.03em; color:#ffffff;">Liquid Handler</h3>
+            <p style="margin:18px 0 0; max-width:420px; font-size:17px; line-height:1.62; font-weight:300; color:rgba(228,232,244,0.76);">A portable, precision dispensing instrument — mechanical design, firmware and a calibration UI.</p>
+            <div style="display:inline-flex; align-items:center; gap:10px; margin-top:24px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:rgba(255,180,160,0.9); border:1px solid rgba(255,122,89,0.4); border-radius:999px; padding:9px 18px; transition:box-shadow 0.35s ease, border-color 0.35s ease;" style-hover="border-color:rgba(255,122,89,0.9); box-shadow:0 0 20px rgba(255,122,89,0.3)">OPEN PLATE — WARP JUMP&nbsp;&#8594;</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 02 EXPERIENCE -->
+    <section id="experience" data-screen-label="Experience" style="position:relative; padding:clamp(80px,12vh,150px) clamp(20px,6vw,84px); scroll-margin-top:70px;">
+      <span aria-hidden="true" data-para="-0.07" style="position:absolute; top:-2%; left:1vw; font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:clamp(170px,27vw,400px); line-height:0.8; letter-spacing:-0.04em; color:transparent; -webkit-text-stroke:1px rgba(255,122,89,0.20); pointer-events:none; user-select:none;">02</span>
+      <div data-para="0.13" style="position:absolute; right:-18%; top:14%; width:48vw; height:48vw; border-radius:50%; background:radial-gradient(circle, rgba(255,122,89,0.09), rgba(255,122,89,0) 62%); pointer-events:none;"></div>
+      <div style="position:relative; max-width:1180px; margin:0 auto;">
+        <div data-reveal="0" style="display:flex; align-items:center; gap:20px;">
+          <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.26em; color:rgba(255,122,89,0.85); white-space:nowrap;">02 — ALDEBARAN SECTOR</span>
+          <span style="flex:1; height:1px; background:linear-gradient(90deg, rgba(255,122,89,0.4), rgba(255,122,89,0));"></span>
+        </div>
+        <h2 data-reveal="0" style="margin:14px 0 0; font-family:'Space Grotesk',sans-serif; font-weight:300; font-size:clamp(40px,6vw,86px); letter-spacing:-0.035em; color:#eef2ff;">Experience</h2>
+        <div data-reveal="1" style="position:relative; margin-top:clamp(44px,5.5vw,70px); padding-left:46px;">
+          <span style="position:absolute; left:8px; top:10px; bottom:10px; width:1px; background:linear-gradient(180deg, rgba(255,122,89,0), rgba(255,122,89,0.55) 16%, rgba(255,122,89,0.55) 84%, rgba(255,122,89,0));"></span>
+          <div style="position:relative; display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 40px; padding:clamp(20px,2.6vw,30px) 0;">
+            <span style="position:absolute; left:-42px; top:calc(clamp(20px,2.6vw,30px) + 0.55em); width:9px; height:9px; border-radius:50%; background:#ff7a59; box-shadow:0 0 14px rgba(255,122,89,0.9);"></span>
+            <span style="flex:0 0 160px; font-family:'Space Mono',monospace; font-size:14px; letter-spacing:0.06em; color:rgba(255,150,120,0.88);">2024 — 2026</span>
+            <h4 style="margin:0; flex:1 1 240px; font-family:'Space Grotesk',sans-serif; font-weight:400; font-size:clamp(24px,2.8vw,34px); letter-spacing:-0.02em; color:#ffffff;">MSc Biotechnology</h4>
+            <span style="font-size:16px; font-weight:300; color:rgba(232,228,232,0.6);">DTU Copenhagen</span>
+          </div>
+          <div style="position:relative; display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 40px; padding:clamp(20px,2.6vw,30px) 0;">
+            <span style="position:absolute; left:-42px; top:calc(clamp(20px,2.6vw,30px) + 0.55em); width:9px; height:9px; border-radius:50%; background:#ff7a59; box-shadow:0 0 14px rgba(255,122,89,0.9);"></span>
+            <span style="flex:0 0 160px; font-family:'Space Mono',monospace; font-size:14px; letter-spacing:0.06em; color:rgba(255,150,120,0.88);">2024</span>
+            <h4 style="margin:0; flex:1 1 240px; font-family:'Space Grotesk',sans-serif; font-weight:400; font-size:clamp(24px,2.8vw,34px); letter-spacing:-0.02em; color:#ffffff;">Hardware Lead — iGEM</h4>
+            <span style="font-size:16px; font-weight:300; color:rgba(232,228,232,0.6);">Gold medal</span>
+          </div>
+          <div style="position:relative; display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 40px; padding:clamp(20px,2.6vw,30px) 0;">
+            <span style="position:absolute; left:-42px; top:calc(clamp(20px,2.6vw,30px) + 0.55em); width:9px; height:9px; border-radius:50%; background:#ff7a59; box-shadow:0 0 14px rgba(255,122,89,0.9);"></span>
+            <span style="flex:0 0 160px; font-family:'Space Mono',monospace; font-size:14px; letter-spacing:0.06em; color:rgba(255,150,120,0.88);">2022 — 2024</span>
+            <h4 style="margin:0; flex:1 1 240px; font-family:'Space Grotesk',sans-serif; font-weight:400; font-size:clamp(24px,2.8vw,34px); letter-spacing:-0.02em; color:#ffffff;">Research Assistant</h4>
+            <span style="font-size:16px; font-weight:300; color:rgba(232,228,232,0.6);">Lab automation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 PUBLICATIONS -->
+    <section id="publications" data-screen-label="Publications" style="position:relative; padding:clamp(80px,12vh,150px) clamp(20px,6vw,84px); scroll-margin-top:70px;">
+      <span aria-hidden="true" data-para="-0.07" style="position:absolute; top:-2%; right:1vw; font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:clamp(170px,27vw,400px); line-height:0.8; letter-spacing:-0.04em; color:transparent; -webkit-text-stroke:1px rgba(171,140,255,0.20); pointer-events:none; user-select:none;">03</span>
+      <div data-para="0.13" style="position:absolute; left:-16%; top:20%; width:46vw; height:46vw; border-radius:50%; background:radial-gradient(circle, rgba(171,140,255,0.10), rgba(171,140,255,0) 62%); pointer-events:none;"></div>
+      <div style="position:relative; max-width:1180px; margin:0 auto;">
+        <div data-reveal="0" style="display:flex; align-items:center; gap:20px;">
+          <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.26em; color:rgba(171,140,255,0.85); white-space:nowrap;">03 — VEGA SECTOR</span>
+          <span style="flex:1; height:1px; background:linear-gradient(90deg, rgba(171,140,255,0.4), rgba(171,140,255,0));"></span>
+        </div>
+        <h2 data-reveal="0" style="margin:14px 0 0; font-family:'Space Grotesk',sans-serif; font-weight:300; font-size:clamp(40px,6vw,86px); letter-spacing:-0.035em; color:#eef2ff;">Publications</h2>
+        <div data-reveal="1" style="margin-top:clamp(40px,5vw,64px);">
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:8px 32px; padding:clamp(22px,2.8vw,32px) 14px; border-top:1px solid rgba(255,255,255,0.1); transition:background 0.4s ease;" style-hover="background:rgba(255,255,255,0.03)">
+            <h4 style="margin:0; font-family:'Space Grotesk',sans-serif; font-weight:400; font-size:clamp(21px,2.4vw,28px); letter-spacing:-0.02em; color:#ffffff;">Cell-free diagnostics <span style="font-size:16px; font-weight:300; color:rgba(214,206,255,0.6);">— co-author</span></h4>
+            <span style="font-family:'Space Mono',monospace; font-size:14px; letter-spacing:0.06em; color:rgba(189,163,255,0.9);">EMBO &#183; 2025 &#8599;</span>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:8px 32px; padding:clamp(22px,2.8vw,32px) 14px; border-top:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); transition:background 0.4s ease;" style-hover="background:rgba(255,255,255,0.03)">
+            <h4 style="margin:0; font-family:'Space Grotesk',sans-serif; font-weight:400; font-size:clamp(21px,2.4vw,28px); letter-spacing:-0.02em; color:#ffffff;">Part collection contribution</h4>
+            <span style="font-family:'Space Mono',monospace; font-size:14px; letter-spacing:0.06em; color:rgba(189,163,255,0.9);">iGEM Registry &#183; 2024 &#8599;</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 CONTACT -->
+    <section id="contact" data-screen-label="Contact" style="position:relative; padding:clamp(100px,14vh,180px) clamp(20px,6vw,84px) clamp(80px,10vh,130px); text-align:center; scroll-margin-top:70px;">
+      <div data-para="0.1" style="position:absolute; left:50%; top:30%; width:60vw; height:60vw; margin-left:-30vw; border-radius:50%; background:radial-gradient(circle, rgba(150,196,255,0.10), rgba(150,196,255,0) 60%); pointer-events:none;"></div>
+      <div style="position:relative; max-width:1180px; margin:0 auto;">
+        <div data-reveal="0" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.26em; color:rgba(150,196,255,0.8); margin-bottom:22px;">04 — TRANSMISSION · SIRIUS SECTOR</div>
+        <h3 data-reveal="1" style="margin:0; font-family:'Space Grotesk',sans-serif; font-weight:300; font-size:clamp(46px,7vw,96px); letter-spacing:-0.035em; color:#eef2ff; text-shadow:0 2px 40px rgba(150,196,255,0.35);">Let's build something.</h3>
+        <div data-reveal="2"><a href="mailto:sirio.feltrin@gmail.com" style="display:inline-block; text-decoration:none; font-family:'Space Mono',monospace; font-size:clamp(15px,2.4vw,26px); letter-spacing:0.08em; color:rgba(150,196,255,0.95); margin-top:34px; padding-bottom:8px; border-bottom:1px solid rgba(150,196,255,0.3); transition:text-shadow 0.4s ease, border-color 0.4s ease;" style-hover="text-shadow:0 0 22px rgba(150,196,255,0.85); border-color:rgba(150,196,255,0.9)">sirio.feltrin@gmail.com</a></div>
+      </div>
+    </section>
+
+    <footer style="border-top:1px solid rgba(255,255,255,0.09); padding:24px clamp(20px,6vw,84px);">
+      <div style="max-width:1180px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 32px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:rgba(228,236,255,0.38);">
+        <span>SF — SIRIO VITTORIO FELTRIN</span>
+        <span>COPENHAGEN · 2026</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ================= PROJECT PAGE — ENDOSENSE (backbone) ================= -->
+  <div data-proj="endosense" data-accent="244,182,89" data-pos="0.18" data-screen-label="Project — EndoSense" style="position:fixed; inset:0; z-index:30; overflow:auto; visibility:hidden; opacity:0; background:linear-gradient(180deg,#0a0805 0%, #0e0a07 38%, #04050c 100%);">
+    <div data-proj-inner style="min-height:100%; will-change:transform,opacity,filter; transform-origin:50% 42%; padding:0 clamp(20px,6vw,84px) clamp(70px,9vw,110px);">
+      <div style="max-width:1080px; margin:0 auto;">
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px 24px; padding-top:26px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em;">
+          <a data-close href="#work" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; color:rgba(228,236,255,0.6); border:1px solid rgba(255,255,255,0.14); border-radius:999px; padding:8px 16px; background:rgba(5,6,12,0.5); transition:color 0.3s ease, border-color 0.3s ease;" style-hover="color:rgba(238,242,255,0.95); border-color:rgba(244,182,89,0.5)">&#8592;&nbsp;RETURN TO DEEP FIELD</a>
+          <span style="color:rgba(244,182,89,0.85);">PLATE 001 · ANTARES SECTOR</span>
+        </div>
+        <div style="margin-top:clamp(46px,7vw,84px);">
+          <div style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.22em; color:rgba(244,182,89,0.85);">2024 · BIOLOGY / HARDWARE</div>
+          <h1 style="margin:14px 0 0; font-family:'Space Grotesk',sans-serif; font-weight:300; font-size:clamp(48px,8vw,110px); line-height:0.98; letter-spacing:-0.035em; color:#ffffff;">EndoSense</h1>
+          <p style="margin:22px 0 0; max-width:640px; font-size:clamp(17px,1.6vw,20px); line-height:1.6; font-weight:300; color:rgba(228,232,244,0.78);">[ one-line project lede — what it is and why it matters ]</p>
+        </div>
+        <div style="margin-top:clamp(38px,5vw,60px); width:100%; aspect-ratio:16/8; border-radius:20px; background:repeating-linear-gradient(135deg, rgba(244,182,89,0.09) 0 11px, rgba(244,182,89,0.02) 11px 22px); border:1px dashed rgba(244,182,89,0.32); display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.14em; color:rgba(244,182,89,0.65);">[ HERO MEDIA — video / photo of the device ]</div>
+        <div style="display:grid; grid-template-columns:1.6fr 1fr; gap:clamp(28px,4vw,56px); margin-top:clamp(40px,5vw,64px);">
+          <div style="min-width:0;">
+            <div style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.24em; color:rgba(244,182,89,0.8); margin-bottom:18px;">OVERVIEW</div>
+            <p style="margin:0; font-size:17px; line-height:1.7; font-weight:300; color:rgba(228,232,244,0.68);">[ overview — the problem, the approach, the result. 3–4 sentences. ]</p>
+            <p style="margin:18px 0 0; font-size:17px; line-height:1.7; font-weight:300; color:rgba(228,232,244,0.68);">[ second paragraph — your specific contribution and what was hard. ]</p>
+          </div>
+          <div style="border-left:1px solid rgba(255,255,255,0.1); padding-left:clamp(20px,2.5vw,34px); font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.1em;">
+            <div style="display:flex; flex-direction:column; gap:20px;">
+              <div><div style="color:rgba(228,236,255,0.4); font-size:10px; letter-spacing:0.24em; margin-bottom:6px;">ROLE</div><div style="color:rgba(238,242,255,0.85);">[ role ]</div></div>
+              <div><div style="color:rgba(228,236,255,0.4); font-size:10px; letter-spacing:0.24em; margin-bottom:6px;">STACK</div><div style="color:rgba(238,242,255,0.85);">[ tools / tech ]</div></div>
+              <div><div style="color:rgba(228,236,255,0.4); font-size:10px; letter-spacing:0.24em; margin-bottom:6px;">YEAR</div><div style="color:rgba(238,242,255,0.85);">2024</div></div>
+              <div><div style="color:rgba(228,236,255,0.4); font-size:10px; letter-spacing:0.24em; margin-bottom:6px;">STATUS</div><div style="color:rgba(238,242,255,0.85);">[ status ]</div></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:18px; margin-top:clamp(40px,5vw,64px);">
+          <div style="aspect-ratio:4/3; border-radius:14px; background:rgba(244,182,89,0.05); border:1px dashed rgba(244,182,89,0.28); display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.14em; color:rgba(244,182,89,0.55);">[ photo ]</div>
+          <div style="aspect-ratio:4/3; border-radius:14px; background:rgba(244,182,89,0.05); border:1px dashed rgba(244,182,89,0.28); display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.14em; color:rgba(244,182,89,0.55);">[ cad / render ]</div>
+          <div style="aspect-ratio:4/3; border-radius:14px; background:rgba(244,182,89,0.05); border:1px dashed rgba(244,182,89,0.28); display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.14em; color:rgba(244,182,89,0.55);">[ ui / data ]</div>
+        </div>
+        <div data-open="liquid-handler" style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:10px 30px; margin-top:clamp(56px,7vw,90px); padding:clamp(22px,3vw,32px) 18px; border-top:1px solid rgba(255,255,255,0.12); border-bottom:1px solid rgba(255,255,255,0.12); cursor:pointer; transition:background 0.4s ease;" style-hover="background:rgba(255,122,89,0.05)">
+          <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.24em; color:rgba(255,122,89,0.8);">NEXT PLATE — WARP JUMP</span>
+          <span style="font-family:'Space Grotesk',sans-serif; font-weight:400; font-size:clamp(24px,3vw,38px); letter-spacing:-0.02em; color:#ffffff;">Liquid Handler&nbsp;&#8594;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PROJECT PAGE — LIQUID HANDLER (backbone) ================= -->
+  <div data-proj="liquid-handler" data-accent="255,122,89" data-pos="0.46" data-screen-label="Project — Liquid Handler" style="position:fixed; inset:0; z-index:30; overflow:auto; visibility:hidden; opacity:0; background:linear-gradient(180deg,#0a0605 0%, #100906 38%, #04050c 100%);">
+    <div data-proj-inner style="min-height:100%; will-change:transform,opacity,filter; transform-origin:50% 42%; padding:0 clamp(20px,6vw,84px) clamp(70px,9vw,110px);">
+      <div style="max-width:1080px; margin:0 auto;">
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px 24px; padding-top:26px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em;">
+          <a data-close href="#work" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; color:rgba(228,236,255,0.6); border:1px solid rgba(255,255,255,0.14); border-radius:999px; padding:8px 16px; background:rgba(5,6,12,0.5); transition:color 0.3s ease, border-color 0.3s ease;" style-hover="color:rgba(238,242,255,0.95); border-color:rgba(255,122,89,0.5)">&#8592;&nbsp;RETURN TO DEEP FIELD</a>
+          <span style="color:rgba(255,122,89,0.85);">PLATE 002 · ALDEBARAN SECTOR</span>
+        </div>
+        <div style="margin-top:clamp(46px,7vw,84px);">
+          <div style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.22em; color:rgba(255,122,89,0.85);">2025 · HARDWARE / FIRMWARE</div>
+          <h1 style="margin:14px 0 0; font-family:'Space Grotesk',sans-serif; font-weight:300; font-size:clamp(48px,8vw,110px); line-height:0.98; letter-spacing:-0.035em; color:#ffffff;">Liquid Handler</h1>
+          <p style="margin:22px 0 0; max-width:640px; font-size:clamp(17px,1.6vw,20px); line-height:1.6; font-weight:300; color:rgba(228,232,244,0.78);">A portable, precision dispensing instrument — mechanical design, firmware and a calibration UI.</p>
+        </div>
+        <div style="margin-top:clamp(38px,5vw,60px); width:100%; aspect-ratio:16/8; border-radius:20px; background:repeating-linear-gradient(135deg, rgba(255,122,89,0.09) 0 11px, rgba(255,122,89,0.02) 11px 22px); border:1px dashed rgba(255,122,89,0.32); display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.14em; color:rgba(255,122,89,0.65);">[ HERO MEDIA — device render / demo gif ]</div>
+        <div style="display:grid; grid-template-columns:1.6fr 1fr; gap:clamp(28px,4vw,56px); margin-top:clamp(40px,5vw,64px);">
+          <div style="min-width:0;">
+            <div style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.24em; color:rgba(255,122,89,0.8); margin-bottom:18px;">OVERVIEW</div>
+            <p style="margin:0; font-size:17px; line-height:1.7; font-weight:300; color:rgba(228,232,244,0.68);">[ overview — the problem, the approach, the result. 3–4 sentences. ]</p>
+            <p style="margin:18px 0 0; font-size:17px; line-height:1.7; font-weight:300; color:rgba(228,232,244,0.68);">[ second paragraph — mechanics, firmware, calibration UI. ]</p>
+          </div>
+          <div style="border-left:1px solid rgba(255,255,255,0.1); padding-left:clamp(20px,2.5vw,34px); font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.1em;">
+            <div style="display:flex; flex-direction:column; gap:20px;">
+              <div><div style="color:rgba(228,236,255,0.4); font-size:10px; letter-spacing:0.24em; margin-bottom:6px;">ROLE</div><div style="color:rgba(238,242,255,0.85);">[ role ]</div></div>
+              <div><div style="color:rgba(228,236,255,0.4); font-size:10px; letter-spacing:0.24em; margin-bottom:6px;">STACK</div><div style="color:rgba(238,242,255,0.85);">[ tools / tech ]</div></div>
+              <div><div style="color:rgba(228,236,255,0.4); font-size:10px; letter-spacing:0.24em; margin-bottom:6px;">YEAR</div><div style="color:rgba(238,242,255,0.85);">2025</div></div>
+              <div><div style="color:rgba(228,236,255,0.4); font-size:10px; letter-spacing:0.24em; margin-bottom:6px;">STATUS</div><div style="color:rgba(238,242,255,0.85);">[ status ]</div></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:18px; margin-top:clamp(40px,5vw,64px);">
+          <div style="aspect-ratio:4/3; border-radius:14px; background:rgba(255,122,89,0.05); border:1px dashed rgba(255,122,89,0.28); display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.14em; color:rgba(255,122,89,0.55);">[ photo ]</div>
+          <div style="aspect-ratio:4/3; border-radius:14px; background:rgba(255,122,89,0.05); border:1px dashed rgba(255,122,89,0.28); display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.14em; color:rgba(255,122,89,0.55);">[ cad / render ]</div>
+          <div style="aspect-ratio:4/3; border-radius:14px; background:rgba(255,122,89,0.05); border:1px dashed rgba(255,122,89,0.28); display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.14em; color:rgba(255,122,89,0.55);">[ ui / calibration ]</div>
+        </div>
+        <div data-open="endosense" style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:10px 30px; margin-top:clamp(56px,7vw,90px); padding:clamp(22px,3vw,32px) 18px; border-top:1px solid rgba(255,255,255,0.12); border-bottom:1px solid rgba(255,255,255,0.12); cursor:pointer; transition:background 0.4s ease;" style-hover="background:rgba(244,182,89,0.05)">
+          <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.24em; color:rgba(244,182,89,0.8);">NEXT PLATE — WARP JUMP</span>
+          <span style="font-family:'Space Grotesk',sans-serif; font-weight:400; font-size:clamp(24px,3vw,38px); letter-spacing:-0.02em; color:#ffffff;">EndoSense&nbsp;&#8594;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= WARP OVERLAY ================= -->
+  <div data-warpov style="position:fixed; inset:0; z-index:40; pointer-events:none; opacity:0; transition:opacity 0.35s ease;">
+    <canvas data-warpc style="position:absolute; inset:0; width:100%; height:100%;"></canvas>
+    <div data-flash style="position:absolute; inset:0; opacity:0; background:radial-gradient(circle at 50% 50%, rgba(222,236,255,0.9), rgba(150,196,255,0.25) 45%, rgba(0,0,0,0) 75%);"></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;warpIntensity&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;min&quot;: 0.4, &quot;max&quot;: 2, &quot;step&quot;: 0.1, &quot;default&quot;: 1, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Warp&quot;},
+  &quot;jumpSeconds&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;min&quot;: 0.8, &quot;max&quot;: 2.4, &quot;step&quot;: 0.1, &quot;default&quot;: 1.6, &quot;tsType&quot;: &quot;number&quot;, &quot;unit&quot;: &quot;s&quot;, &quot;section&quot;: &quot;Warp&quot;},
+  &quot;starDensity&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;min&quot;: 0.4, &quot;max&quot;: 1.8, &quot;step&quot;: 0.1, &quot;default&quot;: 1, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Warp&quot;}
+}">
+class Component extends DCLogic {
+  componentDidMount() {
+    if (window.__sirioActive && window.__sirioActive !== this && window.__sirioActive.teardown) { try { window.__sirioActive.teardown(); } catch (e) {} }
+    window.__sirioActive = this;
+    this._boot();
+  }
+  componentWillUnmount() { this.teardown(); }
+  teardown() {
+    this._dead = true;
+    cancelAnimationFrame(this.raf);
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('resize', this._onResize);
+    document.body.style.overflow = '';
+  }
+
+  dens() { return (this.props && this.props.starDensity) || 1; }
+  warpMax() { return (this.props && this.props.warpIntensity) || 1; }
+  jumpMs() { return ((this.props && this.props.jumpSeconds) || 1.6) * 1000; }
+  projEl(id) { return document.querySelector('[data-proj="' + id + '"]'); }
+
+  /* re-acquire DOM refs every frame — survives runtime re-renders */
+  acquire() {
+    if (!this.deep || !this.deep.isConnected) this.deep = document.querySelector('canvas[data-deep]');
+    if (!this.field || !this.field.isConnected) this.field = document.querySelector('[data-field]');
+    if (!this.warpc || !this.warpc.isConnected) {
+      this.warpov = document.querySelector('[data-warpov]');
+      this.warpc = document.querySelector('canvas[data-warpc]');
+      this.flash = document.querySelector('[data-flash]');
+    }
+    this.paraEls = Array.from(document.querySelectorAll('[data-para]'));
+    document.querySelectorAll('[data-open]').forEach(b => {
+      if (b.__wired) return; b.__wired = true;
+      b.addEventListener('click', (e) => { e.preventDefault(); this.openProj(b.dataset.open); });
+    });
+    document.querySelectorAll('[data-close]').forEach(b => {
+      if (b.__wired) return; b.__wired = true;
+      b.addEventListener('click', (e) => { e.preventDefault(); this.closeProj(); });
+    });
+    document.querySelectorAll('[data-jump]').forEach(a => {
+      if (a.__wired) return; a.__wired = true;
+      a.addEventListener('click', () => { this.startBurst(); });
+    });
+    /* restore an open project page if a re-render replaced its node */
+    if (this.curProj && !this.trans) {
+      const p = this.projEl(this.curProj);
+      if (p && p.style.visibility !== 'visible') { p.style.visibility = 'visible'; p.style.opacity = '1'; document.body.style.overflow = 'hidden'; }
+    }
+  }
+
+  async _boot() {
+    const eng = await import('./star-engine.js');
+    if (this._dead) return;
+    this.eng = eng; this.reduced = eng.REDUCED; this.dpr = eng.DPR;
+    this.acquire();
+    const mk = (n, rM, rX) => Array.from({ length: Math.round(n * this.dens()) }, () => ({ x: Math.random(), y: Math.random() * 3, r: rM + Math.random() * (rX - rM), ph: Math.random() * 6.28, hue: Math.random() }));
+    this.layers = [
+      { f: 0.14, a: 0.26, stars: mk(280, 0.3, 0.9) },
+      { f: 0.36, a: 0.40, stars: mk(140, 0.5, 1.3) },
+      { f: 0.66, a: 0.58, stars: mk(64, 0.8, 1.9) }
+    ];
+    this.spawn = (z) => { const a = Math.random() * Math.PI * 2, rr = 0.25 + Math.pow(Math.random(), 0.6) * 1.25; return { x: Math.cos(a) * rr, y: Math.sin(a) * rr, z: z || 1, hue: Math.random() }; };
+    this.wstars = Array.from({ length: Math.round(340 * this.dens()) }, () => this.spawn(Math.random()));
+    this._wt = performance.now();
+    this._onScroll = () => { this.updateHint(); this.updateReveals(); };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onResize = () => { if (this.reduced) this.frame(performance.now()); };
+    window.addEventListener('resize', this._onResize);
+    if (this.reduced) { this.frame(performance.now()); return; }
+    this.loop = (t) => { this.raf = requestAnimationFrame(this.loop); this.frame(t); };
+    this.raf = requestAnimationFrame(this.loop);
+  }
+
+  frame(now) {
+    if (this._dead) return;
+    this.acquire();
+    if (!(this.curProj && !this.trans)) { this.drawDeep(now); this.applyPara(); }
+    this.updateReveals();
+    this.updateHint();
+    this.applyTrans(now);
+    this.drawWarp(now);
+  }
+
+  /* ---------- deep-field starfield ---------- */
+  drawDeep(now) {
+    const c = this.deep; if (!c) return;
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const W = Math.round(vw * this.dpr), H = Math.round(vh * this.dpr);
+    if (c.width !== W || c.height !== H) { c.width = W; c.height = H; }
+    const ctx = c.getContext('2d');
+    ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    ctx.clearRect(0, 0, vw, vh);
+    const rel = window.scrollY, span = vh * 3;
+    for (const L of this.layers) for (const s of L.stars) {
+      let sy = (s.y * vh - rel * L.f) % span;
+      if (sy < 0) sy += span;
+      if (sy > vh + 4) continue;
+      const tw = 0.35 + 0.65 * Math.abs(Math.sin(now * 0.0009 + s.ph));
+      ctx.beginPath();
+      ctx.arc(s.x * vw, sy, s.r, 0, 6.2832);
+      ctx.fillStyle = this.eng.rgba(this.eng.tintAt(s.hue), (L.a * tw).toFixed(3));
+      ctx.fill();
+    }
+  }
+
+  applyPara() {
+    const vh = window.innerHeight;
+    for (const el of this.paraEls) {
+      const par = el.parentElement;
+      if (!par) continue;
+      const r = par.getBoundingClientRect();
+      if (r.bottom < -400 || r.top > vh + 400) continue;
+      const f = parseFloat(el.dataset.para) || 0;
+      el.style.transform = 'translate3d(0,' + ((r.top + r.height / 2 - vh / 2) * -f).toFixed(1) + 'px,0)';
+    }
+  }
+
+  /* ---------- warp jump transitions ---------- */
+  openProj(id) {
+    if (this.trans) return;
+    const target = this.projEl(id); if (!target) return;
+    const fromId = this.curProj && this.curProj !== id ? this.curProj : null;
+    const pos = parseFloat(target.dataset.pos); /* palette position of the destination */
+    if (this.reduced) {
+      if (fromId) { const f = this.projEl(fromId); if (f) { f.style.visibility = 'hidden'; f.style.opacity = '0'; } }
+      target.style.visibility = 'visible'; target.style.opacity = '1'; target.scrollTop = 0;
+      document.body.style.overflow = 'hidden'; this.curProj = id; return;
+    }
+    this.trans = {
+      start: performance.now(), dur: this.jumpMs(), pos: isNaN(pos) ? 0 : pos, max: 0.016 * this.warpMax(),
+      out: fromId ? { id: fromId } : { isField: true },
+      into: { id: id }
+    };
+    this.curProj = id;
+  }
+
+  closeProj() {
+    if (this.trans || !this.curProj) return;
+    const id = this.curProj;
+    if (this.reduced) {
+      const p = this.projEl(id); if (p) { p.style.visibility = 'hidden'; p.style.opacity = '0'; }
+      document.body.style.overflow = ''; this.curProj = null; return;
+    }
+    this.trans = {
+      start: performance.now(), dur: this.jumpMs(), live: true, max: 0.016 * this.warpMax(),
+      out: { id: id },
+      into: { isField: true }
+    };
+    this.curProj = null;
+  }
+
+  startBurst(col) {
+    if (this.reduced || this.trans) return;
+    this.burst = { start: performance.now(), dur: 950, live: true, max: 0.0075 * this.warpMax() };
+  }
+
+  /* palette position of the current scroll — the warp inherits the gradient the page is at */
+  scrollPos() {
+    const doc = document.documentElement;
+    return this.eng.clamp(window.scrollY / Math.max(1, doc.scrollHeight - window.innerHeight), 0, 1);
+  }
+
+  applyTrans(now) {
+    const tr = this.trans; if (!tr) return;
+    const t = this.eng.clamp((now - tr.start) / tr.dur, 0, 1);
+    const vh = window.innerHeight;
+    const outEl = tr.out.isField ? this.field : this.projEl(tr.out.id);
+    const inEl = tr.into.isField ? this.field : this.projEl(tr.into.id);
+    const h = this.eng.clamp(t / 0.5, 0, 1);
+    const b = this.eng.clamp((t - 0.5) / 0.5, 0, 1);
+    /* departure: fly past the outgoing view */
+    if (outEl && t < 0.55) {
+      const ea = h * h;
+      const tgt = tr.out.isField ? outEl : (outEl.querySelector('[data-proj-inner]') || outEl);
+      if (tr.out.isField) tgt.style.transformOrigin = '50% ' + (window.scrollY + vh / 2) + 'px';
+      tgt.style.transform = 'scale(' + (1 + ea * 4).toFixed(3) + ')';
+      tgt.style.filter = 'blur(' + (ea * 9).toFixed(1) + 'px)';
+      outEl.style.opacity = this.eng.clamp(1 - h * 1.3, 0, 1).toFixed(3);
+    }
+    /* mid-point swap (masked by the warp field) */
+    if (t >= 0.5 && !tr._mid) {
+      tr._mid = true;
+      if (!tr.out.isField && outEl) {
+        outEl.style.visibility = 'hidden'; outEl.style.opacity = '0';
+        const oi = outEl.querySelector('[data-proj-inner]'); if (oi) { oi.style.transform = ''; oi.style.filter = ''; }
+      }
+      if (!tr.into.isField && inEl) { inEl.style.visibility = 'visible'; inEl.scrollTop = 0; document.body.style.overflow = 'hidden'; }
+      if (tr.into.isField) document.body.style.overflow = '';
+    }
+    /* arrival: incoming view scales up out of the warp */
+    if (t >= 0.5 && inEl) {
+      const eb = 1 - Math.pow(1 - b, 3);
+      const tgt = tr.into.isField ? inEl : (inEl.querySelector('[data-proj-inner]') || inEl);
+      if (tr.into.isField) tgt.style.transformOrigin = '50% ' + (window.scrollY + vh / 2) + 'px';
+      const sc = tr.into.isField ? (3.2 - 2.2 * eb) : (0.32 + 0.68 * eb);
+      tgt.style.transform = 'scale(' + sc.toFixed(3) + ')';
+      tgt.style.filter = b > 0.96 ? 'none' : 'blur(' + ((1 - eb) * 10).toFixed(1) + 'px)';
+      inEl.style.opacity = this.eng.clamp(b * 1.4, 0, 1).toFixed(3);
+    }
+    if (t >= 1) {
+      if (inEl) {
+        inEl.style.opacity = tr.into.isField ? '' : '1';
+        const tg = tr.into.isField ? inEl : (inEl.querySelector('[data-proj-inner]') || inEl);
+        tg.style.transform = ''; tg.style.filter = '';
+      }
+      if (outEl && tr.out.isField) { outEl.style.transform = ''; outEl.style.filter = ''; outEl.style.opacity = ''; }
+      this.trans = null;
+    }
+  }
+
+  /* ---------- warp starfield overlay ---------- */
+  drawWarp(now) {
+    const c = this.warpc; if (!c) return;
+    const dt = Math.max(1, Math.min(50, now - this._wt)); this._wt = now;
+    const act = this.trans || this.burst;
+    if (!act) {
+      if (this.warpov && this.warpov.style.opacity !== '0') this.warpov.style.opacity = '0';
+      if (this.flash && this.flash.style.opacity !== '0') this.flash.style.opacity = '0';
+      if (c._painted) { const x = c.getContext('2d'); x.clearRect(0, 0, c.width, c.height); c._painted = false; }
+      return;
+    }
+    const isJump = act === this.trans;
+    const t = this.eng.clamp((now - act.start) / act.dur, 0, 1);
+    this.warpov.style.opacity = '1';
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const W = Math.round(vw * this.dpr), H = Math.round(vh * this.dpr);
+    if (c.width !== W || c.height !== H) { c.width = W; c.height = H; }
+    const ctx = c.getContext('2d');
+    ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    ctx.clearRect(0, 0, vw, vh);
+    c._painted = true;
+    const prof = Math.pow(Math.sin(Math.PI * t), 1.4);
+    const speed = prof * act.max;
+    const bgA = isJump ? this.eng.clamp(prof * 1.7, 0, 1) : prof * 0.3;
+    ctx.fillStyle = 'rgba(4,5,12,' + bgA.toFixed(3) + ')';
+    ctx.fillRect(0, 0, vw, vh);
+    /* tint follows the page palette: live scroll position for bursts/returns, destination sector for jumps */
+    const pos = act.live ? this.scrollPos() : (act.pos || 0);
+    const tint = this.eng.tintAt(pos);
+    const cx = vw / 2, cy = vh / 2, f = Math.min(vw, vh) * 0.5;
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(vw, vh) * 0.55);
+    g.addColorStop(0, this.eng.rgba(tint, (0.04 + 0.16 * prof).toFixed(3)));
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, vw, vh);
+    ctx.lineCap = 'round';
+    for (let k = 0; k < this.wstars.length; k++) {
+      const s = this.wstars[k];
+      s.z -= speed * dt * 0.06 * (0.7 + s.hue * 0.6);
+      if (s.z <= 0.035) { this.wstars[k] = this.spawn(1); continue; }
+      const px = cx + s.x / s.z * f, py = cy + s.y / s.z * f;
+      if (px < -60 || px > vw + 60 || py < -60 || py > vh + 60) { this.wstars[k] = this.spawn(1); continue; }
+      const near = 1 - s.z;
+      /* per-star spread: sample neighbouring palette colors around the section tint */
+      const col = this.eng.lerp3([225, 232, 250], this.eng.tintAt(this.eng.clamp(pos + (s.hue - 0.5) * 0.26, 0, 1)), 0.3 + s.hue * 0.5);
+      const a = this.eng.clamp((0.08 + near * 0.75) * (0.25 + 0.75 * prof), 0, 0.85);
+      const streak = speed * 900 * (0.5 + near);
+      if (streak > 1.2) {
+        const z2 = Math.min(1, s.z + speed * 40 * (0.7 + s.hue * 0.6));
+        const qx = cx + s.x / z2 * f, qy = cy + s.y / z2 * f;
+        const grad = ctx.createLinearGradient(px, py, qx, qy);
+        grad.addColorStop(0, this.eng.rgba(col, a.toFixed(3)));
+        grad.addColorStop(1, this.eng.rgba(col, 0));
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 0.7 + near * 1.7;
+        ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(qx, qy); ctx.stroke();
+      } else {
+        const tw = 0.45 + 0.55 * Math.abs(Math.sin(now * 0.0009 + s.hue * 6.28));
+        ctx.fillStyle = this.eng.rgba(col, (a * tw).toFixed(3));
+        ctx.beginPath(); ctx.arc(px, py, 0.5 + near * 1.6, 0, 6.2832); ctx.fill();
+      }
+    }
+    if (this.flash) this.flash.style.opacity = isJump ? (Math.pow(Math.abs(Math.sin(Math.PI * t)), 10) * 0.5).toFixed(3) : '0';
+    if (!isJump && t >= 1) this.burst = null;
+  }
+
+  /* ---------- reveals + scroll hint (stateless, from V1) ---------- */
+  updateHint() {
+    const hint = document.querySelector('[data-scrollhint]');
+    if (!hint) return;
+    const hide = window.scrollY > 70;
+    hint.style.opacity = hide ? '0' : '1';
+    hint.style.pointerEvents = hide ? 'none' : 'auto';
+  }
+  updateReveals() {
+    const vh = window.innerHeight;
+    const els = document.querySelectorAll('[data-reveal]');
+    for (const el of els) {
+      if (this.reduced) { el.dataset.revState = 'shown'; continue; }
+      const d = (parseInt(el.dataset.reveal, 10) || 0) * 130;
+      const trans = 'opacity 1s ease ' + d + 'ms, transform 1s cubic-bezier(0.22,1,0.36,1) ' + d + 'ms, filter 1s ease ' + d + 'ms';
+      if (el.dataset.revState === 'shown') {
+        /* re-arm once the element is fully out of view, so reveals replay on the way back */
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -60 || r.top > vh + 60) {
+          el.dataset.revState = 'hidden';
+          el.style.transition = 'none';
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(30px)';
+          el.style.filter = 'blur(10px)';
+        }
+        continue;
+      }
+      if (!el.dataset.revState) {
+        el.dataset.revState = 'hidden';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.filter = 'blur(10px)';
+        el.style.transition = trans;
+        continue;
+      }
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * 0.9 && r.bottom > 0 && r.width > 0) {
+        el.dataset.revState = 'shown';
+        el.style.transition = trans;
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        el.style.filter = 'blur(0)';
+        setTimeout(() => { if (el.isConnected && el.dataset.revState === 'shown') { el.style.filter = ''; el.style.transform = ''; } }, 1700 + d);
+      }
+    }
+  }
+
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

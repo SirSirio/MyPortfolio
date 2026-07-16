@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; height:100%; background:#04050c; color:#fff; overflow:hidden; -webkit-font-smoothing:antialiased; }
+  ::selection{ background:rgba(150,196,255,0.25); }
+  @keyframes spin{ to{ transform:rotate(360deg);} }
+  @keyframes spinRev{ to{ transform:rotate(-360deg);} }
+  @keyframes orbit{ to{ transform:rotate(360deg);} }
+  @keyframes blink{ 50%{ opacity:0; } }
+</style>
+</helmet>
+
+<section data-screen-label="Star" style="position:absolute; inset:0; overflow:hidden; background:#04050c; font-family:'Hanken Grotesk','Space Grotesk',sans-serif;">
+  <canvas style="position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
+
+  <div data-planet="far" style="position:absolute; left:-99px; top:-99px; width:12px; height:12px; border-radius:50%; pointer-events:none; z-index:1;"></div>
+  <div data-planet="near" style="position:absolute; left:-99px; top:-99px; width:12px; height:12px; border-radius:50%; pointer-events:none; z-index:1;"></div>
+
+  <div data-star style="position:absolute; left:50%; top:50%; width:0; height:0; pointer-events:none; z-index:2; font-size:120px;">
+    <span style="position:absolute; left:50%; top:50%; width:2.7em; height:2.7em; margin-left:-1.35em; margin-top:-1.35em; border-radius:50%; opacity:var(--halo-op,0.05); background:radial-gradient(circle, rgba(var(--glow,150,196,255),0.95), rgba(var(--glow,150,196,255),0) 62%);"></span>
+    <span style="position:absolute; left:50%; top:50%; width:2.0em; height:2.0em; margin-left:-1em; margin-top:-1em; animation:spinRev 56s linear infinite; opacity:calc(var(--flare-op,0)*0.5);">
+      <svg viewBox="0 0 100 100" style="width:100%; height:100%; display:block; filter:blur(1.1px); transform:scale(var(--flare-scale,0.28)); transform-origin:center;"><path d="M50 3 C52 37 63 48 97 50 C63 52 52 63 50 97 C48 63 37 52 3 50 C37 48 48 37 50 3 Z" fill="rgba(var(--glow,150,196,255),0.8)"></path></svg>
+    </span>
+    <span style="position:absolute; left:50%; top:50%; width:1.45em; height:1.45em; margin-left:-0.725em; margin-top:-0.725em; animation:spin 46s linear infinite; opacity:var(--flare-op,0);">
+      <svg viewBox="0 0 100 100" style="width:100%; height:100%; display:block; filter:blur(0.6px); transform:scale(var(--flare-scale,0.28)); transform-origin:center;"><path d="M50 1 C53 36 64 47 99 50 C64 53 53 64 50 99 C47 64 36 53 1 50 C36 47 47 36 50 1 Z" fill="rgba(255,255,255,0.85)"></path></svg>
+    </span>
+    <span style="position:absolute; left:50%; top:50%; width:0.96em; height:0.96em; margin-left:-0.48em; margin-top:-0.48em; animation:spinRev 32s linear infinite; opacity:var(--flare-op,0);">
+      <svg viewBox="0 0 100 100" style="width:100%; height:100%; display:block; transform:scale(var(--flare-scale,0.28)); transform-origin:center;"><path d="M50 6 C52 38 62 48 94 50 C62 52 52 62 50 94 C48 62 38 52 6 50 C38 48 48 38 50 6 Z" fill="rgba(var(--glow,150,196,255),0.9)"></path></svg>
+    </span>
+    <span style="position:absolute; left:50%; top:50%; width:0.92em; height:0.92em; margin-left:-0.46em; margin-top:-0.46em; border-radius:50%; background:rgba(255,255,255,var(--glass-op,0.05)); border:1px solid rgba(255,255,255,calc(var(--glass-op,0.05)*2.2)); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);"></span>
+    <span style="position:absolute; left:50%; top:50%; width:0.78em; height:0.78em; margin-left:-0.39em; margin-top:-0.39em; animation:spin 17s linear infinite; opacity:var(--ring-op,0.55);">
+      <svg viewBox="0 0 100 100" style="width:100%; height:100%; display:block;"><circle cx="50" cy="50" r="46" fill="none" stroke="rgba(196,214,255,0.9)" stroke-width="3.2" stroke-dasharray="5 11" stroke-linecap="round"></circle></svg>
+    </span>
+    <span style="position:absolute; left:50%; top:50%; width:0.5em; height:0.5em; margin-left:-0.25em; margin-top:-0.25em; border-radius:50%; background:var(--core,#06060e); box-shadow:0 0 var(--core-blur,6px) rgba(var(--glow,150,196,255),0.85), 0 0 calc(var(--core-blur,6px)*0.45) rgba(255,255,255,calc(var(--b,0)*0.7));"></span>
+  </div>
+
+  <div style="position:absolute; top:0; left:0; right:0; padding:30px clamp(22px,5vw,56px); display:flex; align-items:center; justify-content:space-between; z-index:5;">
+    <span style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.2em; color:rgba(228,236,255,0.55);">SIRIO VITTORIO FELTRIN</span>
+    <div style="display:flex; gap:24px;">
+      <a href="https://canva.link/5a5yj5bdg78axhv" target="_blank" rel="noopener" style="text-decoration:none; color:rgba(228,236,255,0.6); font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.1em;">CV&nbsp;↗</a>
+      <a href="https://www.linkedin.com/in/sirio-vittorio-feltrin/" target="_blank" rel="noopener" style="text-decoration:none; color:rgba(228,236,255,0.6); font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.1em;">LinkedIn&nbsp;↗</a>
+    </div>
+  </div>
+
+  <div style="position:absolute; inset:0; z-index:4; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 24px; pointer-events:none;">
+    <div style="font-family:'Hanken Grotesk',sans-serif; font-weight:300; font-size:clamp(18px,2.4vw,30px); letter-spacing:0.005em; color:rgba(200,214,250,0.78); margin-bottom:8px;">Hello, I am</div>
+    <h1 style="margin:0; font-family:'Space Grotesk',sans-serif; font-weight:300; font-size:clamp(58px,12.5vw,184px); line-height:0.98; letter-spacing:-0.04em; color:#eef2ff; text-shadow:0 2px 40px rgba(0,0,0,0.55);">S<span style="position:relative;">&#305;</span>r<span style="position:relative;">&#305;</span><span style="color:transparent; display:inline-block;">o</span></h1>
+    <p style="margin:34px 0 0; min-height:1.7em; display:flex; align-items:center; justify-content:center; gap:0; font-family:'Hanken Grotesk',sans-serif; font-weight:300; font-size:clamp(18px,2.3vw,28px); line-height:1.4; color:rgba(220,228,250,0.72);">
+      <span>I am a</span>
+      <span style="display:inline-flex; align-items:center; gap:0;">
+        <span></span>
+        <span style="font-weight:600; background-clip:text; -webkit-background-clip:text; color:transparent; background-image:linear-gradient(90deg,#7dd3fc,#38bdf8);"></span>
+        <span style="display:inline-block; width:2px; height:1.05em; border-radius:1px; background:rgba(196,214,255,0.9); animation:blink 1.05s step-end infinite; margin-left:0.12ch;"></span>
+      </span>
+    </p>
+  </div>
+
+  <div style="position:absolute; bottom:30px; left:clamp(22px,5vw,56px); font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.16em; color:rgba(228,236,255,0.32); z-index:5;">COPENHAGEN · 2026</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;starColor&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Blue-white&quot;, &quot;Gold&quot;, &quot;Violet&quot;], &quot;default&quot;: &quot;Blue-white&quot;, &quot;tsType&quot;: &quot;string&quot; },
+  &quot;cycleSpeed&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Slow&quot;, &quot;Medium&quot;], &quot;default&quot;: &quot;Slow&quot;, &quot;tsType&quot;: &quot;string&quot; }
+}">
+class Component extends DCLogic {
+  raf = null;
+  t0 = 0;
+  rings = [];
+  lastSpawn = 0;
+  _si = 0;
+  spawnEvery = 2100;
+  center = { x: 0, y: 0 };
+  oSize = 40;
+  stars = null;
+
+  componentDidMount() {
+    this.canvas = document.querySelector('[data-screen-label="Star"] canvas');
+    this.root = document.querySelector('[data-screen-label="Star"]');
+    this._iSpans = [...this.root.querySelectorAll('h1 > span')].filter(s => s.firstChild && s.firstChild.nodeType === 3 && s.firstChild.textContent === 'ı');
+    this._starLayer = this.root.querySelector('[data-star]');
+    this._planetNear = this.root.querySelector('[data-planet="near"]');
+    this._planetFar = this.root.querySelector('[data-planet="far"]');
+    this._h1fs = 120;
+    this.armed = true; this.orbiting = false; this.planets = [];
+    this.stars = Array.from({ length: 130 }, () => ({
+      x: Math.random(), y: Math.random(), r: Math.random() * 1.3 + 0.35,
+      ph: Math.random() * 6.28, big: Math.random() < 0.10
+    }));
+    window.addEventListener('resize', this._resize);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.measure());
+    this._resize();
+    this.t0 = performance.now();
+    this.lastSpawn = this.t0;
+    this.loop();
+    this.startType();
+  }
+  componentWillUnmount() {
+    cancelAnimationFrame(this.raf);
+    clearTimeout(this._tt);
+    window.removeEventListener('resize', this._resize);
+  }
+
+  startType() {
+    this.terms = [
+      { text: 'Engineer', grad: 'linear-gradient(90deg,#7dd3fc,#38bdf8)' },
+      { text: 'Designer', grad: 'linear-gradient(90deg,#fcd34d,#fb923c)' },
+      { text: 'Developer', grad: 'linear-gradient(90deg,#c4b5fd,#a855f7)' },
+      { text: 'Biotechnologist', grad: 'linear-gradient(90deg,#86efac,#34d399)' },
+      { text: 'Product Maker', grad: 'linear-gradient(90deg,#fda4af,#fb7185)' },
+      { text: 'Lab Automator', grad: 'linear-gradient(90deg,#5eead4,#14b8a6)' },
+      { text: 'Data Analyst', grad: 'linear-gradient(90deg,#f9a8d4,#ec4899)' },
+      { text: 'AI enthusiast', grad: 'linear-gradient(90deg,#a5b4fc,#818cf8)' }
+    ];
+    this.terms.forEach(t => { t.prefix = (/^[aeiou]/i.test(t.text) ? 'n ' : ' '); t.full = t.prefix + t.text; });
+    this.ti = 0; this.ci = 0; this.deleting = false;
+    const p = this.root && this.root.querySelector('p');
+    const wrap = p && p.children[1];
+    this._artEl = wrap && wrap.children[0];
+    this._typeEl = wrap && wrap.children[1];
+    if (this._typeEl) { this._typeEl.style.backgroundImage = this.terms[0].grad; this.tick(); }
+  }
+  tick = () => {
+    const el = this._typeEl;
+    if (!el) return;
+    const t = this.terms[this.ti];
+    el.style.backgroundImage = t.grad;
+    const pl = t.prefix.length;
+    const render = () => {
+      if (this._artEl) this._artEl.textContent = t.prefix.slice(0, Math.min(this.ci, pl));
+      el.textContent = this.ci > pl ? t.text.slice(0, this.ci - pl) : '';
+    };
+    if (!this.deleting) {
+      this.ci++;
+      render();
+      if (this.ci >= t.full.length) { this.deleting = true; this._tt = setTimeout(this.tick, 1500); return; }
+      this._tt = setTimeout(this.tick, 72 + Math.random() * 46);
+    } else {
+      this.ci--;
+      render();
+      if (this.ci <= 0) { this.deleting = false; this.ti = (this.ti + 1) % this.terms.length; this._tt = setTimeout(this.tick, 380); return; }
+      this._tt = setTimeout(this.tick, 40);
+    }
+  };
+
+  _resize = () => {
+    const c = this.canvas;
+    if (!c) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    c.width = window.innerWidth * dpr;
+    c.height = window.innerHeight * dpr;
+    c.getContext('2d').setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.measure();
+  };
+  measure() {
+    const h1 = this.root && this.root.querySelector('h1');
+    const spans = document.querySelectorAll('[data-screen-label="Star"] h1 span');
+    let o = null;
+    for (const s of spans) { if (s.firstChild && s.firstChild.nodeType === 3 && s.firstChild.textContent === 'o') { o = s; break; } }
+    if (!o || !h1) {
+      this.center.x = window.innerWidth / 2;
+      this.center.y = window.innerHeight / 2;
+      this.oSize = 40;
+      return;
+    }
+    const r = o.getBoundingClientRect();
+    // optical centre of the lowercase 'o' glyph via font metrics (it sits low in the line box)
+    let centerYfrac = 0.61, ink = r.height * 0.30;
+    try {
+      if (!this._mctx) this._mctx = document.createElement('canvas').getContext('2d');
+      const cs = getComputedStyle(h1);
+      this._h1fs = parseFloat(cs.fontSize) || this._h1fs;
+      this._mctx.font = cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
+      const m = this._mctx.measureText('o');
+      const fs = parseFloat(cs.fontSize);
+      const L = parseFloat(cs.lineHeight) || fs * 0.98;
+      const fA = m.fontBoundingBoxAscent, fD = m.fontBoundingBoxDescent;
+      if (fA && fD) {
+        const baseline = (L - (fA + fD)) / 2 + fA;
+        const inkCenter = (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2;
+        const centerY = baseline - inkCenter;
+        centerYfrac = centerY / L;
+        ink = m.actualBoundingBoxAscent * 0.62;
+      }
+    } catch (e) {}
+    if (this.root) this.root.style.setProperty('--oy', (centerYfrac * 100).toFixed(2) + '%');
+    this.center.x = r.left + r.width / 2;
+    this.center.y = r.top + centerYfrac * r.height;
+    this.oSize = Math.max(ink, 14);
+  }
+
+  period() { return ({ Slow: 20, Medium: 13 })[(this.props && this.props.cycleSpeed)] || 18; }
+  palette() {
+    const map = {
+      'Blue-white': { glow: [150, 196, 255], core: [255, 251, 242] },
+      'Gold': { glow: [255, 196, 110], core: [255, 236, 200] },
+      'Violet': { glow: [197, 160, 255], core: [244, 238, 255] }
+    };
+    return map[(this.props && this.props.starColor)] || map['Blue-white'];
+  }
+  lerp3(a, c, t) { return [Math.round(a[0] + (c[0] - a[0]) * t), Math.round(a[1] + (c[1] - a[1]) * t), Math.round(a[2] + (c[2] - a[2]) * t)]; }
+  rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+
+  spawn(now) {
+    const styles = [{ dash: [], width: 1.4 }, { dash: [2, 12], width: 1.1 }, { dash: [12, 17], width: 1 }, { dash: [1, 8], width: 1.8 }];
+    this.rings.push({ born: now, st: styles[this._si++ % styles.length] });
+  }
+
+  loop = () => {
+    const c = this.canvas;
+    if (!c) { this.raf = requestAnimationFrame(this.loop); return; }
+    const ctx = c.getContext('2d');
+    const W = window.innerWidth, H = window.innerHeight;
+    const now = performance.now();
+    this.measure();
+
+    const T = this.period() * 1000;
+    let b = (Math.sin((now - this.t0) / T * Math.PI * 2 - Math.PI / 2) + 1) / 2;
+    b = b * b * (3 - 2 * b);
+    const pal = this.palette();
+    const cx = this.center.x, cy = this.center.y;
+
+    // --- drive the DOM star via CSS variables (perfectly anchored to the name) ---
+    if (this.root) {
+      const core = this.lerp3([5, 5, 11], pal.core, b);
+      const r = this.root.style;
+      r.setProperty('--b', b.toFixed(3));
+      r.setProperty('--glow', pal.glow[0] + ',' + pal.glow[1] + ',' + pal.glow[2]);
+      r.setProperty('--core', 'rgb(' + core[0] + ',' + core[1] + ',' + core[2] + ')');
+      r.setProperty('--core-blur', (5 + 58 * b).toFixed(1) + 'px');
+      r.setProperty('--halo-op', (0.04 + 0.34 * b).toFixed(3));
+      r.setProperty('--glass-op', (0.04 + 0.10 * b).toFixed(3));
+      r.setProperty('--flare-op', (0.42 * b).toFixed(3));
+      r.setProperty('--flare-scale', (0.28 + 0.72 * b).toFixed(3));
+      r.setProperty('--ring-op', (0.5 + 0.4 * b).toFixed(3));
+      r.setProperty('--dot-op', (0.4 + 0.5 * b).toFixed(3));
+    }
+
+    // keep the star layer glued to the optical centre of the 'o'
+    if (this._starLayer) {
+      this._starLayer.style.fontSize = (this._h1fs || 120) + 'px';
+      this._starLayer.style.left = cx + 'px';
+      this._starLayer.style.top = cy + 'px';
+    }
+
+    // --- background, follows the star colour ---
+    const bg = this.lerp3([4, 5, 12], [10, 15, 32], b);
+    ctx.fillStyle = 'rgb(' + bg[0] + ',' + bg[1] + ',' + bg[2] + ')';
+    ctx.fillRect(0, 0, W, H);
+
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * 0.62);
+    g.addColorStop(0, this.rgba(pal.glow, 0.05 + 0.18 * b));
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+    // --- starfield (brighter / more present) ---
+    for (const s of this.stars) {
+      const tw = 0.45 + 0.55 * Math.abs(Math.sin(now * 0.0008 + s.ph));
+      const a = (0.16 + 0.5 * b) * tw;
+      const rad = s.r * (s.big ? 1.7 : 1);
+      if (s.big) {
+        ctx.fillStyle = this.rgba([225, 234, 255], a * 0.5);
+        ctx.beginPath(); ctx.arc(s.x * W, s.y * H, rad * 2.4, 0, 6.3); ctx.fill();
+      }
+      ctx.fillStyle = this.rgba([228, 236, 255], a);
+      ctx.beginPath(); ctx.arc(s.x * W, s.y * H, rad, 0, 6.3); ctx.fill();
+    }
+
+    // --- slow rotating dashed rings around the star ---
+    const base = Math.min(W, H);
+    const rotRings = [
+      { r: base * 0.18, dash: [2, 13], w: 1.2, spd: 0.00022, dir: 1 },
+      { r: base * 0.28, dash: [12, 19], w: 1.0, spd: 0.00016, dir: -1 },
+      { r: base * 0.40, dash: [1, 17], w: 1.0, spd: 0.00012, dir: 1 }
+    ];
+    const rc = this.lerp3([60, 64, 92], pal.glow, b);
+    for (const rg of rotRings) {
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(now * rg.spd * rg.dir);
+      ctx.strokeStyle = this.rgba(rc, 0.10 + 0.17 * b);
+      ctx.lineWidth = rg.w; ctx.setLineDash(rg.dash);
+      ctx.beginPath(); ctx.arc(0, 0, rg.r, 0, 6.3); ctx.stroke(); ctx.restore();
+    }
+    ctx.setLineDash([]);
+
+    // --- expanding rings in the star's colour ---
+    if (now - this.lastSpawn > this.spawnEvery) { this.lastSpawn = now; this.spawn(now); }
+    const life = 7600, maxR = Math.hypot(W, H) * 0.58;
+    this.rings = this.rings.filter(r => now - r.born < life);
+    for (const r of this.rings) {
+      const a = (now - r.born) / life;
+      const rad = (1 - Math.pow(1 - a, 3)) * maxR + this.oSize;
+      const col = this.lerp3([50, 54, 80], pal.glow, b);
+      ctx.strokeStyle = this.rgba(col, (1 - a) * (0.12 + 0.4 * b));
+      ctx.lineWidth = r.st.width; ctx.setLineDash(r.st.dash);
+      ctx.beginPath(); ctx.arc(cx, cy, rad, 0, 6.3); ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    // --- i-dot planets: rest on the i's; each ignition triggers ONE eased orbit that parks back home ---
+    if (this._iSpans && this._iSpans.length === 2 && this._planetNear && this._planetFar) {
+      const homes = this._iSpans.map(s => {
+        const r = s.getBoundingClientRect();
+        return { x: r.left + r.width * 0.5 + r.width * 0.085, y: r.top + r.height * 0.30, ps: Math.max(r.height * 0.060, 6) };
+      });
+      const dn = homes.map(h => Math.hypot(h.x - cx, h.y - cy));
+      const nearIdx = dn[0] <= dn[1] ? 0 : 1;
+
+      if (b < 0.30) this.armed = true;
+      if (this.armed && b >= 0.45) {
+        this.armed = false; this.orbiting = true; this.orbitStart = now;
+        const mk = (i, k, dir, dur, tilt) => {
+          const dx = homes[i].x - cx, dy = homes[i].y - cy, d = Math.max(Math.hypot(dx, dy), 1);
+          return { R: d, ux: dx / d, uy: dy / d, k: k, dir: dir, dur: dur, tilt: tilt };  // major axis home→star ⇒ path passes through the dot
+        };
+        this.planets = [];
+        this.planets[nearIdx] = mk(nearIdx, 0.34, -1, 8200, true);        // tilted plane: dips in front of & behind the star
+        this.planets[1 - nearIdx] = mk(1 - nearIdx, 1.0, 1, 12500, false); // flat screen-plane ring: constant size
+      }
+
+      let anyActive = false;
+      for (let i = 0; i < 2; i++) {
+        const h = homes[i];
+        const el = (i === nearIdx) ? this._planetNear : this._planetFar;
+        const pl = this.planets[i];
+        let x = h.x, y = h.y, rad = h.ps, depth = 0.5, z = 1, op = 1;
+        if (this.orbiting && pl) {
+          const p = (now - this.orbitStart) / pl.dur;
+          if (p < 1) {
+            anyActive = true;
+            const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;   // ease in-out across exactly one revolution
+            const th = pl.dir * 2 * Math.PI * e;                               // th: 0 → ±2π, starts & ends on the home dot
+            const perpx = -pl.uy, perpy = pl.ux;
+            const ex = pl.R * Math.cos(th), ey = pl.R * pl.k * Math.sin(th);
+            x = cx + ex * pl.ux + ey * perpx;
+            y = cy + ex * pl.uy + ey * perpy;
+            if (pl.tilt) {
+              depth = Math.sin(th) * 0.5 + 0.5;        // 1 = in front of the star, 0 = behind it
+              rad = h.ps * (0.80 + 0.42 * depth);
+              op = 0.55 + 0.45 * depth;
+              z = depth > 0.5 ? 3 : 1;                 // in front ⇒ above the star (z2); behind ⇒ beneath it
+            }
+          }
+        }
+        const dia = (rad * 2).toFixed(1);
+        el.style.width = el.style.height = dia + 'px';
+        el.style.left = x.toFixed(1) + 'px';
+        el.style.top = y.toFixed(1) + 'px';
+        el.style.transform = 'translate(-50%,-50%)';
+        el.style.zIndex = z;
+        el.style.opacity = op.toFixed(2);
+        el.style.background = '#eef2ff';
+        el.style.boxShadow = '0 0 ' + (rad * 0.7 + rad * 0.9 * b).toFixed(1) + 'px rgba(' + pal.glow.join(',') + ',' + (0.30 + 0.4 * b).toFixed(2) + ')';
+      }
+      if (this.orbiting && !anyActive) this.orbiting = false;
+    }
+
+    this.raf = requestAnimationFrame(this.loop);
+  };
+
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
