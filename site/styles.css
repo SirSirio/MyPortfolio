@@ -1361,6 +1361,38 @@ section[id] {
     transform 0.8s ease;
 }
 
+/* ── IN PRACTICE — the understated evidence strip (D-10). A quiet block that
+   owns the site as evidence plainly but late; separated from the tracks by
+   macro-tier fluid rhythm. */
+.evidence {
+  margin-top: clamp(56px, 7vw, 80px);
+}
+
+/* The label in the shipped interlude idiom (cf. .section__label). ⚠ Weight 400 —
+   the live site never uses 700; accent + tracking carry it (T-1). */
+.evidence__label {
+  font: 400 13px var(--font-mono);
+  letter-spacing: 0.26em;
+  color: rgba(var(--accent), 0.85);
+}
+
+/* Two columns at desktop, one at 860px. Gap on the 4-multiple micro scale. */
+.ev-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 32px;
+}
+
+/* ⚠ Supporting text is deliberately NOT scaled up like .narr (T-3): 15-16px body
+   in --text-body. Accent is NEVER on the prose (Cl-3) — it belongs to the ↗ glyph
+   (the .deck-link) and its hover only. */
+.ev {
+  font: 300 clamp(15px, 1.4vw, 16px) / 1.55 var(--font-body);
+  color: var(--text-body);
+  max-width: 44ch;
+}
+
 /* Responsive: below 860px the phases stack to one column and each wire rotates
    to a vertical line. ⚠ The armed/lit contract stays data-ph-state — never a
    runtime root class. OI-5: this query is rendered but NOT validated below
@@ -1408,6 +1440,10 @@ section[id] {
   .doc-rail::before,
   .doc-rail::after {
     display: none;
+  }
+
+  .ev-grid {
+    grid-template-columns: 1fr;
   }
 }
 
