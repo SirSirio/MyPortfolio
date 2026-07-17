@@ -1,0 +1,52 @@
+/* ─────────────────────────────────────────────────────────────
+   Sketch theme — MIRRORS THE LIVE SITE, does not invent.
+   Every token below is copied from site/styles.css :root so the
+   sketches read as the real page, not a generic mockup.
+
+   Two tokens are NEW and are this sketch's proposal for D-03
+   ("add two new star-spectrum stops … exact values are Claude's call;
+    they must sit natively in the existing spectrum"):
+     --star-zuben  → bio-green  → About/ORIGIN section
+     --star-rigel  → indigo/cyan → AI/METHOD section  ← used here
+
+   Star naming follows the existing convention (sirius/antares/
+   aldebaran/vega are all real stars):
+     β Librae "Zubeneschamali" — the one star widely reported green
+     Rigel — blue-cyan supergiant
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  /* Deep-field palette stops — mirror PAL in star-engine.js:4-10. */
+  --star-sirius: 150, 196, 255;
+  --star-antares: 244, 182, 89;
+  --star-aldebaran: 255, 122, 89;
+  --star-vega: 171, 140, 255;
+
+  /* NEW — D-03 proposal. */
+  --star-zuben: 126, 240, 174;   /* bio-green  → ORIGIN  (not used in this sketch) */
+  --star-rigel: 96, 214, 255;    /* indigo/cyan → METHOD (used in this sketch)     */
+
+  /* The hero star. --gold-glow is the STAR and must never appear in a section. */
+  --gold-glow: 255, 196, 110;
+  --gold-core: 255, 236, 200;
+
+  /* Surfaces + text */
+  --bg-0: #04050c;
+  --text-hi: #eef2ff;
+  --text-body: rgba(228, 232, 244, 0.76);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.1);
+
+  /* Type */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Hanken Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Layout */
+  --pad-section: clamp(80px, 12vh, 150px) clamp(20px, 6vw, 84px);
+  --max-w: 1180px;
+  --nav-h: 70px;
+
+  /* This section's accent. Section-driven, never plate-driven. */
+  --accent: var(--star-rigel);
+}
