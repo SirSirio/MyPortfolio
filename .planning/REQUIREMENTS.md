@@ -110,12 +110,12 @@ Maps each v1 REQ-ID to its phase. v2/Later and Out-of-Scope items are not mapped
 | LINK-02 | Phase 1 — The Design Build | Complete |
 | MEDIA-01 | Phase 1 — The Design Build | Complete |
 | NAV-01 | Phase 2 — The Story | Pending |
-| NAV-03 | Phase 2 — The Story | Pending |
 | CONT-01 | Phase 2 — The Story | Pending |
 | CONT-03 | Phase 2 — The Story | Pending |
 | CONT-04 | Phase 2 — The Story | Pending |
 | MOTION-01 | Phase 2 — The Story | Pending |
 | MOTION-02 | Phase 2 — The Story | Pending |
+| NAV-03 | Phase 2.1 — The Automation Deep-Dive | Pending |
 | RESP-01 | Phase 3 — The Pocket Build | Pending |
 | PERF-01 | Phase 3 — The Pocket Build | Pending |
 | CONT-02 | Phase 4 — The Showcase | Pending |
