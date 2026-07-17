@@ -79,7 +79,7 @@ Use **only** these when planning or building. Anything not listed is not authori
 | Design (visual language, layout, motion) | The approved Claude Design snapshots in `.planning/phases/01-the-design-build/design/` — `Sirio Star.dc.html` (hero, **gold** variant), `Sirio V4 - Deep Field x Hyperlight.dc.html` (full page), `star-engine.js` (engine) |
 | Content (projects, experience, publications, bio) | `../00_Profile/profile.md` — the master profile |
 | Scope, goals, requirements | `.planning/ROADMAP.md`, `.planning/REQUIREMENTS.md`, `.planning/PROJECT.md` |
-| Live site source | `app/` (published to GitHub Pages from this folder) |
+| Live site source | `site/` (published to GitHub Pages from this folder) |
 
 ### `_Archive/` is off-limits
 
