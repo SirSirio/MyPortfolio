@@ -918,6 +918,104 @@ section[id] {
   color: rgba(var(--accent), 0.9);
 }
 
+/* ── the calculator, as an object ──────────────────────────────────────
+   Geometry ported from sketch 001 variant D; colour + type re-themed from
+   the live tokens. The glass surface is the shipped idiom (cf. .media-slot),
+   not the sketch's ad-hoc rgba. The sketch's .calc--big size variant is
+   folded in (no small variant ships). The sketch's bare state classes are
+   converted to BEM modifiers to match the live site (.nav--docked,
+   .plate--flip, .section__numeral--right): the sketch's "press" becomes
+   key--press, "op" becomes key--op, "resolved" becomes calc__out--resolved.
+   Every transition ENUMERATES its properties — never the `all` keyword, a
+   footgun on a page with a live canvas rAF loop. */
+.calc {
+  max-width: 420px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+}
+
+.calc__screen {
+  min-height: 132px;
+  padding: 20px 16px;
+  margin-bottom: 16px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(var(--accent), 0.22);
+  border-radius: 8px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.calc__ghost {
+  font: 400 12px var(--font-mono);
+  letter-spacing: 0.16em;
+  color: rgba(var(--accent), 0.72);
+  min-height: 16px;
+  margin-bottom: 8px;
+}
+
+/* word-break: break-all is REQUIRED while the digit mash overflows the screen. */
+.calc__out {
+  font: 400 clamp(28px, 3vw, 40px) var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--text-hi);
+  word-break: break-all;
+}
+
+/* Sketch bug 3: break-all also splits the RESOLVED words ("THE DIRECTION IS
+   M / INE"). Scope the reset off the resolved state — words wrap on spaces only. */
+.calc__out--resolved {
+  word-break: normal;
+  overflow-wrap: normal;
+  font-size: clamp(15px, 1.5vw, 19px);
+  letter-spacing: 0.14em;
+  line-height: 1.75;
+}
+
+/* The 4x4 grid, styled off the container's required id (a .keys class would
+   inflate the key-count gate). */
+#calc-keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.key {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--glass-bg);
+  font: 400 17px var(--font-mono);
+  color: var(--text-body);
+  cursor: default;
+  transition:
+    background-color 0.1s ease,
+    color 0.1s ease,
+    border-color 0.1s ease,
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+.key--op {
+  color: rgba(var(--accent), 0.75);
+}
+
+/* The lit state, written by the play sequence in a later plan. */
+.key--press {
+  background: rgba(var(--accent), 0.9);
+  color: var(--bg-0);
+  border-color: rgb(var(--accent));
+  transform: translateY(2px) scale(0.96);
+  box-shadow: 0 0 22px rgba(var(--accent), 0.7);
+}
+
 .pills {
   display: flex;
   flex-wrap: wrap;
