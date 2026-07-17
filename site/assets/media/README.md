@@ -72,6 +72,30 @@ never be `:empty`, and the placeholder would silently never appear.
 
 ---
 
+## The one named exception: `.media-slot--composite`
+
+The drop-in contract above ("drop-in plus one line, no CSS change") governs
+**every slot but one**. The Automated Gel Electrophoresis slot on plate 002 is a
+**composite** and carries the extra class `media-slot--composite`, which does add
+CSS. This exception is **deliberate and accepted** — it exists for one reason:
+**aspect ratio, not background.**
+
+The slots are 16:9 with `object-fit: cover`. That plate had to show two things at
+once: a **9:16 portrait** timelapse of the OT-2 running, and four CAD renders of
+the printed parts at sub-2:1 ratios. A raw cover-crop of a portrait clip in a 16:9
+box shows only a narrow horizontal band of it, and the same crop would cut the
+renders. So `.media-slot--composite` lays the slot out as two columns — a
+height-driven portrait `<video>` beside a `.blueprint` plate whose `.blueprint__part`
+renders use `object-fit: contain` so nothing is cropped.
+
+This changes nothing else. **The plain drop-in contract still governs every other
+slot**, and the two rules that make a filled slot "just work"
+(`.media-slot:not(:has(> img, > video))` and `.media-slot > img, .media-slot > video`)
+are untouched. The exception is about geometry only — it does **not** weaken the
+first-party rule or the no-stock/no-AI rule below, which are non-negotiable.
+
+---
+
 ## Naming
 
 - Lowercase, hyphenated, matching the project slug: `liquid-dispenser.jpg`,

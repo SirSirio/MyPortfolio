@@ -1707,6 +1707,39 @@ section[id] {
   border-radius: 8px;
 }
 
+/* The blueprint plate (D-28): a dark ground with a faint accent grid and an
+   inner glow, so the parts read as an engineering drawing lit from within —
+   on-identity for the engineering-blueprint × bio-glow language. It derives
+   EVERY colour from the section's --accent and hard-codes no hue, so inside
+   #work it resolves to --star-antares gold with no rule of its own (styles.css
+   section system). The baked-in blue-grey render shadows land as a soft glow on
+   this dark ground (D-27) rather than a dirty edge. */
+.blueprint {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid rgba(var(--accent), 0.28);
+  border-radius: 8px;
+  background-color: rgba(var(--accent), 0.03);
+  background-image:
+    linear-gradient(to right, rgba(var(--accent), 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(var(--accent), 0.09) 1px, transparent 1px);
+  background-size: 16px 16px;
+  box-shadow: inset 0 0 60px rgba(var(--accent), 0.08);
+}
+
+/* ⚠ object-fit: CONTAIN, not cover — this is the entire reason the plate
+   exists. The renders are 1.13:1 / 1.68:1 / 1.26:1 / 1.48:1 and a 16:9
+   cover-crop would cut them; contain fits each whole render on its dark cell.
+   These imgs are children of .blueprint, NOT direct children of .media-slot, so
+   the shipped `.media-slot > img` rule does not match them — do not hoist them. */
+.blueprint__part {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 /* Responsive: below the stacking breakpoint the composite must not squash the
    video to a sliver. Drop to one column and cap the portrait clip's height so it
    stays legible without dominating; the box grows past 16:9 to fit both rows
