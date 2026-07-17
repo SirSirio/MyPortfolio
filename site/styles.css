@@ -651,6 +651,9 @@ section[id] {
 .section__rule {
   flex: 1;
   height: 1px;
+  /* Drawn left-to-right by the 'draw' reveal kind. A transform on a flex item
+     does not disturb flex layout, so scaling this flex:1 line is safe. */
+  transform-origin: left center;
   background: linear-gradient(
     90deg,
     rgba(var(--accent), 0.4),
@@ -962,6 +965,8 @@ section[id] {
   top: 10px;
   bottom: 10px;
   width: 1px;
+  /* Drawn downward by the 'draw' reveal kind. */
+  transform-origin: center top;
   background: linear-gradient(
     180deg,
     rgba(var(--accent), 0),
@@ -1189,6 +1194,73 @@ section[id] {
 [data-rev-state='shown'] {
   opacity: 1;
   transform: none;
+}
+
+/* --- kind: draw — the shipped 1px lines draw themselves (D-38). transform is
+   compositor-only (no layout, no paint), and .section__rule / .exp__spine already
+   ship, so this closes PROJECT.md:28's "lines draw themselves" across EVERY
+   section for the cost of two transform-origin declarations. opacity stays 1 on
+   both sides — a drawing line must not also fade. These (0,2,0) rules beat the
+   (0,1,0) base, so the base translateY/opacity do not leak in. */
+[data-reveal-kind='draw'] {
+  transition-duration: 900ms;
+}
+
+[data-reveal-kind='draw'][data-rev-state='hidden'] {
+  opacity: 1;
+  transform: scaleX(0);
+}
+
+[data-reveal-kind='draw'][data-rev-state='shown'] {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* The spine draws on the vertical axis instead. */
+.exp__spine[data-reveal-kind='draw'][data-rev-state='hidden'] {
+  transform: scaleY(0);
+}
+
+.exp__spine[data-reveal-kind='draw'][data-rev-state='shown'] {
+  transform: scaleY(1);
+}
+
+/* --- kind: snap — a pop with overshoot. Defined here as part of the approved
+   C-2 vocabulary; its first consumer is .ph__dot in plan 02-04. The overshoot
+   timing-function is what makes it a pop rather than a grow. */
+[data-reveal-kind='snap'] {
+  transition-duration: 450ms;
+}
+
+[data-reveal-kind='snap'][data-rev-state='hidden'] {
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+[data-reveal-kind='snap'][data-rev-state='shown'] {
+  opacity: 1;
+  transform: scale(1);
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* The .exp__dot pop, keyed on its ROW's state rather than its own reveal.
+   C-2 lists 'snap' for the dot, but C-6 P-1 forbids nesting a reveal inside a
+   reveal — resolved here in favour of a row-state descendant rule. The dot
+   carries a box-shadow glow (styles.css .exp__dot), so it must NEVER be wrapped
+   in an assemble/overflow frame (L-2), which would clip it. The +240ms offset
+   lands the dot AFTER its row begins arriving, so the timeline reads
+   spine -> row -> dot. data-rev-state is JS-created, so D-34 still holds. */
+.exp__row[data-rev-state] .exp__dot {
+  transition: transform 450ms cubic-bezier(0.34, 1.56, 0.64, 1)
+    calc(var(--rev-stagger) * var(--rev-i, 0) + 240ms);
+}
+
+.exp__row[data-rev-state='hidden'] .exp__dot {
+  transform: scale(0.6);
+}
+
+.exp__row[data-rev-state='shown'] .exp__dot {
+  transform: scale(1);
 }
 
 /* ============================================================
