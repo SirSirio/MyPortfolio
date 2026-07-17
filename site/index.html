@@ -219,9 +219,13 @@
                    RELATIVE paths — never a remote src (README: a remote src hands a
                    third party control of what the portfolio shows). -->
               <figure data-para="0.05" class="media-slot media-slot--composite" data-label="[ project video / image ]">
+                <!-- No `autoplay` attribute by design (MOTION-02): playback is started
+                     from main.js only when prefers-reduced-motion is NOT set. Fail-safe —
+                     if JS never runs, the poster stands in and nothing moves. Reduced-motion
+                     visitors get `controls` (added by main.js) to play it on demand. -->
                 <video src="./assets/media/ot2-timelapse.mp4"
                        poster="./assets/media/ot2-timelapse-poster.jpg"
-                       muted loop playsinline autoplay
+                       muted loop playsinline
                        aria-label="Timelapse of the Opentrons OT-2 liquid-handling robot running Sirio's gel-electrophoresis protocol in the DTU lab, handling his green 3D-printed racks, pink PCR strip racks and a blue gel tray"></video>
                 <!-- The blueprint plate (D-28): the four CAD renders of the parts
                      Sirio designed, on a dark gold-grid ground. object-fit:contain

@@ -106,6 +106,10 @@ function drawDeep(now) {
 /* Scroll-driven, so it runs on scroll rather than per frame — the ±400px cull
    is the perf guard. (No [data-para] elements ship until Plan 01-03.) */
 function applyPara() {
+  /* MOTION-02 / D-36 — parallax is continuous scroll-driven motion, so it is
+     suppressed under reduced motion. Returning before the transform write leaves
+     every [data-para] element at its natural position (no translate). */
+  if (REDUCED) return;
   const vh = window.innerHeight;
   for (const el of paraEls) {
     const par = el.parentElement;
@@ -232,6 +236,14 @@ function boot() {
   /* METHOD's calculator choreography. Observer- and timer-driven (D-37): it adds
      no rAF loop and never touches loop()/onScroll(). Inert without #method. */
   initMethod();
+  /* MOTION-02 — the OT-2 composite clip carries no autoplay attribute (see
+     index.html). Start it here only when motion is allowed; reduced-motion
+     visitors keep the static poster and get manual controls instead. */
+  const ot2Clip = document.querySelector('.media-slot--composite video');
+  if (ot2Clip) {
+    if (REDUCED) ot2Clip.setAttribute('controls', '');
+    else ot2Clip.play().catch(() => {});
+  }
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize, { passive: true });
 
