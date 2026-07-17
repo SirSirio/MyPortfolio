@@ -1016,6 +1016,254 @@ section[id] {
   box-shadow: 0 0 22px rgba(var(--accent), 0.7);
 }
 
+/* ============================================================
+   METHOD Act 2 — the two tracks (CONT-03)
+   DIGITAL is a LINE that ships; PHYSICAL is a LOOP that comes back
+   around. The structural contrast IS the argument, not two lists of
+   text. Geometry ported from sketch 001 variant D, colour + type
+   re-themed to the live tokens.
+
+   ⚠ The sketch scoped every hide rule under a runtime class on the root
+   element and LOST the specificity race twice, shipping a dark page both
+   times. That pattern is FORBIDDEN (gate G-2 greps site/ for it and
+   requires zero hits).
+   Instead each .ph carries data-ph-state — a JS-created attribute with
+   exactly two values (armed | lit) at IDENTICAL specificity (0,2,0),
+   mirroring the data-rev-state contract. No JS -> the attribute never
+   exists -> no rule matches -> the section renders fully lit and
+   readable (D-34, one step further). The dimming is a JS-driven state
+   too: a bare .ph__name { opacity:.38 } would leave a no-JS visitor with
+   a permanently half-dead section.
+
+   Fixed spacing is from the 4-multiple micro scale {4,8,12,16,20,24,32,48};
+   macro rhythm stays fluid (S-1). Weights {300,400} only (T-1) — the
+   track/rail labels take their emphasis from accent colour + tracking,
+   never the sketch's 700. Every transition ENUMERATES its properties;
+   never the `all` keyword.
+   ============================================================ */
+
+.tracks {
+  margin-top: clamp(64px, 8vw, 96px);
+  display: grid;
+  gap: clamp(56px, 7vw, 74px);
+}
+
+.track__head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ⚠ weight 400, NOT the sketch's 700 — the live site never uses 700.
+   Accent colour + 0.24em tracking carry the emphasis (T-1). */
+.track__kind {
+  font: 400 12px var(--font-mono);
+  letter-spacing: 0.24em;
+  color: rgb(var(--accent));
+  white-space: nowrap;
+}
+
+.track__for {
+  font: 300 15px var(--font-body);
+  color: rgba(255, 255, 255, 0.42);
+}
+
+/* An h3 — sits clearly below the shared h2 ceiling of 86px. */
+.track__title {
+  font: 300 clamp(24px, 2.4vw, 34px) var(--font-display);
+  color: var(--text-hi);
+  margin: 12px 0 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.track__foot {
+  margin-top: 24px;
+  font: 300 15px/1.6 var(--font-body);
+  color: rgba(228, 232, 244, 0.5);
+  max-width: 70ch;
+}
+
+/* The <b> carries no bold weight of its own — accent + 400, per the sketch. */
+.track__foot b {
+  color: rgba(var(--accent), 0.95);
+  font-weight: 400;
+}
+
+/* ── the phase row (shared by both tracks) ── */
+.phases {
+  margin-top: 40px;
+  display: grid;
+  gap: 0;
+  position: relative;
+}
+
+.phases--line {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.ph {
+  position: relative;
+  padding-right: 20px;
+}
+
+/* Unlit = hollow outline; lit = filled + glow. The lit state keys on
+   data-ph-state (JS-created), NEVER a bare rule, so a no-JS visitor sees
+   it lit. */
+.ph__dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--bg-0);
+  border: 1px solid rgba(var(--accent), 0.5);
+  position: relative;
+  z-index: 2;
+  transition:
+    background-color 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+[data-ph-state='lit'] .ph__dot {
+  background: rgb(var(--accent));
+  border-color: rgb(var(--accent));
+  box-shadow: 0 0 26px rgba(var(--accent), 0.95);
+}
+
+/* The wire draws itself left-to-right. scaleX is compositor-only (free). */
+.ph__wire {
+  position: absolute;
+  top: 7px;
+  left: 15px;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(var(--accent), 0.6), rgba(var(--accent), 0.2));
+  transform-origin: left center;
+}
+
+[data-ph-state='armed'] .ph__wire {
+  transform: scaleX(0);
+}
+
+[data-ph-state='lit'] .ph__wire {
+  transform: scaleX(1);
+  transition: transform 800ms cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+
+/* The LINE ends after Execute — that is the point. The loop keeps its last
+   wire (it does not end); only the line drops it. */
+.phases--line .ph:last-child .ph__wire {
+  display: none;
+}
+
+.ph__n {
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.3);
+  margin: 20px 0 8px;
+}
+
+/* Sirio asked for the GSD phases to be bigger — this is the size bump (T-3). */
+.ph__name {
+  font: 400 clamp(24px, 2.7vw, 38px) var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--text-hi);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+/* ⚠ The dimming is a JS-driven state too — armed via data-ph-state, never a
+   bare opacity rule that would half-kill the section without JS. */
+[data-ph-state='armed'] .ph__name {
+  opacity: 0.38;
+}
+
+[data-ph-state='lit'] .ph__name {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.ph__desc {
+  font: 300 16px/1.55 var(--font-body);
+  color: rgba(228, 232, 244, 0.6);
+  max-width: 26ch;
+}
+
+[data-ph-state='armed'] .ph__desc {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+[data-ph-state='lit'] .ph__desc {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.6s ease 0.15s,
+    transform 0.6s ease 0.15s;
+}
+
+/* The outbound-link idiom, reused by the evidence strip in Task 3. Colour is
+   restated on hover/focus because the global a:hover rule (styles.css) outranks
+   it on specificity and would otherwise repaint it — same reason
+   .contact__link does it. :focus-visible paired for keyboard users. */
+.deck-link {
+  display: inline-block;
+  margin-top: 24px;
+  text-decoration: none;
+  font: 400 clamp(12px, 1.4vw, 15px) var(--font-mono);
+  letter-spacing: 0.14em;
+  color: rgba(var(--accent), 0.7);
+  transition:
+    color 0.4s ease,
+    text-shadow 0.4s ease;
+}
+
+.deck-link:hover,
+.deck-link:focus-visible {
+  color: rgba(var(--accent), 0.95);
+  text-shadow: 0 0 18px rgba(var(--accent), 0.55);
+}
+
+/* Responsive: below 860px the phases stack to one column and each wire rotates
+   to a vertical line. ⚠ The armed/lit contract stays data-ph-state — never a
+   runtime root class. OI-5: this query is rendered but NOT validated below
+   ~485 CSS px; Phase 3's mobile pass owns the 375/390px check. */
+@media (max-width: 860px) {
+  .phases--line,
+  .phases--loop {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .ph {
+    padding: 0 0 24px 0;
+  }
+
+  .ph__desc,
+  .ph__note {
+    max-width: none;
+  }
+
+  .ph__wire {
+    top: 15px;
+    left: 7px;
+    right: auto;
+    width: 1px;
+    height: calc(100% - 15px);
+    background: linear-gradient(180deg, rgba(var(--accent), 0.6), rgba(var(--accent), 0.2));
+    transform-origin: top center;
+  }
+
+  [data-ph-state='armed'] .ph__wire {
+    transform: scaleY(0);
+  }
+
+  [data-ph-state='lit'] .ph__wire {
+    transform: scaleY(1);
+  }
+}
+
 .pills {
   display: flex;
   flex-wrap: wrap;

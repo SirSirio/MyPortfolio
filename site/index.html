@@ -404,6 +404,60 @@
               </div>
             </div>
           </div>
+
+          <!-- Act 2: the two tracks. ONE section, a second .method__act (not a
+               second section element — the sketch split it only because it was a
+               sketch). DIGITAL is a LINE that ships; PHYSICAL is a LOOP that comes
+               back around. The structural contrast IS the argument. Each track
+               lights on its OWN scroll position (Sirio: "if you animate them on
+               scroll, that would be good"). Hiding is driven by data-ph-state (a
+               JS-created attribute) exactly like data-rev-state — never the
+               sketch's runtime-class-on-the-root scoping, which lost a specificity
+               race and shipped a dark page twice (gate G-2). -->
+          <div class="method__act method__act--tracks">
+            <div class="tracks">
+
+              <!-- DIGITAL — a LINE. It ships. -->
+              <div class="track track--digital" data-track="digital">
+                <div class="track__head">
+                  <span class="track__kind">DIGITAL</span>
+                  <span class="track__for">websites, apps, tooling &mdash; like this page</span>
+                </div>
+                <h3 class="track__title">Spec-driven development, run by GSD</h3>
+
+                <div class="phases phases--line" data-phases>
+                  <div class="ph">
+                    <div class="ph__dot"></div>
+                    <div class="ph__wire"></div>
+                    <div class="ph__n">01</div>
+                    <div class="ph__name">Discuss</div>
+                    <div class="ph__desc">Lock decisions before planning.</div>
+                  </div>
+                  <div class="ph">
+                    <div class="ph__dot"></div>
+                    <div class="ph__wire"></div>
+                    <div class="ph__n">02</div>
+                    <div class="ph__name">Plan</div>
+                    <div class="ph__desc">Research first, then atomic tasks.</div>
+                  </div>
+                  <div class="ph">
+                    <div class="ph__dot"></div>
+                    <div class="ph__wire"></div>
+                    <div class="ph__n">03</div>
+                    <div class="ph__name">Execute</div>
+                    <div class="ph__desc">Parallel waves, atomic commits.</div>
+                  </div>
+                </div>
+
+                <p class="track__foot">
+                  Lock decisions before plans, plans before code. It runs <b>straight through and ships</b> &mdash;
+                  research, verification and atomic commits, keeping the AI's context lean as the project grows.
+                </p>
+                <a class="deck-link" href="https://github.com/open-gsd/gsd-core" target="_blank" rel="noopener">GSD is open source&nbsp;&#8599;</a>
+              </div>
+
+            </div>
+          </div>
         </div>
       </section>
 
