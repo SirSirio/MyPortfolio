@@ -338,6 +338,19 @@
           <div data-reveal="2">
             <a class="contact__email" href="mailto:sirio.feltrin@gmail.com">sirio.feltrin@gmail.com</a>
           </div>
+          <!-- Outbound link row (CONT-04), a SIBLING of the email's reveal (P-1 —
+               reveals never nest), data-reveal="3" so it arrives after the email.
+               Every anchor opens in a new tab and keeps the noopener relationship:
+               it is what blocks reverse tabnabbing (same contract as .nav__link).
+               LinkedIn is
+               repeated from the nav ON PURPOSE (D-21) — it is where a recruiter
+               looks once they have decided to act. No CV link here (D-22): it stays
+               in the persistent nav only. -->
+          <div data-reveal="3" class="contact__links">
+            <a class="contact__link" href="https://www.linkedin.com/in/sirio-vittorio-feltrin/" target="_blank" rel="noopener">LinkedIn&nbsp;&#8599;</a>
+            <a class="contact__link" href="https://github.com/SirSirio" target="_blank" rel="noopener">GitHub&nbsp;&#8599;</a>
+            <a class="contact__link" href="https://2024.igem.wiki/DTU-Denmark/" target="_blank" rel="noopener">iGEM wiki&nbsp;&#8599;</a>
+          </div>
         </div>
       </section>
 
