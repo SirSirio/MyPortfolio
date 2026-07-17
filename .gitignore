@@ -1,3 +1,6 @@
 # Archived / superseded material — kept locally for reference, never part of the project.
 # See _Archive/README.md.
 _Archive/
+
+# Ephemeral Playwright MCP browser artifacts (screenshots, console logs, snapshots).
+.playwright-mcp/
