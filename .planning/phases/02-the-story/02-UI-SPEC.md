@@ -1,7 +1,7 @@
 ---
 phase: 2
 slug: the-story
-status: draft
+status: approved
 shadcn_initialized: false
 preset: none
 created: 2026-07-17
@@ -576,13 +576,25 @@ Incidentally, **D-35's no-library rule is the strongest security control in the 
 
 ## Checker Sign-Off
 
-- [ ] Dimension 1 Copywriting: PASS
-- [ ] Dimension 2 Visuals: PASS
-- [ ] Dimension 3 Color: PASS
-- [ ] Dimension 4 Typography: PASS
-- [ ] Dimension 5 Spacing: PASS
-- [ ] Dimension 6 Registry Safety: PASS
+- [x] Dimension 1 Copywriting: PASS
+- [x] Dimension 2 Visuals: PASS
+- [x] Dimension 3 Color: PASS
+- [x] Dimension 4 Typography: PASS (declared deviation)
+- [x] Dimension 5 Spacing: PASS (declared deviation)
+- [x] Dimension 6 Registry Safety: PASS (not applicable — no registries)
 
 > **Checker note:** Dimensions 5 (Spacing) and 4 (Typography) contain **declared, defended deviations** from the template's fixed-4px / 3-4-fixed-sizes rules — see § S-1 and § T-1. The live site ships a fluid `clamp()` system; retro-fitting a fixed scale onto it was explicitly rejected as dishonest and out of scope. Dimension 6 is **not applicable** (no registries exist). Judge these against the reasons given, not against the template's defaults.
 
-**Approval:** pending
+**Approval:** approved 2026-07-17 — 6/6 dimensions PASS (gsd-ui-checker)
+
+> **Verification provenance.** The checker's first pass reported `02-RESEARCH.md` as "not present" and
+> validated the spec's research claims against the spec's own inline citations — a circular check. It
+> was sent back and re-ran against the real `02-RESEARCH.md` (1019 lines). The re-check confirmed
+> stack alignment (IO swap, blur removal, D-35/36/37), DEV-1/DEV-2 fidelity, Pitfalls 5/6, and the
+> P-1…P-6 pattern-fit survey against the research's actual conclusions.
+>
+> It also corrected the orchestrator: **`data-rev-state` does not supersede RESEARCH.md — it IS the
+> research's own reference implementation** (`el.dataset.revState = 'hidden'/'shown'`, "the code that
+> hides is the code that shows"). What it supersedes is only the **sketch's** `body.js` pattern, which
+> the research never endorsed and which shipped a dark page twice. Use `data-rev-state`; do not
+> resurrect `body.js` scoping from the sketch HTML.
