@@ -9,6 +9,7 @@
    both canvases. Do not add a second loop. */
 
 import { HeroStar, REDUCED, DPR, tintAt, rgba } from './star-engine.js';
+import { initMethod } from './method.js';
 
 const heroEl = document.querySelector('[data-hero]');
 const deepEl = document.querySelector('[data-deep]');
@@ -222,6 +223,9 @@ function boot() {
   syncNav();
   applyPara();
   initReveals();
+  /* METHOD's calculator choreography. Observer- and timer-driven (D-37): it adds
+     no rAF loop and never touches loop()/onScroll(). Inert without #method. */
+  initMethod();
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize, { passive: true });
 
