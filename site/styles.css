@@ -10,11 +10,23 @@
    ============================================================ */
 
 :root {
-  /* Deep-field palette stops — these mirror PAL in star-engine.js:4-10. */
+  /* Section ACCENT palette. PAL in star-engine.js:4-10 is a SEPARATE thing —
+     the deep-field STAR spectrum that tintAt() paints all 484 background stars
+     with (main.js:91). These accent stops overlap PAL for the four original
+     sectors by design COINCIDENCE, not by contract (--gold-glow 255,196,110
+     already differs from --star-antares 244,182,89, proving they are not bound).
+     ⚠ NEVER add a stop here to PAL: --star-zuben below is bio-green and
+     deliberately absent from PAL — adding it re-tints the whole starfield and
+     breaks the approved hero composition (L-3 / Pitfall 7). */
   --star-sirius: 150, 196, 255;
   --star-antares: 244, 182, 89;
   --star-aldebaran: 255, 122, 89;
   --star-vega: 171, 140, 255;
+
+  /* β Librae "Zubeneschamali" — the one star widely reported as green. Green is
+     the hue absent from the deep-field spectrum, and it is the bioluminescence
+     this project is named for. ORIGIN's accent; must NEVER join PAL (see above). */
+  --star-zuben: 126, 240, 174;
 
   /* The hero star. NOTE: --gold-glow (255,196,110) is the STAR.
      --star-antares (244,182,89) is the Work section. Two different golds. */
@@ -571,12 +583,56 @@ section[id] {
   scroll-margin-top: var(--nav-h);
 }
 
+/* NAV-01 full-height FLOOR (not a cage). Reuses the hero's shipped cascade
+   (.hero, styles.css) VERBATIM: two min-height declarations, not @supports —
+   the svh line overrides where supported and is ignored where it is not.
+   ⚠ min-height is a floor: content that overruns simply GROWS, which is exactly
+   what survives the Phase 3 mobile pass unchanged.
+   ⚠ svh, NEVER the dynamic-viewport unit: it resizes as the URL bar shows/hides,
+   firing a layout reflow during the exact scroll gesture that triggers reveals,
+   on top of a live canvas rAF loop — a cost this page cannot afford. No --vh JS
+   hack (needs a resize listener) and no scroll snapping (y mandatory traps the
+   reader mid-section in variable-height sections like Work). Applied to #origin
+   only this plan;
+   #method gets it in plan 02-03. #index/#publications/#contact are OI-3,
+   deferred to a render. */
+.section--full {
+  min-height: max(100vh, 620px);
+  min-height: max(100svh, 620px);
+  display: flex;
+  align-items: center;
+}
+
+.section--full > .section__inner {
+  width: 100%;
+}
+
 /* The accent map — PAL stops, mirroring star-engine.js:4-10.
    ⚠ --gold-glow (255,196,110) is the HERO STAR and is NOT
    --star-antares (244,182,89). Two different golds; --gold-glow
    must never appear in a section. */
 #index {
   --accent: var(--star-sirius);
+}
+
+/* ORIGIN's bio-green accent. ⚠ REQUIRED, not styling polish (P-4 / Pitfall 6):
+   omit it and var(--accent) is unresolved -> rgba(, 0.4) is invalid -> the
+   browser drops it -> the label, rule and blob render TRANSPARENT with no
+   console error. Gate G-4 exists for exactly this. */
+#origin {
+  --accent: var(--star-zuben);
+}
+
+/* Narrative stagger (C-3, the phase's hardest-won lesson: Sirio could NOT read
+   the sketch's first cut — timings had to be roughly tripled). The interludes
+   are READ, not scanned, so their beats reveal at 220ms while the rest of the
+   page keeps the :root 130ms furniture default. Custom properties inherit, so
+   every [data-rev-state] element inside these two ids picks it up with no JS
+   change and no per-section rule. ⚠ Stagger stays a TOKEN, never a JS constant —
+   JS writes only the unitless --rev-i; CSS owns the interval, so re-pacing the
+   whole page is a one-line change. Treat 220ms as a floor. */
+#origin, #method {
+  --rev-stagger: 220ms;
 }
 
 #work {
@@ -694,6 +750,14 @@ section[id] {
   );
 }
 
+/* ORIGIN's bio-green glow. Positioned on the LEFT, lower down, so it does not
+   stack with .section__blob--mission (right / top) in the section directly
+   above it. */
+.section__blob--origin {
+  left: -14%;
+  top: 28%;
+}
+
 /* Mission's label is a standalone lead line, not part of a .section__head. */
 .section__label--lead {
   display: block;
@@ -725,6 +789,63 @@ section[id] {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+}
+
+/* ============================================================
+   NARRATIVE INTERLUDE TYPE (ORIGIN, and #method's manifesto in 02-03)
+   The interludes are READ, not scanned. The shipped 16-17px card copy is
+   correct for cards and too small for prose at length — Sirio asked for
+   bigger type across the narrative sections. New roles only; NO shipped
+   token is modified (T-2 — .section h2 / .section__label are shared).
+   Weights {300, 400} only (T-1 — the live site's single 500 is
+   .section__numeral, which the interludes do not have). Accent is NEVER on
+   narrative prose (Cl-3). Fixed spacing here is from the 4-multiple micro
+   scale {4,8,12,16,20,24,32,48}; section rhythm stays fluid (S-1).
+   ============================================================ */
+
+/* Narrative body — ORIGIN's three beats (02-03's manifesto stanzas reuse it).
+   ~+47% over card copy at the ceiling; prose read at length wants a longer
+   measure (~66ch) and more leading (1.62, T-3). */
+.narr {
+  margin: 0;
+  max-width: 66ch;
+  font: 300 clamp(20px, 1.7vw, 25px) / 1.62 var(--font-body);
+  color: var(--text-body);
+}
+
+/* The narrative LANDING line (the beat that carries the argument): larger and
+   tighter (1.45, T-3). Colour stays --text-body — accent never on prose (Cl-3). */
+.narr--land {
+  font-size: clamp(24px, 2.3vw, 33px);
+  line-height: 1.45;
+}
+
+/* ⚠ The assemble frame forces line-height:1.2 on its direct child as a heading
+   descender guard ([data-reveal-kind='assemble'] > *, specificity 0,1,0).
+   Narrative prose is read at length and needs its T-3 leading, so restore it on
+   the sliding span at higher specificity (0,1,1). Without this the beats would
+   render at 1.2 — the cramped leading Sirio explicitly rejected. */
+.narr > span {
+  line-height: 1.62;
+}
+
+.narr--land > span {
+  line-height: 1.45;
+}
+
+/* Interlude label — 13px (up from the sector labels' 11px), inheriting
+   var(--font-mono), 400, 0.26em and rgba(var(--accent),0.85) from the base
+   .section__label. ⚠ Quieter in HIERARCHY (no numeral), not in LEGIBILITY. */
+.section__label--interlude {
+  font-size: 13px;
+}
+
+/* Vertical rhythm between the three beats — micro tier (4-multiples). */
+.origin__beats {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .pills {
@@ -1139,6 +1260,37 @@ section[id] {
   color: rgba(var(--accent), 1);
   text-shadow: 0 0 22px rgba(var(--accent), 0.85);
   border-color: rgba(var(--accent), 0.9);
+}
+
+/* The outbound link row (CONT-04). data-reveal="3" arrives after the email,
+   which stays the primary CTA — these read as SECONDARY: lower alpha than the
+   email's 0.95, no border, mono. gap/margin from the 4-multiple micro scale;
+   flex-wrap so the row folds on narrow viewports. */
+.contact__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px 24px;
+  margin-top: 24px;
+}
+
+.contact__link {
+  text-decoration: none;
+  font: 400 clamp(12px, 1.4vw, 15px) var(--font-mono);
+  letter-spacing: 0.14em;
+  color: rgba(var(--accent), 0.6);
+  transition:
+    color 0.4s ease,
+    text-shadow 0.4s ease;
+}
+
+/* Colour restated on hover/focus for the same reason .contact__email does it
+   above: the global a:hover rule outranks this on specificity and would
+   otherwise repaint it. :focus-visible paired for keyboard users. */
+.contact__link:hover,
+.contact__link:focus-visible {
+  color: rgba(var(--accent), 0.95);
+  text-shadow: 0 0 18px rgba(var(--accent), 0.55);
 }
 
 .footer {
