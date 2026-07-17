@@ -1691,32 +1691,39 @@ section[id] {
 
 /* ── COMPOSITE slot (D-29) — a DELIBERATE, ACKNOWLEDGED MEDIA-01 DEVIATION.
    MEDIA-01's contract is "drop-in plus one line, no CSS change"; a composite
-   needs new CSS, and Sirio accepted this knowingly. ⚠ The surviving reason is
-   ASPECT RATIO, not background: the slot is 16:9 with object-fit:cover, the
-   timelapse is 9:16 (0.5625:1) and the four renders are ~1.1–1.7:1, so a raw
-   cover-crop of the portrait clip would show only a narrow horizontal band. The
-   composite makes both assets legible. Only plate 002 (#work) uses it; every
-   other slot keeps the plain drop-in contract. A 9:16 video at full height
-   inside a 16:9 box occupies 81/256 ≈ 31.6% of the width — `auto 1fr` with a
-   height-driven video reproduces that without hard-coding the percentage. */
+   needs new CSS, and Sirio accepted this knowingly. The timelapse is PORTRAIT
+   9:16 (720×1280) and MUST be shown whole (object-fit:contain), never cropped —
+   Sirio's steer. So this slot abandons the shipped 16:9 + cover crop: an
+   explicit, responsive VIDEO HEIGHT drives the layout, the clip sits at its true
+   9:16 on the left, and the four CAD renders fill the remaining lateral space on
+   their blueprint plate. The height is explicit (not 100%) on purpose — a
+   percentage height does not resolve against the slot's aspect-ratio row, so the
+   clip would blow out to its intrinsic 1280px and overflow-crop (the very bug
+   this replaces). Only plate 002 (#work) uses it; every other slot keeps the
+   plain drop-in contract. */
 .media-slot--composite {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 12px;
-  padding: 12px;
+  /* Height comes from the video, not a 16:9 ratio — override the base slot. */
+  aspect-ratio: auto;
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  padding: 14px;
   background-color: var(--bg-0);
 }
 
-/* ⚠ Specificity (0,2,1) — this DELIBERATELY overrides the shipped
-   `.media-slot > img, .media-slot > video` rule at (0,1,1) above, which would
-   otherwise stretch the clip to width:100%. Do NOT edit that shipped rule;
-   other slots depend on it. */
+/* ⚠ Overrides the shipped `.media-slot > video` (width:100%; height:100%;
+   object-fit:cover) at equal specificity via source order. Explicit height +
+   object-fit:contain = the whole portrait clip, never a crop. flex:0 0 auto so
+   it keeps its true 9:16 footprint and the renders take the rest. Do NOT edit
+   that shipped rule; other slots depend on it. */
 .media-slot--composite > video {
-  height: 100%;
+  flex: 0 0 auto;
+  height: clamp(300px, 32vw, 440px);
   width: auto;
   aspect-ratio: 9 / 16;
-  object-fit: cover;
-  border-radius: 8px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #08090f;
 }
 
 /* The blueprint plate (D-28): a dark ground with a faint accent grid and an
@@ -1725,11 +1732,15 @@ section[id] {
    EVERY colour from the section's --accent and hard-codes no hue, so inside
    #work it resolves to --star-antares gold with no rule of its own (styles.css
    section system). The baked-in blue-grey render shadows land as a soft glow on
-   this dark ground (D-27) rather than a dirty edge. */
+   this dark ground (D-27) rather than a dirty edge. As the flex partner it fills
+   the lateral space beside the portrait clip (flex:1) and matches its height
+   (parent align-items:stretch); the four renders tile a 2×2 grid of equal cells. */
 .blueprint {
+  flex: 1 1 auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  grid-auto-rows: 1fr;
+  gap: 10px;
   padding: 12px;
   border: 1px solid rgba(var(--accent), 0.28);
   border-radius: 8px;
@@ -1742,8 +1753,8 @@ section[id] {
 }
 
 /* ⚠ object-fit: CONTAIN, not cover — this is the entire reason the plate
-   exists. The renders are 1.13:1 / 1.68:1 / 1.26:1 / 1.48:1 and a 16:9
-   cover-crop would cut them; contain fits each whole render on its dark cell.
+   exists. The renders are 1.13:1 / 1.68:1 / 1.26:1 / 1.48:1 and a cover-crop
+   would cut them; contain fits each whole render on its dark cell.
    These imgs are children of .blueprint, NOT direct children of .media-slot, so
    the shipped `.media-slot > img` rule does not match them — do not hoist them. */
 .blueprint__part {
@@ -1752,21 +1763,22 @@ section[id] {
   object-fit: contain;
 }
 
-/* Responsive: below the stacking breakpoint the composite must not squash the
-   video to a sliver. Drop to one column and cap the portrait clip's height so it
-   stays legible without dominating; the box grows past 16:9 to fit both rows
-   (Phase 3 owns the real-device mobile pass — this is a sane collapse, not a tune). */
+/* Responsive: below the stacking breakpoint, stack the clip over the renders so
+   neither is squashed. The portrait clip keeps its explicit height (→ 9:16
+   width); the blueprint spans full width beneath it.
+   (Phase 3 owns the real-device mobile pass — this is a sane collapse, not a tune.) */
 @media (max-width: 860px) {
   .media-slot--composite {
-    grid-template-columns: 1fr;
-    aspect-ratio: auto;
-    justify-items: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .media-slot--composite > video {
-    height: auto;
-    width: auto;
-    max-height: 320px;
+    height: clamp(280px, 52vh, 420px);
+  }
+
+  .blueprint {
+    width: 100%;
   }
 }
 
