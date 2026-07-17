@@ -10,11 +10,23 @@
    ============================================================ */
 
 :root {
-  /* Deep-field palette stops — these mirror PAL in star-engine.js:4-10. */
+  /* Section ACCENT palette. PAL in star-engine.js:4-10 is a SEPARATE thing —
+     the deep-field STAR spectrum that tintAt() paints all 484 background stars
+     with (main.js:91). These accent stops overlap PAL for the four original
+     sectors by design COINCIDENCE, not by contract (--gold-glow 255,196,110
+     already differs from --star-antares 244,182,89, proving they are not bound).
+     ⚠ NEVER add a stop here to PAL: --star-zuben below is bio-green and
+     deliberately absent from PAL — adding it re-tints the whole starfield and
+     breaks the approved hero composition (L-3 / Pitfall 7). */
   --star-sirius: 150, 196, 255;
   --star-antares: 244, 182, 89;
   --star-aldebaran: 255, 122, 89;
   --star-vega: 171, 140, 255;
+
+  /* β Librae "Zubeneschamali" — the one star widely reported as green. Green is
+     the hue absent from the deep-field spectrum, and it is the bioluminescence
+     this project is named for. ORIGIN's accent; must NEVER join PAL (see above). */
+  --star-zuben: 126, 240, 174;
 
   /* The hero star. NOTE: --gold-glow (255,196,110) is the STAR.
      --star-antares (244,182,89) is the Work section. Two different golds. */
@@ -571,12 +583,44 @@ section[id] {
   scroll-margin-top: var(--nav-h);
 }
 
+/* NAV-01 full-height FLOOR (not a cage). Reuses the hero's shipped cascade
+   (.hero, styles.css) VERBATIM: two min-height declarations, not @supports —
+   the svh line overrides where supported and is ignored where it is not.
+   ⚠ min-height is a floor: content that overruns simply GROWS, which is exactly
+   what survives the Phase 3 mobile pass unchanged.
+   ⚠ svh, NEVER the dynamic-viewport unit: it resizes as the URL bar shows/hides,
+   firing a layout reflow during the exact scroll gesture that triggers reveals,
+   on top of a live canvas rAF loop — a cost this page cannot afford. No --vh JS
+   hack (needs a resize listener) and no scroll snapping (y mandatory traps the
+   reader mid-section in variable-height sections like Work). Applied to #origin
+   only this plan;
+   #method gets it in plan 02-03. #index/#publications/#contact are OI-3,
+   deferred to a render. */
+.section--full {
+  min-height: max(100vh, 620px);
+  min-height: max(100svh, 620px);
+  display: flex;
+  align-items: center;
+}
+
+.section--full > .section__inner {
+  width: 100%;
+}
+
 /* The accent map — PAL stops, mirroring star-engine.js:4-10.
    ⚠ --gold-glow (255,196,110) is the HERO STAR and is NOT
    --star-antares (244,182,89). Two different golds; --gold-glow
    must never appear in a section. */
 #index {
   --accent: var(--star-sirius);
+}
+
+/* ORIGIN's bio-green accent. ⚠ REQUIRED, not styling polish (P-4 / Pitfall 6):
+   omit it and var(--accent) is unresolved -> rgba(, 0.4) is invalid -> the
+   browser drops it -> the label, rule and blob render TRANSPARENT with no
+   console error. Gate G-4 exists for exactly this. */
+#origin {
+  --accent: var(--star-zuben);
 }
 
 #work {
@@ -692,6 +736,14 @@ section[id] {
     rgba(var(--accent), 0.11),
     rgba(var(--accent), 0) 62%
   );
+}
+
+/* ORIGIN's bio-green glow. Positioned on the LEFT, lower down, so it does not
+   stack with .section__blob--mission (right / top) in the section directly
+   above it. */
+.section__blob--origin {
+  left: -14%;
+  top: 28%;
 }
 
 /* Mission's label is a standalone lead line, not part of a .section__head. */
