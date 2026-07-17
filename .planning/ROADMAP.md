@@ -98,7 +98,7 @@ creating new ones.
 
 **Wave 4** *(blocked on Wave 3)*
 
-  - [ ] 02-04-PLAN.md — `#method` Act 2: DIGITAL is a line, PHYSICAL is a loop, the DOCUMENT rail, the evidence strip (CONT-03, MOTION-01)
+  - [x] 02-04-PLAN.md — `#method` Act 2: DIGITAL is a line, PHYSICAL is a loop, the DOCUMENT rail, the evidence strip (CONT-03, MOTION-01)
 
 **Wave 5** *(blocked on Wave 4)*
 
@@ -198,7 +198,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. The Design Build | 3/3 | Complete    | 2026-07-16 |
-| 2. The Story | 3/5 | In Progress|  |
+| 2. The Story | 4/5 | In Progress|  |
 | 2.1. The Automation Deep-Dive (INSERTED) | 0/TBD | Not started | - |
 | 3. The Pocket Build | 0/TBD | Not started | - |
 | 4. The Showcase | 0/TBD | Not started | - |
