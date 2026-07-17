@@ -19,6 +19,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: The Design Build** - The minimal real site: approved cosmic design + gold Sirio Star hero + a few curated entries per section + empty labelled media slots, live on GitHub Pages (completed 2026-07-16)
 - [ ] **Phase 2: The Story** - Who Sirio is, in words: the biotech → design/automation pivot, how he works with AI, and a Contact close. All from profile.md — needs no media
+- [ ] **Phase 2.1: The Automation Deep-Dive** *(INSERTED)* - The OT-2 case-study page as a vertical slice that proves the template: warp transition in, the full story, the real media, moving parts. Carries NAV-03
 - [ ] **Phase 3: The Pocket Build** - Make it genuinely great on a smartphone: layout, touch, and a star that stays smooth on real phones
 - [ ] **Phase 4: The Showcase** - Go deep: full project case-study pages, the real images/videos, and the fuller profile
 - [ ] **Phase 5: Ready to Share** - Lazy-loading, accessibility, SEO/Open Graph, launch
@@ -67,15 +68,57 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 **Goal**: Turn "impressive" into "I want to talk to this person" — the home gains the narrative of who Sirio is: the biotech → design/automation pivot (About/journey), the "how I work with AI" *grano salis* philosophy, and a Contact close, with scroll-triggered motion that conveys "automation". Placed early **because it needs no media** — profile.md already holds the raw material, so it's pure writing + motion and can ship while Sirio is still hunting for images.
 **Mode:** mvp
-**Depends on**: Phase 1
-**Requirements**: NAV-01, NAV-03, CONT-01, CONT-03, CONT-04, MOTION-01, MOTION-02
+**Depends on**: Phase 1. **NAV-03 moved out → Phase 2.1** — it was stranded here (no deeper pages exist yet to transition to), so it is unbuildable and unverifiable in this phase. Home↔page transitions ship with the deep-dive page that needs them.
+**Requirements**: NAV-01, CONT-01, CONT-03, CONT-04, MOTION-01, MOTION-02
 **Success Criteria** (what must be TRUE):
 
   1. A visitor can scroll through distinct full-height sections (About/journey, How I Work With AI, Contact) on one page
   2. The About section narrates the biotech to design/automation pivot in Sirio's voice
-  3. Sections reveal/assemble with scroll-triggered animations, and home↔page transitions feel intentional
+  3. Sections reveal/assemble with scroll-triggered animations that read as "automation"
   4. Animations are suppressed/reduced when the visitor has `prefers-reduced-motion` enabled
   5. A Contact section presents email and social links that work
+
+**Plans**: 5 plans
+
+Every plan touches `site/index.html` and/or `site/styles.css`, so all five run **sequentially** —
+there is no parallelism available in this phase. Phase 2 extends three shipped files rather than
+creating new ones.
+
+**Wave 1**
+
+  - [ ] 02-01-PLAN.md — The reveal vocabulary: `initReveals()` + `data-rev-state`, draw / assemble / snap on the existing sections (MOTION-01, MOTION-02)
+
+**Wave 2** *(blocked on Wave 1)*
+
+  - [ ] 02-02-PLAN.md — `#origin`: the bio-green three-beat journey + the narrative type scale + the Contact close (CONT-01, NAV-01, CONT-04)
+
+**Wave 3** *(blocked on Wave 2)*
+
+  - [ ] 02-03-PLAN.md — `#method` Act 1: the indigo interlude, the five-stanza manifesto, the calculator (CONT-03, NAV-01)
+
+**Wave 4** *(blocked on Wave 3)*
+
+  - [ ] 02-04-PLAN.md — `#method` Act 2: DIGITAL is a line, PHYSICAL is a loop, the DOCUMENT rail, the evidence strip (CONT-03, MOTION-01)
+
+**Wave 5** *(blocked on Wave 4)*
+
+  - [ ] 02-05-PLAN.md — The OT-2 composite: the re-encoded timelapse beside the CAD renders on a blueprint plate (partially advances MEDIA-02)
+
+**UI hint**: yes
+
+### Phase 2.1: The Automation Deep-Dive (INSERTED)
+
+**Goal**: Prove the case-study template with one real page — click the OT-2 card on the home page, get a deliberate warp/hyperlight transition, and land on a full DALSA OT-2 deep-dive: the story, the explanations, the moving parts, and the real media. Inserted here because Sirio asked for it directly (*"clicking it, having the hyperlight animation, and landing in the page describing the automation project more in details… something dynamic with some moving parts"*) and because it gives **NAV-03** the deeper page it was stranded without. Deliberately **one** page as a vertical slice — Phase 4 then reuses the proven template for the dispenser, EndoSense, EMBO and AGC.
+**Mode:** mvp
+**Depends on**: Phase 2. **Requirement allocation decision required at discuss time:** this phase formally carries NAV-03; how much of PROJ-01 (template), PROJ-02 (pages), PROJ-03 (media/links) and CONT-02 (Featured Projects cards) moves here versus stays in Phase 4 is settled by `/gsd-discuss-phase 2.1`. **Architecture already decided — do not re-litigate:** fixed overlays + warp transition (`startBurst` / `applyTrans` / `drawWarp` / `[data-warpov]` in the V4 design, deliberately not ported in Phase 1), **not** separate `.html` files — see `01-03-PLAN.md:94`. **Carries from the Phase 2 discussion:** the vendor-image decision (D-33, unresolved — check Opentrons / Embi Tec press-kit terms), the slots-allocation diagram and protocol-runner UI screenshot (D-26), the full OT-2 media set, and the "moving parts" design discussion.
+**Requirements**: NAV-03
+**Success Criteria** (what must be TRUE):
+
+  1. Clicking the OT-2 card on the home page opens its deep-dive through a deliberate warp/hyperlight transition, and returning home feels equally intentional (NAV-03)
+  2. The deep-dive presents the full OT-2 story — what it does, how it was built, and why — well beyond the home card's summary
+  3. The page carries Sirio's real OT-2 media (already supplied) and any external links resolve correctly
+  4. The page has "moving parts" — at least one dynamic element that conveys automation, suppressed under `prefers-reduced-motion`
+  5. The page is built from a template shape reusable for the remaining projects, not a one-off
 
 **Plans**: TBD
 **UI hint**: yes
@@ -155,7 +198,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. The Design Build | 3/3 | Complete    | 2026-07-16 |
-| 2. The Story | 0/TBD | Not started | - |
+| 2. The Story | 0/5 | Planned | - |
+| 2.1. The Automation Deep-Dive (INSERTED) | 0/TBD | Not started | - |
 | 3. The Pocket Build | 0/TBD | Not started | - |
 | 4. The Showcase | 0/TBD | Not started | - |
 | 5. Ready to Share | 0/TBD | Not started | - |
