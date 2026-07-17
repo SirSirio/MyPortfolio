@@ -37,6 +37,11 @@
   --pad-section: clamp(80px, 12vh, 150px) clamp(20px, 6vw, 84px);
   --max-w: 1180px;
   --nav-h: 70px;
+
+  /* Reveal cadence (MOTION-01). V4's approved interval and the furniture
+     default; a token not a JS constant, so re-pacing the whole page is a
+     one-line change. Expect Sirio to want it slower — bump this alone. */
+  --rev-stagger: 130ms;
 }
 
 /* ============================================================
@@ -547,12 +552,13 @@ section[id] {
    section sets --accent to the PAL stop it owns. That is what makes
    plate reordering free and the file portable.
 
-   ⚠ NEVER add a rule selecting the reveal attribute to this file.
-   updateReveals() (V4:579-585) is what sets opacity:0, and it is
-   deferred to Phase 2 (MOTION-01). The attributes ship inert; a
-   hiding rule here would ship an INVISIBLE page to every visitor.
-   (Written without the literal bracketed selector on purpose — the
-   verification gate greps this file for it.)
+   ⚠ The reveal contract (MOTION-01): initReveals() in main.js is the
+   ONLY writer of data-rev-state, and the reveal vocabulary lower in
+   this file keys ONLY on that attribute. NEVER add a rule that hides a
+   reveal element before or without JS — a hiding rule keyed on anything
+   other than data-rev-state ships an INVISIBLE page to every visitor.
+   (Written without the literal bracketed reveal selector on purpose —
+   the verification gate greps this file for it.)
 
    ⚠ --accent is section-driven, never plate-driven. V4:92-100 gives
    Work plate 002 an Aldebaran accent INSIDE the Antares section —
@@ -645,6 +651,9 @@ section[id] {
 .section__rule {
   flex: 1;
   height: 1px;
+  /* Drawn left-to-right by the 'draw' reveal kind. A transform on a flex item
+     does not disturb flex layout, so scaling this flex:1 line is safe. */
+  transform-origin: left center;
   background: linear-gradient(
     90deg,
     rgba(var(--accent), 0.4),
@@ -956,6 +965,8 @@ section[id] {
   top: 10px;
   bottom: 10px;
   width: 1px;
+  /* Drawn downward by the 'draw' reveal kind. */
+  transform-origin: center top;
   background: linear-gradient(
     180deg,
     rgba(var(--accent), 0),
@@ -1145,6 +1156,154 @@ section[id] {
   font: 400 11px var(--font-mono);
   letter-spacing: 0.18em;
   color: rgba(228, 236, 255, 0.38);
+}
+
+/* ============================================================
+   REVEAL VOCABULARY (MOTION-01)
+   The D-34 contract, structural not disciplinary: JS (initReveals() in
+   main.js) is the ONLY writer of data-rev-state; CSS may key ONLY on
+   that attribute. No rule here hides an element by any other selector,
+   so if the module never loads nothing is ever hidden and the page
+   renders complete. 'hidden' and 'shown' are two values of ONE
+   attribute at identical specificity (0,1,0) — the symmetry is the
+   point, the cascade cannot be gotten backwards.
+
+   ⚠ filter: blur() is deliberately NOT ported (DEV-2). V4 animated
+   blur(10px)->blur(0) on every reveal, but Chrome's own guidance warns
+   against animating blur, and this page already spends GPU on two
+   canvases plus a backdrop-filter glass disc. Dropping it also removes
+   the need for V4's setTimeout blur-cleanup. Do not "restore" it.
+
+   CSS owns the interval: JS writes --rev-i (unitless index), the delay
+   is --rev-stagger * --rev-i. Both --rev-i and --rev-stagger inherit,
+   which is what lets the 'assemble' inner child read the frame's values.
+   ============================================================ */
+
+[data-rev-state] {
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--rev-stagger) * var(--rev-i, 0));
+}
+
+[data-rev-state='hidden'] {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+[data-rev-state='shown'] {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- kind: draw — the shipped 1px lines draw themselves (D-38). transform is
+   compositor-only (no layout, no paint), and .section__rule / .exp__spine already
+   ship, so this closes PROJECT.md:28's "lines draw themselves" across EVERY
+   section for the cost of two transform-origin declarations. opacity stays 1 on
+   both sides — a drawing line must not also fade. These (0,2,0) rules beat the
+   (0,1,0) base, so the base translateY/opacity do not leak in. */
+[data-reveal-kind='draw'] {
+  transition-duration: 900ms;
+}
+
+[data-reveal-kind='draw'][data-rev-state='hidden'] {
+  opacity: 1;
+  transform: scaleX(0);
+}
+
+[data-reveal-kind='draw'][data-rev-state='shown'] {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* The spine draws on the vertical axis instead. */
+.exp__spine[data-reveal-kind='draw'][data-rev-state='hidden'] {
+  transform: scaleY(0);
+}
+
+.exp__spine[data-reveal-kind='draw'][data-rev-state='shown'] {
+  transform: scaleY(1);
+}
+
+/* --- kind: snap — a pop with overshoot. Defined here as part of the approved
+   C-2 vocabulary; its first consumer is .ph__dot in plan 02-04. The overshoot
+   timing-function is what makes it a pop rather than a grow. */
+[data-reveal-kind='snap'] {
+  transition-duration: 450ms;
+}
+
+[data-reveal-kind='snap'][data-rev-state='hidden'] {
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+[data-reveal-kind='snap'][data-rev-state='shown'] {
+  opacity: 1;
+  transform: scale(1);
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* The .exp__dot pop, keyed on its ROW's state rather than its own reveal.
+   C-2 lists 'snap' for the dot, but C-6 P-1 forbids nesting a reveal inside a
+   reveal — resolved here in favour of a row-state descendant rule. The dot
+   carries a box-shadow glow (styles.css .exp__dot), so it must NEVER be wrapped
+   in an assemble/overflow frame (L-2), which would clip it. The +240ms offset
+   lands the dot AFTER its row begins arriving, so the timeline reads
+   spine -> row -> dot. data-rev-state is JS-created, so D-34 still holds. */
+.exp__row[data-rev-state] .exp__dot {
+  transition: transform 450ms cubic-bezier(0.34, 1.56, 0.64, 1)
+    calc(var(--rev-stagger) * var(--rev-i, 0) + 240ms);
+}
+
+.exp__row[data-rev-state='hidden'] .exp__dot {
+  transform: scale(0.6);
+}
+
+.exp__row[data-rev-state='shown'] .exp__dot {
+  transform: scale(1);
+}
+
+/* --- kind: assemble — the masked line reveal (research P-2): the frame clips and
+   its inner child slides up from behind a hard edge. Text is UNCOVERED, not faded
+   — the single most recognisably authored motion on the page. overflow:hidden
+   clips glows/box-shadows, so assemble is for TEXT BLOCKS ONLY — never .exp__dot,
+   .section__label, or anything with a shadow (L-2). The hidden/shown rules on the
+   FRAME are REQUIRED at (0,2,0): the (0,1,0) base would otherwise fade and shift
+   the frame itself while its child slides, which is not the effect. --rev-i and
+   --rev-stagger inherit, so the child reads the frame's values with no JS touching
+   it. NOTE (L-1): a non-none transform makes an element a containing block for
+   position:fixed descendants — never put a reveal on an ancestor of the docked
+   nav (it lives inside [data-hero], which has no reveal — safe today). */
+[data-reveal-kind='assemble'] {
+  overflow: hidden;
+}
+
+[data-reveal-kind='assemble'][data-rev-state='hidden'] {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal-kind='assemble'][data-rev-state='shown'] {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal-kind='assemble'] > * {
+  display: block;
+  /* Pins the frame's content box so a descender (the 'p' in Experience) is not
+     clipped by overflow:hidden. Fixed on the inner child, never on .section h2
+     (which is a shared token). */
+  line-height: 1.2;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1)
+    calc(var(--rev-stagger) * var(--rev-i, 0));
+}
+
+[data-reveal-kind='assemble'][data-rev-state='hidden'] > * {
+  transform: translateY(100%);
+}
+
+[data-reveal-kind='assemble'][data-rev-state='shown'] > * {
+  transform: translateY(0);
 }
 
 /* ============================================================
