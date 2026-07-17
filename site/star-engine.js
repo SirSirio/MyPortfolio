@@ -263,8 +263,11 @@ export class HeroStar {
           return { R: d, ux: dx / d, uy: dy / d, k: k, dir: dir, dur: dur, tilt: tilt };
         };
         this.planets = [];
-        this.planets[nearIdx] = mk(nearIdx, 0.34, -1, 8200, true);
-        this.planets[1 - nearIdx] = mk(1 - nearIdx, 1.0, 1, 12500, false);
+        /* Orbit durations scale off the breath period (0.41x near, 0.625x far —
+           the original 20s ratios: 8200ms / 12500ms), so both orbits complete
+           within one breath and stay synchronized to the pulse at any periodSec. */
+        this.planets[nearIdx] = mk(nearIdx, 0.34, -1, this.periodMs * 0.41, true);
+        this.planets[1 - nearIdx] = mk(1 - nearIdx, 1.0, 1, this.periodMs * 0.625, false);
       }
 
       let anyActive = false;

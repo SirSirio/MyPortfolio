@@ -35,17 +35,18 @@ function cacheHeroRect() {
 
 /* ---------- the star ---------- */
 
-/* periodSec: 3.81 completes the cycle in a third of the previous 11.43s tempo
-   (~5.25x the design's approved "Slow" 20s) — Sirio's call, superseding both.
-   Well past the design's own fastest preset (Medium: 13); the engine defaults to
-   15, so this must stay explicit.
-   breathFloor: 0.55 keeps the star from blinking to black at this fast tempo —
-   Sirio's steer: "make it faster, not cut it halfway." The breath now pulses
-   between 0.55 and full bloom, so the star always reads as complete/alive rather
-   than extinguishing to a dark core each cycle.
+/* periodSec: 5 runs the design's full synchronized choreography at 4x the approved
+   "Slow" 20s — Sirio's call. The engine now scales the i-dot orbit durations off
+   periodMs (0.41x / 0.625x, the original 20s ratios), so breath and orbits stay
+   locked in sync at any speed. Past the design's fastest preset (Medium: 13) and
+   the engine's 15 default, so this must stay explicit.
+   No breathFloor: the breath runs the full 0->1 cycle, starting from complete dark
+   and blooming to a bright core each pulse — the original behavior. (An earlier
+   breathFloor:0.55 lifted the trough above the 0.30 re-arm threshold, which froze
+   the i-dot orbits after their first pass; removing it restores the loop.)
    transparent: true is D-04 — it swaps the engine's opaque background fill for a
    clearRect so the fixed deep field shows through the hero. */
-const star = new HeroStar(heroEl, { periodSec: 3.81, breathFloor: 0.55, transparent: true });
+const star = new HeroStar(heroEl, { periodSec: 5, transparent: true });
 
 /* D-02 — the GOLD palette. The engine hard-codes blue-white and accepts no
    opts.pal; _draw reads this.pal fresh every frame, so assigning it here needs
