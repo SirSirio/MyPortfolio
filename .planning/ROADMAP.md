@@ -18,7 +18,7 @@ Each phase is a meaningful chunk a visitor actually feels, not a technical layer
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: The Design Build** - The minimal real site: approved cosmic design + gold Sirio Star hero + a few curated entries per section + empty labelled media slots, live on GitHub Pages (completed 2026-07-16)
-- [ ] **Phase 2: The Story** - Who Sirio is, in words: the biotech → design/automation pivot, how he works with AI, and a Contact close. All from profile.md — needs no media
+- [x] **Phase 2: The Story** - Who Sirio is, in words: the biotech → design/automation pivot, how he works with AI, and a Contact close. All from profile.md — needs no media (completed 2026-07-17)
 - [ ] **Phase 2.1: The Automation Deep-Dive** *(INSERTED)* - The OT-2 case-study page as a vertical slice that proves the template: warp transition in, the full story, the real media, moving parts. Carries NAV-03
 - [ ] **Phase 3: The Pocket Build** - Make it genuinely great on a smartphone: layout, touch, and a star that stays smooth on real phones
 - [ ] **Phase 4: The Showcase** - Go deep: full project case-study pages, the real images/videos, and the fuller profile
@@ -102,7 +102,7 @@ creating new ones.
 
 **Wave 5** *(blocked on Wave 4)*
 
-  - [ ] 02-05-PLAN.md — The OT-2 composite: the re-encoded timelapse beside the CAD renders on a blueprint plate (partially advances MEDIA-02)
+  - [x] 02-05-PLAN.md — The OT-2 composite: the re-encoded timelapse beside the CAD renders on a blueprint plate (partially advances MEDIA-02)
 
 **UI hint**: yes
 
@@ -198,7 +198,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. The Design Build | 3/3 | Complete    | 2026-07-16 |
-| 2. The Story | 4/5 | In Progress|  |
+| 2. The Story | 5/5 | Complete   | 2026-07-17 |
 | 2.1. The Automation Deep-Dive (INSERTED) | 0/TBD | Not started | - |
 | 3. The Pocket Build | 0/TBD | Not started | - |
 | 4. The Showcase | 0/TBD | Not started | - |

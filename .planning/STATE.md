@@ -4,14 +4,14 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 2 UI-SPEC approved (6/6) — ready to plan
-last_updated: "2026-07-17T13:50:27.738Z"
+last_updated: "2026-07-17T15:19:34.662Z"
 last_activity: 2026-07-17 -- Phase 02 execution started
 progress:
   total_phases: 7
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 8
-  completed_plans: 3
-  percent: 14
+  completed_plans: 8
+  percent: 29
 ---
 
 # Project State
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 ## Current Position
 
 Phase: 02 (the-story) — EXECUTING
-Plan: 1 of 5
-Status: Executing Phase 02
+Plan: 2 of 5
+Status: Ready to execute
 Last activity: 2026-07-17 -- Phase 02 execution started
 
 Progress: [░░░░░░░░░░] 0%
@@ -53,6 +53,7 @@ Progress: [░░░░░░░░░░] 0%
 
 *Updated after each plan completion*
 | Phase 01 P01 | 35 | 3 tasks | 7 files |
+| Phase 02 P05 | 6 | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -85,6 +86,7 @@ Recent decisions affecting current work:
 - [Content]: Email on the site stays `sirio.feltrin@gmail.com` (as in the approved design), NOT the account address airsiriomax@gmail.com — confirmed by user 2026-07-16.
 - [Requirements]: 2026-07-16 — fixed pre-existing drift: the traceability table still used the OLD pre-consolidation numbering ("Phase 1 — The Look", "Phase 2 — The First Impression"). Rewritten against current phases; now 36/36 mapped (added MEDIA-01/02).
 - [Repo]: 2026-07-16 — site source folder renamed `app/` → `site/` (it's a site, not an app); Pages artifact path updated, redeploy verified green.
+- [Phase ?]: [Media] 2026-07-17 — Plate 002 (Gel Electrophoresis) filled with Sirio's real OT-2 timelapse (re-encoded 6.66MB to 1.96MB, crf 31 +faststart) beside a blueprint plate of his four CAD renders (genuine alpha, colour type 6). D-29 composite is a NAMED, accepted MEDIA-01 deviation (aspect ratio, not background). Partially advances MEDIA-02 — case-study slots + formal encode remain Phase 4.
 
 ### Pending Todos
 
@@ -109,6 +111,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-07-17T12:00:23.574Z
+Last session: 2026-07-17T15:19:03.824Z
 Stopped at: Phase 2 UI-SPEC approved (6/6) — ready to plan
 Resume file: .planning/phases/02-the-story/02-UI-SPEC.md
