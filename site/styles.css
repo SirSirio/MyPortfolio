@@ -28,6 +28,13 @@
      this project is named for. ORIGIN's accent; must NEVER join PAL (see above). */
   --star-zuben: 126, 240, 174;
 
+  /* Rigel (β Orionis) — a blue-cyan supergiant. METHOD's accent: indigo/cyan,
+     markedly more cyan and saturated than --star-sirius (150,196,255) so the two
+     read as distinct where they nearly meet at Contact (UI-SPEC OI-1 — the one
+     pairing to check on a render). Like --star-zuben it is a SECTION accent only
+     and must NEVER join PAL (L-3 / Pitfall 7); the starfield spectrum is untouched. */
+  --star-rigel: 96, 214, 255;
+
   /* The hero star. NOTE: --gold-glow (255,196,110) is the STAR.
      --star-antares (244,182,89) is the Work section. Two different golds. */
   --gold-glow: 255, 196, 110;
@@ -623,6 +630,13 @@ section[id] {
   --accent: var(--star-zuben);
 }
 
+/* METHOD's indigo/cyan accent. ⚠ REQUIRED, not polish (P-4 / Pitfall 6 / gate G-4):
+   omit it and var(--accent) is unresolved -> every accent-derived surface (label,
+   rule, blob, calculator keys) renders TRANSPARENT with no console error. */
+#method {
+  --accent: var(--star-rigel);
+}
+
 /* Narrative stagger (C-3, the phase's hardest-won lesson: Sirio could NOT read
    the sketch's first cut — timings had to be roughly tripled). The interludes
    are READ, not scanned, so their beats reveal at 220ms while the rest of the
@@ -758,6 +772,13 @@ section[id] {
   top: 28%;
 }
 
+/* METHOD's indigo/cyan glow. Positioned on the RIGHT, mid-height, so it does not
+   stack with #publications' blob directly above it. */
+.section__blob--method {
+  right: -14%;
+  top: 24%;
+}
+
 /* Mission's label is a standalone lead line, not part of a .section__head. */
 .section__label--lead {
   display: block;
@@ -846,6 +867,55 @@ section[id] {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+/* ============================================================
+   METHOD (#method) — the "How I work with AI" interlude
+   Ported STRUCTURE/OBJECTS/ANIMATION from sketch 001 variant D
+   (.planning/sketches/001-method-section/), re-themed to the live
+   tokens and type (D-20 closed). One section, two acts; only Act 1
+   (.method__act--story: the calculator + the five-stanza manifesto)
+   ships this plan. The calculator's markup + CSS follow in this block.
+   Fixed spacing is from the 4-multiple micro scale; the acts' rhythm is
+   fluid (S-1). The manifesto REUSES .narr / .narr--land (T-3) — no
+   second narrative body role.
+   ============================================================ */
+
+/* The two-act container. Vertical rhythm from the macro fluid tier. */
+.method__act {
+  margin-top: clamp(40px, 6vw, 80px);
+}
+
+/* Act 1's two-column layout: the calculator beside the manifesto. Collapses to
+   one column at 860px (the sketch's breakpoint) so the two stack, never squash. */
+.calc-wrap {
+  display: grid;
+  grid-template-columns: minmax(300px, 420px) 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .calc-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* The manifesto stanzas — micro-tier rhythm (the sketch's free 22px normalised
+   to 24px). Each <p> is a .narr / .narr--land, so the type scale is inherited. */
+.manifesto {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* The one emphasised phrase in the closing stanza ("The direction is still
+   mine."). A CLASS, never an inline style — the live site carries zero inline
+   style= on content (the sketch's <em style=…> became this). */
+.ph__em {
+  font-style: normal;
+  color: rgba(var(--accent), 0.9);
 }
 
 .pills {
