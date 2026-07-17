@@ -213,7 +213,17 @@
                expanded and tool descriptors added per profile.md:8-9. -->
           <article data-reveal="1" class="plate plate--flip">
             <div class="plate__media">
-              <figure data-para="0.05" class="media-slot" data-label="[ project video / image ]"></figure>
+              <!-- COMPOSITE slot (D-29, a named MEDIA-01 deviation): Sirio's real
+                   OT-2 timelapse in the video column, beside the blueprint plate of
+                   his own CAD renders. Both files are committed and referenced with
+                   RELATIVE paths — never a remote src (README: a remote src hands a
+                   third party control of what the portfolio shows). -->
+              <figure data-para="0.05" class="media-slot media-slot--composite" data-label="[ project video / image ]">
+                <video src="./assets/media/ot2-timelapse.mp4"
+                       poster="./assets/media/ot2-timelapse-poster.jpg"
+                       muted loop playsinline autoplay
+                       aria-label="Timelapse of the Opentrons OT-2 liquid-handling robot running Sirio's gel-electrophoresis protocol in the DTU lab, handling his green 3D-printed racks, pink PCR strip racks and a blue gel tray"></video>
+              </figure>
             </div>
             <div class="plate__body">
               <div class="plate__meta">Lab automation · 2025</div>

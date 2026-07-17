@@ -1677,6 +1677,54 @@ section[id] {
   border-color: rgba(var(--accent), 0.7);
 }
 
+/* ── COMPOSITE slot (D-29) — a DELIBERATE, ACKNOWLEDGED MEDIA-01 DEVIATION.
+   MEDIA-01's contract is "drop-in plus one line, no CSS change"; a composite
+   needs new CSS, and Sirio accepted this knowingly. ⚠ The surviving reason is
+   ASPECT RATIO, not background: the slot is 16:9 with object-fit:cover, the
+   timelapse is 9:16 (0.5625:1) and the four renders are ~1.1–1.7:1, so a raw
+   cover-crop of the portrait clip would show only a narrow horizontal band. The
+   composite makes both assets legible. Only plate 002 (#work) uses it; every
+   other slot keeps the plain drop-in contract. A 9:16 video at full height
+   inside a 16:9 box occupies 81/256 ≈ 31.6% of the width — `auto 1fr` with a
+   height-driven video reproduces that without hard-coding the percentage. */
+.media-slot--composite {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  padding: 12px;
+  background-color: var(--bg-0);
+}
+
+/* ⚠ Specificity (0,2,1) — this DELIBERATELY overrides the shipped
+   `.media-slot > img, .media-slot > video` rule at (0,1,1) above, which would
+   otherwise stretch the clip to width:100%. Do NOT edit that shipped rule;
+   other slots depend on it. */
+.media-slot--composite > video {
+  height: 100%;
+  width: auto;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Responsive: below the stacking breakpoint the composite must not squash the
+   video to a sliver. Drop to one column and cap the portrait clip's height so it
+   stays legible without dominating; the box grows past 16:9 to fit both rows
+   (Phase 3 owns the real-device mobile pass — this is a sane collapse, not a tune). */
+@media (max-width: 860px) {
+  .media-slot--composite {
+    grid-template-columns: 1fr;
+    aspect-ratio: auto;
+    justify-items: center;
+  }
+
+  .media-slot--composite > video {
+    height: auto;
+    width: auto;
+    max-height: 320px;
+  }
+}
+
 /* ============================================================
    EXPERIENCE (#experience)
    ============================================================ */
