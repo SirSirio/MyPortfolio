@@ -16,6 +16,7 @@ const navEl = document.querySelector('[data-nav]');
 const parallaxEl = heroEl && heroEl.querySelector('[data-parallax]');
 const heroCanvas = heroEl && heroEl.querySelector('canvas');
 const paraEls = Array.from(document.querySelectorAll('[data-para]'));
+const revealEls = Array.from(document.querySelectorAll('[data-reveal]'));
 
 /* Tuning knobs — all three are single values, deliberately. */
 const DOCK_AT = 70;        /* px: dock once hero.bottom crosses the nav height */
@@ -110,6 +111,43 @@ function applyPara() {
   }
 }
 
+/* ---------- scroll reveals (MOTION-01) ---------- */
+
+/* Observer-driven, NOT loop-driven (D-37): reveals resolve their own geometry in
+   the browser's layout phase, so loop() and onScroll() gain nothing and are left
+   untouched — the page does strictly less scroll work than it did before. The IO
+   callback deliberately makes NO layout read (no rect measurement); the browser has
+   already resolved entry.isIntersecting for us (DEV-1, gate G-5).
+
+   D-34 invariant — the code that hides is the code that shows: this function is the
+   ONLY writer of data-rev-state, and styles.css must contain no rule that hides a
+   reveal element except ones keyed on data-rev-state, an attribute this function
+   creates. If this module fails to load nothing is ever hidden and the page renders
+   fully.
+
+   D-36 / MOTION-02 — reduced motion reuses the REDUCED import (:11); no second
+   matchMedia and no second prefers-reduced-motion query (styles.css already has one). */
+function initReveals() {
+  /* Reduced-motion branch first: present everything, never observe, never style. */
+  if (REDUCED) {
+    for (const el of revealEls) el.dataset.revState = 'shown';
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      /* isIntersecting:false is V4's re-arm — reveals replay on scroll-back. */
+      e.target.dataset.revState = e.isIntersecting ? 'shown' : 'hidden';
+    }
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
+  /* Arm and observe in one synchronous pass: CSS owns the interval, JS never
+     computes milliseconds — --rev-i is the unitless stagger index. */
+  for (const el of revealEls) {
+    el.style.setProperty('--rev-i', String(parseInt(el.dataset.reveal, 10) || 0));
+    el.dataset.revState = 'hidden';
+    io.observe(el);
+  }
+}
+
 /* ---------- nav docking (D-01) ---------- */
 
 function syncNav() {
@@ -183,6 +221,7 @@ function boot() {
   cacheHeroRect();
   syncNav();
   applyPara();
+  initReveals();
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize, { passive: true });
 

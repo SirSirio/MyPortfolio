@@ -37,6 +37,11 @@
   --pad-section: clamp(80px, 12vh, 150px) clamp(20px, 6vw, 84px);
   --max-w: 1180px;
   --nav-h: 70px;
+
+  /* Reveal cadence (MOTION-01). V4's approved interval and the furniture
+     default; a token not a JS constant, so re-pacing the whole page is a
+     one-line change. Expect Sirio to want it slower — bump this alone. */
+  --rev-stagger: 130ms;
 }
 
 /* ============================================================
@@ -547,12 +552,13 @@ section[id] {
    section sets --accent to the PAL stop it owns. That is what makes
    plate reordering free and the file portable.
 
-   ⚠ NEVER add a rule selecting the reveal attribute to this file.
-   updateReveals() (V4:579-585) is what sets opacity:0, and it is
-   deferred to Phase 2 (MOTION-01). The attributes ship inert; a
-   hiding rule here would ship an INVISIBLE page to every visitor.
-   (Written without the literal bracketed selector on purpose — the
-   verification gate greps this file for it.)
+   ⚠ The reveal contract (MOTION-01): initReveals() in main.js is the
+   ONLY writer of data-rev-state, and the reveal vocabulary lower in
+   this file keys ONLY on that attribute. NEVER add a rule that hides a
+   reveal element before or without JS — a hiding rule keyed on anything
+   other than data-rev-state ships an INVISIBLE page to every visitor.
+   (Written without the literal bracketed reveal selector on purpose —
+   the verification gate greps this file for it.)
 
    ⚠ --accent is section-driven, never plate-driven. V4:92-100 gives
    Work plate 002 an Aldebaran accent INSIDE the Antares section —
@@ -1145,6 +1151,44 @@ section[id] {
   font: 400 11px var(--font-mono);
   letter-spacing: 0.18em;
   color: rgba(228, 236, 255, 0.38);
+}
+
+/* ============================================================
+   REVEAL VOCABULARY (MOTION-01)
+   The D-34 contract, structural not disciplinary: JS (initReveals() in
+   main.js) is the ONLY writer of data-rev-state; CSS may key ONLY on
+   that attribute. No rule here hides an element by any other selector,
+   so if the module never loads nothing is ever hidden and the page
+   renders complete. 'hidden' and 'shown' are two values of ONE
+   attribute at identical specificity (0,1,0) — the symmetry is the
+   point, the cascade cannot be gotten backwards.
+
+   ⚠ filter: blur() is deliberately NOT ported (DEV-2). V4 animated
+   blur(10px)->blur(0) on every reveal, but Chrome's own guidance warns
+   against animating blur, and this page already spends GPU on two
+   canvases plus a backdrop-filter glass disc. Dropping it also removes
+   the need for V4's setTimeout blur-cleanup. Do not "restore" it.
+
+   CSS owns the interval: JS writes --rev-i (unitless index), the delay
+   is --rev-stagger * --rev-i. Both --rev-i and --rev-stagger inherit,
+   which is what lets the 'assemble' inner child read the frame's values.
+   ============================================================ */
+
+[data-rev-state] {
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--rev-stagger) * var(--rev-i, 0));
+}
+
+[data-rev-state='hidden'] {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+[data-rev-state='shown'] {
+  opacity: 1;
+  transform: none;
 }
 
 /* ============================================================
