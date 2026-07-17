@@ -90,7 +90,7 @@ creating new ones.
 
 **Wave 2** *(blocked on Wave 1)*
 
-  - [ ] 02-02-PLAN.md — `#origin`: the bio-green three-beat journey + the narrative type scale + the Contact close (CONT-01, NAV-01, CONT-04)
+  - [x] 02-02-PLAN.md — `#origin`: the bio-green three-beat journey + the narrative type scale + the Contact close (CONT-01, NAV-01, CONT-04)
 
 **Wave 3** *(blocked on Wave 2)*
 
@@ -198,7 +198,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. The Design Build | 3/3 | Complete    | 2026-07-16 |
-| 2. The Story | 1/5 | In Progress|  |
+| 2. The Story | 2/5 | In Progress|  |
 | 2.1. The Automation Deep-Dive (INSERTED) | 0/TBD | Not started | - |
 | 3. The Pocket Build | 0/TBD | Not started | - |
 | 4. The Showcase | 0/TBD | Not started | - |
