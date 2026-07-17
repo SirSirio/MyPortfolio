@@ -94,7 +94,7 @@ creating new ones.
 
 **Wave 3** *(blocked on Wave 2)*
 
-  - [ ] 02-03-PLAN.md — `#method` Act 1: the indigo interlude, the five-stanza manifesto, the calculator (CONT-03, NAV-01)
+  - [x] 02-03-PLAN.md — `#method` Act 1: the indigo interlude, the five-stanza manifesto, the calculator (CONT-03, NAV-01)
 
 **Wave 4** *(blocked on Wave 3)*
 
@@ -198,7 +198,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. The Design Build | 3/3 | Complete    | 2026-07-16 |
-| 2. The Story | 2/5 | In Progress|  |
+| 2. The Story | 3/5 | In Progress|  |
 | 2.1. The Automation Deep-Dive (INSERTED) | 0/TBD | Not started | - |
 | 3. The Pocket Build | 0/TBD | Not started | - |
 | 4. The Showcase | 0/TBD | Not started | - |
