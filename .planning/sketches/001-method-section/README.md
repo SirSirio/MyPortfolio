@@ -134,6 +134,21 @@ new tab + `rel="noopener"`, matching the Phase 1 nav pattern.
 - "The design meets the real thing, and the real thing decides. Reality is the pressure test." — mine,
   carrying D-17's pressure-test idea onto the Test phase.
 
+## ⚠ DO NOT COPY THIS SKETCH'S REVEAL MECHANISM
+
+This sketch uses a **`body.js` scoping pattern** for D-34. **It is the wrong mechanism — do not port it.**
+Use **`data-rev-state`** as specified in `.planning/phases/02-the-story/02-UI-SPEC.md` § C-1.
+
+Why: `body.js` only avoids the invisible page by *winning a CSS specificity race*
+(`body.js .m [data-rise].in` (0,4,1) must out-specify `body.js .m [data-rise]` (0,3,1)). A future edit
+can silently lose that race — and it already did, twice, in this very sketch. `data-rev-state` puts both
+states on one JS-created attribute at identical specificity, so they cannot be gotten backwards.
+
+**`02-RESEARCH.md` already specified `data-rev-state` before this sketch was built** (`el.dataset.revState
+= 'hidden' / 'shown'` — "the code that hides is the code that shows"). The `body.js` pattern was Claude
+re-inventing a solved problem, worse. The sketch is authoritative for **structure, objects and animation
+only** — not for reveal plumbing.
+
 ## Notes for the Planner
 
 - **`--star-rigel: 96, 214, 255`** (indigo/cyan) is this sketch's **D-03 proposal** for the METHOD
