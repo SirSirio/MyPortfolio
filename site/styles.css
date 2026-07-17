@@ -1263,6 +1263,49 @@ section[id] {
   transform: scale(1);
 }
 
+/* --- kind: assemble — the masked line reveal (research P-2): the frame clips and
+   its inner child slides up from behind a hard edge. Text is UNCOVERED, not faded
+   — the single most recognisably authored motion on the page. overflow:hidden
+   clips glows/box-shadows, so assemble is for TEXT BLOCKS ONLY — never .exp__dot,
+   .section__label, or anything with a shadow (L-2). The hidden/shown rules on the
+   FRAME are REQUIRED at (0,2,0): the (0,1,0) base would otherwise fade and shift
+   the frame itself while its child slides, which is not the effect. --rev-i and
+   --rev-stagger inherit, so the child reads the frame's values with no JS touching
+   it. NOTE (L-1): a non-none transform makes an element a containing block for
+   position:fixed descendants — never put a reveal on an ancestor of the docked
+   nav (it lives inside [data-hero], which has no reveal — safe today). */
+[data-reveal-kind='assemble'] {
+  overflow: hidden;
+}
+
+[data-reveal-kind='assemble'][data-rev-state='hidden'] {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal-kind='assemble'][data-rev-state='shown'] {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal-kind='assemble'] > * {
+  display: block;
+  /* Pins the frame's content box so a descender (the 'p' in Experience) is not
+     clipped by overflow:hidden. Fixed on the inner child, never on .section h2
+     (which is a shared token). */
+  line-height: 1.2;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1)
+    calc(var(--rev-stagger) * var(--rev-i, 0));
+}
+
+[data-reveal-kind='assemble'][data-rev-state='hidden'] > * {
+  transform: translateY(100%);
+}
+
+[data-reveal-kind='assemble'][data-rev-state='shown'] > * {
+  transform: translateY(0);
+}
+
 /* ============================================================
    REDUCED MOTION
    The star still renders — one static, fully-lit gold frame (main.js draws a
