@@ -86,7 +86,7 @@ creating new ones.
 
 **Wave 1**
 
-  - [ ] 02-01-PLAN.md — The reveal vocabulary: `initReveals()` + `data-rev-state`, draw / assemble / snap on the existing sections (MOTION-01, MOTION-02)
+  - [x] 02-01-PLAN.md — The reveal vocabulary: `initReveals()` + `data-rev-state`, draw / assemble / snap on the existing sections (MOTION-01, MOTION-02)
 
 **Wave 2** *(blocked on Wave 1)*
 
@@ -198,7 +198,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. The Design Build | 3/3 | Complete    | 2026-07-16 |
-| 2. The Story | 0/5 | Planned | - |
+| 2. The Story | 1/5 | In Progress|  |
 | 2.1. The Automation Deep-Dive (INSERTED) | 0/TBD | Not started | - |
 | 3. The Pocket Build | 0/TBD | Not started | - |
 | 4. The Showcase | 0/TBD | Not started | - |
