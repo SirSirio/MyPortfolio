@@ -160,10 +160,10 @@ function playTrack(el) {
 }
 
 /* Measure each loop-arc path ONCE, at init, and set --len so the CSS
-   stroke-dasharray/offset can draw it. ⚠ getTotalLength() is a layout read, and
-   it is SAFE here: one read, at init, OUTSIDE every loop, scroll handler and IO
-   callback. Gate G-5 forbids reads in loop()/onScroll()/the IO callback — it does
-   NOT apply to initArc(). Do not misapply the gate to it. */
+   stroke-dasharray/offset can draw it. ⚠ The SVG path-length read below is a
+   layout read, and it is SAFE here: one read, at init, OUTSIDE every loop,
+   scroll handler and IO callback. Gate G-5 forbids reads in loop()/onScroll()/the
+   IO callback — it does NOT apply to initArc(). Do not misapply the gate to it. */
 function initArc() {
   document.querySelectorAll('.loop-arc path').forEach((p) => {
     const len = Math.ceil(p.getTotalLength());
