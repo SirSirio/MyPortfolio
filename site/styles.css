@@ -718,6 +718,17 @@ section[id] {
   white-space: nowrap;
 }
 
+/* Plain-language eyebrow. The base label's wide 0.26em tracking is tuned for
+   uppercase codes; lowercase sentence intros want near-normal tracking and must
+   never be forced uppercase (Sirio's steer — the "NN — NAME SECTOR" flavour is
+   gone). Slightly quieter than a code label so it introduces without competing
+   with the h2 below it. */
+.section__label--intro {
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: rgba(var(--accent), 0.7);
+}
+
 .section__rule {
   flex: 1;
   height: 1px;
@@ -783,7 +794,10 @@ section[id] {
 .section__label--lead {
   display: block;
   font-size: 11px;
-  letter-spacing: 0.24em;
+  /* Lowercase intro copy ("what I do") — near-normal tracking, not the 0.24em
+     the old all-caps dateline used. Stays muted: it's the quiet eyebrow above
+     the identity line, not a competing accent. */
+  letter-spacing: 0.02em;
   color: rgba(228, 236, 255, 0.45);
   margin-bottom: clamp(38px, 5vw, 64px);
 }
@@ -1545,7 +1559,10 @@ section[id] {
 
 .plate__meta {
   font: 400 12px var(--font-mono);
-  letter-spacing: 0.2em;
+  /* Was 0.2em for the old "PLATE 00N" all-caps code; the tag now carries a real
+     domain label ("MSc thesis", "Lab automation") in natural case, which reads
+     cramped-free at tighter tracking. */
+  letter-spacing: 0.08em;
   color: rgba(var(--accent), 0.85);
 }
 
