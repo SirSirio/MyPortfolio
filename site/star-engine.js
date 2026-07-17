@@ -256,18 +256,23 @@ export class HeroStar {
       const nearIdx = dn[0] <= dn[1] ? 0 : 1;
 
       if (b < 0.30) this.armed = true;
-      if (!this.reduced && this.armed && b >= 0.45) {
+      /* !this.orbiting guards a revolution longer than one breath: the breath
+         re-crosses 0.45 mid-orbit, and without this guard that would restart the
+         orbit every breath so it could never finish. With it, a new revolution
+         only launches once the current one has completed. */
+      if (!this.reduced && this.armed && !this.orbiting && b >= 0.45) {
         this.armed = false; this.orbiting = true; this.orbitStart = now;
         const mk = (i, k, dir, dur, tilt) => {
           const dx = homes[i].x - cx, dy = homes[i].y - cy, d = Math.max(Math.hypot(dx, dy), 1);
           return { R: d, ux: dx / d, uy: dy / d, k: k, dir: dir, dur: dur, tilt: tilt };
         };
         this.planets = [];
-        /* Orbit durations scale off the breath period (0.41x near, 0.625x far —
-           the original 20s ratios: 8200ms / 12500ms), so both orbits complete
-           within one breath and stay synchronized to the pulse at any periodSec. */
-        this.planets[nearIdx] = mk(nearIdx, 0.34, -1, this.periodMs * 0.41, true);
-        this.planets[1 - nearIdx] = mk(1 - nearIdx, 1.0, 1, this.periodMs * 0.625, false);
+        /* Each revolution spans 2 full breaths (dur = 2x periodMs), so the planets
+           orbit at half the breath's angular rate and stay locked to the pulse —
+           one revolution per two breaths. near is the tilted ellipse (k=0.34), far
+           the circle (k=1.0); the 2x factor is shared so both complete together. */
+        this.planets[nearIdx] = mk(nearIdx, 0.34, -1, this.periodMs * 2, true);
+        this.planets[1 - nearIdx] = mk(1 - nearIdx, 1.0, 1, this.periodMs * 2, false);
       }
 
       let anyActive = false;

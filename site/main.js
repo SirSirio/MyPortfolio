@@ -36,10 +36,10 @@ function cacheHeroRect() {
 /* ---------- the star ---------- */
 
 /* periodSec: 5 runs the design's full synchronized choreography at 4x the approved
-   "Slow" 20s — Sirio's call. The engine now scales the i-dot orbit durations off
-   periodMs (0.41x / 0.625x, the original 20s ratios), so breath and orbits stay
-   locked in sync at any speed. Past the design's fastest preset (Medium: 13) and
-   the engine's 15 default, so this must stay explicit.
+   "Slow" 20s — Sirio's call. The engine scales the i-dot orbit durations off
+   periodMs — each revolution now spans 2 full breaths (2x periodMs) per Sirio's
+   steer — so breath and orbits stay locked in sync at any speed. Past the design's
+   fastest preset (Medium: 13) and the engine's 15 default, so this must stay explicit.
    No breathFloor: the breath runs the full 0->1 cycle, starting from complete dark
    and blooming to a bright core each pulse — the original behavior. (An earlier
    breathFloor:0.55 lifted the trough above the 0.30 re-arm threshold, which froze
