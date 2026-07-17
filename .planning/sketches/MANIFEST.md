@@ -31,7 +31,7 @@ invisible-page landmine) · content facts only from `00_Profile/profile.md` and 
 
 | # | Name | Design Question | Winner | Tags |
 |---|------|----------------|--------|------|
-| 001 | method-section | What UI/animation treatment makes "How I Work With AI" land? (D-20, D-38) | **D — Synthesis** *(pending confirmation)* | method, cont-03, motion, d-20, d-38 |
+| 001 | method-section | What UI/animation treatment makes "How I Work With AI" land? (D-20, D-38) | **D — Synthesis** ✓ | method, cont-03, motion, d-20, d-38 |
 
 ## Decisions emerging from sketch 001
 

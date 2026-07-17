@@ -2,7 +2,7 @@
 sketch: 001
 name: method-section
 question: "What UI/animation treatment makes the 'How I Work With AI' (METHOD) section land?"
-winner: "D (pending confirmation)"
+winner: "D"
 tags: [method, cont-03, motion, d-20, d-38]
 phase: 2
 ---
@@ -99,7 +99,22 @@ All copy is grounded — nothing invented:
 - "ANALYZE DATA — AI processes results & runs the stats" · "Document — captured continuously"
 - "Because the discussion happens in text, the results arrive already analysed and presentation-ready."
 - Discuss/Plan/Execute sub-lines; "keeping AI context lean as a project grows"
-- "gravimetric testing", "calculators", "the campaign app", "rotor solver", "displaced-volume calculator"
+
+**Round 3 — deliberately DE-specified at Sirio's request.** The loop is meant to read as *how he
+works*, not as a thesis changelog. The deck's concrete nouns were pulled back out:
+- ~~"Calculators, solvers and the campaign app"~~ → **"Custom tools and artifacts get built along the
+  way — often to *make* the decisions, not just to carry them out."** Sirio: *"just say that custom
+  tools and artifacts are built also to make decisions."* The point is that tooling is an instrument
+  of judgement, not just output.
+- ~~"Gravimetric campaigns on the real machine"~~ → **"The design meets the real thing, and the real
+  thing decides. Reality is the pressure test."** Sirio: *"gravimetric testing is specific, this part
+  is meant to be generic."*
+- ~~"the bench answers back"~~ → "the real thing answers back" (consistency with the above).
+
+**GSD link (D-18 sibling):** `https://github.com/open-gsd/gsd-core` — **verified live this session**:
+`open-gsd/gsd-core`, "Git. Ship. Done.", MIT, v1.7.0, 6.8k stars. This is the newer official repo
+(npm package `@opengsd/gsd-core`), *not* an older mirror. Rendered as "GSD is open source ↗",
+new tab + `rel="noopener"`, matching the Phase 1 nav pattern.
 
 **Sirio's own corrections, applied:**
 - *"analyze data is helped by AI (I give the direction there), not autonomously run (e.g. custom
@@ -114,10 +129,10 @@ All copy is grounded — nothing invented:
   contain. **This line is my guess and must be confirmed or replaced before it ships.** Fabrication is
   a standing project landmine (see `<specifics>` in CONTEXT.md, and D-17's "make smth up idk" refusal).
 - "the dispenser, the bench, the thesis hardware" / "websites, apps, tooling — like this page" —
-  framing labels, mine.
-- "Nothing here ships and stops — the bench answers back, and the loop comes round again." — mine.
-- "The design gets pressure-tested against reality." — my compression of D-17's pressure-test idea
-  onto the Test phase.
+  framing labels, mine. (Not flagged by Sirio; the *loop steps* were the thing he wanted generic.)
+- "Nothing here ships and stops — the real thing answers back…" — mine.
+- "The design meets the real thing, and the real thing decides. Reality is the pressure test." — mine,
+  carrying D-17's pressure-test idea onto the Test phase.
 
 ## Notes for the Planner
 
