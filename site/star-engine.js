@@ -40,6 +40,11 @@ export class HeroStar {
     this.reduced = opts.reduced !== undefined ? opts.reduced : REDUCED;
     this.dpr = DPR;
     this.periodMs = (opts.periodSec || 15) * 1000;
+    /* breathFloor lifts the trough of the breath so the star never fully
+       extinguishes. Default 0 preserves the original 0→1 breath for every other
+       caller; a positive floor remaps the cycle to [floor, 1] so a FAST period
+       reads as a living pulse instead of the core blinking to black each cycle. */
+    this.breathFloor = clamp(opts.breathFloor || 0, 0, 0.95);
     this.transparent = !!opts.transparent;
     this.pal = { glow: [150, 196, 255], core: [255, 251, 242] };
     this.canvas = heroEl.querySelector('canvas');
@@ -160,6 +165,7 @@ export class HeroStar {
 
     let b = (Math.sin((now - this.t0) / this.periodMs * Math.PI * 2 - Math.PI / 2) + 1) / 2;
     b = b * b * (3 - 2 * b);
+    if (this.breathFloor) b = this.breathFloor + (1 - this.breathFloor) * b;
     if (this.reduced) b = 0.72;
     this.b = b;
     const pal = this.pal;
