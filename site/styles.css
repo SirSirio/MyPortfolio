@@ -1643,8 +1643,11 @@ section[id] {
     border-color 0.5s ease;
 }
 
-/* EMPTY STATE — the striped, labelled placeholder. */
-.media-slot:not(:has(> img, > video)) {
+/* EMPTY STATE — the striped, labelled placeholder.
+   `> a > img` joins the "filled" test so a CLICKABLE asset (an <img> wrapped in an
+   <a>, e.g. EndoSense links to the iGEM wiki) also switches the placeholder off.
+   Without it the anchor makes the <img> a grandchild and `> img` stops matching. */
+.media-slot:not(:has(> img, > video, > a > img)) {
   background: repeating-linear-gradient(
     135deg,
     rgba(var(--accent), 0.09) 0 11px,
@@ -1654,7 +1657,7 @@ section[id] {
   box-shadow: 0 30px 90px rgba(var(--accent), 0.1);
 }
 
-.media-slot:not(:has(> img, > video))::after {
+.media-slot:not(:has(> img, > video, > a > img))::after {
   content: attr(data-label);
   font-family: var(--font-mono);
   font-size: 12px;
@@ -1663,13 +1666,22 @@ section[id] {
   color: rgba(var(--accent), 0.65);
 }
 
-/* FILLED STATE — the placeholder chrome above simply stops matching. */
+/* FILLED STATE — the placeholder chrome above simply stops matching.
+   `> a > img` covers a clickable asset; the `> a` block below makes the whole
+   16:9 box the link hit-target so a click anywhere on the image follows through. */
 .media-slot > img,
-.media-slot > video {
+.media-slot > video,
+.media-slot > a > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.media-slot > a {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .media-slot:hover {
