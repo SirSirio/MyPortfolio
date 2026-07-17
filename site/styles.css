@@ -1016,6 +1016,437 @@ section[id] {
   box-shadow: 0 0 22px rgba(var(--accent), 0.7);
 }
 
+/* ============================================================
+   METHOD Act 2 — the two tracks (CONT-03)
+   DIGITAL is a LINE that ships; PHYSICAL is a LOOP that comes back
+   around. The structural contrast IS the argument, not two lists of
+   text. Geometry ported from sketch 001 variant D, colour + type
+   re-themed to the live tokens.
+
+   ⚠ The sketch scoped every hide rule under a runtime class on the root
+   element and LOST the specificity race twice, shipping a dark page both
+   times. That pattern is FORBIDDEN (gate G-2 greps site/ for it and
+   requires zero hits).
+   Instead each .ph carries data-ph-state — a JS-created attribute with
+   exactly two values (armed | lit) at IDENTICAL specificity (0,2,0),
+   mirroring the data-rev-state contract. No JS -> the attribute never
+   exists -> no rule matches -> the section renders fully lit and
+   readable (D-34, one step further). The dimming is a JS-driven state
+   too: a bare .ph__name { opacity:.38 } would leave a no-JS visitor with
+   a permanently half-dead section.
+
+   Fixed spacing is from the 4-multiple micro scale {4,8,12,16,20,24,32,48};
+   macro rhythm stays fluid (S-1). Weights {300,400} only (T-1) — the
+   track/rail labels take their emphasis from accent colour + tracking,
+   never the sketch's 700. Every transition ENUMERATES its properties;
+   never the `all` keyword.
+   ============================================================ */
+
+.tracks {
+  margin-top: clamp(64px, 8vw, 96px);
+  display: grid;
+  gap: clamp(56px, 7vw, 74px);
+}
+
+.track__head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ⚠ weight 400, NOT the sketch's 700 — the live site never uses 700.
+   Accent colour + 0.24em tracking carry the emphasis (T-1). */
+.track__kind {
+  font: 400 12px var(--font-mono);
+  letter-spacing: 0.24em;
+  color: rgb(var(--accent));
+  white-space: nowrap;
+}
+
+.track__for {
+  font: 300 15px var(--font-body);
+  color: rgba(255, 255, 255, 0.42);
+}
+
+/* An h3 — sits clearly below the shared h2 ceiling of 86px. */
+.track__title {
+  font: 300 clamp(24px, 2.4vw, 34px) var(--font-display);
+  color: var(--text-hi);
+  margin: 12px 0 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.track__foot {
+  margin-top: 24px;
+  font: 300 15px/1.6 var(--font-body);
+  color: rgba(228, 232, 244, 0.5);
+  max-width: 70ch;
+}
+
+/* The <b> carries no bold weight of its own — accent + 400, per the sketch. */
+.track__foot b {
+  color: rgba(var(--accent), 0.95);
+  font-weight: 400;
+}
+
+/* ── the phase row (shared by both tracks) ── */
+.phases {
+  margin-top: 40px;
+  display: grid;
+  gap: 0;
+  position: relative;
+}
+
+.phases--line {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.ph {
+  position: relative;
+  padding-right: 20px;
+}
+
+/* Unlit = hollow outline; lit = filled + glow. The lit state keys on
+   data-ph-state (JS-created), NEVER a bare rule, so a no-JS visitor sees
+   it lit. */
+.ph__dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--bg-0);
+  border: 1px solid rgba(var(--accent), 0.5);
+  position: relative;
+  z-index: 2;
+  transition:
+    background-color 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+[data-ph-state='lit'] .ph__dot {
+  background: rgb(var(--accent));
+  border-color: rgb(var(--accent));
+  box-shadow: 0 0 26px rgba(var(--accent), 0.95);
+}
+
+/* The wire draws itself left-to-right. scaleX is compositor-only (free). */
+.ph__wire {
+  position: absolute;
+  top: 7px;
+  left: 15px;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(var(--accent), 0.6), rgba(var(--accent), 0.2));
+  transform-origin: left center;
+}
+
+[data-ph-state='armed'] .ph__wire {
+  transform: scaleX(0);
+}
+
+[data-ph-state='lit'] .ph__wire {
+  transform: scaleX(1);
+  transition: transform 800ms cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+
+/* The LINE ends after Execute — that is the point. The loop keeps its last
+   wire (it does not end); only the line drops it. */
+.phases--line .ph:last-child .ph__wire {
+  display: none;
+}
+
+.ph__n {
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.3);
+  margin: 20px 0 8px;
+}
+
+/* Sirio asked for the GSD phases to be bigger — this is the size bump (T-3). */
+.ph__name {
+  font: 400 clamp(24px, 2.7vw, 38px) var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--text-hi);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+/* ⚠ The dimming is a JS-driven state too — armed via data-ph-state, never a
+   bare opacity rule that would half-kill the section without JS. */
+[data-ph-state='armed'] .ph__name {
+  opacity: 0.38;
+}
+
+[data-ph-state='lit'] .ph__name {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.ph__desc {
+  font: 300 16px/1.55 var(--font-body);
+  color: rgba(228, 232, 244, 0.6);
+  max-width: 26ch;
+}
+
+[data-ph-state='armed'] .ph__desc {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+[data-ph-state='lit'] .ph__desc {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.6s ease 0.15s,
+    transform 0.6s ease 0.15s;
+}
+
+/* The outbound-link idiom, reused by the evidence strip in Task 3. Colour is
+   restated on hover/focus because the global a:hover rule (styles.css) outranks
+   it on specificity and would otherwise repaint it — same reason
+   .contact__link does it. :focus-visible paired for keyboard users. */
+.deck-link {
+  display: inline-block;
+  margin-top: 24px;
+  text-decoration: none;
+  font: 400 clamp(12px, 1.4vw, 15px) var(--font-mono);
+  letter-spacing: 0.14em;
+  color: rgba(var(--accent), 0.7);
+  transition:
+    color 0.4s ease,
+    text-shadow 0.4s ease;
+}
+
+.deck-link:hover,
+.deck-link:focus-visible {
+  color: rgba(var(--accent), 0.95);
+  text-shadow: 0 0 18px rgba(var(--accent), 0.55);
+}
+
+/* ── PHYSICAL — the LOOP. Tinted a second accent stop so the two tracks read as
+   different KINDS of work at a glance, not just different text.
+   ⚠ SANCTIONED override of styles.css:557 ("--accent is section-driven, never
+   plate-driven"). It is NOT the bug that warning names: there the V4 design gave
+   a Work plate an Aldebaran accent inside an Antares section ARBITRARILY —
+   decoration masquerading as meaning. Here the accent IS the meaning: it encodes
+   kind-of-work and is the mechanism by which the line/loop contrast reads at a
+   glance. Scoped, semantic, bounded — one subtree. The section head
+   (.section__label / .section__rule / .section__blob) still derives from
+   #method's rigel and is unaffected (Cl-2). Bonus resonance, not accident:
+   PHYSICAL green IS ORIGIN green — physical work is the lab root, said in colour
+   without a word. */
+.track--physical {
+  --accent: var(--star-zuben);
+}
+
+.phases--loop {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Unlike the line, the loop keeps its last wire — it does not end. The return
+   arc closes the circuit instead, so there is no :last-child display:none here. */
+
+.ph__note {
+  margin-top: 12px;
+  font: 400 12px/1.5 var(--font-mono);
+  letter-spacing: 0.02em;
+  color: rgba(var(--accent), 0.72);
+  max-width: 26ch;
+}
+
+/* ── the LOOP's return arc (physical only) — draws itself back to the start.
+   ⚠ stroke-dashoffset is NOT a compositor property — it repaints every frame.
+   Accepted HERE because the arc is one thin path over a ~62px area, drawn once
+   and hidden below 860px (threat T-02-19). Do NOT generalise the mechanism;
+   every other line on the page uses transform: scaleX() because it is free
+   (research P-1). The armed state keys on data-arc-state (JS-created), never a
+   bare .loop-arc path rule — otherwise a no-JS visitor gets an invisible arc
+   forever (D-34, one step further). Two values of one attribute, identical
+   specificity. */
+.loop-arc {
+  display: block;
+  width: 100%;
+  height: 62px;
+  margin-top: 4px;
+  overflow: visible;
+}
+
+.loop-arc path {
+  fill: none;
+  stroke: rgba(var(--accent), 0.45);
+  stroke-width: 1;
+  stroke-dasharray: var(--len);
+}
+
+[data-arc-state='armed'] path {
+  stroke-dashoffset: var(--len);
+}
+
+[data-arc-state='lit'] path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.5s ease;
+}
+
+/* ── the DOCUMENT rail — spans BENEATH the loop, because the deck says
+   "Document — captured continuously". It is a RAIL, not a step in the chain; its
+   ticks land under phase 03 (Test) and 04 (Analyze Data) — the 4-column grid
+   puts those dots at 50% and 75%. That alignment IS the argument: documentation
+   runs WHILE the test runs (D-17, made structural). The armed/lit state keys on
+   data-rail-state (JS-created), never a bare rule. */
+.doc-rail {
+  margin-top: 24px;
+  position: relative;
+  border: 1px dashed rgba(var(--accent), 0.32);
+  border-radius: 8px;
+  padding: 16px 20px;
+  background: rgba(var(--accent), 0.045);
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ⚠ weight 400, not the sketch's 700 — accent + 0.24em tracking carry it (T-1). */
+.doc-rail__tag {
+  font: 400 12px var(--font-mono);
+  letter-spacing: 0.24em;
+  color: rgb(var(--accent));
+  white-space: nowrap;
+}
+
+.doc-rail__txt {
+  font: 300 15px/1.55 var(--font-body);
+  color: rgba(228, 232, 244, 0.66);
+}
+
+/* The emphasised clause takes accent at weight 400 — same idiom as .track__foot
+   b; never the UA default 700 (T-1). */
+.doc-rail__txt b {
+  color: rgba(var(--accent), 0.9);
+  font-weight: 400;
+}
+
+/* The ticks tie the rail up into the phase row, landing under Test and Analyze
+   Data (the argument: documentation runs WHILE the test runs). */
+.doc-rail::before,
+.doc-rail::after {
+  content: '';
+  position: absolute;
+  top: -24px;
+  width: 1px;
+  height: 24px;
+  background: linear-gradient(180deg, rgba(var(--accent), 0), rgba(var(--accent), 0.45));
+}
+
+.doc-rail::before {
+  left: calc(50% + 7px);
+}
+
+.doc-rail::after {
+  left: calc(75% + 7px);
+}
+
+[data-rail-state='armed'] {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+[data-rail-state='lit'] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+/* ── IN PRACTICE — the understated evidence strip (D-10). A quiet block that
+   owns the site as evidence plainly but late; separated from the tracks by
+   macro-tier fluid rhythm. */
+.evidence {
+  margin-top: clamp(56px, 7vw, 80px);
+}
+
+/* The label in the shipped interlude idiom (cf. .section__label). ⚠ Weight 400 —
+   the live site never uses 700; accent + tracking carry it (T-1). */
+.evidence__label {
+  font: 400 13px var(--font-mono);
+  letter-spacing: 0.26em;
+  color: rgba(var(--accent), 0.85);
+}
+
+/* Two columns at desktop, one at 860px. Gap on the 4-multiple micro scale. */
+.ev-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 32px;
+}
+
+/* ⚠ Supporting text is deliberately NOT scaled up like .narr (T-3): 15-16px body
+   in --text-body. Accent is NEVER on the prose (Cl-3) — it belongs to the ↗ glyph
+   (the .deck-link) and its hover only. */
+.ev {
+  font: 300 clamp(15px, 1.4vw, 16px) / 1.55 var(--font-body);
+  color: var(--text-body);
+  max-width: 44ch;
+}
+
+/* Responsive: below 860px the phases stack to one column and each wire rotates
+   to a vertical line. ⚠ The armed/lit contract stays data-ph-state — never a
+   runtime root class. OI-5: this query is rendered but NOT validated below
+   ~485 CSS px; Phase 3's mobile pass owns the 375/390px check. */
+@media (max-width: 860px) {
+  .phases--line,
+  .phases--loop {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .ph {
+    padding: 0 0 24px 0;
+  }
+
+  .ph__desc,
+  .ph__note {
+    max-width: none;
+  }
+
+  .ph__wire {
+    top: 15px;
+    left: 7px;
+    right: auto;
+    width: 1px;
+    height: calc(100% - 15px);
+    background: linear-gradient(180deg, rgba(var(--accent), 0.6), rgba(var(--accent), 0.2));
+    transform-origin: top center;
+  }
+
+  [data-ph-state='armed'] .ph__wire {
+    transform: scaleY(0);
+  }
+
+  [data-ph-state='lit'] .ph__wire {
+    transform: scaleY(1);
+  }
+
+  /* The arc's viewBox geometry assumes the 4-column row, so it and the rail's
+     ticks are hidden once the loop stacks. */
+  .loop-arc {
+    display: none;
+  }
+
+  .doc-rail::before,
+  .doc-rail::after {
+    display: none;
+  }
+
+  .ev-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .pills {
   display: flex;
   flex-wrap: wrap;
