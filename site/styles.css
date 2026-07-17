@@ -623,6 +623,18 @@ section[id] {
   --accent: var(--star-zuben);
 }
 
+/* Narrative stagger (C-3, the phase's hardest-won lesson: Sirio could NOT read
+   the sketch's first cut — timings had to be roughly tripled). The interludes
+   are READ, not scanned, so their beats reveal at 220ms while the rest of the
+   page keeps the :root 130ms furniture default. Custom properties inherit, so
+   every [data-rev-state] element inside these two ids picks it up with no JS
+   change and no per-section rule. ⚠ Stagger stays a TOKEN, never a JS constant —
+   JS writes only the unitless --rev-i; CSS owns the interval, so re-pacing the
+   whole page is a one-line change. Treat 220ms as a floor. */
+#origin, #method {
+  --rev-stagger: 220ms;
+}
+
 #work {
   --accent: var(--star-antares);
 }
@@ -777,6 +789,63 @@ section[id] {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+}
+
+/* ============================================================
+   NARRATIVE INTERLUDE TYPE (ORIGIN, and #method's manifesto in 02-03)
+   The interludes are READ, not scanned. The shipped 16-17px card copy is
+   correct for cards and too small for prose at length — Sirio asked for
+   bigger type across the narrative sections. New roles only; NO shipped
+   token is modified (T-2 — .section h2 / .section__label are shared).
+   Weights {300, 400} only (T-1 — the live site's single 500 is
+   .section__numeral, which the interludes do not have). Accent is NEVER on
+   narrative prose (Cl-3). Fixed spacing here is from the 4-multiple micro
+   scale {4,8,12,16,20,24,32,48}; section rhythm stays fluid (S-1).
+   ============================================================ */
+
+/* Narrative body — ORIGIN's three beats (02-03's manifesto stanzas reuse it).
+   ~+47% over card copy at the ceiling; prose read at length wants a longer
+   measure (~66ch) and more leading (1.62, T-3). */
+.narr {
+  margin: 0;
+  max-width: 66ch;
+  font: 300 clamp(20px, 1.7vw, 25px) / 1.62 var(--font-body);
+  color: var(--text-body);
+}
+
+/* The narrative LANDING line (the beat that carries the argument): larger and
+   tighter (1.45, T-3). Colour stays --text-body — accent never on prose (Cl-3). */
+.narr--land {
+  font-size: clamp(24px, 2.3vw, 33px);
+  line-height: 1.45;
+}
+
+/* ⚠ The assemble frame forces line-height:1.2 on its direct child as a heading
+   descender guard ([data-reveal-kind='assemble'] > *, specificity 0,1,0).
+   Narrative prose is read at length and needs its T-3 leading, so restore it on
+   the sliding span at higher specificity (0,1,1). Without this the beats would
+   render at 1.2 — the cramped leading Sirio explicitly rejected. */
+.narr > span {
+  line-height: 1.62;
+}
+
+.narr--land > span {
+  line-height: 1.45;
+}
+
+/* Interlude label — 13px (up from the sector labels' 11px), inheriting
+   var(--font-mono), 400, 0.26em and rgba(var(--accent),0.85) from the base
+   .section__label. ⚠ Quieter in HIERARCHY (no numeral), not in LEGIBILITY. */
+.section__label--interlude {
+  font-size: 13px;
+}
+
+/* Vertical rhythm between the three beats — micro tier (4-multiples). */
+.origin__beats {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .pills {
