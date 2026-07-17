@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 Phase: 02 (the-story) — EXECUTING
 Plan: 2 of 5
 Status: Ready to execute
-Last activity: 2026-07-17 -- Phase 02 execution started
+Last activity: 2026-07-17 -- Completed quick task 260717-oj6: Add EndoSense gif to media slot, clickable to iGEM wiki
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -100,6 +100,12 @@ Recent decisions affecting current work:
 [Issues that affect future work]
 
 - ~~Visual theme/aesthetic undecided~~ → RESOLVED 2026-07-16: theme chosen via Claude Design (Sirio Star + V4 Deep Field × Hyperlight). No open blockers.
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260717-oj6 | Add EndoSense gif to media slot, clickable to iGEM wiki | 2026-07-17 | 2ee8a3e | [260717-oj6-add-endosense-gif-to-media-slot-clickabl](./quick/260717-oj6-add-endosense-gif-to-media-slot-clickabl/) |
 
 ## Deferred Items
 
