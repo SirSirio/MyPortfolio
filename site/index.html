@@ -638,6 +638,18 @@
       </footer>
 
     </div>
+
+    <!-- ================= WARP OVERLAY (NAV-03) =================
+         Ported VERBATIM from the approved design snapshot
+         (Sirio V4 - Deep Field x Hyperlight.dc.html:266-269). drawWarp() in
+         main.js paints [data-warpc] only during a warp and clears it when idle;
+         [data-flash] is the bright core pulse at the jump's midpoint. A sibling
+         of [data-field] so it overlays the whole page; pointer-events:none so it
+         never intercepts clicks. -->
+    <div data-warpov style="position:fixed; inset:0; z-index:40; pointer-events:none; opacity:0; transition:opacity 0.35s ease;">
+      <canvas data-warpc style="position:absolute; inset:0; width:100%; height:100%;"></canvas>
+      <div data-flash style="position:absolute; inset:0; opacity:0; background:radial-gradient(circle at 50% 50%, rgba(222,236,255,0.9), rgba(150,196,255,0.25) 45%, rgba(0,0,0,0) 75%);"></div>
+    </div>
   </div>
   <!-- GSAP (vendored locally, no CDN) + the pump-head animation. Classic scripts,
        loaded before the main.js module so the global `gsap` is ready when
