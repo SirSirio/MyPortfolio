@@ -2311,6 +2311,249 @@ section[id] {
 }
 
 /* ============================================================
+   OT-2 DEEP-DIVE OVERLAY (NAV-03, D-05..D-09, D-25, D-27)
+   The full-bleed case-study page the OT-2 card warps into. Preserve-and-extend:
+   it speaks the site's existing dark "engineered bioluminescence" language, with
+   the ENGINEERING-ROOM treatment (D-27) — the blueprint grid comes forward and
+   the starfield recedes. The deep-field engine is already PAUSED behind this
+   overlay (D-20 loop guard), so an opaque, gridded ground both frees the frame
+   budget and stops the frozen starfield showing through.
+
+   ⚠ --accent is REQUIRED here, not polish (Pitfall 6 / styles.css:625-628):
+   without a resolved --accent every accent surface renders transparent with NO
+   console error. It is set to --star-rigel (the cyan technical accent). This is
+   a SECTION-style accent variable ONLY — it must NEVER be added to PAL in
+   star-engine.js (styles.css:13-20), which would re-tint the whole starfield.
+   ============================================================ */
+
+[data-proj="ot2"] {
+  --accent: var(--star-rigel);
+  color: var(--text-body);
+  /* Opaque engineering-room ground: solid base + a faint accent blueprint grid
+     + a soft cyan glow low-left, so the paused starfield never shows through. */
+  background-color: #05070e;
+  background-image:
+    radial-gradient(1100px 620px at 12% 108%, rgba(var(--accent), 0.10), transparent 60%),
+    linear-gradient(to right, rgba(var(--accent), 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(var(--accent), 0.05) 1px, transparent 1px);
+  background-size: auto, 46px 46px, 46px 46px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.proj__inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(28px, 6vw, 88px) clamp(20px, 6vw, 64px) clamp(90px, 14vh, 160px);
+}
+
+/* Return link — the site's mono voice; the accent underline lights on hover. */
+.proj__back {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(var(--accent), 0.85);
+  text-decoration: none;
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.proj__back:hover,
+.proj__back:focus-visible {
+  color: rgba(var(--accent), 1);
+  border-bottom-color: rgba(var(--accent), 0.7);
+}
+.proj__back--foot {
+  margin-top: clamp(28px, 5vw, 52px);
+}
+
+.proj__masthead {
+  margin: clamp(30px, 6vw, 64px) 0 clamp(40px, 8vw, 80px);
+}
+.proj__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(var(--accent), 0.8);
+  margin-bottom: 18px;
+}
+.proj__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(38px, 7vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: var(--text-hi);
+  margin: 0 0 22px;
+}
+.proj__lede {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(18px, 2.4vw, 24px);
+  line-height: 1.5;
+  color: rgba(232, 236, 248, 0.9);
+  max-width: 40ch;
+  margin: 0 0 22px;
+}
+.proj__meta {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  color: rgba(228, 232, 244, 0.55);
+}
+
+/* A case-study section. The mono index + kicker echo the page's section labels. */
+.dd-sec {
+  padding: clamp(34px, 6vw, 64px) 0;
+  border-top: 1px solid rgba(var(--accent), 0.14);
+}
+.dd-sec__head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.dd-sec__n {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: rgba(var(--accent), 0.55);
+}
+.dd-sec__kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(var(--accent), 0.85);
+}
+.dd-sec__h {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 3.6vw, 38px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--text-hi);
+  margin: 0 0 24px;
+  max-width: 24ch;
+}
+.dd-p {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(15.5px, 1.7vw, 18px);
+  line-height: 1.72;
+  color: var(--text-body);
+  margin: 0 0 18px;
+  max-width: 64ch;
+}
+.dd-p strong {
+  color: rgba(232, 236, 248, 0.95);
+  font-weight: 500;
+}
+
+.dd-list {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  max-width: 64ch;
+}
+.dd-list li {
+  position: relative;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(15px, 1.6vw, 17px);
+  line-height: 1.62;
+  color: var(--text-body);
+  padding: 10px 0 10px 26px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.dd-list li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 20px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(var(--accent), 0.8);
+  box-shadow: 0 0 10px rgba(var(--accent), 0.6);
+}
+.dd-list__k {
+  color: rgba(232, 236, 248, 0.95);
+  font-weight: 500;
+}
+
+/* External link — the same accent idiom as .plate__link / .nav__link. */
+.dd-link {
+  color: rgba(var(--accent), 0.95);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(var(--accent), 0.4);
+  white-space: nowrap;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.dd-link:hover,
+.dd-link:focus-visible {
+  color: rgba(var(--accent), 1);
+  border-bottom-color: rgba(var(--accent), 0.9);
+}
+
+/* The CAD-render blueprint plate, standalone (outside the composite flex row). */
+.dd-figure {
+  margin: 8px 0 26px;
+}
+.dd-figure .blueprint {
+  aspect-ratio: 2 / 1;
+}
+
+/* RUN clip — its own modifier so the shipped .media-slot--composite (which the
+   home OT-2 card depends on) is untouched. The timelapse is portrait 9:16 and is
+   shown WHOLE (object-fit:contain), never cropped — mirrors the composite's fix.
+   Base .media-slot stays on the figure so main.js's autoplay contract applies
+   (querySelectorAll('.media-slot video')) and the :has() placeholder switches off. */
+.media-slot--dd-run {
+  aspect-ratio: auto;
+  padding: 16px;
+  background-color: #08090f;
+}
+.media-slot--dd-run > video {
+  height: clamp(320px, 62vh, 560px);
+  width: auto;
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #06070d;
+}
+
+.dd-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(18px, 4vw, 44px);
+  margin: 4px 0 30px;
+}
+.dd-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.dd-stat__n {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(30px, 5vw, 46px);
+  letter-spacing: -0.02em;
+  color: rgba(var(--accent), 0.95);
+  line-height: 1;
+}
+.dd-stat__l {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(228, 232, 244, 0.55);
+  max-width: 20ch;
+}
+
+/* ============================================================
    REDUCED MOTION
    The star still renders — one static, fully-lit gold frame (main.js draws a
    single frame; the engine pins b = 0.72). Motion is replaced, not deleted.
