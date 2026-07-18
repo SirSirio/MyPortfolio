@@ -2416,10 +2416,23 @@ section[id] {
    the wider left track, the hand-built gel-loading SVG anchors the right. */
 .proj__masthead {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.82fr);
   align-items: center;
   gap: clamp(28px, 5vw, 64px);
   margin: clamp(30px, 6vw, 64px) 0 clamp(48px, 9vw, 96px);
+}
+/* Mobile collapse (matches .proj-spotlight / .proj-build): single column so the
+   title uses full width and wraps at word boundaries (never mid-word), and the
+   gel-loading SVG sits below the text at a contained size rather than crushed
+   into a narrow track. */
+@media (max-width: 760px) {
+  .proj__masthead {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .proj__masthead-visual {
+    max-width: 320px;
+  }
 }
 .proj__eyebrow {
   font-family: var(--font-mono);
@@ -2432,11 +2445,14 @@ section[id] {
 .proj__title {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(40px, 6.4vw, 82px);
-  line-height: 1.0;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.02;
   letter-spacing: -0.035em;
   color: var(--text-hi);
   margin: 0 0 22px;
+  /* Safety net: "Electrophoresis" is a long single word; never let it overflow
+     the split title column into the SVG panel at any viewport width. */
+  overflow-wrap: break-word;
 }
 .proj__lede {
   font-family: var(--font-body);
