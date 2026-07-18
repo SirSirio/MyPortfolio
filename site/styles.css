@@ -2329,22 +2329,66 @@ section[id] {
 [data-proj="ot2"] {
   --accent: var(--star-rigel);
   color: var(--text-body);
-  /* Opaque engineering-room ground: solid base + a faint accent blueprint grid
-     + a soft cyan glow low-left, so the paused starfield never shows through. */
+  /* Engineering-room ground as LAYERED DEPTH (not a flat wallpaper grid): a solid
+     dark base, a soft cyan glow up behind the masthead, and a top vignette so the
+     masthead sits on depth. The faint blueprint grid is a vignette-masked backdrop
+     (::before) so it fades at the edges and never reads as an even full-bleed grid.
+     The paused starfield never shows through (opaque base). */
   background-color: #05070e;
   background-image:
-    radial-gradient(1100px 620px at 12% 108%, rgba(var(--accent), 0.10), transparent 60%),
-    linear-gradient(to right, rgba(var(--accent), 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(var(--accent), 0.05) 1px, transparent 1px);
-  background-size: auto, 46px 46px, 46px 46px;
+    radial-gradient(1200px 720px at 80% -8%, rgba(var(--accent), 0.09), transparent 60%),
+    linear-gradient(180deg, rgba(2, 3, 8, 0.92), rgba(2, 3, 8, 0) 20%);
   -webkit-overflow-scrolling: touch;
 }
 
+/* Faint blueprint grid as TEXTURE ONLY — a fixed backdrop masked by a radial
+   vignette so it fades toward the edges and behind the reading column, never a
+   flat even grid. Fixed to the viewport (the overlay is itself position:fixed and
+   sets no transform, so this pins while the content scrolls above it). */
+[data-proj="ot2"]::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(var(--accent), 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(var(--accent), 0.06) 1px, transparent 1px);
+  background-size: 46px 46px, 46px 46px;
+  -webkit-mask-image: radial-gradient(128% 84% at 50% 26%, #000 0%, rgba(0, 0, 0, 0.4) 52%, transparent 84%);
+  mask-image: radial-gradient(128% 84% at 50% 26%, #000 0%, rgba(0, 0, 0, 0.4) 52%, transparent 84%);
+}
+
 .proj__inner {
-  max-width: 860px;
+  position: relative;
+  z-index: 1;   /* sit above the fixed grid backdrop */
+  max-width: 960px;
   margin: 0 auto;
   padding: clamp(28px, 6vw, 88px) clamp(20px, 6vw, 64px) clamp(90px, 14vh, 160px);
 }
+
+/* Ambient nebula glows — large, very soft accent radials that drift down the page
+   with the content (like the landing's section blobs, in the cyan register). They
+   layer under the per-section .section__blob glows to build "deep field with an
+   accent nebula" depth rather than a flat plane. Pure decoration. */
+.proj__atmos {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.proj__glow {
+  position: absolute;
+  width: 60vw;
+  max-width: 760px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--accent), 0.07), rgba(var(--accent), 0) 66%);
+}
+.proj__glow--a { top: 6%;  right: -18%; }
+.proj__glow--b { top: 40%; left: -20%; }
+.proj__glow--c { top: 74%; right: -16%; }
 
 /* Return link — the site's mono voice; the accent underline lights on hover. */
 .proj__back {
@@ -2368,8 +2412,14 @@ section[id] {
   margin-top: clamp(28px, 5vw, 52px);
 }
 
+/* MASTHEAD — asymmetric split (anti-centre, VARIANCE 8): the title column takes
+   the wider left track, the hand-built gel-loading SVG anchors the right. */
 .proj__masthead {
-  margin: clamp(30px, 6vw, 64px) 0 clamp(40px, 8vw, 80px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
+  margin: clamp(30px, 6vw, 64px) 0 clamp(48px, 9vw, 96px);
 }
 .proj__eyebrow {
   font-family: var(--font-mono);
@@ -2382,9 +2432,9 @@ section[id] {
 .proj__title {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(38px, 7vw, 76px);
-  line-height: 1.02;
-  letter-spacing: -0.03em;
+  font-size: clamp(40px, 6.4vw, 82px);
+  line-height: 1.0;
+  letter-spacing: -0.035em;
   color: var(--text-hi);
   margin: 0 0 22px;
 }
@@ -2394,7 +2444,7 @@ section[id] {
   font-size: clamp(18px, 2.4vw, 24px);
   line-height: 1.5;
   color: rgba(232, 236, 248, 0.9);
-  max-width: 40ch;
+  max-width: 42ch;
   margin: 0 0 22px;
 }
 .proj__meta {
@@ -2404,40 +2454,90 @@ section[id] {
   color: rgba(228, 232, 244, 0.55);
 }
 
-/* A case-study section. The mono index + kicker echo the page's section labels. */
-.dd-sec {
-  padding: clamp(34px, 6vw, 64px) 0;
-  border-top: 1px solid rgba(var(--accent), 0.14);
+/* The signature masthead visual — a schematic gel being loaded. Sits in an inset
+   accent-framed panel echoing .device-frame, so the hand-built SVG reads as a
+   framed instrument, on-brand with the site's other hand-built SVG (pump-anim). */
+.proj__masthead-visual {
+  margin: 0;
+  padding: clamp(14px, 2.4vw, 22px);
+  border: 1px solid rgba(var(--accent), 0.24);
+  border-radius: 12px;
+  background-color: #08090f;
+  background-image: radial-gradient(120% 120% at 30% 0%, rgba(var(--accent), 0.08), transparent 62%);
+  box-shadow:
+    inset 0 0 70px rgba(var(--accent), 0.08),
+    0 24px 70px rgba(0, 0, 0, 0.42);
 }
-.dd-sec__head {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  margin-bottom: 18px;
+.gel-motif {
+  display: block;
+  width: 100%;
+  height: auto;
 }
-.dd-sec__n {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  color: rgba(var(--accent), 0.55);
+.gel-motif__frame {
+  stroke: rgba(var(--accent), 0.55);
+  stroke-width: 1.5;
 }
-.dd-sec__kicker {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(var(--accent), 0.85);
+.gel-motif__well {
+  fill: rgba(var(--accent), 0.14);
+  stroke: rgba(var(--accent), 0.8);
+  stroke-width: 1.4;
 }
-.dd-sec__h {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(24px, 3.6vw, 38px);
-  line-height: 1.12;
-  letter-spacing: -0.02em;
+.gel-motif__lane {
+  stroke: rgba(var(--accent), 0.5);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+.gel-motif__band {
+  stroke: rgba(var(--accent), 0.95);
+  stroke-width: 3.4;
+  stroke-linecap: round;
+  filter: none;
+}
+.gel-motif__pip-body {
+  fill: rgba(228, 236, 248, 0.5);
+  stroke: rgba(var(--accent), 0.85);
+  stroke-width: 1.3;
+}
+.gel-motif__pip-tip {
+  fill: rgba(var(--accent), 0.9);
+}
+.gel-motif__drop {
+  fill: rgba(var(--accent), 0.95);
+  opacity: 0;   /* default: no drop mid-air; JS loops it when motion is allowed */
+}
+
+/* A case-study section — reuses the landing section chrome (giant ghost numeral,
+   .section__head label + rule, section-scale h2, positioned accent blob). */
+.proj-sec {
+  position: relative;
+  padding: clamp(48px, 8vw, 96px) 0;
+  border-top: 1px solid rgba(var(--accent), 0.12);
+}
+.proj-sec:first-of-type { border-top: 0; }
+
+/* The overlay's section headline reuses the landing .section h2 scale/weight. */
+[data-proj="ot2"] .proj-sec > h2 {
+  margin: 14px 0 26px;
+  font: 300 clamp(34px, 5vw, 68px) var(--font-display);
+  letter-spacing: -0.035em;
   color: var(--text-hi);
-  margin: 0 0 24px;
-  max-width: 24ch;
+  max-width: 20ch;
 }
+/* The assemble-frame inner span inherits the block/line-height guard from the
+   landing reveal vocabulary; nothing extra needed here. */
+
+/* Positioned accent glow per section, alternating side down the page (reusing the
+   landing .section__blob treatment in the cyan register). */
+.proj-sec__blob {
+  width: 46vw;
+  height: 46vw;
+  max-width: 620px;
+  max-height: 620px;
+  top: 6%;
+}
+.proj-sec__blob--right { right: -16%; }
+.proj-sec__blob--left { left: -16%; }
+.proj-sec__blob--run { left: -10%; top: 20%; }
 .dd-p {
   font-family: var(--font-body);
   font-weight: 300;
@@ -2496,14 +2596,6 @@ section[id] {
 .dd-link:focus-visible {
   color: rgba(var(--accent), 1);
   border-bottom-color: rgba(var(--accent), 0.9);
-}
-
-/* The CAD-render blueprint plate, standalone (outside the composite flex row). */
-.dd-figure {
-  margin: 8px 0 26px;
-}
-.dd-figure .blueprint {
-  aspect-ratio: 2 / 1;
 }
 
 /* ── DEVICE FRAME ─────────────────────────────────────────────
@@ -2571,37 +2663,109 @@ section[id] {
 
 /* ── APPROACH SPOTLIGHT (D-09) ───────────────────────────────
    The design-thinking process is the differentiator that signals "designer,
-   not just programmer". This modifier lifts the APPROACH section out of the
-   plain vertical stack into an asymmetric two-column composition (text-heavy
-   body + the deck-map plate as its visual anchor), with extra breathing room
-   and a brighter top edge — distinct layout weight, VISUAL_DENSITY 3-4. */
-.dd-sec--spotlight {
-  padding-top: clamp(44px, 7vw, 80px);
-  padding-bottom: clamp(44px, 7vw, 80px);
-  border-top: 1px solid rgba(var(--accent), 0.28);
+   not just programmer". Asymmetric two-column composition (text-heavy body +
+   the deck-map plate as its visual anchor). The aside sits on the RIGHT here;
+   BUILD's media offsets to the opposite side, so no two adjacent beats share a
+   layout family (VARIANCE 8, zigzag cap). */
+.proj-sec--spotlight {
+  border-top: 1px solid rgba(var(--accent), 0.24);
 }
-.dd-spotlight {
+.proj-spotlight {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   gap: clamp(24px, 4vw, 52px);
   align-items: start;
 }
-.dd-spotlight__body > .dd-p:last-child {
+.proj-spotlight__body > .dd-p:last-child {
   margin-bottom: 0;
 }
-.dd-spotlight__aside {
+.proj-spotlight__aside {
   position: sticky;
   top: 24px;
   margin: 0;
 }
 @media (max-width: 860px) {
-  .dd-spotlight {
+  .proj-spotlight {
     grid-template-columns: 1fr;
   }
-  .dd-spotlight__aside {
+  .proj-spotlight__aside {
     position: static;
     order: -1;   /* deck-map leads on narrow screens, then the reasoning */
   }
+}
+
+/* ── BUILD layout diversification ────────────────────────────
+   Two asymmetric text+media pairings (intro before-visual on the RIGHT, protocol
+   UI on the RIGHT but narrower) framing a full-width assembly figure — so BUILD
+   does not read as one long centred stack. */
+.proj-build__intro,
+.proj-build__protocol {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: clamp(22px, 4vw, 48px);
+  align-items: center;
+  margin: 8px 0 26px;
+}
+.proj-build__intro-text > .dd-p:last-child,
+.proj-build__protocol-text > .dd-p:last-child {
+  margin-bottom: 0;
+}
+.proj-build__before,
+.proj-build__ui {
+  margin: 0;
+  align-self: center;
+}
+@media (max-width: 860px) {
+  .proj-build__intro,
+  .proj-build__protocol {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── ASSEMBLY figure — the "machine assembles itself" beat ────
+   A distinct full-width figure: a schematic OT-2 deck plan (draws itself on
+   scroll) with the four CAD renders assembling onto it. GSAP owns the motion;
+   the default state (no JS / reduced motion) shows the plan fully drawn and the
+   renders in place. */
+.proj-assembly {
+  margin: 8px 0 30px;
+}
+.ot2-deck {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 14px;
+}
+.ot2-deck__line {
+  stroke: rgba(var(--accent), 0.55);
+  stroke-width: 1.5;
+  fill: rgba(var(--accent), 0.03);
+}
+.proj-assembly .blueprint {
+  aspect-ratio: 2 / 1;
+}
+
+/* ── RUN — cinematic near-full-bleed band (the biggest visual beat, D-11) ──
+   The timelapse breaks out wider than the reading column and is framed with the
+   engineering glow. */
+/* Break out wider than the reading column WITHOUT a CSS transform (GSAP owns the
+   figure's transform for the scrubbed lift-in; a translateX here would be clobbered
+   the moment GSAP writes y/scale). margin-left centres the wider band on the column. */
+.proj-sec--run .proj-run__figure {
+  width: min(94vw, 1120px);
+  margin-left: calc(50% - min(47vw, 560px));
+  border: 1px solid rgba(var(--accent), 0.22);
+  border-radius: 16px;
+  box-shadow:
+    inset 0 0 90px rgba(var(--accent), 0.08),
+    0 30px 90px rgba(0, 0, 0, 0.5);
+}
+
+/* will-change only on the handful of GSAP-animated elements (R-01). */
+[data-proj="ot2"] .blueprint__part,
+.gel-motif__pipette,
+.gel-motif__drop {
+  will-change: transform;
 }
 
 /* RUN clip — its own modifier so the shipped .media-slot--composite (which the
@@ -2623,32 +2787,45 @@ section[id] {
   background: #06070d;
 }
 
-.dd-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(18px, 4vw, 44px);
-  margin: 4px 0 30px;
+/* OUTCOME — bold display-number row (reuses the landing's big-number energy in
+   the cyan register). Three tiles, each a large --accent number over a mono
+   label, divided by hairlines. The numbers get a scrubbed emphasis via GSAP. */
+.ot2-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 40px);
+  margin: 12px 0 34px;
 }
-.dd-stat {
+.ot2-stat {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
+  padding: clamp(16px, 2.4vw, 26px) 0 0;
+  border-top: 1px solid rgba(var(--accent), 0.28);
 }
-.dd-stat__n {
+.ot2-stat__n {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(30px, 5vw, 46px);
-  letter-spacing: -0.02em;
-  color: rgba(var(--accent), 0.95);
-  line-height: 1;
+  font-size: clamp(44px, 8vw, 92px);
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  color: rgba(var(--accent), 0.96);
+  text-shadow: 0 0 34px rgba(var(--accent), 0.28);
 }
-.dd-stat__l {
+.ot2-stat__l {
   font-family: var(--font-mono);
   font-size: 11.5px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: rgba(228, 232, 244, 0.55);
-  max-width: 20ch;
+  max-width: 22ch;
+  line-height: 1.5;
+}
+@media (max-width: 680px) {
+  .ot2-stats {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
 
 /* ============================================================

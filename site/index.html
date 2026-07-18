@@ -668,91 +668,178 @@
          midpoint. EVERY factual claim traces to ../00_Profile/profile.md or the
          DALSA report; the protocol is described by what it DOES, never a line count. -->
     <div data-proj="ot2" data-accent="96,214,255" data-pos="0.02" class="proj"
-         style="position:fixed; inset:0; z-index:30; overflow:auto; visibility:hidden; opacity:0;">
+         style="position:fixed; inset:0; z-index:30; overflow-x:hidden; overflow-y:auto; visibility:hidden; opacity:0;">
       <div data-proj-inner class="proj__inner" style="min-height:100%; will-change:transform,opacity,filter; transform-origin:50% 42%;">
+
+        <!-- Atmosphere layer (D-27 engineering room). Three positioned accent
+             glows down the page + a vignette-masked faint grid, so the ground reads
+             as a deep field with a cyan nebula rather than a flat blueprint grid.
+             Pointer-events:none, aria-hidden — pure depth, no content. -->
+        <div class="proj__atmos" aria-hidden="true">
+          <span class="proj__glow proj__glow--a"></span>
+          <span class="proj__glow proj__glow--b"></span>
+          <span class="proj__glow proj__glow--c"></span>
+        </div>
 
         <a data-close href="#work" class="proj__back">&#8592;&nbsp;back to work</a>
 
+        <!-- MASTHEAD — asymmetric split (design-taste VARIANCE 8, anti-centre):
+             title column on the left, a signature hand-built "gel-loading" SVG
+             motif on the right. The motif echoes the site's own hand-built
+             pump-anim SVG (brand consistency, the ONE sanctioned hand-rolled SVG),
+             transform/opacity + stroke-dashoffset only. It renders in its final
+             drawn state by default (static, complete under reduced motion / no JS);
+             initOt2Motion() draws the lanes on and loops the pipette when motion
+             is allowed. -->
         <header class="proj__masthead">
-          <div class="proj__eyebrow">lab automation · DALSA (DTU Arena for Life Science Automation) · 2025</div>
-          <h1 class="proj__title">Automated Gel Electrophoresis</h1>
-          <p class="proj__lede">A design-thinking project that hands the lab's most repetitive verification step &mdash; loading a gel by hand &mdash; to an Opentrons OT-2 liquid-handling robot, without giving up the flexibility and low cost of a slab gel.</p>
-          <div class="proj__meta">6-month solo project &middot; DTU Bioengineering &middot; graded&nbsp;12/12</div>
+          <div class="proj__masthead-text">
+            <div data-reveal="0" class="proj__eyebrow">lab automation · DALSA (DTU Arena for Life Science Automation) · 2025</div>
+            <h1 data-reveal="1" class="proj__title">Automated Gel Electrophoresis</h1>
+            <p data-reveal="2" class="proj__lede">A design-thinking project that hands the lab's most repetitive verification step &mdash; loading a gel by hand &mdash; to an Opentrons OT-2 liquid-handling robot, without giving up the flexibility and low cost of a slab gel.</p>
+            <div data-reveal="3" class="proj__meta">6-month solo project &middot; DTU Bioengineering &middot; graded&nbsp;12/12</div>
+          </div>
+          <figure class="proj__masthead-visual" aria-hidden="true">
+            <svg class="gel-motif" viewBox="0 0 420 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic of a gel being loaded — a pipette dispensing sample into a row of wells, each lane running its bands down the gel">
+              <!-- gel cassette outline -->
+              <rect class="gel-motif__frame" x="34" y="60" width="352" height="210" rx="10"/>
+              <!-- comb / well row -->
+              <g class="gel-motif__wells">
+                <rect class="gel-motif__well" x="60" y="78" width="34" height="16" rx="3"/>
+                <rect class="gel-motif__well" x="110" y="78" width="34" height="16" rx="3"/>
+                <rect class="gel-motif__well" x="160" y="78" width="34" height="16" rx="3"/>
+                <rect class="gel-motif__well" x="210" y="78" width="34" height="16" rx="3"/>
+                <rect class="gel-motif__well" x="260" y="78" width="34" height="16" rx="3"/>
+                <rect class="gel-motif__well" x="310" y="78" width="34" height="16" rx="3"/>
+              </g>
+              <!-- lanes: each well runs a trace down the gel (draw-on targets) -->
+              <g class="gel-motif__lanes">
+                <path class="gel-motif__lane" d="M77 96 L77 256"/>
+                <path class="gel-motif__lane" d="M127 96 L127 256"/>
+                <path class="gel-motif__lane" d="M177 96 L177 256"/>
+                <path class="gel-motif__lane" d="M227 96 L227 256"/>
+                <path class="gel-motif__lane" d="M277 96 L277 256"/>
+                <path class="gel-motif__lane" d="M327 96 L327 256"/>
+              </g>
+              <!-- migration bands: dashes sitting on the lanes at staggered depths -->
+              <g class="gel-motif__bands">
+                <line class="gel-motif__band" x1="68" y1="138" x2="86" y2="138"/>
+                <line class="gel-motif__band" x1="118" y1="170" x2="136" y2="170"/>
+                <line class="gel-motif__band" x1="168" y1="150" x2="186" y2="150"/>
+                <line class="gel-motif__band" x1="218" y1="196" x2="236" y2="196"/>
+                <line class="gel-motif__band" x1="268" y1="160" x2="286" y2="160"/>
+                <line class="gel-motif__band" x1="318" y1="182" x2="336" y2="182"/>
+              </g>
+              <!-- pipette tip descending over lane 4 (the loop target) -->
+              <g class="gel-motif__pipette">
+                <path class="gel-motif__pip-body" d="M227 8 L237 8 L233 44 L231 44 Z"/>
+                <path class="gel-motif__pip-tip" d="M231 44 L233 44 L232.4 56 L231.6 56 Z"/>
+              </g>
+              <circle class="gel-motif__drop" cx="232" cy="60" r="3.4"/>
+            </svg>
+          </figure>
         </header>
 
-        <!-- 1 — PROBLEM (problem-first, framed from report §1.1-1.2). -->
-        <section class="dd-sec">
-          <div class="dd-sec__head">
-            <span class="dd-sec__n">01</span>
-            <span class="dd-sec__kicker">the problem</span>
+        <!-- 01 — PROBLEM (problem-first, framed from report §1.1-1.2). Reuses the
+             landing section chrome: giant ghost .section__numeral, .section__head
+             with .section__label(+--intro) + draw-on .section__rule, .section-scale
+             h2, and a positioned .section__blob accent glow. -->
+        <section class="proj-sec" data-proj-sec>
+          <span aria-hidden="true" class="section__numeral section__numeral--right">01</span>
+          <div class="section__blob proj-sec__blob proj-sec__blob--right"></div>
+          <div class="section__head">
+            <span data-reveal="0" class="section__label section__label--intro">the problem</span>
+            <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 class="dd-sec__h">A verification step almost every experiment passes through &mdash; still loaded by hand.</h2>
-          <p class="dd-p">Gel electrophoresis is one of the most established techniques in molecular biology. It is rarely the endpoint; it is the quality-control gate &mdash; confirming a PCR worked, checking a digest, sizing and reading off fragments. Almost every experiment passes through it.</p>
-          <p class="dd-p">But loading a gel means pipetting sample after sample into a row of tiny wells, by hand. It is repetitive, slow, physically fatiguing, and easy to get wrong &mdash; and it scales badly: the more samples, the worse it gets. It is one of the clearest examples of low-value manual work standing between a researcher and the science itself.</p>
-          <p class="dd-p">The friction is worst exactly where budgets are tightest &mdash; academic labs, start-ups and small biotech teams. Closed, cartridge-based systems can automate it, but they are expensive and rigid; manual slab gels stay cheap and flexible. Between those two extremes sits a gap, and that gap is where this project lives.</p>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span>A verification step almost every experiment passes through &mdash; still loaded by hand.</span></h2>
+          <p data-reveal="1" class="dd-p">Gel electrophoresis is one of the most established techniques in molecular biology. It is rarely the endpoint; it is the quality-control gate &mdash; confirming a PCR worked, checking a digest, sizing and reading off fragments. Almost every experiment passes through it.</p>
+          <p data-reveal="2" class="dd-p">But loading a gel means pipetting sample after sample into a row of tiny wells, by hand. It is repetitive, slow, physically fatiguing, and easy to get wrong &mdash; and it scales badly: the more samples, the worse it gets. It is one of the clearest examples of low-value manual work standing between a researcher and the science itself.</p>
+          <p data-reveal="3" class="dd-p">The friction is worst exactly where budgets are tightest &mdash; academic labs, start-ups and small biotech teams. Closed, cartridge-based systems can automate it, but they are expensive and rigid; manual slab gels stay cheap and flexible. Between those two extremes sits a gap, and that gap is where this project lives.</p>
         </section>
 
-        <!-- 2 — APPROACH (its own design-thinking spotlight, D-09).
-             .dd-sec--spotlight lifts this into an asymmetric two-column
-             composition (reasoning body + the deck-map plate as visual anchor)
-             so the design-thinking process reads as the differentiator. -->
-        <section class="dd-sec dd-sec--spotlight">
-          <div class="dd-sec__head">
-            <span class="dd-sec__n">02</span>
-            <span class="dd-sec__kicker">the approach</span>
+        <!-- 02 — APPROACH (its own design-thinking spotlight, D-09). Asymmetric
+             two-column: reasoning body + the deck-map plate as sticky visual anchor.
+             The aside sits on the RIGHT here; layout alternates down the page. -->
+        <section class="proj-sec proj-sec--spotlight" data-proj-sec>
+          <span aria-hidden="true" class="section__numeral section__numeral--left">02</span>
+          <div class="section__blob proj-sec__blob proj-sec__blob--left"></div>
+          <div class="section__head">
+            <span data-reveal="0" class="section__label section__label--intro">the approach</span>
+            <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 class="dd-sec__h">Understand the real problem before designing anything.</h2>
-          <div class="dd-spotlight">
-            <div class="dd-spotlight__body">
-              <p class="dd-p">The whole project ran on the <strong>Double Diamond</strong> design process &mdash; Discover, Define, Develop, Deliver &mdash; deliberately exploring the problem before converging on a solution, so the design answered a real need rather than a guessed one.</p>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span>Understand the real problem before designing anything.</span></h2>
+          <div class="proj-spotlight">
+            <div class="proj-spotlight__body">
+              <p data-reveal="1" class="dd-p">The whole project ran on the <strong>Double Diamond</strong> design process &mdash; Discover, Define, Develop, Deliver &mdash; deliberately exploring the problem before converging on a solution, so the design answered a real need rather than a guessed one.</p>
               <ul class="dd-list">
-                <li><span class="dd-list__k">Stakeholder analysis</span> &mdash; a Power &times; Interest map that put the lab workforce &mdash; researchers, PhD candidates and students &mdash; at the centre, as the people who feel the friction every day.</li>
-                <li><span class="dd-list__k">Semi-structured interviews</span> with that workforce, which surfaced a clear split: people who run a handful of gels occasionally (for whom manual is already fine), and people who run them daily at twenty to a hundred-plus samples &mdash; for whom loading is a genuine bottleneck.</li>
-                <li><span class="dd-list__k">A market survey of 19 systems</span> &mdash; 12 general lab-automation platforms and 7 dedicated electrophoresis systems &mdash; mapping the landscape and pinpointing the gap between fully manual slab gels and expensive closed cartridge machines.</li>
+                <li data-reveal="2"><span class="dd-list__k">Stakeholder analysis</span> &mdash; a Power &times; Interest map that put the lab workforce &mdash; researchers, PhD candidates and students &mdash; at the centre, as the people who feel the friction every day.</li>
+                <li data-reveal="3"><span class="dd-list__k">Semi-structured interviews</span> with that workforce, which surfaced a clear split: people who run a handful of gels occasionally (for whom manual is already fine), and people who run them daily at twenty to a hundred-plus samples &mdash; for whom loading is a genuine bottleneck.</li>
+                <li data-reveal="4"><span class="dd-list__k">A market survey of 19 systems</span> &mdash; 12 general lab-automation platforms and 7 dedicated electrophoresis systems &mdash; mapping the landscape and pinpointing the gap between fully manual slab gels and expensive closed cartridge machines.</li>
               </ul>
-              <p class="dd-p">That synthesis became an innovation brief with one clear direction: selectively automate the most repetitive, error-prone steps &mdash; sample handling and gel loading &mdash; while keeping the slab gel's familiar, low-cost, flexible workflow intact. The work was carried out solo at <a class="dd-link" href="https://dalsa.dtu.dk/" target="_blank" rel="noopener">DALSA&nbsp;&#8599;</a>, DTU's Arena for Life Science Automation.</p>
+              <p data-reveal="5" class="dd-p">That synthesis became an innovation brief with one clear direction: selectively automate the most repetitive, error-prone steps &mdash; sample handling and gel loading &mdash; while keeping the slab gel's familiar, low-cost, flexible workflow intact. The work was carried out solo at <a class="dd-link" href="https://dalsa.dtu.dk/" target="_blank" rel="noopener">DALSA&nbsp;&#8599;</a>, DTU's Arena for Life Science Automation.</p>
             </div>
             <!-- First-party deck-allocation map (Sirio's own protocol deck layout);
                  the device-frame seats the opaque-white PNG on the dark ground. -->
-            <figure class="device-frame dd-spotlight__aside">
+            <figure data-reveal="1" class="device-frame proj-spotlight__aside">
               <img src="./assets/media/ot2-slots-allocation.png" alt="Sirio's OT-2 deck allocation map for the gel-electrophoresis protocol — the plan for where each rack, reagent and gel tray sits on the robot deck">
               <figcaption class="device-frame__cap">deck layout &mdash; where each rack and reagent lands on the OT-2</figcaption>
             </figure>
           </div>
         </section>
 
-        <!-- 3 — BUILD (the parts + protocol; NEVER a line count, D-10). -->
-        <section class="dd-sec">
-          <div class="dd-sec__head">
-            <span class="dd-sec__n">03</span>
-            <span class="dd-sec__kicker">the build</span>
+        <!-- 03 — BUILD (the parts + protocol; NEVER a line count, D-10). The CAD
+             parts stagger-assemble on scroll (GSAP), reading as parts coming
+             together on the deck; a schematic deck-plan draws itself in first. -->
+        <section class="proj-sec" data-proj-sec data-ot2-build>
+          <span aria-hidden="true" class="section__numeral section__numeral--right">03</span>
+          <div class="section__blob proj-sec__blob proj-sec__blob--right"></div>
+          <div class="section__head">
+            <span data-reveal="0" class="section__label section__label--intro">the build</span>
+            <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 class="dd-sec__h">Five 3D-printed parts and a custom protocol on the OT-2.</h2>
-          <!-- BEFORE-VISUAL — TEMPORARY, UNCLEARED PLACEHOLDER (owner override).
-               Source: the Opentrons OT-2 manufacturer render in the source-media
-               folder (full provenance in ./assets/media/README.md). Shipped by
-               Sirio's informed decision as a stop-gap "what I started with" beat;
-               R-02 (no uncleared vendor render) is consciously WAIVED for this asset
-               only. REPLACE with a cleared first-party bench photo or a licensed
-               image — drop the new file over ./assets/media/ot2-platform-stock.png
-               (one-line swap, MEDIA-01). -->
-          <figure class="device-frame device-frame--before">
-            <img src="./assets/media/ot2-platform-stock.png" alt="An off-the-shelf Opentrons OT-2 liquid-handling robot — the general-purpose platform this build starts from">
-            <figcaption class="device-frame__cap">the starting point &mdash; a stock, general-purpose OT-2 liquid handler</figcaption>
-          </figure>
-          <p class="dd-p">The first prototype was a fully custom gel-casting cassette designed in the Fusion360 CAD tool with 3D-printed combs. It was abandoned when the comb spacing could not be reconciled with standard PCR-strip geometry &mdash; a manufacturability wall. That failure pointed to a more robust route: integrating the existing RunOne MultiCaster casting system directly onto the robot's deck.</p>
-          <p class="dd-p">From there, five parts were designed in Fusion360, each with interlocking cubic mating features so they seat repeatably on the deck:</p>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span>Five 3D-printed parts and a custom protocol on the OT-2.</span></h2>
+
+          <!-- BUILD lede + before-visual paired asymmetrically: text left, the
+               "starting point" render offset right (not a centred stack). -->
+          <div class="proj-build__intro">
+            <div class="proj-build__intro-text">
+              <!-- BEFORE-VISUAL — TEMPORARY, UNCLEARED PLACEHOLDER (owner override).
+                   Source: the Opentrons OT-2 manufacturer render in the source-media
+                   folder (full provenance in ./assets/media/README.md). Shipped by
+                   Sirio's informed decision as a stop-gap "what I started with" beat;
+                   R-02 (no uncleared vendor render) is consciously WAIVED for this asset
+                   only. REPLACE with a cleared first-party bench photo or a licensed
+                   image — drop the new file over ./assets/media/ot2-platform-stock.png
+                   (one-line swap, MEDIA-01). -->
+              <p data-reveal="1" class="dd-p">The first prototype was a fully custom gel-casting cassette designed in the Fusion360 CAD tool with 3D-printed combs. It was abandoned when the comb spacing could not be reconciled with standard PCR-strip geometry &mdash; a manufacturability wall. That failure pointed to a more robust route: integrating the existing RunOne MultiCaster casting system directly onto the robot's deck.</p>
+            </div>
+            <figure data-reveal="1" class="device-frame device-frame--before proj-build__before">
+              <img src="./assets/media/ot2-platform-stock.png" alt="An off-the-shelf Opentrons OT-2 liquid-handling robot — the general-purpose platform this build starts from">
+              <figcaption class="device-frame__cap">the starting point &mdash; a stock, general-purpose OT-2 liquid handler</figcaption>
+            </figure>
+          </div>
+
+          <p data-reveal="1" class="dd-p">From there, five parts were designed in Fusion360, each with interlocking cubic mating features so they seat repeatably on the deck:</p>
           <ul class="dd-list">
-            <li><span class="dd-list__k">OT-2 deck adapter</span> &mdash; the mechanical interface between the MultiCaster and the robot's deck.</li>
-            <li><span class="dd-list__k">Three PCR strip racks</span> &mdash; positions 1&ndash;48, permanently labelled for unambiguous loading.</li>
-            <li><span class="dd-list__k">Loading-buffer &amp; ladder rack</span> &mdash; holding reagents where the protocol expects them.</li>
-            <li><span class="dd-list__k">Rack holder</span> &mdash; locating the racks precisely on the deck.</li>
+            <li data-reveal="2"><span class="dd-list__k">OT-2 deck adapter</span> &mdash; the mechanical interface between the MultiCaster and the robot's deck.</li>
+            <li data-reveal="3"><span class="dd-list__k">Three PCR strip racks</span> &mdash; positions 1&ndash;48, permanently labelled for unambiguous loading.</li>
+            <li data-reveal="4"><span class="dd-list__k">Loading-buffer &amp; ladder rack</span> &mdash; holding reagents where the protocol expects them.</li>
+            <li data-reveal="5"><span class="dd-list__k">Rack holder</span> &mdash; locating the racks precisely on the deck.</li>
           </ul>
-          <!-- The CAD renders on the shipped .blueprint plate (styles.css:1740) —
-               a dedicated wrapper, NOT .media-slot, because these imgs live inside
-               .blueprint (grandchildren) and the media-slot :has() placeholder test
-               would keep striping behind them. -->
-          <figure class="dd-figure">
+
+          <!-- Assembly figure (distinct full-width beat): a schematic OT-2 deck
+               plan draws itself on scroll (stroke-dashoffset), then the four CAD
+               renders assemble onto it, part by part (GSAP stagger). The renders
+               sit on the shipped .blueprint plate; they are children of .blueprint,
+               NOT .media-slot, so the :has() placeholder never stripes behind them. -->
+          <figure class="proj-assembly" data-ot2-assembly>
+            <svg class="ot2-deck" data-ot2-deck viewBox="0 0 600 150" fill="none" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic plan of the OT-2 deck with the five printed parts seated in their slots">
+              <rect class="ot2-deck__line" x="8" y="8" width="584" height="134" rx="8"/>
+              <rect class="ot2-deck__line" x="34" y="34" width="150" height="82" rx="4"/>
+              <rect class="ot2-deck__line" x="200" y="34" width="90" height="82" rx="4"/>
+              <rect class="ot2-deck__line" x="306" y="34" width="90" height="82" rx="4"/>
+              <rect class="ot2-deck__line" x="412" y="34" width="90" height="82" rx="4"/>
+              <rect class="ot2-deck__line" x="518" y="34" width="48" height="82" rx="4"/>
+            </svg>
             <div class="blueprint">
               <img class="blueprint__part" src="./assets/media/ot2-part-adapter.png" alt="CAD render of the 3D-printed adapter Sirio designed for the OT-2 deck">
               <img class="blueprint__part" src="./assets/media/ot2-part-pcr-strip-racks.png" alt="CAD render of Sirio's 3D-printed PCR strip racks">
@@ -760,29 +847,40 @@
               <img class="blueprint__part" src="./assets/media/ot2-part-rack-holder.png" alt="CAD render of the 3D-printed rack holder Sirio designed">
             </div>
           </figure>
-          <p class="dd-p">A custom Opentrons OT-2 protocol drives the run. Rather than a fixed script, it is parameterised &mdash; the operator chooses how many strips, what volume, whether loading buffer and a molecular-weight ladder are included. Under the hood it loads a split strip across half a column at a time, uses an air-gap dispensing strategy to keep small volumes intact, and lifts the tip slowly out of each well so the sample settles cleanly into its lane.</p>
-          <!-- First-party screenshot of Sirio's parameterised-run interface (D-14 —
-               what the protocol DOES, not how long it is). Portrait 371×888, shown
-               whole via .device-frame--portrait (object-fit:contain, never cropped). -->
-          <figure class="device-frame device-frame--portrait">
-            <img src="./assets/media/ot2-ui-runner.png" alt="The parameterised-run interface of Sirio's OT-2 protocol — the operator sets the number of strips, the volume, and whether a loading buffer and a molecular-weight ladder are included before the run">
-            <figcaption class="device-frame__cap">the parameterised run &mdash; strips, volume, buffer and ladder, chosen before the robot starts</figcaption>
-          </figure>
+
+          <!-- Protocol beat: text left, the parameterised-run UI (371×888 portrait)
+               offset opposite — not a centred stack. -->
+          <div class="proj-build__protocol">
+            <div class="proj-build__protocol-text">
+              <p data-reveal="1" class="dd-p">A custom Opentrons OT-2 protocol drives the run. Rather than a fixed script, it is parameterised &mdash; the operator chooses how many strips, what volume, whether loading buffer and a molecular-weight ladder are included. Under the hood it loads a split strip across half a column at a time, uses an air-gap dispensing strategy to keep small volumes intact, and lifts the tip slowly out of each well so the sample settles cleanly into its lane.</p>
+            </div>
+            <!-- First-party screenshot of Sirio's parameterised-run interface (D-14 —
+                 what the protocol DOES, not how long it is). Shown whole via
+                 .device-frame--portrait (object-fit:contain, never cropped). -->
+            <figure data-reveal="1" class="device-frame device-frame--portrait proj-build__ui">
+              <img src="./assets/media/ot2-ui-runner.png" alt="The parameterised-run interface of Sirio's OT-2 protocol — the operator sets the number of strips, the volume, and whether a loading buffer and a molecular-weight ladder are included before the run">
+              <figcaption class="device-frame__cap">the parameterised run &mdash; strips, volume, buffer and ladder, chosen before the robot starts</figcaption>
+            </figure>
+          </div>
         </section>
 
-        <!-- 4 — RUN (the real timelapse — the signature automation motion, D-11). -->
-        <section class="dd-sec">
-          <div class="dd-sec__head">
-            <span class="dd-sec__n">04</span>
-            <span class="dd-sec__kicker">the run</span>
+        <!-- 04 — RUN (the real timelapse — the signature automation motion, D-11).
+             A cinematic near-full-bleed band: the single biggest visual beat,
+             framed with the engineering glow. -->
+        <section class="proj-sec proj-sec--run" data-proj-sec data-ot2-run>
+          <span aria-hidden="true" class="section__numeral section__numeral--left">04</span>
+          <div class="section__blob proj-sec__blob proj-sec__blob--run"></div>
+          <div class="section__head">
+            <span data-reveal="0" class="section__label section__label--intro">the run</span>
+            <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 class="dd-sec__h">The robot doing the loading, so a person doesn't have to.</h2>
-          <p class="dd-p">This is the prototype running the real protocol in the DTU lab &mdash; the OT-2 working across the green 3D-printed racks, the pink PCR strip racks and a blue gel tray, placing sample after sample without a hand on a pipette.</p>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span>The robot doing the loading, so a person doesn't have to.</span></h2>
+          <p data-reveal="1" class="dd-p">This is the prototype running the real protocol in the DTU lab &mdash; the OT-2 working across the green 3D-printed racks, the pink PCR strip racks and a blue gel tray, placing sample after sample without a hand on a pipette.</p>
           <!-- No `autoplay` (MOTION-02): main.js starts every .media-slot video only
                when prefers-reduced-motion is NOT set; otherwise the poster stands in
                and `controls` are added. Same first-party, committed, relative asset
                as the home card. -->
-          <figure class="media-slot media-slot--dd-run" data-label="[ project video ]">
+          <figure class="media-slot media-slot--dd-run proj-run__figure" data-label="[ project video ]">
             <video src="./assets/media/ot2-timelapse.mp4"
                    poster="./assets/media/ot2-timelapse-poster.jpg"
                    muted loop playsinline
@@ -790,20 +888,32 @@
           </figure>
         </section>
 
-        <!-- 5 — OUTCOME + FUTURE (real numbers + report §4 perspectives). -->
-        <section class="dd-sec">
-          <div class="dd-sec__head">
-            <span class="dd-sec__n">05</span>
-            <span class="dd-sec__kicker">the outcome</span>
+        <!-- 05 — OUTCOME + FUTURE (real numbers + report §4 perspectives). The
+             three results become a bold display-number row with --accent treatment. -->
+        <section class="proj-sec" data-proj-sec data-ot2-outcome>
+          <span aria-hidden="true" class="section__numeral section__numeral--right">05</span>
+          <div class="section__blob proj-sec__blob proj-sec__blob--right"></div>
+          <div class="section__head">
+            <span data-reveal="0" class="section__label section__label--intro">the outcome</span>
+            <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 class="dd-sec__h">A working prototype &mdash; and a clear next iteration.</h2>
-          <div class="dd-stats">
-            <div class="dd-stat"><span class="dd-stat__n">144</span><span class="dd-stat__l">samples per run &mdash; 3 gels &times; 48</span></div>
-            <div class="dd-stat"><span class="dd-stat__n">~10 min</span><span class="dd-stat__l">per gel, tested and functional</span></div>
-            <div class="dd-stat"><span class="dd-stat__n">12/12</span><span class="dd-stat__l">final grade</span></div>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span>A working prototype &mdash; and a clear next iteration.</span></h2>
+          <div class="ot2-stats">
+            <div data-reveal="1" class="ot2-stat">
+              <span class="ot2-stat__n" data-ot2-stat>144</span>
+              <span class="ot2-stat__l">samples per run &mdash; 3 gels &times; 48</span>
+            </div>
+            <div data-reveal="2" class="ot2-stat">
+              <span class="ot2-stat__n" data-ot2-stat>~10 min</span>
+              <span class="ot2-stat__l">per gel, tested and functional</span>
+            </div>
+            <div data-reveal="3" class="ot2-stat">
+              <span class="ot2-stat__n" data-ot2-stat>12/12</span>
+              <span class="ot2-stat__l">final grade</span>
+            </div>
           </div>
-          <p class="dd-p">The prototype was tested and confirmed working: up to 144 samples per run across three gels, at about ten minutes per gel &mdash; keeping the slab gel's low cost and flexibility while taking the repetitive pipetting off a person's hands.</p>
-          <p class="dd-p">Because it is a prototype, the report closes on where it goes next: structured feedback from operators after repeated runs; magnetic or self-guiding (V-groove) mating features to make the parts assemble faster and more repeatably; a modified comb with a dedicated ladder lane; support for multiple gel sizes; automated dispensing of the covering buffer; and short calibration and dry-run checks so the robot verifies its own alignment before a run.</p>
+          <p data-reveal="4" class="dd-p">The prototype was tested and confirmed working: up to 144 samples per run across three gels, at about ten minutes per gel &mdash; keeping the slab gel's low cost and flexibility while taking the repetitive pipetting off a person's hands.</p>
+          <p data-reveal="5" class="dd-p">Because it is a prototype, the report closes on where it goes next: structured feedback from operators after repeated runs; magnetic or self-guiding (V-groove) mating features to make the parts assemble faster and more repeatably; a modified comb with a dedicated ladder lane; support for multiple gel sizes; automated dispensing of the covering buffer; and short calibration and dry-run checks so the robot verifies its own alignment before a run.</p>
           <a data-close href="#work" class="proj__back proj__back--foot">&#8592;&nbsp;back to work</a>
         </section>
 
@@ -812,8 +922,13 @@
   </div>
   <!-- GSAP (vendored locally, no CDN) + the pump-head animation. Classic scripts,
        loaded before the main.js module so the global `gsap` is ready when
-       pump-anim.js self-inits. pump-anim.js is inert without #pump-anim. -->
+       pump-anim.js self-inits. pump-anim.js is inert without #pump-anim.
+       ScrollTrigger (also vendored, pinned to the SAME 3.15.0 as core) attaches
+       window.ScrollTrigger for the OT-2 deep-dive scroll-telling (main.js's
+       initOt2Motion). It needs gsap core loaded first, so it sits after
+       gsap.min.js and before the main.js module. Exactly ONE gsap-core tag. -->
   <script src="./assets/vendor/gsap.min.js"></script>
+  <script src="./assets/vendor/ScrollTrigger.min.js"></script>
   <script src="./pump-anim.js"></script>
   <script type="module" src="./main.js"></script>
 </body>
