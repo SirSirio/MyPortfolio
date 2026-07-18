@@ -692,20 +692,33 @@
           <p class="dd-p">The friction is worst exactly where budgets are tightest &mdash; academic labs, start-ups and small biotech teams. Closed, cartridge-based systems can automate it, but they are expensive and rigid; manual slab gels stay cheap and flexible. Between those two extremes sits a gap, and that gap is where this project lives.</p>
         </section>
 
-        <!-- 2 — APPROACH (its own design-thinking spotlight, D-09). -->
-        <section class="dd-sec">
+        <!-- 2 — APPROACH (its own design-thinking spotlight, D-09).
+             .dd-sec--spotlight lifts this into an asymmetric two-column
+             composition (reasoning body + the deck-map plate as visual anchor)
+             so the design-thinking process reads as the differentiator. -->
+        <section class="dd-sec dd-sec--spotlight">
           <div class="dd-sec__head">
             <span class="dd-sec__n">02</span>
             <span class="dd-sec__kicker">the approach</span>
           </div>
           <h2 class="dd-sec__h">Understand the real problem before designing anything.</h2>
-          <p class="dd-p">The whole project ran on the <strong>Double Diamond</strong> design process &mdash; Discover, Define, Develop, Deliver &mdash; deliberately exploring the problem before converging on a solution, so the design answered a real need rather than a guessed one.</p>
-          <ul class="dd-list">
-            <li><span class="dd-list__k">Stakeholder analysis</span> &mdash; a Power &times; Interest map that put the lab workforce &mdash; researchers, PhD candidates and students &mdash; at the centre, as the people who feel the friction every day.</li>
-            <li><span class="dd-list__k">Semi-structured interviews</span> with that workforce, which surfaced a clear split: people who run a handful of gels occasionally (for whom manual is already fine), and people who run them daily at twenty to a hundred-plus samples &mdash; for whom loading is a genuine bottleneck.</li>
-            <li><span class="dd-list__k">A market survey of 19 systems</span> &mdash; 12 general lab-automation platforms and 7 dedicated electrophoresis systems &mdash; mapping the landscape and pinpointing the gap between fully manual slab gels and expensive closed cartridge machines.</li>
-          </ul>
-          <p class="dd-p">That synthesis became an innovation brief with one clear direction: selectively automate the most repetitive, error-prone steps &mdash; sample handling and gel loading &mdash; while keeping the slab gel's familiar, low-cost, flexible workflow intact. The work was carried out solo at <a class="dd-link" href="https://dalsa.dtu.dk/" target="_blank" rel="noopener">DALSA&nbsp;&#8599;</a>, DTU's Arena for Life Science Automation.</p>
+          <div class="dd-spotlight">
+            <div class="dd-spotlight__body">
+              <p class="dd-p">The whole project ran on the <strong>Double Diamond</strong> design process &mdash; Discover, Define, Develop, Deliver &mdash; deliberately exploring the problem before converging on a solution, so the design answered a real need rather than a guessed one.</p>
+              <ul class="dd-list">
+                <li><span class="dd-list__k">Stakeholder analysis</span> &mdash; a Power &times; Interest map that put the lab workforce &mdash; researchers, PhD candidates and students &mdash; at the centre, as the people who feel the friction every day.</li>
+                <li><span class="dd-list__k">Semi-structured interviews</span> with that workforce, which surfaced a clear split: people who run a handful of gels occasionally (for whom manual is already fine), and people who run them daily at twenty to a hundred-plus samples &mdash; for whom loading is a genuine bottleneck.</li>
+                <li><span class="dd-list__k">A market survey of 19 systems</span> &mdash; 12 general lab-automation platforms and 7 dedicated electrophoresis systems &mdash; mapping the landscape and pinpointing the gap between fully manual slab gels and expensive closed cartridge machines.</li>
+              </ul>
+              <p class="dd-p">That synthesis became an innovation brief with one clear direction: selectively automate the most repetitive, error-prone steps &mdash; sample handling and gel loading &mdash; while keeping the slab gel's familiar, low-cost, flexible workflow intact. The work was carried out solo at <a class="dd-link" href="https://dalsa.dtu.dk/" target="_blank" rel="noopener">DALSA&nbsp;&#8599;</a>, DTU's Arena for Life Science Automation.</p>
+            </div>
+            <!-- First-party deck-allocation map (Sirio's own protocol deck layout);
+                 the device-frame seats the opaque-white PNG on the dark ground. -->
+            <figure class="device-frame dd-spotlight__aside">
+              <img src="./assets/media/ot2-slots-allocation.png" alt="Sirio's OT-2 deck allocation map for the gel-electrophoresis protocol — the plan for where each rack, reagent and gel tray sits on the robot deck">
+              <figcaption class="device-frame__cap">deck layout &mdash; where each rack and reagent lands on the OT-2</figcaption>
+            </figure>
+          </div>
         </section>
 
         <!-- 3 — BUILD (the parts + protocol; NEVER a line count, D-10). -->
@@ -715,6 +728,18 @@
             <span class="dd-sec__kicker">the build</span>
           </div>
           <h2 class="dd-sec__h">Five 3D-printed parts and a custom protocol on the OT-2.</h2>
+          <!-- BEFORE-VISUAL — TEMPORARY, UNCLEARED PLACEHOLDER (owner override).
+               Source: the Opentrons OT-2 manufacturer render in the source-media
+               folder (full provenance in ./assets/media/README.md). Shipped by
+               Sirio's informed decision as a stop-gap "what I started with" beat;
+               R-02 (no uncleared vendor render) is consciously WAIVED for this asset
+               only. REPLACE with a cleared first-party bench photo or a licensed
+               image — drop the new file over ./assets/media/ot2-platform-stock.png
+               (one-line swap, MEDIA-01). -->
+          <figure class="device-frame device-frame--before">
+            <img src="./assets/media/ot2-platform-stock.png" alt="An off-the-shelf Opentrons OT-2 liquid-handling robot — the general-purpose platform this build starts from">
+            <figcaption class="device-frame__cap">the starting point &mdash; a stock, general-purpose OT-2 liquid handler</figcaption>
+          </figure>
           <p class="dd-p">The first prototype was a fully custom gel-casting cassette designed in the Fusion360 CAD tool with 3D-printed combs. It was abandoned when the comb spacing could not be reconciled with standard PCR-strip geometry &mdash; a manufacturability wall. That failure pointed to a more robust route: integrating the existing RunOne MultiCaster casting system directly onto the robot's deck.</p>
           <p class="dd-p">From there, five parts were designed in Fusion360, each with interlocking cubic mating features so they seat repeatably on the deck:</p>
           <ul class="dd-list">
@@ -736,6 +761,13 @@
             </div>
           </figure>
           <p class="dd-p">A custom Opentrons OT-2 protocol drives the run. Rather than a fixed script, it is parameterised &mdash; the operator chooses how many strips, what volume, whether loading buffer and a molecular-weight ladder are included. Under the hood it loads a split strip across half a column at a time, uses an air-gap dispensing strategy to keep small volumes intact, and lifts the tip slowly out of each well so the sample settles cleanly into its lane.</p>
+          <!-- First-party screenshot of Sirio's parameterised-run interface (D-14 —
+               what the protocol DOES, not how long it is). Portrait 371×888, shown
+               whole via .device-frame--portrait (object-fit:contain, never cropped). -->
+          <figure class="device-frame device-frame--portrait">
+            <img src="./assets/media/ot2-ui-runner.png" alt="The parameterised-run interface of Sirio's OT-2 protocol — the operator sets the number of strips, the volume, and whether a loading buffer and a molecular-weight ladder are included before the run">
+            <figcaption class="device-frame__cap">the parameterised run &mdash; strips, volume, buffer and ladder, chosen before the robot starts</figcaption>
+          </figure>
         </section>
 
         <!-- 4 — RUN (the real timelapse — the signature automation motion, D-11). -->

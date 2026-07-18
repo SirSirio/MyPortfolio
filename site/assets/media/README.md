@@ -96,6 +96,25 @@ first-party rule or the no-stock/no-AI rule below, which are non-negotiable.
 
 ---
 
+## Temporary, uncleared placeholder — `ot2-platform-stock.png`
+
+One asset on the page is a **known exception to the first-party rule above**, shipped
+by the project owner's **informed, deliberate decision**:
+
+- **`ot2-platform-stock.png`** — the "starting point" render in the OT-2 deep-dive's
+  BUILD section. Its source is a **manufacturer marketing render**
+  (`Opentrons-OT2 DALSA media/Opentrons-OT2.png`), i.e. **not first-party and not
+  cleared for editorial use** (R-02 is consciously **waived** for this one asset).
+- It ships as a **temporary stop-gap** for the "what I started with" beat and must be
+  **replaced** with a cleared first-party bench photo or a licensed image.
+- **Swapping it is a one-line change** (MEDIA-01): drop the replacement over
+  `ot2-platform-stock.png` and the `<img src="./assets/media/ot2-platform-stock.png">`
+  in `site/index.html` picks it up — no CSS/JS change. The markup carries a matching
+  HTML comment flagging it as temporary.
+
+The two first-party diagrams beside it (`ot2-slots-allocation.png`,
+`ot2-ui-runner.png`) are Sirio's own work product and are **not** exceptions.
+
 ## Naming
 
 - Lowercase, hyphenated, matching the project slug: `liquid-dispenser.jpg`,

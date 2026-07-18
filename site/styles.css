@@ -2506,6 +2506,104 @@ section[id] {
   aspect-ratio: 2 / 1;
 }
 
+/* ── DEVICE FRAME ─────────────────────────────────────────────
+   Two of the deep-dive diagrams (the deck-allocation map, the run UI) and the
+   "starting point" render are genuinely opaque-white PNGs. Dropped raw they punch
+   a white hole in the dark engineering-room ground (D-15). This frame — modelled
+   on .blueprint (:1740) — seats them on a dark inset ground with a faint accent
+   blueprint grid, an accent hairline border and an inner accent glow, so each
+   reads as a framed instrument panel / schematic. ALL colour derives from the
+   section's --accent (never a hard-coded hue); it is drop-in swappable
+   (MEDIA-01): the <img> is a direct child, so replacing the file is one line. */
+.device-frame {
+  margin: 8px 0 26px;
+  padding: clamp(12px, 2.4vw, 20px);
+  border: 1px solid rgba(var(--accent), 0.28);
+  border-radius: 10px;
+  background-color: #08090f;
+  background-image:
+    radial-gradient(120% 120% at 20% 0%, rgba(var(--accent), 0.07), transparent 60%),
+    linear-gradient(to right, rgba(var(--accent), 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(var(--accent), 0.07) 1px, transparent 1px);
+  background-size: auto, 18px 18px, 18px 18px;
+  box-shadow:
+    inset 0 0 60px rgba(var(--accent), 0.09),
+    0 24px 70px rgba(0, 0, 0, 0.42);
+}
+.device-frame > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;   /* never crop a diagram / screenshot */
+  border-radius: 6px;
+}
+/* Mono caption — keeps the site's em-dash mono-label voice (D-28). */
+.device-frame__cap {
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: rgba(228, 232, 244, 0.5);
+  line-height: 1.5;
+}
+
+/* Portrait screenshot (the 371×888 run UI): show it WHOLE at a constrained
+   height, centred — mirrors the composite/run-clip contain fix, never a crop. */
+.device-frame--portrait {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.device-frame--portrait > img {
+  width: auto;
+  height: clamp(360px, 66vh, 600px);
+  max-width: 100%;
+}
+.device-frame--portrait > .device-frame__cap {
+  align-self: stretch;
+}
+
+/* The temporary "starting point" render sits smaller — it is context, not a
+   hero. Landscape, capped width, left-aligned within the build column. */
+.device-frame--before {
+  max-width: 460px;
+}
+
+/* ── APPROACH SPOTLIGHT (D-09) ───────────────────────────────
+   The design-thinking process is the differentiator that signals "designer,
+   not just programmer". This modifier lifts the APPROACH section out of the
+   plain vertical stack into an asymmetric two-column composition (text-heavy
+   body + the deck-map plate as its visual anchor), with extra breathing room
+   and a brighter top edge — distinct layout weight, VISUAL_DENSITY 3-4. */
+.dd-sec--spotlight {
+  padding-top: clamp(44px, 7vw, 80px);
+  padding-bottom: clamp(44px, 7vw, 80px);
+  border-top: 1px solid rgba(var(--accent), 0.28);
+}
+.dd-spotlight {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 52px);
+  align-items: start;
+}
+.dd-spotlight__body > .dd-p:last-child {
+  margin-bottom: 0;
+}
+.dd-spotlight__aside {
+  position: sticky;
+  top: 24px;
+  margin: 0;
+}
+@media (max-width: 860px) {
+  .dd-spotlight {
+    grid-template-columns: 1fr;
+  }
+  .dd-spotlight__aside {
+    position: static;
+    order: -1;   /* deck-map leads on narrow screens, then the reasoning */
+  }
+}
+
 /* RUN clip — its own modifier so the shipped .media-slot--composite (which the
    home OT-2 card depends on) is untouched. The timelapse is portrait 9:16 and is
    shown WHOLE (object-fit:contain), never cropped — mirrors the composite's fix.
