@@ -120,7 +120,24 @@ creating new ones.
   4. The page has "moving parts" — at least one dynamic element that conveys automation, suppressed under `prefers-reduced-motion`
   5. The page is built from a template shape reusable for the remaining projects, not a one-off
 
-**Plans**: TBD
+**Plans**: 3 plans
+
+Vertical-slice order (MVP): the thin end-to-end warp path lands first, then media depth,
+then the advanced scroll-telling. Every plan touches `site/index.html` and `site/styles.css`
+(Plans 01/03 also `site/main.js`), so the three run **sequentially** — no parallelism.
+
+**Wave 1**
+
+  - [ ] 02.1-01-PLAN.md — The warp spine + the real OT-2 deep-dive: port the V4 warp into main.js (+ engine-pause guard), make the OT-2 card clickable, build the [data-proj="ot2"] overlay with the full curated story + timelapse + CAD blueprint (NAV-03)
+
+**Wave 2** *(blocked on Wave 1)*
+
+  - [ ] 02.1-02-PLAN.md — Media depth + the engineering room: the deck-map + protocol-runner UI with a device-frame treatment, the design-thinking spotlight, the before-visual + accent/tint checkpoints
+
+**Wave 3** *(blocked on Wave 2)*
+
+  - [ ] 02.1-03-PLAN.md — The "moving parts": vendor ScrollTrigger, the scoped gsap.context lifecycle, and Sirio-approved scroll-telling (parts-assemble / protocol-trace / draw-on), reduced-motion-gated
+
 **UI hint**: yes
 
 ### Phase 3: The Pocket Build
@@ -199,7 +216,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 |-------|----------------|--------|-----------|
 | 1. The Design Build | 3/3 | Complete    | 2026-07-16 |
 | 2. The Story | 5/5 | Complete   | 2026-07-17 |
-| 2.1. The Automation Deep-Dive (INSERTED) | 0/TBD | Not started | - |
+| 2.1. The Automation Deep-Dive (INSERTED) | 0/3 | Not started | - |
 | 3. The Pocket Build | 0/TBD | Not started | - |
 | 4. The Showcase | 0/TBD | Not started | - |
 | 5. Ready to Share | 0/TBD | Not started | - |
