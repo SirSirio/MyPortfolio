@@ -199,7 +199,30 @@
                2026, MSc runs to Sep 2026), not the design's 2025. -->
           <article data-reveal="1" class="plate">
             <div class="plate__media">
-              <figure data-para="0.05" class="media-slot" data-label="[ device render / gif ]"></figure>
+              <!-- PUMP slot (D-29 sibling of the OT-2 composite): a two-up media
+                   pairing — the thesis' own #hero-rotor peristaltic-pump animation
+                   (SVG + GSAP, lifted verbatim, driven by pump-anim.js; scoped
+                   under .pump-anim in styles.css) beside the proto-02 pump-head
+                   dispensing clip. The whole slot links to Sirio's thesis site,
+                   which is the project's real detail page — no portfolio sub-page.
+                   Both assets are first-party, committed, RELATIVE paths (README:
+                   never a remote src). Own modifier .media-slot--pump, NOT the
+                   shipped .media-slot--composite, so the OT-2 rules stay untouched. -->
+              <figure data-para="0.05" class="media-slot media-slot--pump" data-label="[ device animation / video ]">
+                <a href="https://sirsirio.github.io/thesis-tools/index.html" target="_blank" rel="noopener"
+                   aria-label="Peristaltic pump-head animation and the proto-02 dispensing clip — opens Sirio's thesis-tools site">
+                  <!-- Populated by pump-anim.js; decorative (the link + video carry
+                       the accessible names). -->
+                  <div class="pump-anim" id="pump-anim" aria-hidden="true"></div>
+                  <!-- No `autoplay` by design (MOTION-02): main.js starts every
+                       .media-slot video only when prefers-reduced-motion is NOT set;
+                       otherwise the poster stands in and `controls` are added. -->
+                  <video class="pump-clip" src="./assets/media/pump-head-web.mp4"
+                         poster="./assets/media/pump-head-web-poster.jpg"
+                         muted loop playsinline
+                         aria-label="Proto-02 peristaltic pump head dispensing a 5 µL droplet, filmed on Sirio's thesis prototype"></video>
+                </a>
+              </figure>
             </div>
             <div class="plate__body">
               <div class="plate__meta">MSc thesis · 2026</div>
@@ -616,6 +639,11 @@
 
     </div>
   </div>
+  <!-- GSAP (vendored locally, no CDN) + the pump-head animation. Classic scripts,
+       loaded before the main.js module so the global `gsap` is ready when
+       pump-anim.js self-inits. pump-anim.js is inert without #pump-anim. -->
+  <script src="./assets/vendor/gsap.min.js"></script>
+  <script src="./pump-anim.js"></script>
   <script type="module" src="./main.js"></script>
 </body>
 </html>

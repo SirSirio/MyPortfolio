@@ -1646,8 +1646,10 @@ section[id] {
 /* EMPTY STATE — the striped, labelled placeholder.
    `> a > img` joins the "filled" test so a CLICKABLE asset (an <img> wrapped in an
    <a>, e.g. EndoSense links to the iGEM wiki) also switches the placeholder off.
-   Without it the anchor makes the <img> a grandchild and `> img` stops matching. */
-.media-slot:not(:has(> img, > video, > a > img)) {
+   Without it the anchor makes the <img> a grandchild and `> img` stops matching.
+   `> a > video` does the same for the Pump slot, whose link wraps a <video>
+   (+ the animation div) — otherwise the stripes would show through behind them. */
+.media-slot:not(:has(> img, > video, > a > img, > a > video)) {
   background: repeating-linear-gradient(
     135deg,
     rgba(var(--accent), 0.09) 0 11px,
@@ -1657,7 +1659,7 @@ section[id] {
   box-shadow: 0 30px 90px rgba(var(--accent), 0.1);
 }
 
-.media-slot:not(:has(> img, > video, > a > img))::after {
+.media-slot:not(:has(> img, > video, > a > img, > a > video))::after {
   content: attr(data-label);
   font-family: var(--font-mono);
   font-size: 12px;
@@ -1781,6 +1783,135 @@ section[id] {
     width: 100%;
   }
 }
+
+/* ── PUMP slot — the Portable Precision Liquid Dispenser plate (plate 001).
+   A two-up media pairing that mirrors the OT-2 composite's look (portrait clip +
+   companion filling the lateral space) but is a SEPARATE, self-contained modifier
+   so the shipped `.media-slot--composite` rules the OT-2 card depends on are never
+   touched. Here the companion is the #pump-anim SVG animation (flex:1) and the
+   portrait clip is the proto-02 pump-head video. The whole slot is one <a> to the
+   thesis site — `.media-slot > a` (display:block; height:100%) is overridden to a
+   flex row at equal specificity via source order. */
+.media-slot--pump {
+  /* Height comes from the content, not a 16:9 ratio — override the base slot. */
+  aspect-ratio: auto;
+}
+.media-slot--pump > a {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(14px, 2vw, 26px);
+  width: 100%;
+  height: auto;
+  padding: clamp(14px, 2.2vw, 26px);
+}
+.media-slot--pump .pump-anim {
+  flex: 1 1 auto;
+  min-width: 0;              /* let the SVG shrink instead of forcing overflow */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.media-slot--pump .pump-anim svg {
+  width: 100%;
+  height: auto;
+  max-width: 560px;
+}
+/* The portrait clip (540×960) shown WHOLE (contain), never cropped — it keeps its
+   true 9:16 footprint and the animation takes the rest. A grandchild of
+   `.media-slot` (`> a > video`), so the shipped `.media-slot > video` cover rule
+   does not match it — no override needed. */
+.media-slot--pump video.pump-clip {
+  flex: 0 0 auto;
+  height: clamp(280px, 30vw, 420px);
+  width: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Collapse to a column on narrow viewports (same breakpoint as the composite). */
+@media (max-width: 860px) {
+  .media-slot--pump > a {
+    flex-direction: column;
+    align-items: center;
+  }
+  .media-slot--pump .pump-anim {
+    width: 100%;
+  }
+  .media-slot--pump video.pump-clip {
+    height: clamp(260px, 50vh, 400px);
+  }
+}
+
+/* ── Pump-head animation, scoped under .pump-anim ────────────────
+   Lifted verbatim from the thesis site's #hero-rotor motif (see pump-anim.js).
+   EVERY rule is prefixed with `.pump-anim ` so the .hero-* classes cannot leak
+   into the rest of the page. `--accent`/`--accent-2` are pinned here to the thesis
+   hex values: the portfolio's own `--accent` is a section-driven RGB TRIPLET used
+   as `rgba(var(--accent),…)`, whereas this vendored SVG uses `--accent` as a whole
+   color — pinning on this scope keeps the two idioms from colliding and holds the
+   animation to the thesis orange regardless of which section owns the plate. */
+.pump-anim {
+  --accent: #ff6b2b;
+  --accent-2: #e83535;
+  width: 100%;
+}
+.pump-anim svg { display: block; overflow: visible; }
+.pump-anim .hero-vessel {
+  fill: rgba(255, 255, 255, 0.04);
+  stroke: rgba(255, 107, 43, 0.30);
+  stroke-width: 1.4;
+}
+.pump-anim .hero-vessel-cap {
+  fill: rgba(255, 255, 255, 0.07);
+  stroke: rgba(255, 107, 43, 0.35);
+  stroke-width: 1.2;
+}
+.pump-anim .hero-vessel-tick { stroke: rgba(255, 255, 255, 0.20); stroke-width: 1; }
+.pump-anim .hero-vessel-liquid { fill: var(--accent); opacity: 0.16; }
+.pump-anim .hero-cap-flap {
+  fill: rgba(255, 255, 255, 0.08);
+  stroke: rgba(255, 107, 43, 0.40);
+  stroke-width: 1.2;
+}
+.pump-anim .hero-cap-hinge { fill: var(--accent); opacity: 0.7; }
+.pump-anim .hero-rotor-disc {
+  fill: rgba(255, 255, 255, 0.04);
+  stroke: rgba(255, 107, 43, 0.30);
+  stroke-width: 1;
+}
+.pump-anim .hero-roller {
+  fill: rgba(255, 107, 43, 0.18);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.pump-anim .hero-hub { fill: var(--accent); opacity: 0.85; }
+.pump-anim .hero-tube-wall {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 11;
+  stroke-linecap: round;
+}
+.pump-anim .hero-tube-liquid {
+  fill: none;
+  stroke: var(--accent);
+  stroke-opacity: 0.22;
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+.pump-anim .hero-tube-slug {
+  fill: none;
+  stroke: url(#hero-packet-grad);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+.pump-anim .hero-needle {
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+}
+.pump-anim .hero-droplet { fill: url(#hero-packet-grad); opacity: 0; }
 
 /* ============================================================
    EXPERIENCE (#experience)
