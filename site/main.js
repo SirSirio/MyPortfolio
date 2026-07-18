@@ -228,6 +228,7 @@ let curProj = null;   /* id of the open project overlay, or null when on the fie
 let trans = null;     /* the active warp transition, or null when idle */
 let burst = null;     /* a short scroll-jump burst (inert until a [data-jump] wires it) */
 let _wt = performance.now();
+let ot2Ctx = null;    /* the OT-2 deep-dive GSAP context (Plan 03), or null when torn down */
 
 /* The warp starfield: points stream out of the centre as their z shrinks toward 0
    (ported from .dc.html:337-338). spawn seeds one at a random angle and radius. */
@@ -261,6 +262,11 @@ function openProj(id) {
 function closeProj() {
   if (trans || !curProj) return;
   const id = curProj;
+  /* Tear down the OT-2 scroll-telling before the return warp — ctx.revert() kills
+     every tween + ScrollTrigger and restores inline styles, so a reopen rebuilds
+     cleanly (no leaked/duplicate triggers). No-ops when nothing was built (reduced
+     motion, or a different overlay). Covers both the reduced and animated paths. */
+  killOt2Motion();
   if (REDUCED) {
     const p = projEl(id); if (p) { p.style.visibility = 'hidden'; p.style.opacity = '0'; }
     document.body.style.overflow = ''; curProj = null; return;
@@ -276,6 +282,91 @@ function closeProj() {
 function startBurst() {
   if (REDUCED || trans) return;
   burst = { start: performance.now(), dur: 950, live: true, max: 0.0075 * WARP_INT };
+}
+
+/* ---------- OT-2 deep-dive scroll-telling (Plan 02.1-03) ----------
+
+   The "machine assembles itself" motion layer for the [data-proj="ot2"] overlay,
+   built with the vendored GSAP core + ScrollTrigger (index.html tail scripts, which
+   attach window.gsap + window.ScrollTrigger before this module runs). Design rules,
+   all enforced here:
+     - REDUCED is the SINGLE reduced-motion source (no second media-query source, no
+       gsap reduced-motion helper). Under reduced motion nothing is built and every
+       section renders complete by
+       default — GSAP is the ONLY thing that animates, and gsap.from()/timelines set
+       their own "from" state at runtime, so a no-JS / reduced visitor sees the final
+       state (RESEARCH Pattern 4, D-36).
+     - Every ScrollTrigger sets scroller = the [data-proj="ot2"] element — NEVER the
+       window, which is frozen while the overlay is open (RESEARCH Pitfall 1).
+     - Built only AFTER the warp completes (called from applyTrans at t>=1), so
+       ScrollTrigger never measures the scaled/blurred inner (RESEARCH § R-03), then
+       ScrollTrigger.refresh() recomputes.
+     - Every trigger lives inside gsap.context(fn, scroller); killOt2Motion() →
+       ctx.revert() kills every tween + trigger and restores inline styles, so a
+       reopen rebuilds cleanly (no leaks — threat T-02.1-07).
+     - Vocabulary is transform / opacity / stroke-dashoffset ONLY (cheap on mobile,
+       R-01); draw-on uses POSITIVE dashoffset (Safari-safe, Pattern 2); scrub over
+       long autonomous timelines. The one autonomous loop (the masthead pipette) is a
+       tiny, bounded transform/opacity cycle, on-brand with the site's pump-anim SVG. */
+function initOt2Motion() {
+  if (REDUCED) return;
+  const gsap = window.gsap, ScrollTrigger = window.ScrollTrigger;
+  if (!gsap || !ScrollTrigger) return;   /* vendored globals must be live at runtime */
+  const scroller = document.querySelector('[data-proj="ot2"]');
+  if (!scroller) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  ot2Ctx = gsap.context(() => {
+    /* Seed a draw-on: dasharray = dashoffset = path length, so the stroke starts
+       hidden and tweens to 0 (positive offset only — Safari mishandles negative). */
+    const seedDraw = (sel) => gsap.utils.toArray(sel).forEach((el) => {
+      const len = (el.getTotalLength && el.getTotalLength()) || 0;
+      if (len) gsap.set(el, { strokeDasharray: len, strokeDashoffset: len });
+    });
+
+    /* — MASTHEAD: the gel motif draws itself on, then the pipette loads a well on a
+         subtle infinite loop (echoes the pump-anim SVG). Autonomous — the masthead
+         is on-screen the moment the overlay opens. — */
+    seedDraw('.gel-motif__lane');
+    gsap.timeline()
+      .to('.gel-motif__lane', { strokeDashoffset: 0, duration: 0.9, stagger: 0.08, ease: 'power1.inOut' }, 0.15)
+      .from('.gel-motif__band', { scaleX: 0, opacity: 0, transformOrigin: '50% 50%', duration: 0.5, stagger: 0.06, ease: 'power2.out' }, 0.75);
+    gsap.timeline({ repeat: -1, repeatDelay: 0.7, delay: 1.2 })
+      .fromTo('.gel-motif__pipette', { y: 0 }, { y: 34, duration: 0.7, ease: 'power1.inOut' })
+      .fromTo('.gel-motif__drop', { y: 0, opacity: 0 }, { y: 8, opacity: 1, duration: 0.24, ease: 'power1.in' }, '-=0.16')
+      .to('.gel-motif__drop', { y: 22, opacity: 0, duration: 0.3, ease: 'power1.in' })
+      .to('.gel-motif__pipette', { y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.08');
+
+    /* — BUILD: the schematic deck plan draws itself, then the CAD parts assemble
+         onto it, part by part, scrub-linked to the overlay scroll. — */
+    seedDraw('[data-ot2-deck] .ot2-deck__line');
+    gsap.to('[data-ot2-deck] .ot2-deck__line', {
+      strokeDashoffset: 0, ease: 'none',
+      scrollTrigger: { scroller, trigger: '[data-ot2-assembly]', start: 'top 88%', end: 'top 44%', scrub: 0.6 }
+    });
+    gsap.from('[data-ot2-assembly] .blueprint__part', {
+      y: 44, scale: 0.85, opacity: 0, transformOrigin: '50% 100%', ease: 'none', stagger: 0.12,
+      scrollTrigger: { scroller, trigger: '[data-ot2-assembly] .blueprint', start: 'top 84%', end: 'top 40%', scrub: 0.6 }
+    });
+
+    /* — RUN: the cinematic band lifts and resolves as it enters. — */
+    gsap.from('[data-ot2-run] .proj-run__figure', {
+      y: 54, scale: 0.96, opacity: 0.3, ease: 'none',
+      scrollTrigger: { scroller, trigger: '[data-ot2-run] .proj-run__figure', start: 'top 94%', end: 'top 54%', scrub: 0.6 }
+    });
+
+    /* — OUTCOME: the big display numbers rise with a scrubbed emphasis. — */
+    gsap.from('[data-ot2-outcome] .ot2-stat__n', {
+      y: 30, opacity: 0, ease: 'none', stagger: 0.1,
+      scrollTrigger: { scroller, trigger: '[data-ot2-outcome] .ot2-stats', start: 'top 90%', end: 'top 56%', scrub: 0.6 }
+    });
+  }, scroller);
+
+  ScrollTrigger.refresh();   /* recompute now the warp transform/filter are cleared */
+}
+
+function killOt2Motion() {
+  if (ot2Ctx) { ot2Ctx.revert(); ot2Ctx = null; }
 }
 
 /* palette position of the current scroll — the warp inherits the gradient the page is at */
@@ -328,7 +419,11 @@ function applyTrans(now) {
       tg.style.transform = ''; tg.style.filter = '';
     }
     if (outEl && tr.out.isField) { outEl.style.transform = ''; outEl.style.filter = ''; outEl.style.opacity = ''; }
-    trans = null;
+    const intoId = tr.into.id;
+    trans = null;   /* clear FIRST so the engine-pause guard is active and ScrollTrigger
+                       measures a settled, transform-free inner (RESEARCH § R-03). */
+    /* Build the OT-2 scroll-telling only once the warp INTO ot2 has fully landed. */
+    if (intoId === 'ot2') initOt2Motion();
   }
 }
 
