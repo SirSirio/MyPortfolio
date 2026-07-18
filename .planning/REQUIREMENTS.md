@@ -22,7 +22,7 @@ Derived from `.planning/PROJECT.md`. Visual/theme specifics are intentionally de
 
 - [ ] **NAV-01**: Immersive single-scroll home with distinct, full-height sections
 - [x] **NAV-02**: Smooth scrolling with section anchors and a persistent/access nav
-- [ ] **NAV-03**: Tasteful transitions when moving between home and deeper pages
+- [x] **NAV-03**: Tasteful transitions when moving between home and deeper pages
 
 ### AI Concierge ("Ask AI about me")
 
@@ -115,7 +115,7 @@ Maps each v1 REQ-ID to its phase. v2/Later and Out-of-Scope items are not mapped
 | CONT-04 | Phase 2 — The Story | Pending |
 | MOTION-01 | Phase 2 — The Story | Pending |
 | MOTION-02 | Phase 2 — The Story | Pending |
-| NAV-03 | Phase 2.1 — The Automation Deep-Dive | Pending |
+| NAV-03 | Phase 2.1 — The Automation Deep-Dive | Complete |
 | RESP-01 | Phase 3 — The Pocket Build | Pending |
 | PERF-01 | Phase 3 — The Pocket Build | Pending |
 | CONT-02 | Phase 4 — The Showcase | Pending |

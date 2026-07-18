@@ -128,7 +128,7 @@ then the advanced scroll-telling. Every plan touches `site/index.html` and `site
 
 **Wave 1**
 
-  - [ ] 02.1-01-PLAN.md — The warp spine + the real OT-2 deep-dive: port the V4 warp into main.js (+ engine-pause guard), make the OT-2 card clickable, build the [data-proj="ot2"] overlay with the full curated story + timelapse + CAD blueprint (NAV-03)
+  - [x] 02.1-01-PLAN.md — The warp spine + the real OT-2 deep-dive: port the V4 warp into main.js (+ engine-pause guard), make the OT-2 card clickable, build the [data-proj="ot2"] overlay with the full curated story + timelapse + CAD blueprint (NAV-03)
 
 **Wave 2** *(blocked on Wave 1)*
 
@@ -216,7 +216,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 |-------|----------------|--------|-----------|
 | 1. The Design Build | 3/3 | Complete    | 2026-07-16 |
 | 2. The Story | 5/5 | Complete   | 2026-07-17 |
-| 2.1. The Automation Deep-Dive (INSERTED) | 0/3 | Not started | - |
+| 2.1. The Automation Deep-Dive (INSERTED) | 1/3 | In Progress|  |
 | 3. The Pocket Build | 0/TBD | Not started | - |
 | 4. The Showcase | 0/TBD | Not started | - |
 | 5. Ready to Share | 0/TBD | Not started | - |

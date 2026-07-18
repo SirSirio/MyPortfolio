@@ -4,13 +4,13 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 2 UI-SPEC approved (6/6) — ready to plan
-last_updated: "2026-07-18T08:28:53.447Z"
-last_activity: "2026-07-18 -- Completed quick task 260718-deu: Fill Portable Precision Liquid Dispenser media slot (pump animation + video, clickable to thesis site)"
+last_updated: "2026-07-18T09:22:41.811Z"
+last_activity: 2026-07-18 -- Phase 02.1 execution started
 progress:
   total_phases: 7
   completed_phases: 2
-  total_plans: 8
-  completed_plans: 8
+  total_plans: 11
+  completed_plans: 9
   percent: 29
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-16)
 
 **Core value:** On open, a visitor instantly thinks "wow — this person can build something genuinely impressive," and within 30 seconds grasps that Sirio sits at the intersection of biology, engineering/design, and automation.
-**Current focus:** Phase 02 — the-story
+**Current focus:** Phase 02.1 — the-automation-deep-dive
 
 ## Current Position
 
-Phase: 02 (the-story) — EXECUTING
-Plan: 2 of 5
+Phase: 02.1 (the-automation-deep-dive) — EXECUTING
+Plan: 2 of 3
 Status: Ready to execute
-Last activity: 2026-07-18 -- Completed quick task 260718-deu: Fill Portable Precision Liquid Dispenser media slot (pump animation + video, clickable to thesis site)
+Last activity: 2026-07-18 -- Phase 02.1 execution started
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -54,6 +54,7 @@ Progress: [░░░░░░░░░░] 0%
 *Updated after each plan completion*
 | Phase 01 P01 | 35 | 3 tasks | 7 files |
 | Phase 02 P05 | 6 | 2 tasks | 9 files |
+| Phase 02.1 P01 | 22 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -87,6 +88,8 @@ Recent decisions affecting current work:
 - [Requirements]: 2026-07-16 — fixed pre-existing drift: the traceability table still used the OLD pre-consolidation numbering ("Phase 1 — The Look", "Phase 2 — The First Impression"). Rewritten against current phases; now 36/36 mapped (added MEDIA-01/02).
 - [Repo]: 2026-07-16 — site source folder renamed `app/` → `site/` (it's a site, not an app); Pages artifact path updated, redeploy verified green.
 - [Phase ?]: [Media] 2026-07-17 — Plate 002 (Gel Electrophoresis) filled with Sirio's real OT-2 timelapse (re-encoded 6.66MB to 1.96MB, crf 31 +faststart) beside a blueprint plate of his four CAD renders (genuine alpha, colour type 6). D-29 composite is a NAMED, accepted MEDIA-01 deviation (aspect ratio, not background). Partially advances MEDIA-02 — case-study slots + formal encode remain Phase 4.
+- [Phase ?]: [02.1-01] Ported the V4 warp/hyperlight transition into site/main.js (DC class to ES module) + added the D-20 engine-pause loop guard: drawDeep/applyPointer skip behind an open overlay
+- [Phase ?]: [02.1-01] NAV-03 met: OT-2 card warps into a real [data-proj=ot2] DALSA deep-dive (5 sections from profile.md + report); return link is plain 'back to work'; '785 lines' framing dropped (D-10)
 
 ### Pending Todos
 
@@ -119,6 +122,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-07-17T15:19:03.824Z
+Last session: 2026-07-18T09:22:01.175Z
 Stopped at: Phase 2 UI-SPEC approved (6/6) — ready to plan
 Resume file: .planning/phases/02-the-story/02-UI-SPEC.md
