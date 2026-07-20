@@ -32,6 +32,14 @@
           <div class="nav__links">
             <a class="nav__link" href="https://canva.link/5a5yj5bdg78axhv" target="_blank" rel="noopener">CV&nbsp;&#8599;</a>
             <a class="nav__link" href="https://www.linkedin.com/in/sirio-vittorio-feltrin/" target="_blank" rel="noopener">LinkedIn&nbsp;&#8599;</a>
+            <!-- EN/IT language control (quick 260720-p2u). <button>, not <a> — it
+                 toggles state, it does not navigate. main.js wires the click to
+                 applyLang() and keeps aria-pressed in sync. The wordmark and the
+                 star engine are untouched by the switch. -->
+            <div class="nav__lang" role="group" aria-label="Language / Lingua">
+              <button type="button" class="nav__lang-btn" data-lang="en" aria-pressed="true">EN</button>
+              <button type="button" class="nav__lang-btn" data-lang="it" aria-pressed="false">IT</button>
+            </div>
           </div>
         </header>
 
@@ -70,7 +78,7 @@
         </div>
 
         <div class="hero__content">
-          <div class="hero__intro">Hello, I am</div>
+          <div class="hero__intro" data-i18n="hero.intro">Hello, I am</div>
 
           <!--
             THE WORDMARK IS LOAD-BEARING. Do not "fix" the gap that reads as "Sir".
@@ -96,7 +104,7 @@
           <!-- [data-art] and [data-typer] are required by the engine. Without
                [data-typer] the typewriter early-returns and silently never runs. -->
           <p class="hero__type">
-            <span>I am a</span>
+            <span data-i18n="hero.type.lead">I am a</span>
             <span class="typer">
               <span data-art class="typer__art"></span>
               <span data-typer class="typer__word"></span>
@@ -105,10 +113,10 @@
           </p>
         </div>
 
-        <div class="corner-mark">COPENHAGEN · 2026</div>
+        <div class="corner-mark" data-i18n="hero.corner">COPENHAGEN · 2026</div>
 
         <a data-scrollhint data-jump href="#index" class="scrollhint">
-          <span class="scrollhint__label">SCROLL</span>
+          <span class="scrollhint__label" data-i18n="hero.scroll">SCROLL</span>
           <span class="scrollhint__rail"><span class="scrollhint__dot"></span></span>
         </a>
       </section>
@@ -124,17 +132,17 @@
       <section id="index" class="section section--mission">
         <div data-para="0.16" class="section__blob section__blob--mission"></div>
         <div class="section__inner">
-          <div data-reveal="0" class="section__label section__label--lead section__label--intro">what I do</div>
+          <div data-reveal="0" data-i18n="mission.label" class="section__label section__label--lead section__label--intro">what I do</div>
 
           <!-- The identity one-liner. LOCKED and verbatim — do not reword,
                retitle or "improve" it. The gradient span is the PAL spectrum. -->
-          <p data-reveal="1" class="mission__line">Biotechnology MSc at DTU Copenhagen. I design and build the <span class="grad">hardware, software and automation</span> that free scientists from repetitive lab work.</p>
+          <p data-reveal="1" data-i18n-rich="mission.line" class="mission__line">Biotechnology MSc at DTU Copenhagen. I design and build the <span class="grad">hardware, software and automation</span> that free scientists from repetitive lab work.</p>
 
           <div data-reveal="2" class="pills">
-            <a data-jump class="pill pill--work" href="#work">01&nbsp;WORK&nbsp;&#8600;</a>
-            <a data-jump class="pill pill--experience" href="#experience">02&nbsp;EXPERIENCE&nbsp;&#8600;</a>
-            <a data-jump class="pill pill--publications" href="#publications">03&nbsp;PUBLICATIONS&nbsp;&#8600;</a>
-            <a data-jump class="pill pill--contact" href="#contact">04&nbsp;CONTACT&nbsp;&#8600;</a>
+            <a data-jump data-i18n-rich="nav.pill.work" class="pill pill--work" href="#work">01&nbsp;WORK&nbsp;&#8600;</a>
+            <a data-jump data-i18n-rich="nav.pill.experience" class="pill pill--experience" href="#experience">02&nbsp;EXPERIENCE&nbsp;&#8600;</a>
+            <a data-jump data-i18n-rich="nav.pill.publications" class="pill pill--publications" href="#publications">03&nbsp;PUBLICATIONS&nbsp;&#8600;</a>
+            <a data-jump data-i18n-rich="nav.pill.contact" class="pill pill--contact" href="#contact">04&nbsp;CONTACT&nbsp;&#8600;</a>
             <!-- The design's trailing caption promising a short warp burst on
                  sector jumps is deliberately NOT ported: that motion is Phase
                  2/4, and the copy would promise a behaviour this page lacks. -->
@@ -163,14 +171,14 @@
         <div data-para="0.14" class="section__blob section__blob--origin"></div>
         <div class="section__inner">
           <div class="section__head">
-            <span data-reveal="0" class="section__label section__label--interlude">// ORIGIN</span>
+            <span data-reveal="0" data-i18n="origin.label" class="section__label section__label--interlude">// ORIGIN</span>
             <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 data-reveal="0" data-reveal-kind="assemble"><span>How I got here</span></h2>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="origin.h2">How I got here</span></h2>
           <div class="origin__beats">
-            <p data-reveal="1" data-reveal-kind="assemble" class="narr"><span>For five years my hands were in the lab &mdash; mammalian cells, microbiology, fermentation, cell-free systems &mdash; and I led the wet lab for EndoSense, DTU's iGEM cell-free biosensor. Biotechnology is where I learned how good science actually gets made at the bench, one careful experiment at a time.</span></p>
-            <p data-reveal="2" data-reveal-kind="assemble" class="narr"><span>What drains me isn't physical work &mdash; it's repetition: running the same protocol dozens of times with no room to think. Between that and countless late nights fixing broken lab equipment, one thing became impossible to ignore &mdash; repetitive manual work is the real bottleneck in the lab. What energizes me is the opposite: the design layer, conceiving the tools, fixtures and workflows that make the bench work better.</span></p>
-            <p data-reveal="3" data-reveal-kind="assemble" class="narr narr--land"><span>So I crossed into the design layer &mdash; Fusion360 CAD, 3D-printed parts, custom automation, an MSc thesis on a portable precision liquid dispenser. My years at the bench aren't behind me; they're the edge, and I build these tools for the people who have to use them. Product design is the constant, the domain stays flexible, and the logic never changes: repetitive work is the bottleneck in the lab, so I automate it.</span></p>
+            <p data-reveal="1" data-reveal-kind="assemble" class="narr"><span data-i18n="origin.beat1">For five years my hands were in the lab &mdash; mammalian cells, microbiology, fermentation, cell-free systems &mdash; and I led the wet lab for EndoSense, DTU's iGEM cell-free biosensor. Biotechnology is where I learned how good science actually gets made at the bench, one careful experiment at a time.</span></p>
+            <p data-reveal="2" data-reveal-kind="assemble" class="narr"><span data-i18n="origin.beat2">What drains me isn't physical work &mdash; it's repetition: running the same protocol dozens of times with no room to think. Between that and countless late nights fixing broken lab equipment, one thing became impossible to ignore &mdash; repetitive manual work is the real bottleneck in the lab. What energizes me is the opposite: the design layer, conceiving the tools, fixtures and workflows that make the bench work better.</span></p>
+            <p data-reveal="3" data-reveal-kind="assemble" class="narr narr--land"><span data-i18n="origin.beat3">So I crossed into the design layer &mdash; Fusion360 CAD, 3D-printed parts, custom automation, an MSc thesis on a portable precision liquid dispenser. My years at the bench aren't behind me; they're the edge, and I build these tools for the people who have to use them. Product design is the constant, the domain stays flexible, and the logic never changes: repetitive work is the bottleneck in the lab, so I automate it.</span></p>
           </div>
         </div>
       </section>
@@ -189,10 +197,10 @@
         <div data-para="0.13" class="section__blob section__blob--work"></div>
         <div class="section__inner">
           <div class="section__head">
-            <span data-reveal="0" class="section__label section__label--intro">things I've designed and built</span>
+            <span data-reveal="0" data-i18n="work.label" class="section__label section__label--intro">things I've designed and built</span>
             <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 data-reveal="0" data-reveal-kind="assemble"><span>Selected Work</span></h2>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="work.h2">Selected Work</span></h2>
 
           <!-- Plate 001 — the flagship: design + hardware + automation + AI in
                one artefact. profile.md:57. Year is 2026 (thesis deadline Aug
@@ -208,8 +216,9 @@
                    Both assets are first-party, committed, RELATIVE paths (README:
                    never a remote src). Own modifier .media-slot--pump, NOT the
                    shipped .media-slot--composite, so the OT-2 rules stay untouched. -->
-              <figure data-para="0.05" class="media-slot media-slot--pump" data-label="[ device animation / video ]">
+              <figure data-para="0.05" class="media-slot media-slot--pump" data-label="[ device animation / video ]" data-i18n-attr="data-label:work.plate1.label">
                 <a href="https://sirsirio.github.io/thesis-tools/index.html" target="_blank" rel="noopener"
+                   data-i18n-attr="aria-label:work.plate1.aria"
                    aria-label="Peristaltic pump-head animation and the proto-02 dispensing clip — opens Sirio's thesis-tools site">
                   <!-- Populated by pump-anim.js; decorative (the link + video carry
                        the accessible names). -->
@@ -220,14 +229,15 @@
                   <video class="pump-clip" src="./assets/media/pump-head-web.mp4"
                          poster="./assets/media/pump-head-web-poster.jpg"
                          muted loop playsinline
+                         data-i18n-attr="aria-label:work.plate1.videoAria"
                          aria-label="Proto-02 peristaltic pump head dispensing a 5 µL droplet, filmed on Sirio's thesis prototype"></video>
                 </a>
               </figure>
             </div>
             <div class="plate__body">
-              <div class="plate__meta">MSc thesis · 2026</div>
-              <h3>Portable Precision Liquid Dispenser</h3>
-              <p>A self-designed MSc thesis: a modular, field-deployable device for accurate liquid dispensing in point-of-care diagnostics, pandemic monitoring and field research. Fusion360 CAD tool for the mechanics, Arduino with electronics and motors, 3D printing, and a custom AI-assisted testing app that runs automated sample analysis using Design of Experiments.</p>
+              <div class="plate__meta" data-i18n="work.plate1.meta">MSc thesis · 2026</div>
+              <h3 data-i18n="work.plate1.title">Portable Precision Liquid Dispenser</h3>
+              <p data-i18n="work.plate1.body">A self-designed MSc thesis: a modular, field-deployable device for accurate liquid dispensing in point-of-care diagnostics, pandemic monitoring and field research. Fusion360 CAD tool for the mechanics, Arduino with electronics and motors, 3D printing, and a custom AI-assisted testing app that runs automated sample analysis using Design of Experiments.</p>
             </div>
           </article>
 
@@ -240,6 +250,7 @@
                is wired at boot). It warps to the [data-proj="ot2"] deep-dive below. -->
           <article data-reveal="1" class="plate plate--flip"
                    data-open="ot2" role="button" tabindex="0"
+                   data-i18n-attr="aria-label:work.plate2.aria"
                    aria-label="Open the Automated Gel Electrophoresis case study">
             <div class="plate__media">
               <!-- COMPOSITE slot (D-29, a named MEDIA-01 deviation): Sirio's real
@@ -247,7 +258,7 @@
                    his own CAD renders. Both files are committed and referenced with
                    RELATIVE paths — never a remote src (README: a remote src hands a
                    third party control of what the portfolio shows). -->
-              <figure data-para="0.05" class="media-slot media-slot--composite" data-label="[ project video / image ]">
+              <figure data-para="0.05" class="media-slot media-slot--composite" data-label="[ project video / image ]" data-i18n-attr="data-label:work.plate2.label">
                 <!-- No `autoplay` attribute by design (MOTION-02): playback is started
                      from main.js only when prefers-reduced-motion is NOT set. Fail-safe —
                      if JS never runs, the poster stands in and nothing moves. Reduced-motion
@@ -255,23 +266,24 @@
                 <video src="./assets/media/ot2-timelapse.mp4"
                        poster="./assets/media/ot2-timelapse-poster.jpg"
                        muted loop playsinline
+                       data-i18n-attr="aria-label:work.plate2.videoAria"
                        aria-label="Timelapse of the Opentrons OT-2 liquid-handling robot running Sirio's gel-electrophoresis protocol in the DTU lab, handling his green 3D-printed racks, pink PCR strip racks and a blue gel tray"></video>
                 <!-- The blueprint plate (D-28): the four CAD renders of the parts
                      Sirio designed, on a dark gold-grid ground. object-fit:contain
                      (not cover) so the sub-2:1 renders are never cropped. The PNG
                      alpha is load-bearing — do NOT convert to .jpg. -->
                 <div class="blueprint">
-                  <img class="blueprint__part" src="./assets/media/ot2-part-adapter.png" alt="CAD render of the 3D-printed adapter Sirio designed for the OT-2 deck">
-                  <img class="blueprint__part" src="./assets/media/ot2-part-pcr-strip-racks.png" alt="CAD render of Sirio's 3D-printed PCR strip racks">
-                  <img class="blueprint__part" src="./assets/media/ot2-part-buffer-ladder-rack.png" alt="CAD render of Sirio's 3D-printed rack for loading buffer and molecular-weight ladders">
-                  <img class="blueprint__part" src="./assets/media/ot2-part-rack-holder.png" alt="CAD render of the 3D-printed rack holder Sirio designed">
+                  <img class="blueprint__part" src="./assets/media/ot2-part-adapter.png" data-i18n-attr="alt:work.blueprint.adapter" alt="CAD render of the 3D-printed adapter Sirio designed for the OT-2 deck">
+                  <img class="blueprint__part" src="./assets/media/ot2-part-pcr-strip-racks.png" data-i18n-attr="alt:work.blueprint.pcr" alt="CAD render of Sirio's 3D-printed PCR strip racks">
+                  <img class="blueprint__part" src="./assets/media/ot2-part-buffer-ladder-rack.png" data-i18n-attr="alt:work.blueprint.buffer" alt="CAD render of Sirio's 3D-printed rack for loading buffer and molecular-weight ladders">
+                  <img class="blueprint__part" src="./assets/media/ot2-part-rack-holder.png" data-i18n-attr="alt:work.blueprint.holder" alt="CAD render of the 3D-printed rack holder Sirio designed">
                 </div>
               </figure>
             </div>
             <div class="plate__body">
-              <div class="plate__meta">Lab automation · 2025</div>
-              <h3>Automated Gel Electrophoresis</h3>
-              <p>Gel electrophoresis is one of the most common techniques in a molecular biology lab &mdash; and loading a gel means pipetting sample after sample by hand, slow and easy to get wrong. I interviewed the lab's students and researchers and mapped the workflow, which confirmed the manual loading was the real bottleneck. So I automated it: five 3D-printed components designed in the Fusion360 CAD tool, driven by a custom protocol on the Opentrons OT-2 liquid-handling robot. Built solo at DALSA (DTU Arena for Life Science Automation), the prototype handles up to 144 samples per run at ~10 minutes per gel. Graded 12/12.</p>
+              <div class="plate__meta" data-i18n="work.plate2.meta">Lab automation · 2025</div>
+              <h3 data-i18n="work.plate2.title">Automated Gel Electrophoresis</h3>
+              <p data-i18n="work.plate2.body">Gel electrophoresis is one of the most common techniques in a molecular biology lab &mdash; and loading a gel means pipetting sample after sample by hand, slow and easy to get wrong. I interviewed the lab's students and researchers and mapped the workflow, which confirmed the manual loading was the real bottleneck. So I automated it: five 3D-printed components designed in the Fusion360 CAD tool, driven by a custom protocol on the Opentrons OT-2 liquid-handling robot. Built solo at DALSA (DTU Arena for Life Science Automation), the prototype handles up to 144 samples per run at ~10 minutes per gel. Graded 12/12.</p>
             </div>
           </article>
 
@@ -281,13 +293,13 @@
                link, and it goes somewhere real. -->
           <article data-reveal="1" class="plate">
             <div class="plate__media">
-              <figure data-para="0.05" class="media-slot" data-label="[ project image ]"><a href="https://2024.igem.wiki/DTU-Denmark/" target="_blank" rel="noopener"><img src="./assets/media/endosense.gif" alt="EndoSense cell-free biosensor in action — DTU iGEM 2024; opens the project wiki"></a></figure>
+              <figure data-para="0.05" class="media-slot" data-label="[ project image ]" data-i18n-attr="data-label:work.plate3.label"><a href="https://2024.igem.wiki/DTU-Denmark/" target="_blank" rel="noopener"><img src="./assets/media/endosense.gif" data-i18n-attr="alt:work.plate3.imgAlt" alt="EndoSense cell-free biosensor in action — DTU iGEM 2024; opens the project wiki"></a></figure>
             </div>
             <div class="plate__body">
-              <div class="plate__meta">iGEM · 2024</div>
-              <h3>EndoSense</h3>
-              <p>A cell-free biosensor for detecting endocrine-disrupting compounds in drinking water, built as Wet Lab Lead of the DTU iGEM team. Allosteric transcription factors act as the sensing elements, with a Broccoli RNA aptamer reporter and a light-based readout. Awarded an iGEM Gold Medal at the 2024 Paris Jamboree.</p>
-              <a class="plate__link" href="https://2024.igem.wiki/DTU-Denmark/" target="_blank" rel="noopener">IGEM WIKI&nbsp;&#8599;</a>
+              <div class="plate__meta" data-i18n="work.plate3.meta">iGEM · 2024</div>
+              <h3 data-i18n="work.plate3.title">EndoSense</h3>
+              <p data-i18n="work.plate3.body">A cell-free biosensor for detecting endocrine-disrupting compounds in drinking water, built as Wet Lab Lead of the DTU iGEM team. Allosteric transcription factors act as the sensing elements, with a Broccoli RNA aptamer reporter and a light-based readout. Awarded an iGEM Gold Medal at the 2024 Paris Jamboree.</p>
+              <a class="plate__link" href="https://2024.igem.wiki/DTU-Denmark/" target="_blank" rel="noopener" data-i18n-rich="work.plate3.link">IGEM WIKI&nbsp;&#8599;</a>
             </div>
           </article>
         </div>
@@ -314,39 +326,39 @@
         <div data-para="0.13" class="section__blob section__blob--experience"></div>
         <div class="section__inner">
           <div class="section__head">
-            <span data-reveal="0" class="section__label section__label--intro">where I've worked and studied</span>
+            <span data-reveal="0" data-i18n="exp.label" class="section__label section__label--intro">where I've worked and studied</span>
             <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 data-reveal="0" data-reveal-kind="assemble"><span>Experience</span></h2>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="exp.h2">Experience</span></h2>
           <div class="exp">
             <span data-reveal="1" data-reveal-kind="draw" class="exp__spine"></span>
 
             <div data-reveal="2" class="exp__row">
               <span class="exp__dot"></span>
-              <span class="exp__period">2024 — Present</span>
-              <h4>Student Assistant — PM Team</h4>
-              <span class="exp__at">AGC Biologics, Copenhagen</span>
+              <span class="exp__period" data-i18n="exp.row1.period">2024 — Present</span>
+              <h4 data-i18n="exp.row1.role">Student Assistant — PM Team</h4>
+              <span class="exp__at" data-i18n="exp.row1.at">AGC Biologics, Copenhagen</span>
             </div>
 
             <div data-reveal="3" class="exp__row">
               <span class="exp__dot"></span>
-              <span class="exp__period">2024 — 2026</span>
-              <h4>MSc Biotechnology</h4>
-              <span class="exp__at">DTU Copenhagen</span>
+              <span class="exp__period" data-i18n="exp.row2.period">2024 — 2026</span>
+              <h4 data-i18n="exp.row2.role">MSc Biotechnology</h4>
+              <span class="exp__at" data-i18n="exp.row2.at">DTU Copenhagen</span>
             </div>
 
             <div data-reveal="4" class="exp__row">
               <span class="exp__dot"></span>
-              <span class="exp__period">2024</span>
-              <h4>iGEM Wet Lab Lead — EndoSense Biosensor</h4>
-              <span class="exp__at">iGEM Gold Medal</span>
+              <span class="exp__period" data-i18n="exp.row3.period">2024</span>
+              <h4 data-i18n="exp.row3.role">iGEM Wet Lab Lead — EndoSense Biosensor</h4>
+              <span class="exp__at" data-i18n="exp.row3.at">iGEM Gold Medal</span>
             </div>
 
             <div data-reveal="5" class="exp__row">
               <span class="exp__dot"></span>
-              <span class="exp__period">2023</span>
-              <h4>Research Intern — CIBIO, UniTrento</h4>
-              <span class="exp__at">EMBO publication</span>
+              <span class="exp__period" data-i18n="exp.row4.period">2023</span>
+              <h4 data-i18n="exp.row4.role">Research Intern — CIBIO, UniTrento</h4>
+              <span class="exp__at" data-i18n="exp.row4.at">EMBO publication</span>
             </div>
           </div>
         </div>
@@ -366,13 +378,13 @@
         <div data-para="0.13" class="section__blob section__blob--publications"></div>
         <div class="section__inner">
           <div class="section__head">
-            <span data-reveal="0" class="section__label section__label--intro">research I've contributed to</span>
+            <span data-reveal="0" data-i18n="pub.label" class="section__label section__label--intro">research I've contributed to</span>
             <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 data-reveal="0" data-reveal-kind="assemble"><span>Publications</span></h2>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="pub.h2">Publications</span></h2>
           <div data-reveal="1" class="pubs">
             <a class="pub" href="https://doi.org/10.1038/s44318-025-00567-1" target="_blank" rel="noopener">
-              <h4>Mapping cryptic phosphorylation sites in the human proteome <span class="pub__role">— Contributing author</span></h4>
+              <h4>Mapping cryptic phosphorylation sites in the human proteome <span class="pub__role" data-i18n="pub.role">— Contributing author</span></h4>
               <span class="pub__venue">The EMBO Journal &#183; 2025 &#183; 44:6704&#8211;6731&nbsp;&#8599;</span>
             </a>
           </div>
@@ -405,10 +417,10 @@
         <div data-para="0.14" class="section__blob section__blob--method"></div>
         <div class="section__inner">
           <div class="section__head">
-            <span data-reveal="0" class="section__label section__label--interlude">// METHOD</span>
+            <span data-reveal="0" data-i18n="method.label" class="section__label section__label--interlude">// METHOD</span>
             <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 data-reveal="0" data-reveal-kind="assemble"><span>How I work with AI</span></h2>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="method.h2">How I work with AI</span></h2>
           <div class="method__act method__act--story">
             <div class="calc-wrap">
               <!-- The calculator — ported from sketch 001 variant D (structure and
@@ -449,11 +461,11 @@
                 </div>
               </div>
               <div class="manifesto">
-                <p data-reveal="1" data-reveal-kind="assemble" class="narr"><span>I was ten, and I hated long division. The calculator could just do it.</span></p>
-                <p data-reveal="2" data-reveal-kind="assemble" class="narr"><span>My teacher said I could use it &mdash; but only if I already knew what I was asking it. Otherwise it wouldn't help me.</span></p>
-                <p data-reveal="3" data-reveal-kind="assemble" class="narr"><span>I ignored her, and spent a year typing numbers until they matched the answers in the back of the book. I understood nothing.</span></p>
-                <p data-reveal="4" data-reveal-kind="assemble" class="narr narr--land"><span>So I learned the order: map the problem, choose the strategy, then let the tool execute. Never the reverse.</span></p>
-                <p data-reveal="5" data-reveal-kind="assemble" class="narr narr--land"><span>Same bottleneck, one layer up. AI is the biggest calculator I've been handed. <em class="ph__em">The direction is still mine.</em></span></p>
+                <p data-reveal="1" data-reveal-kind="assemble" class="narr"><span data-i18n="method.m1">I was ten, and I hated long division. The calculator could just do it.</span></p>
+                <p data-reveal="2" data-reveal-kind="assemble" class="narr"><span data-i18n="method.m2">My teacher said I could use it &mdash; but only if I already knew what I was asking it. Otherwise it wouldn't help me.</span></p>
+                <p data-reveal="3" data-reveal-kind="assemble" class="narr"><span data-i18n="method.m3">I ignored her, and spent a year typing numbers until they matched the answers in the back of the book. I understood nothing.</span></p>
+                <p data-reveal="4" data-reveal-kind="assemble" class="narr narr--land"><span data-i18n="method.m4">So I learned the order: map the problem, choose the strategy, then let the tool execute. Never the reverse.</span></p>
+                <p data-reveal="5" data-reveal-kind="assemble" class="narr narr--land"><span data-i18n-rich="method.m5">Same bottleneck, one layer up. AI is the biggest calculator I've been handed. <em class="ph__em">The direction is still mine.</em></span></p>
               </div>
             </div>
           </div>
@@ -473,40 +485,40 @@
               <!-- DIGITAL — a LINE. It ships. -->
               <div class="track track--digital" data-track="digital">
                 <div class="track__head">
-                  <span class="track__kind">DIGITAL</span>
-                  <span class="track__for">websites, apps, tooling &mdash; like this page</span>
+                  <span class="track__kind" data-i18n="track.digital.kind">DIGITAL</span>
+                  <span class="track__for" data-i18n="track.digital.for">websites, apps, tooling &mdash; like this page</span>
                 </div>
-                <h3 class="track__title">Spec-driven development, run by GSD</h3>
+                <h3 class="track__title" data-i18n="track.digital.title">Spec-driven development, run by GSD</h3>
 
                 <div class="phases phases--line" data-phases>
                   <div class="ph">
                     <div class="ph__dot"></div>
                     <div class="ph__wire"></div>
                     <div class="ph__n">01</div>
-                    <div class="ph__name">Discuss</div>
-                    <div class="ph__desc">Lock decisions before planning.</div>
+                    <div class="ph__name" data-i18n="track.digital.ph1.name">Discuss</div>
+                    <div class="ph__desc" data-i18n="track.digital.ph1.desc">Lock decisions before planning.</div>
                   </div>
                   <div class="ph">
                     <div class="ph__dot"></div>
                     <div class="ph__wire"></div>
                     <div class="ph__n">02</div>
-                    <div class="ph__name">Plan</div>
-                    <div class="ph__desc">Research first, then atomic tasks.</div>
+                    <div class="ph__name" data-i18n="track.digital.ph2.name">Plan</div>
+                    <div class="ph__desc" data-i18n="track.digital.ph2.desc">Research first, then atomic tasks.</div>
                   </div>
                   <div class="ph">
                     <div class="ph__dot"></div>
                     <div class="ph__wire"></div>
                     <div class="ph__n">03</div>
-                    <div class="ph__name">Execute</div>
-                    <div class="ph__desc">Parallel waves, atomic commits.</div>
+                    <div class="ph__name" data-i18n="track.digital.ph3.name">Execute</div>
+                    <div class="ph__desc" data-i18n="track.digital.ph3.desc">Parallel waves, atomic commits.</div>
                   </div>
                 </div>
 
-                <p class="track__foot">
+                <p class="track__foot" data-i18n-rich="track.digital.foot">
                   Lock decisions before plans, plans before code. It runs <b>straight through and ships</b> &mdash;
                   research, verification and atomic commits, keeping the AI's context lean as the project grows.
                 </p>
-                <a class="deck-link" href="https://github.com/open-gsd/gsd-core" target="_blank" rel="noopener">GSD is open source&nbsp;&#8599;</a>
+                <a class="deck-link" href="https://github.com/open-gsd/gsd-core" target="_blank" rel="noopener" data-i18n-rich="track.digital.deck">GSD is open source&nbsp;&#8599;</a>
               </div>
 
               <!-- PHYSICAL — a LOOP. It comes back around. The digital track runs
@@ -517,18 +529,18 @@
                    round-3 correction — no project-specific nouns. -->
               <div class="track track--physical" data-track="physical">
                 <div class="track__head">
-                  <span class="track__kind">PHYSICAL</span>
-                  <span class="track__for">the dispenser, the bench, the thesis hardware</span>
+                  <span class="track__kind" data-i18n="track.physical.kind">PHYSICAL</span>
+                  <span class="track__for" data-i18n="track.physical.for">the dispenser, the bench, the thesis hardware</span>
                 </div>
-                <h3 class="track__title">Working with AI is one continuous loop</h3>
+                <h3 class="track__title" data-i18n="track.physical.title">Working with AI is one continuous loop</h3>
 
                 <div class="phases phases--loop" data-phases>
                   <div class="ph">
                     <div class="ph__dot"></div>
                     <div class="ph__wire"></div>
                     <div class="ph__n">01</div>
-                    <div class="ph__name">Discuss&nbsp;&amp;&nbsp;Design</div>
-                    <div class="ph__desc">Talk through the next move; AI proposes it &mdash; then argues each design decision and models the physics.</div>
+                    <div class="ph__name" data-i18n-rich="track.physical.ph1.name">Discuss&nbsp;&amp;&nbsp;Design</div>
+                    <div class="ph__desc" data-i18n="track.physical.ph1.desc">Talk through the next move; AI proposes it &mdash; then argues each design decision and models the physics.</div>
                     <!-- OI-2: the sketch's note here ("skills carry my design
                          rules in…") was CUT, not shipped. It is Claude-invented and
                          unconfirmed — Sirio asked only that the design part
@@ -541,26 +553,26 @@
                     <div class="ph__dot"></div>
                     <div class="ph__wire"></div>
                     <div class="ph__n">02</div>
-                    <div class="ph__name">Build&nbsp;&amp;&nbsp;Iterate</div>
-                    <div class="ph__desc">Custom tools and artifacts get built along the way &mdash; often to <em class="ph__em">make</em> the decisions, not just to carry them out.</div>
+                    <div class="ph__name" data-i18n-rich="track.physical.ph2.name">Build&nbsp;&amp;&nbsp;Iterate</div>
+                    <div class="ph__desc" data-i18n-rich="track.physical.ph2.desc">Custom tools and artifacts get built along the way &mdash; often to <em class="ph__em">make</em> the decisions, not just to carry them out.</div>
                   </div>
                   <div class="ph">
                     <div class="ph__dot"></div>
                     <div class="ph__wire"></div>
                     <div class="ph__n">03</div>
-                    <div class="ph__name">Test</div>
-                    <div class="ph__desc">The design meets the real thing, and the real thing decides. Reality is the pressure test.</div>
+                    <div class="ph__name" data-i18n="track.physical.ph3.name">Test</div>
+                    <div class="ph__desc" data-i18n="track.physical.ph3.desc">The design meets the real thing, and the real thing decides. Reality is the pressure test.</div>
                   </div>
                   <div class="ph">
                     <div class="ph__dot"></div>
                     <div class="ph__wire"></div>
                     <div class="ph__n">04</div>
-                    <div class="ph__name">Analyze&nbsp;Data</div>
-                    <div class="ph__desc">AI processes the results and runs the stats.</div>
+                    <div class="ph__name" data-i18n-rich="track.physical.ph4.name">Analyze&nbsp;Data</div>
+                    <div class="ph__desc" data-i18n="track.physical.ph4.desc">AI processes the results and runs the stats.</div>
                     <!-- ⚠ Sirio's deliberate narrowing MUST ship: the desc is the
                          deck's blunter claim, which overstates the autonomy; this
                          note narrows it. Keep the note; do not widen the desc back. -->
-                    <div class="ph__note">&#8627; I give the direction &mdash; it writes the custom Python. It does not run itself.</div>
+                    <div class="ph__note" data-i18n="track.physical.ph4.note">&#8627; I give the direction &mdash; it writes the custom Python. It does not run itself.</div>
                   </div>
                 </div>
 
@@ -576,14 +588,14 @@
                      "Document — captured continuously". The alignment IS the
                      argument — documentation runs WHILE the test runs (D-17). -->
                 <div class="doc-rail" id="doc-rail">
-                  <span class="doc-rail__tag">DOCUMENT</span>
-                  <span class="doc-rail__txt">
+                  <span class="doc-rail__tag" data-i18n="track.physical.docTag">DOCUMENT</span>
+                  <span class="doc-rail__txt" data-i18n-rich="track.physical.docTxt">
                     Captured continuously &mdash; not a step at the end. Because the discussion happens in text,
                     the results arrive already analysed and presentation-ready. <b>The documentation is written while the test is running.</b>
                   </span>
                 </div>
 
-                <p class="track__foot">
+                <p class="track__foot" data-i18n="track.physical.foot">
                   Nothing here ships and stops &mdash; the real thing answers back, and the loop comes round again.
                 </p>
               </div>
@@ -598,10 +610,10 @@
                  section's reveal indices past the manifesto's 1-5 — deliberately
                  not a snap or a draw. -->
             <div class="evidence" data-reveal="6">
-              <div class="evidence__label">IN PRACTICE</div>
+              <div class="evidence__label" data-i18n="method.ev.label">IN PRACTICE</div>
               <div class="ev-grid">
-                <div class="ev">The same method built my thesis tooling &mdash; and this page.</div>
-                <div class="ev">AI shortens the gap between an idea and a finished thing. It does not choose the idea.</div>
+                <div class="ev" data-i18n="method.ev1">The same method built my thesis tooling &mdash; and this page.</div>
+                <div class="ev" data-i18n="method.ev2">AI shortens the gap between an idea and a finished thing. It does not choose the idea.</div>
               </div>
             </div>
           </div>
@@ -615,8 +627,8 @@
       <section id="contact" class="section section--contact">
         <div data-para="0.1" class="section__blob section__blob--contact"></div>
         <div class="section__inner">
-          <div data-reveal="0" class="section__label section__label--contact section__label--intro">get in touch</div>
-          <h2 data-reveal="1" class="contact__title">Let's build something.</h2>
+          <div data-reveal="0" data-i18n="contact.label" class="section__label section__label--contact section__label--intro">get in touch</div>
+          <h2 data-reveal="1" data-i18n="contact.h2" class="contact__title">Let's build something.</h2>
           <div data-reveal="2">
             <a class="contact__email" href="mailto:sirio.feltrin@gmail.com">sirio.feltrin@gmail.com</a>
           </div>
@@ -639,7 +651,7 @@
       <footer class="footer">
         <div class="footer__inner">
           <span>SF — SIRIO VITTORIO FELTRIN</span>
-          <span>COPENHAGEN · 2026</span>
+          <span data-i18n="hero.corner">COPENHAGEN · 2026</span>
         </div>
       </footer>
 
@@ -684,7 +696,7 @@
           <span class="proj__glow proj__glow--c"></span>
         </div>
 
-        <a data-close href="#work" class="proj__back">&#8592;&nbsp;back to work</a>
+        <a data-close href="#work" class="proj__back" data-i18n-rich="dd.back">&#8592;&nbsp;back to work</a>
 
         <!-- MASTHEAD — asymmetric split (design-taste VARIANCE 8, anti-centre):
              title column on the left, the real OT-2 timelapse video on the right
@@ -694,10 +706,10 @@
              swaps in the poster + controls under reduced motion. -->
         <header class="proj__masthead">
           <div class="proj__masthead-text">
-            <div data-reveal="0" class="proj__eyebrow">lab automation · DALSA (DTU Arena for Life Science Automation) · 2025</div>
-            <h1 data-reveal="1" class="proj__title">Automated Gel Electrophoresis</h1>
-            <p data-reveal="2" class="proj__lede">A design-thinking project that hands the lab's most repetitive step &mdash; loading a gel by hand &mdash; to an Opentrons OT-2 robot, without giving up the slab gel's flexibility and low cost.</p>
-            <div data-reveal="3" class="proj__meta">6-month solo project &middot; DTU Bioengineering &middot; graded&nbsp;12/12</div>
+            <div data-reveal="0" class="proj__eyebrow" data-i18n="dd.eyebrow">lab automation · DALSA (DTU Arena for Life Science Automation) · 2025</div>
+            <h1 data-reveal="1" class="proj__title" data-i18n="work.plate2.title">Automated Gel Electrophoresis</h1>
+            <p data-reveal="2" class="proj__lede" data-i18n="dd.lede">A design-thinking project that hands the lab's most repetitive step &mdash; loading a gel by hand &mdash; to an Opentrons OT-2 robot, without giving up the slab gel's flexibility and low cost.</p>
+            <div data-reveal="3" class="proj__meta" data-i18n-rich="dd.meta">6-month solo project &middot; DTU Bioengineering &middot; graded&nbsp;12/12</div>
           </div>
           <div data-reveal="2" class="proj__masthead-visual">
             <!-- No `autoplay` (MOTION-02): main.js starts every .media-slot video only
@@ -707,9 +719,10 @@
               <video src="./assets/media/ot2-timelapse.mp4"
                      poster="./assets/media/ot2-timelapse-poster.jpg"
                      muted loop playsinline
+                     data-i18n-attr="aria-label:work.plate2.videoAria"
                      aria-label="Timelapse of the Opentrons OT-2 liquid-handling robot running Sirio's gel-electrophoresis protocol in the DTU lab, handling his green 3D-printed racks, pink PCR strip racks and a blue gel tray"></video>
             </figure>
-            <p class="device-frame__cap proj__masthead-cap">the prototype running the real protocol at DTU &mdash; no hand on a pipette.</p>
+            <p class="device-frame__cap proj__masthead-cap" data-i18n="dd.mastheadCap">the prototype running the real protocol at DTU &mdash; no hand on a pipette.</p>
           </div>
         </header>
 
@@ -721,13 +734,13 @@
           <span aria-hidden="true" class="section__numeral section__numeral--right">01</span>
           <div class="section__blob proj-sec__blob proj-sec__blob--right"></div>
           <div class="section__head">
-            <span data-reveal="0" class="section__label section__label--intro">the problem</span>
+            <span data-reveal="0" class="section__label section__label--intro" data-i18n="dd.s1.label">the problem</span>
             <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 data-reveal="0" data-reveal-kind="assemble"><span>A verification step almost every experiment passes through &mdash; still loaded by hand.</span></h2>
-          <p data-reveal="1" class="dd-p">Gel electrophoresis is one of molecular biology's most established techniques &mdash; rarely the endpoint, almost always the quality-control gate: confirming a PCR worked, checking a digest, sizing fragments off a run.</p>
-          <p data-reveal="2" class="dd-p">But loading one means pipetting sample after sample into a row of tiny wells, by hand &mdash; repetitive, slow, fatiguing, easy to get wrong, and worse the more samples you run. It is low-value manual work standing between a researcher and the science itself.</p>
-          <p data-reveal="3" class="dd-p">The friction bites hardest where budgets are tightest &mdash; academic labs, start-ups, small biotech teams. Closed cartridge systems can automate it but are expensive and rigid; manual slab gels stay cheap and flexible. This project lives in the gap between them.</p>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="dd.s1.h2">A verification step almost every experiment passes through &mdash; still loaded by hand.</span></h2>
+          <p data-reveal="1" class="dd-p" data-i18n="dd.s1.p1">Gel electrophoresis is one of molecular biology's most established techniques &mdash; rarely the endpoint, almost always the quality-control gate: confirming a PCR worked, checking a digest, sizing fragments off a run.</p>
+          <p data-reveal="2" class="dd-p" data-i18n="dd.s1.p2">But loading one means pipetting sample after sample into a row of tiny wells, by hand &mdash; repetitive, slow, fatiguing, easy to get wrong, and worse the more samples you run. It is low-value manual work standing between a researcher and the science itself.</p>
+          <p data-reveal="3" class="dd-p" data-i18n="dd.s1.p3">The friction bites hardest where budgets are tightest &mdash; academic labs, start-ups, small biotech teams. Closed cartridge systems can automate it but are expensive and rigid; manual slab gels stay cheap and flexible. This project lives in the gap between them.</p>
         </section>
 
         <!-- 02 — APPROACH (its own design-thinking spotlight, D-09). Asymmetric
@@ -737,19 +750,19 @@
           <span aria-hidden="true" class="section__numeral section__numeral--left">02</span>
           <div class="section__blob proj-sec__blob proj-sec__blob--left"></div>
           <div class="section__head">
-            <span data-reveal="0" class="section__label section__label--intro">the approach</span>
+            <span data-reveal="0" class="section__label section__label--intro" data-i18n="dd.s2.label">the approach</span>
             <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 data-reveal="0" data-reveal-kind="assemble"><span>Understand the real problem before designing anything.</span></h2>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="dd.s2.h2">Understand the real problem before designing anything.</span></h2>
           <div class="proj-spotlight">
             <div class="proj-spotlight__body">
-              <p data-reveal="1" class="dd-p">The whole project ran on the <strong>Double Diamond</strong> process &mdash; Discover, Define, Develop, Deliver &mdash; exploring the problem before converging on a solution, so the design answered a real need, not a guessed one.</p>
+              <p data-reveal="1" class="dd-p" data-i18n-rich="dd.s2.body">The whole project ran on the <strong>Double Diamond</strong> process &mdash; Discover, Define, Develop, Deliver &mdash; exploring the problem before converging on a solution, so the design answered a real need, not a guessed one.</p>
               <ul class="dd-list">
-                <li data-reveal="2"><span class="dd-list__k">Stakeholder analysis</span> &mdash; a Power &times; Interest map putting the lab workforce &mdash; researchers, PhDs, students &mdash; at the centre, as the people who feel the friction daily.</li>
-                <li data-reveal="3"><span class="dd-list__k">Semi-structured interviews</span> that surfaced a clear split: people who run a few gels occasionally (manual is fine for them), and people running them daily at twenty to a hundred-plus samples &mdash; for whom loading is a real bottleneck.</li>
-                <li data-reveal="4"><span class="dd-list__k">A market survey of 19 systems</span> &mdash; 12 general lab-automation platforms and 7 dedicated electrophoresis systems &mdash; pinpointing the gap between manual slab gels and expensive closed cartridge machines.</li>
+                <li data-reveal="2" data-i18n-rich="dd.s2.li1"><span class="dd-list__k">Stakeholder analysis</span> &mdash; a Power &times; Interest map putting the lab workforce &mdash; researchers, PhDs, students &mdash; at the centre, as the people who feel the friction daily.</li>
+                <li data-reveal="3" data-i18n-rich="dd.s2.li2"><span class="dd-list__k">Semi-structured interviews</span> that surfaced a clear split: people who run a few gels occasionally (manual is fine for them), and people running them daily at twenty to a hundred-plus samples &mdash; for whom loading is a real bottleneck.</li>
+                <li data-reveal="4" data-i18n-rich="dd.s2.li3"><span class="dd-list__k">A market survey of 19 systems</span> &mdash; 12 general lab-automation platforms and 7 dedicated electrophoresis systems &mdash; pinpointing the gap between manual slab gels and expensive closed cartridge machines.</li>
               </ul>
-              <p data-reveal="5" class="dd-p">That synthesis became an innovation brief with one direction: selectively automate the most repetitive, error-prone steps &mdash; sample handling and gel loading &mdash; while keeping the slab gel's low-cost, flexible workflow intact. Carried out solo at <a class="dd-link" href="https://dalsa.dtu.dk/" target="_blank" rel="noopener">DALSA&nbsp;&#8599;</a>, DTU's Arena for Life Science Automation.</p>
+              <p data-reveal="5" class="dd-p" data-i18n-rich="dd.s2.brief">That synthesis became an innovation brief with one direction: selectively automate the most repetitive, error-prone steps &mdash; sample handling and gel loading &mdash; while keeping the slab gel's low-cost, flexible workflow intact. Carried out solo at <a class="dd-link" href="https://dalsa.dtu.dk/" target="_blank" rel="noopener">DALSA&nbsp;&#8599;</a>, DTU's Arena for Life Science Automation.</p>
             </div>
           </div>
 
@@ -760,10 +773,10 @@
                dashoffset (Safari-safe), drawn on via initOt2Motion(); fully drawn +
                static by default (no JS / reduced motion). All colour derives from --accent. -->
           <figure data-reveal="1" class="dd-diamond-fig">
-            <svg class="dd-diamond" data-ot2-diamond viewBox="0 0 740 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Double Diamond design process: two diamonds, each expanding then narrowing. Diamond one is the problem space (Discover diverges to explore, Define converges to a brief); diamond two is the solution space (Develop diverges to prototype, Deliver converges to the shipped build).">
+            <svg class="dd-diamond" data-ot2-diamond viewBox="0 0 740 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" data-i18n-attr="aria-label:dd.diamond.aria" aria-label="The Double Diamond design process: two diamonds, each expanding then narrowing. Diamond one is the problem space (Discover diverges to explore, Define converges to a brief); diamond two is the solution space (Develop diverges to prototype, Deliver converges to the shipped build).">
               <!-- Problem / solution framing over each diamond -->
-              <text class="dd-frame" x="200" y="18" text-anchor="middle">the problem</text>
-              <text class="dd-frame" x="540" y="18" text-anchor="middle">the solution</text>
+              <text class="dd-frame" x="200" y="18" text-anchor="middle" data-i18n="dd.diamond.problem">the problem</text>
+              <text class="dd-frame" x="540" y="18" text-anchor="middle" data-i18n="dd.diamond.solution">the solution</text>
               <!-- Four phase triangles (fills). Diverge halves expand from a point;
                    converge halves narrow back to a point. -->
               <polygon class="dd-tri dd-tri--a" points="30,140 200,40 200,240"/>
@@ -775,10 +788,10 @@
               <path class="dd-edge dd-edge--top"    d="M30 140 L200 40 L370 140 L540 40 L710 140"/>
               <path class="dd-edge dd-edge--bottom" d="M30 140 L200 240 L370 140 L540 240 L710 140"/>
               <!-- diverge / converge cues along the expanding / narrowing edges -->
-              <text class="dd-cue" x="112" y="84" transform="rotate(-30.5 112 84)" text-anchor="middle">diverge</text>
-              <text class="dd-cue" x="288" y="84" transform="rotate(30.5 288 84)" text-anchor="middle">converge</text>
-              <text class="dd-cue" x="452" y="84" transform="rotate(-30.5 452 84)" text-anchor="middle">diverge</text>
-              <text class="dd-cue" x="628" y="84" transform="rotate(30.5 628 84)" text-anchor="middle">converge</text>
+              <text class="dd-cue" x="112" y="84" transform="rotate(-30.5 112 84)" text-anchor="middle" data-i18n="dd.cue.diverge">diverge</text>
+              <text class="dd-cue" x="288" y="84" transform="rotate(30.5 288 84)" text-anchor="middle" data-i18n="dd.cue.converge">converge</text>
+              <text class="dd-cue" x="452" y="84" transform="rotate(-30.5 452 84)" text-anchor="middle" data-i18n="dd.cue.diverge">diverge</text>
+              <text class="dd-cue" x="628" y="84" transform="rotate(30.5 628 84)" text-anchor="middle" data-i18n="dd.cue.converge">converge</text>
               <!-- phase names, integrated into each segment -->
               <text class="dd-name" x="143" y="149" text-anchor="middle">Discover</text>
               <text class="dd-name" x="256" y="149" text-anchor="middle">Define</text>
@@ -788,12 +801,12 @@
             <!-- Short descriptors, positioned under each triangle centroid (19.3 / 34.6 /
                  65.3 / 80.7% of the same 740 box); the fuller facts live in the prose above. -->
             <div class="dd-diamond__phases">
-              <div class="dd-phase" style="left:19.3%"><span class="dd-phase__d">explore the problem widely</span></div>
-              <div class="dd-phase" style="left:34.6%"><span class="dd-phase__d">narrow to a clear brief</span></div>
-              <div class="dd-phase" style="left:65.3%"><span class="dd-phase__d">prototype the parts + protocol</span></div>
-              <div class="dd-phase" style="left:80.7%"><span class="dd-phase__d">test + ship the working OT-2</span></div>
+              <div class="dd-phase" style="left:19.3%"><span class="dd-phase__d" data-i18n="dd.phase.d1">explore the problem widely</span></div>
+              <div class="dd-phase" style="left:34.6%"><span class="dd-phase__d" data-i18n="dd.phase.d2">narrow to a clear brief</span></div>
+              <div class="dd-phase" style="left:65.3%"><span class="dd-phase__d" data-i18n="dd.phase.d3">prototype the parts + protocol</span></div>
+              <div class="dd-phase" style="left:80.7%"><span class="dd-phase__d" data-i18n="dd.phase.d4">test + ship the working OT-2</span></div>
             </div>
-            <figcaption class="device-frame__cap">the Double Diamond &mdash; explore wide (diverge), then narrow down (converge); once on the problem, once on the solution.</figcaption>
+            <figcaption class="device-frame__cap" data-i18n="dd.diamond.cap">the Double Diamond &mdash; explore wide (diverge), then narrow down (converge); once on the problem, once on the solution.</figcaption>
           </figure>
         </section>
 
@@ -804,10 +817,10 @@
           <span aria-hidden="true" class="section__numeral section__numeral--right">03</span>
           <div class="section__blob proj-sec__blob proj-sec__blob--right"></div>
           <div class="section__head">
-            <span data-reveal="0" class="section__label section__label--intro">the build</span>
+            <span data-reveal="0" class="section__label section__label--intro" data-i18n="dd.s3.label">the build</span>
             <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 data-reveal="0" data-reveal-kind="assemble"><span>Five 3D-printed parts and a custom protocol on the OT-2.</span></h2>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="dd.s3.h2">Five 3D-printed parts and a custom protocol on the OT-2.</span></h2>
 
           <!-- BUILD lede + before-visual paired asymmetrically: text left, the
                "starting point" render offset right (not a centred stack). -->
@@ -821,20 +834,20 @@
                    only. REPLACE with a cleared first-party bench photo or a licensed
                    image — drop the new file over ./assets/media/ot2-platform-stock.png
                    (one-line swap, MEDIA-01). -->
-              <p data-reveal="1" class="dd-p">The first prototype was a fully custom gel-casting cassette designed in Fusion360 with 3D-printed combs. It hit a manufacturability wall &mdash; the comb spacing couldn't meet standard PCR-strip geometry &mdash; so it gave way to a more robust route: mounting the existing <a class="dd-link" href="https://embitec.com/runone-electrophoresis-system/" target="_blank" rel="noopener">RunOne&#8482; MultiCaster&nbsp;&#8599;</a> casting system directly onto the robot's deck.</p>
+              <p data-reveal="1" class="dd-p" data-i18n-rich="dd.s3.intro">The first prototype was a fully custom gel-casting cassette designed in Fusion360 with 3D-printed combs. It hit a manufacturability wall &mdash; the comb spacing couldn't meet standard PCR-strip geometry &mdash; so it gave way to a more robust route: mounting the existing <a class="dd-link" href="https://embitec.com/runone-electrophoresis-system/" target="_blank" rel="noopener">RunOne&#8482; MultiCaster&nbsp;&#8599;</a> casting system directly onto the robot's deck.</p>
             </div>
             <figure data-reveal="1" class="device-frame device-frame--before proj-build__before">
-              <img src="./assets/media/ot2-platform-stock.png" alt="An off-the-shelf Opentrons OT-2 liquid-handling robot — the general-purpose platform this build starts from">
-              <figcaption class="device-frame__cap">the starting point &mdash; a stock, general-purpose OT-2 liquid handler.</figcaption>
+              <img src="./assets/media/ot2-platform-stock.png" data-i18n-attr="alt:dd.s3.beforeAlt" alt="An off-the-shelf Opentrons OT-2 liquid-handling robot — the general-purpose platform this build starts from">
+              <figcaption class="device-frame__cap" data-i18n="dd.s3.beforeCap">the starting point &mdash; a stock, general-purpose OT-2 liquid handler.</figcaption>
             </figure>
           </div>
 
-          <p data-reveal="1" class="dd-p">Five parts followed in Fusion360, each with interlocking cubic mating features so they seat repeatably on the deck:</p>
+          <p data-reveal="1" class="dd-p" data-i18n="dd.s3.listIntro">Five parts followed in Fusion360, each with interlocking cubic mating features so they seat repeatably on the deck:</p>
           <ul class="dd-list">
-            <li data-reveal="2"><span class="dd-list__k">OT-2 deck adapter</span> &mdash; the mechanical interface between MultiCaster and deck.</li>
-            <li data-reveal="3"><span class="dd-list__k">Three PCR strip racks</span> &mdash; positions 1&ndash;48, permanently labelled.</li>
-            <li data-reveal="4"><span class="dd-list__k">Loading-buffer &amp; ladder rack</span> &mdash; reagents where the protocol expects them.</li>
-            <li data-reveal="5"><span class="dd-list__k">Rack holder</span> &mdash; locating the racks precisely.</li>
+            <li data-reveal="2" data-i18n-rich="dd.s3.li1"><span class="dd-list__k">OT-2 deck adapter</span> &mdash; the mechanical interface between MultiCaster and deck.</li>
+            <li data-reveal="3" data-i18n-rich="dd.s3.li2"><span class="dd-list__k">Three PCR strip racks</span> &mdash; positions 1&ndash;48, permanently labelled.</li>
+            <li data-reveal="4" data-i18n-rich="dd.s3.li3"><span class="dd-list__k">Loading-buffer &amp; ladder rack</span> &mdash; reagents where the protocol expects them.</li>
+            <li data-reveal="5" data-i18n-rich="dd.s3.li4"><span class="dd-list__k">Rack holder</span> &mdash; locating the racks precisely.</li>
           </ul>
 
           <!-- Assembly figure (distinct full-width beat): the REAL deck-allocation
@@ -845,14 +858,14 @@
                never stripes behind them. -->
           <figure class="proj-assembly" data-ot2-assembly>
             <figure class="device-frame proj-assembly__deck">
-              <img src="./assets/media/ot2-slots-allocation.png" alt="Sirio's OT-2 deck allocation map for the gel-electrophoresis protocol — the plan for where each rack, reagent and gel tray sits on the robot deck">
-              <figcaption class="device-frame__cap">the deck plan &mdash; where each rack and reagent sits.</figcaption>
+              <img src="./assets/media/ot2-slots-allocation.png" data-i18n-attr="alt:dd.s3.deckAlt" alt="Sirio's OT-2 deck allocation map for the gel-electrophoresis protocol — the plan for where each rack, reagent and gel tray sits on the robot deck">
+              <figcaption class="device-frame__cap" data-i18n="dd.s3.deckCap">the deck plan &mdash; where each rack and reagent sits.</figcaption>
             </figure>
             <div class="blueprint">
-              <img class="blueprint__part" src="./assets/media/ot2-part-adapter.png" alt="CAD render of the 3D-printed adapter Sirio designed for the OT-2 deck">
-              <img class="blueprint__part" src="./assets/media/ot2-part-pcr-strip-racks.png" alt="CAD render of Sirio's 3D-printed PCR strip racks">
-              <img class="blueprint__part" src="./assets/media/ot2-part-buffer-ladder-rack.png" alt="CAD render of Sirio's 3D-printed rack for loading buffer and molecular-weight ladders">
-              <img class="blueprint__part" src="./assets/media/ot2-part-rack-holder.png" alt="CAD render of the 3D-printed rack holder Sirio designed">
+              <img class="blueprint__part" src="./assets/media/ot2-part-adapter.png" data-i18n-attr="alt:work.blueprint.adapter" alt="CAD render of the 3D-printed adapter Sirio designed for the OT-2 deck">
+              <img class="blueprint__part" src="./assets/media/ot2-part-pcr-strip-racks.png" data-i18n-attr="alt:work.blueprint.pcr" alt="CAD render of Sirio's 3D-printed PCR strip racks">
+              <img class="blueprint__part" src="./assets/media/ot2-part-buffer-ladder-rack.png" data-i18n-attr="alt:work.blueprint.buffer" alt="CAD render of Sirio's 3D-printed rack for loading buffer and molecular-weight ladders">
+              <img class="blueprint__part" src="./assets/media/ot2-part-rack-holder.png" data-i18n-attr="alt:work.blueprint.holder" alt="CAD render of the 3D-printed rack holder Sirio designed">
             </div>
           </figure>
 
@@ -860,14 +873,14 @@
                offset opposite — not a centred stack. -->
           <div class="proj-build__protocol">
             <div class="proj-build__protocol-text">
-              <p data-reveal="1" class="dd-p">A custom Opentrons OT-2 protocol drives the run. Rather than a fixed script it is parameterised &mdash; the operator sets how many strips, what volume, whether loading buffer and a molecular-weight ladder are included. Under the hood it loads a split strip across half a column at a time, uses air-gap dispensing to protect small volumes, and lifts the tip slowly from each well so the sample settles cleanly into its lane.</p>
+              <p data-reveal="1" class="dd-p" data-i18n="dd.s3.protocol">A custom Opentrons OT-2 protocol drives the run. Rather than a fixed script it is parameterised &mdash; the operator sets how many strips, what volume, whether loading buffer and a molecular-weight ladder are included. Under the hood it loads a split strip across half a column at a time, uses air-gap dispensing to protect small volumes, and lifts the tip slowly from each well so the sample settles cleanly into its lane.</p>
             </div>
             <!-- First-party screenshot of Sirio's parameterised-run interface (D-14 —
                  what the protocol DOES, not how long it is). Shown whole via
                  .device-frame--portrait (object-fit:contain, never cropped). -->
             <figure data-reveal="1" class="device-frame device-frame--portrait proj-build__ui">
-              <img src="./assets/media/ot2-ui-runner.png" alt="The parameterised-run interface of Sirio's OT-2 protocol — the operator sets the number of strips, the volume, and whether a loading buffer and a molecular-weight ladder are included before the run">
-              <figcaption class="device-frame__cap">the parameterised run &mdash; strips, volume, buffer and ladder, set before the robot starts.</figcaption>
+              <img src="./assets/media/ot2-ui-runner.png" data-i18n-attr="alt:dd.s3.uiAlt" alt="The parameterised-run interface of Sirio's OT-2 protocol — the operator sets the number of strips, the volume, and whether a loading buffer and a molecular-weight ladder are included before the run">
+              <figcaption class="device-frame__cap" data-i18n="dd.s3.uiCap">the parameterised run &mdash; strips, volume, buffer and ladder, set before the robot starts.</figcaption>
             </figure>
           </div>
         </section>
@@ -880,27 +893,27 @@
           <span aria-hidden="true" class="section__numeral section__numeral--left">04</span>
           <div class="section__blob proj-sec__blob proj-sec__blob--left"></div>
           <div class="section__head">
-            <span data-reveal="0" class="section__label section__label--intro">the outcome</span>
+            <span data-reveal="0" class="section__label section__label--intro" data-i18n="dd.s4.label">the outcome</span>
             <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 data-reveal="0" data-reveal-kind="assemble"><span>A working prototype &mdash; and a clear next iteration.</span></h2>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="dd.s4.h2">A working prototype &mdash; and a clear next iteration.</span></h2>
           <div class="ot2-stats">
             <div data-reveal="1" class="ot2-stat">
               <span class="ot2-stat__n" data-ot2-stat>144</span>
-              <span class="ot2-stat__l">samples per run &mdash; 3 gels &times; 48</span>
+              <span class="ot2-stat__l" data-i18n="dd.s4.stat1">samples per run &mdash; 3 gels &times; 48</span>
             </div>
             <div data-reveal="2" class="ot2-stat">
               <span class="ot2-stat__n" data-ot2-stat>~10 min</span>
-              <span class="ot2-stat__l">per gel, tested and functional</span>
+              <span class="ot2-stat__l" data-i18n="dd.s4.stat2">per gel, tested and functional</span>
             </div>
             <div data-reveal="3" class="ot2-stat">
               <span class="ot2-stat__n" data-ot2-stat>12/12</span>
-              <span class="ot2-stat__l">final grade</span>
+              <span class="ot2-stat__l" data-i18n="dd.s4.stat3">final grade</span>
             </div>
           </div>
-          <p data-reveal="4" class="dd-p">Tested and confirmed working: up to 144 samples per run across three gels, about ten minutes per gel &mdash; keeping the slab gel's low cost and flexibility while lifting the repetitive pipetting off a person's hands.</p>
-          <p data-reveal="5" class="dd-p">As a prototype, it closes on where it goes next: operator feedback after repeated runs; magnetic or V-groove mating features for faster, more repeatable assembly; a modified comb with a dedicated ladder lane; support for multiple gel sizes; automated covering-buffer dispensing; and short calibration and dry-run checks so the robot verifies its own alignment before a run.</p>
-          <a data-close href="#work" class="proj__back proj__back--foot">&#8592;&nbsp;back to work</a>
+          <p data-reveal="4" class="dd-p" data-i18n="dd.s4.p1">Tested and confirmed working: up to 144 samples per run across three gels, about ten minutes per gel &mdash; keeping the slab gel's low cost and flexibility while lifting the repetitive pipetting off a person's hands.</p>
+          <p data-reveal="5" class="dd-p" data-i18n="dd.s4.p2">As a prototype, it closes on where it goes next: operator feedback after repeated runs; magnetic or V-groove mating features for faster, more repeatable assembly; a modified comb with a dedicated ladder lane; support for multiple gel sizes; automated covering-buffer dispensing; and short calibration and dry-run checks so the robot verifies its own alignment before a run.</p>
+          <a data-close href="#work" class="proj__back proj__back--foot" data-i18n-rich="dd.back">&#8592;&nbsp;back to work</a>
         </section>
 
       </div>

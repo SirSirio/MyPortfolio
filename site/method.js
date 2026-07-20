@@ -20,6 +20,7 @@
        A built an HTML string — that is NOT the locked variant, not ported from. */
 
 import { REDUCED } from './star-engine.js';
+import { onLangChange, t } from './i18n.js';
 
 /* Every calculator timing lives in ONE object, at the top, so re-pacing is a
    numbers-only edit. Timing IS the point of this rebuild: Sirio could not read
@@ -72,14 +73,14 @@ function playCalc() {
      pacing is lost. That is the C-5 test: if any claim existed only in motion,
      the section would be wrong. */
   if (REDUCED) {
-    ghost.textContent = 'MAP → STRATEGY → EXECUTE';
+    ghost.textContent = t('calc.reduced.ghost');
     out.classList.add('calc__out--resolved');
-    out.textContent = 'THE DIRECTION IS MINE';
+    out.textContent = t('calc.direction');
     return;
   }
 
   // Beat 1 — mash the keys. "typing numbers until they matched the answers"
-  ghost.textContent = '873 ÷ 41 = ?';
+  ghost.textContent = t('calc.ghost.q');
   out.textContent = '0';
   let seq = '';
   const mash = ['7', '3', '8', '4', '1', '9', '2', '6', '5', '0', '3', '7'];
@@ -94,35 +95,56 @@ function playCalc() {
       out.textContent = seq;
     }, 900 + i * D.keyStep));
   });
-  let t = 900 + mash.length * D.keyStep + 300;
+  let tm = 900 + mash.length * D.keyStep + 300;
 
   // Beat 2 — the answer that means nothing. The long hold IS the point.
   timers.push(setTimeout(() => {
-    ghost.textContent = 'ANSWER MATCHED. UNDERSTOOD NOTHING.';
+    ghost.textContent = t('calc.mash');
     out.textContent = '21.29268';
-  }, t));
-  t += D.mashPause;
+  }, tm));
+  tm += D.mashPause;
 
   // Beat 3 — the order resolves, one readable line at a time. Lines STACK and
   // stay on screen (\n) so there is time to read each before the next lands.
   timers.push(setTimeout(() => {
-    ghost.textContent = 'THEN I LEARNED THE ORDER';
+    ghost.textContent = t('calc.order.head');
     out.classList.add('calc__out--resolved');
     out.textContent = '';
-  }, t));
-  t += D.preOrder;
+  }, tm));
+  tm += D.preOrder;
 
-  ['MAP THE PROBLEM', 'CHOOSE THE STRATEGY', 'LET THE TOOL EXECUTE'].forEach((s, i) => {
+  [t('calc.line1'), t('calc.line2'), t('calc.line3')].forEach((s, i) => {
     timers.push(setTimeout(() => {
       out.textContent += (i ? '\n' : '') + s;
-    }, t + i * D.lineHold));
+    }, tm + i * D.lineHold));
   });
-  t += 3 * D.lineHold + D.finalHold;
+  tm += 3 * D.lineHold + D.finalHold;
 
   timers.push(setTimeout(() => {
-    ghost.textContent = 'NEVER THE REVERSE';
-    out.textContent = 'THE DIRECTION IS MINE';
-  }, t));
+    ghost.textContent = t('calc.reverse');
+    out.textContent = t('calc.direction');
+  }, tm));
+}
+
+/* Re-label the calculator's RESOLVED end-state in the current language on a live
+   language switch (quick 260720-p2u). The static track/manifesto prose is [data-i18n]
+   and re-renders through applyLang on its own; only the calc's timer-injected strings
+   need this. It does NOT restart the ~20s sequence — that would replay it in the
+   wrong place — it clears any pending timers and snaps to the resolved strings, and
+   ONLY once the calc has actually resolved (it has played, or we are under REDUCED
+   where initMethod resolved it immediately). If the sequence has not started yet, the
+   play-once observer will play it in the current language when it fires (playCalc
+   reads t() live). */
+function relabelCalc() {
+  if (!played && !REDUCED) return;
+  const out = document.getElementById('calc-out');
+  const ghost = document.getElementById('calc-ghost');
+  if (!out || !ghost) return;
+  timers.forEach(clearTimeout);
+  timers = [];
+  ghost.textContent = REDUCED ? t('calc.reduced.ghost') : t('calc.reverse');
+  out.classList.add('calc__out--resolved');
+  out.textContent = t('calc.direction');
 }
 
 /* Act 2 — light one track's phases (and, in the loop's case, its return arc and
@@ -180,6 +202,11 @@ export function initMethod() {
      data-arc-state="lit", whose dasharray still needs --len. Measure before
      arming or observing. */
   initArc();
+
+  /* Re-label the calc's resolved end-state on a live language switch. Registered on
+     BOTH paths (before the REDUCED return) so switching re-labels under reduced motion
+     too. */
+  onLangChange(relabelCalc);
 
   const tracks = [...method.querySelectorAll('[data-track]')];
 

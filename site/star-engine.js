@@ -72,23 +72,47 @@ export class HeroStar {
     this._draw(now, hr);
   }
 
-  /* ---------- typewriter ---------- */
+  /* ---------- typewriter ----------
+
+     The 8 term GRADIENTS are DESIGN (the PAL-spectrum roll), not language, so they
+     live here and stay fixed; only the term WORDS become language-aware. The
+     article prefix uses U+00A0 (a non-breaking space) exactly as the shipped code
+     did, so the article stays glued to its role and English renders byte-identical.
+     The default term list is the shipped English one -- the hero types English
+     whether or not setLang() is ever called (i18n is additive, never required). */
+  _buildTerms(list) {
+    const g = this._grads;
+    return list.map((t, i) => {
+      const prefix = (t.prefix != null) ? t.prefix : (/^[aeiou]/i.test(t.text) ? 'n ' : ' ');
+      return { text: t.text, grad: g[i % g.length], prefix, full: prefix + t.text };
+    });
+  }
   _startType() {
-    this.terms = [
-      { text: 'Engineer', grad: 'linear-gradient(90deg,#7dd3fc,#38bdf8)' },
-      { text: 'Designer', grad: 'linear-gradient(90deg,#fcd34d,#fb923c)' },
-      { text: 'Developer', grad: 'linear-gradient(90deg,#c4b5fd,#a855f7)' },
-      { text: 'Biotechnologist', grad: 'linear-gradient(90deg,#86efac,#34d399)' },
-      { text: 'Product Maker', grad: 'linear-gradient(90deg,#fda4af,#fb7185)' },
-      { text: 'Lab Automator', grad: 'linear-gradient(90deg,#5eead4,#14b8a6)' },
-      { text: 'Data Analyst', grad: 'linear-gradient(90deg,#f9a8d4,#ec4899)' },
-      { text: 'AI enthusiast', grad: 'linear-gradient(90deg,#a5b4fc,#818cf8)' }
+    this._grads = [
+      'linear-gradient(90deg,#7dd3fc,#38bdf8)',
+      'linear-gradient(90deg,#fcd34d,#fb923c)',
+      'linear-gradient(90deg,#c4b5fd,#a855f7)',
+      'linear-gradient(90deg,#86efac,#34d399)',
+      'linear-gradient(90deg,#fda4af,#fb7185)',
+      'linear-gradient(90deg,#5eead4,#14b8a6)',
+      'linear-gradient(90deg,#f9a8d4,#ec4899)',
+      'linear-gradient(90deg,#a5b4fc,#818cf8)'
     ];
-    this.terms.forEach(t => { t.prefix = (/^[aeiou]/i.test(t.text) ? 'n ' : ' '); t.full = t.prefix + t.text; });
+    this.terms = this._buildTerms([
+      { text: 'Engineer' },
+      { text: 'Designer' },
+      { text: 'Developer' },
+      { text: 'Biotechnologist' },
+      { text: 'Product Maker' },
+      { text: 'Lab Automator' },
+      { text: 'Data Analyst' },
+      { text: 'AI enthusiast' }
+    ]);
     this.ti = 0; this.ci = 0; this.deleting = false;
     this._artEl = this.el.querySelector('[data-art]');
     this._typeEl = this.el.querySelector('[data-typer]');
     if (!this._typeEl) return;
+    this._tick = this._tick.bind(this);
     if (this.reduced) {
       this._typeEl.style.backgroundImage = this.terms[0].grad;
       if (this._artEl) this._artEl.textContent = this.terms[0].prefix;
@@ -96,7 +120,26 @@ export class HeroStar {
       return;
     }
     this._typeEl.style.backgroundImage = this.terms[0].grad;
-    this._tick = this._tick.bind(this);
+    this._tick();
+  }
+
+  /* Language swap -- TEXT ONLY. Accepts the resolved term array
+     [{text, prefix?}, ...] (mapped positionally to the fixed gradients), rebuilds
+     this.terms and re-seeds the type cycle from the first term. It touches NOTHING
+     else in the engine -- no periodMs, t0, breath math, armed/orbiting flags or
+     planet/orbit code -- so tempo, breath and the i-dot orbits are unchanged. */
+  setLang(list) {
+    if (!Array.isArray(list) || !list.length || !this._grads) return;
+    this.terms = this._buildTerms(list);
+    clearTimeout(this._tt);
+    this.ti = 0; this.ci = 0; this.deleting = false;
+    if (!this._typeEl) return;
+    this._typeEl.style.backgroundImage = this.terms[0].grad;
+    if (this.reduced) {
+      if (this._artEl) this._artEl.textContent = this.terms[0].prefix;
+      this._typeEl.textContent = this.terms[0].text;
+      return;
+    }
     this._tick();
   }
   _tick() {
