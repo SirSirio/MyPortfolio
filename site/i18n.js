@@ -214,7 +214,11 @@ export const STRINGS = {
 
     /* hero */
     'hero.intro': `Ciao, sono`,
-    'hero.type.lead': `Sono`,
+    /* Trailing U+00A0 is load-bearing: unlike English (where the "a" article-stub
+       lives in the lead and the engine glues "a"+"n" -> "an"), the Italian article
+       is a whole separate word carried in each term's `prefix` ("un ", "uno ").
+       Without this separator the line renders "Sonoun Designer". */
+    'hero.type.lead': `Sono\u00A0`,
     'hero.corner': `COPENAGHEN · 2026`,
     'hero.scroll': `SCORRI`,
 
