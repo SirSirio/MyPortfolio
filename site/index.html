@@ -751,38 +751,27 @@
               </ul>
               <p data-reveal="5" class="dd-p">That synthesis became an innovation brief with one direction: selectively automate the most repetitive, error-prone steps &mdash; sample handling and gel loading &mdash; while keeping the slab gel's low-cost, flexible workflow intact. Carried out solo at <a class="dd-link" href="https://dalsa.dtu.dk/" target="_blank" rel="noopener">DALSA&nbsp;&#8599;</a>, DTU's Arena for Life Science Automation.</p>
             </div>
-            <!-- Hand-built Double Diamond SVG (design-taste §4.8 — a simple diagrammatic
-                 mark the brief calls for). Cyan line-art on the dark ground; the outline
-                 is one continuous stroke that draws on with a POSITIVE stroke-dashoffset
-                 (Safari-safe) via initOt2Motion(). Static + fully drawn by default (no
-                 JS / reduced motion). The four phases carry a few real words each. -->
-            <figure data-reveal="1" class="dd-diamond-fig proj-spotlight__aside">
-              <svg class="dd-diamond" data-ot2-diamond viewBox="0 0 680 340" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Double Diamond design process used on this project: Discover — interviews and a 19-system market survey; Define — an innovation brief to automate the repetitive steps; Develop — prototyping the parts and the parameterised protocol; Deliver — a working OT-2 build graded 12 out of 12.">
-                <!-- process spine (static guide) -->
-                <line class="dd-diamond__spine" x1="30" y1="150" x2="650" y2="150"/>
-                <!-- the two diamonds as one continuous stroke (the draw-on target) -->
-                <path class="dd-diamond__stroke" d="M30 150 L190 50 L350 150 L510 50 L650 150 L510 250 L350 150 L190 250 Z"/>
-                <g class="dd-diamond__labels">
-                  <text class="dd-diamond__phase" x="110" y="292" text-anchor="middle">Discover</text>
-                  <text class="dd-diamond__desc" x="110" y="309" text-anchor="middle">interviews +</text>
-                  <text class="dd-diamond__desc" x="110" y="322" text-anchor="middle">a 19-system survey</text>
-
-                  <text class="dd-diamond__phase" x="275" y="292" text-anchor="middle">Define</text>
-                  <text class="dd-diamond__desc" x="275" y="309" text-anchor="middle">the brief &mdash; automate</text>
-                  <text class="dd-diamond__desc" x="275" y="322" text-anchor="middle">the repetitive steps</text>
-
-                  <text class="dd-diamond__phase" x="405" y="292" text-anchor="middle">Develop</text>
-                  <text class="dd-diamond__desc" x="405" y="309" text-anchor="middle">prototype the parts</text>
-                  <text class="dd-diamond__desc" x="405" y="322" text-anchor="middle">+ the protocol</text>
-
-                  <text class="dd-diamond__phase" x="570" y="292" text-anchor="middle">Deliver</text>
-                  <text class="dd-diamond__desc" x="570" y="309" text-anchor="middle">a working OT-2</text>
-                  <text class="dd-diamond__desc" x="570" y="322" text-anchor="middle">build, graded 12/12</text>
-                </g>
-              </svg>
-              <figcaption class="device-frame__cap">the Double Diamond &mdash; diverge to explore, converge to decide, twice.</figcaption>
-            </figure>
           </div>
+
+          <!-- Double Diamond, FULL-WIDTH: the SVG draws only the two-diamond SHAPE
+               (the draw-on target); the four phase labels are HTML so they stay legible
+               at any width. As SVG <text> they scaled down with the drawing inside the
+               narrow aside and became unreadable. One continuous stroke, POSITIVE
+               dashoffset (Safari-safe), drawn on via initOt2Motion(); fully drawn +
+               static by default (no JS / reduced motion). All colour derives from --accent. -->
+          <figure data-reveal="1" class="dd-diamond-fig">
+            <svg class="dd-diamond" data-ot2-diamond viewBox="0 0 680 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Double Diamond design process: Discover, Define, Develop, Deliver — diverge to explore, then converge to decide, twice.">
+              <line class="dd-diamond__spine" x1="30" y1="150" x2="650" y2="150"/>
+              <path class="dd-diamond__stroke" d="M30 150 L190 50 L350 150 L510 50 L650 150 L510 250 L350 150 L190 250 Z"/>
+            </svg>
+            <div class="dd-diamond__phases">
+              <div class="dd-phase"><span class="dd-phase__k">Discover</span><span class="dd-phase__d">interviews + a 19-system market survey</span></div>
+              <div class="dd-phase"><span class="dd-phase__k">Define</span><span class="dd-phase__d">the brief &mdash; automate the repetitive steps</span></div>
+              <div class="dd-phase"><span class="dd-phase__k">Develop</span><span class="dd-phase__d">prototype the parts + the parameterised protocol</span></div>
+              <div class="dd-phase"><span class="dd-phase__k">Deliver</span><span class="dd-phase__d">a working OT-2 build, graded 12/12</span></div>
+            </div>
+            <figcaption class="device-frame__cap">the Double Diamond &mdash; diverge to explore, converge to decide, twice.</figcaption>
+          </figure>
         </section>
 
         <!-- 03 — BUILD (the parts + protocol; NEVER a line count, D-10). The CAD
