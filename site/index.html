@@ -696,7 +696,7 @@
           <span class="proj__glow proj__glow--c"></span>
         </div>
 
-        <a data-close href="#work" class="proj__back">&#8592;&nbsp;back to work</a>
+        <a data-close href="#work" class="proj__back" data-i18n-rich="dd.back">&#8592;&nbsp;back to work</a>
 
         <!-- MASTHEAD — asymmetric split (design-taste VARIANCE 8, anti-centre):
              title column on the left, the real OT-2 timelapse video on the right
@@ -706,10 +706,10 @@
              swaps in the poster + controls under reduced motion. -->
         <header class="proj__masthead">
           <div class="proj__masthead-text">
-            <div data-reveal="0" class="proj__eyebrow">lab automation · DALSA (DTU Arena for Life Science Automation) · 2025</div>
-            <h1 data-reveal="1" class="proj__title">Automated Gel Electrophoresis</h1>
-            <p data-reveal="2" class="proj__lede">A design-thinking project that hands the lab's most repetitive step &mdash; loading a gel by hand &mdash; to an Opentrons OT-2 robot, without giving up the slab gel's flexibility and low cost.</p>
-            <div data-reveal="3" class="proj__meta">6-month solo project &middot; DTU Bioengineering &middot; graded&nbsp;12/12</div>
+            <div data-reveal="0" class="proj__eyebrow" data-i18n="dd.eyebrow">lab automation · DALSA (DTU Arena for Life Science Automation) · 2025</div>
+            <h1 data-reveal="1" class="proj__title" data-i18n="work.plate2.title">Automated Gel Electrophoresis</h1>
+            <p data-reveal="2" class="proj__lede" data-i18n="dd.lede">A design-thinking project that hands the lab's most repetitive step &mdash; loading a gel by hand &mdash; to an Opentrons OT-2 robot, without giving up the slab gel's flexibility and low cost.</p>
+            <div data-reveal="3" class="proj__meta" data-i18n-rich="dd.meta">6-month solo project &middot; DTU Bioengineering &middot; graded&nbsp;12/12</div>
           </div>
           <div data-reveal="2" class="proj__masthead-visual">
             <!-- No `autoplay` (MOTION-02): main.js starts every .media-slot video only
@@ -719,9 +719,10 @@
               <video src="./assets/media/ot2-timelapse.mp4"
                      poster="./assets/media/ot2-timelapse-poster.jpg"
                      muted loop playsinline
+                     data-i18n-attr="aria-label:work.plate2.videoAria"
                      aria-label="Timelapse of the Opentrons OT-2 liquid-handling robot running Sirio's gel-electrophoresis protocol in the DTU lab, handling his green 3D-printed racks, pink PCR strip racks and a blue gel tray"></video>
             </figure>
-            <p class="device-frame__cap proj__masthead-cap">the prototype running the real protocol at DTU &mdash; no hand on a pipette.</p>
+            <p class="device-frame__cap proj__masthead-cap" data-i18n="dd.mastheadCap">the prototype running the real protocol at DTU &mdash; no hand on a pipette.</p>
           </div>
         </header>
 
@@ -733,13 +734,13 @@
           <span aria-hidden="true" class="section__numeral section__numeral--right">01</span>
           <div class="section__blob proj-sec__blob proj-sec__blob--right"></div>
           <div class="section__head">
-            <span data-reveal="0" class="section__label section__label--intro">the problem</span>
+            <span data-reveal="0" class="section__label section__label--intro" data-i18n="dd.s1.label">the problem</span>
             <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 data-reveal="0" data-reveal-kind="assemble"><span>A verification step almost every experiment passes through &mdash; still loaded by hand.</span></h2>
-          <p data-reveal="1" class="dd-p">Gel electrophoresis is one of molecular biology's most established techniques &mdash; rarely the endpoint, almost always the quality-control gate: confirming a PCR worked, checking a digest, sizing fragments off a run.</p>
-          <p data-reveal="2" class="dd-p">But loading one means pipetting sample after sample into a row of tiny wells, by hand &mdash; repetitive, slow, fatiguing, easy to get wrong, and worse the more samples you run. It is low-value manual work standing between a researcher and the science itself.</p>
-          <p data-reveal="3" class="dd-p">The friction bites hardest where budgets are tightest &mdash; academic labs, start-ups, small biotech teams. Closed cartridge systems can automate it but are expensive and rigid; manual slab gels stay cheap and flexible. This project lives in the gap between them.</p>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="dd.s1.h2">A verification step almost every experiment passes through &mdash; still loaded by hand.</span></h2>
+          <p data-reveal="1" class="dd-p" data-i18n="dd.s1.p1">Gel electrophoresis is one of molecular biology's most established techniques &mdash; rarely the endpoint, almost always the quality-control gate: confirming a PCR worked, checking a digest, sizing fragments off a run.</p>
+          <p data-reveal="2" class="dd-p" data-i18n="dd.s1.p2">But loading one means pipetting sample after sample into a row of tiny wells, by hand &mdash; repetitive, slow, fatiguing, easy to get wrong, and worse the more samples you run. It is low-value manual work standing between a researcher and the science itself.</p>
+          <p data-reveal="3" class="dd-p" data-i18n="dd.s1.p3">The friction bites hardest where budgets are tightest &mdash; academic labs, start-ups, small biotech teams. Closed cartridge systems can automate it but are expensive and rigid; manual slab gels stay cheap and flexible. This project lives in the gap between them.</p>
         </section>
 
         <!-- 02 — APPROACH (its own design-thinking spotlight, D-09). Asymmetric
@@ -749,19 +750,19 @@
           <span aria-hidden="true" class="section__numeral section__numeral--left">02</span>
           <div class="section__blob proj-sec__blob proj-sec__blob--left"></div>
           <div class="section__head">
-            <span data-reveal="0" class="section__label section__label--intro">the approach</span>
+            <span data-reveal="0" class="section__label section__label--intro" data-i18n="dd.s2.label">the approach</span>
             <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 data-reveal="0" data-reveal-kind="assemble"><span>Understand the real problem before designing anything.</span></h2>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="dd.s2.h2">Understand the real problem before designing anything.</span></h2>
           <div class="proj-spotlight">
             <div class="proj-spotlight__body">
-              <p data-reveal="1" class="dd-p">The whole project ran on the <strong>Double Diamond</strong> process &mdash; Discover, Define, Develop, Deliver &mdash; exploring the problem before converging on a solution, so the design answered a real need, not a guessed one.</p>
+              <p data-reveal="1" class="dd-p" data-i18n-rich="dd.s2.body">The whole project ran on the <strong>Double Diamond</strong> process &mdash; Discover, Define, Develop, Deliver &mdash; exploring the problem before converging on a solution, so the design answered a real need, not a guessed one.</p>
               <ul class="dd-list">
-                <li data-reveal="2"><span class="dd-list__k">Stakeholder analysis</span> &mdash; a Power &times; Interest map putting the lab workforce &mdash; researchers, PhDs, students &mdash; at the centre, as the people who feel the friction daily.</li>
-                <li data-reveal="3"><span class="dd-list__k">Semi-structured interviews</span> that surfaced a clear split: people who run a few gels occasionally (manual is fine for them), and people running them daily at twenty to a hundred-plus samples &mdash; for whom loading is a real bottleneck.</li>
-                <li data-reveal="4"><span class="dd-list__k">A market survey of 19 systems</span> &mdash; 12 general lab-automation platforms and 7 dedicated electrophoresis systems &mdash; pinpointing the gap between manual slab gels and expensive closed cartridge machines.</li>
+                <li data-reveal="2" data-i18n-rich="dd.s2.li1"><span class="dd-list__k">Stakeholder analysis</span> &mdash; a Power &times; Interest map putting the lab workforce &mdash; researchers, PhDs, students &mdash; at the centre, as the people who feel the friction daily.</li>
+                <li data-reveal="3" data-i18n-rich="dd.s2.li2"><span class="dd-list__k">Semi-structured interviews</span> that surfaced a clear split: people who run a few gels occasionally (manual is fine for them), and people running them daily at twenty to a hundred-plus samples &mdash; for whom loading is a real bottleneck.</li>
+                <li data-reveal="4" data-i18n-rich="dd.s2.li3"><span class="dd-list__k">A market survey of 19 systems</span> &mdash; 12 general lab-automation platforms and 7 dedicated electrophoresis systems &mdash; pinpointing the gap between manual slab gels and expensive closed cartridge machines.</li>
               </ul>
-              <p data-reveal="5" class="dd-p">That synthesis became an innovation brief with one direction: selectively automate the most repetitive, error-prone steps &mdash; sample handling and gel loading &mdash; while keeping the slab gel's low-cost, flexible workflow intact. Carried out solo at <a class="dd-link" href="https://dalsa.dtu.dk/" target="_blank" rel="noopener">DALSA&nbsp;&#8599;</a>, DTU's Arena for Life Science Automation.</p>
+              <p data-reveal="5" class="dd-p" data-i18n-rich="dd.s2.brief">That synthesis became an innovation brief with one direction: selectively automate the most repetitive, error-prone steps &mdash; sample handling and gel loading &mdash; while keeping the slab gel's low-cost, flexible workflow intact. Carried out solo at <a class="dd-link" href="https://dalsa.dtu.dk/" target="_blank" rel="noopener">DALSA&nbsp;&#8599;</a>, DTU's Arena for Life Science Automation.</p>
             </div>
           </div>
 
@@ -772,10 +773,10 @@
                dashoffset (Safari-safe), drawn on via initOt2Motion(); fully drawn +
                static by default (no JS / reduced motion). All colour derives from --accent. -->
           <figure data-reveal="1" class="dd-diamond-fig">
-            <svg class="dd-diamond" data-ot2-diamond viewBox="0 0 740 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Double Diamond design process: two diamonds, each expanding then narrowing. Diamond one is the problem space (Discover diverges to explore, Define converges to a brief); diamond two is the solution space (Develop diverges to prototype, Deliver converges to the shipped build).">
+            <svg class="dd-diamond" data-ot2-diamond viewBox="0 0 740 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" data-i18n-attr="aria-label:dd.diamond.aria" aria-label="The Double Diamond design process: two diamonds, each expanding then narrowing. Diamond one is the problem space (Discover diverges to explore, Define converges to a brief); diamond two is the solution space (Develop diverges to prototype, Deliver converges to the shipped build).">
               <!-- Problem / solution framing over each diamond -->
-              <text class="dd-frame" x="200" y="18" text-anchor="middle">the problem</text>
-              <text class="dd-frame" x="540" y="18" text-anchor="middle">the solution</text>
+              <text class="dd-frame" x="200" y="18" text-anchor="middle" data-i18n="dd.diamond.problem">the problem</text>
+              <text class="dd-frame" x="540" y="18" text-anchor="middle" data-i18n="dd.diamond.solution">the solution</text>
               <!-- Four phase triangles (fills). Diverge halves expand from a point;
                    converge halves narrow back to a point. -->
               <polygon class="dd-tri dd-tri--a" points="30,140 200,40 200,240"/>
@@ -787,10 +788,10 @@
               <path class="dd-edge dd-edge--top"    d="M30 140 L200 40 L370 140 L540 40 L710 140"/>
               <path class="dd-edge dd-edge--bottom" d="M30 140 L200 240 L370 140 L540 240 L710 140"/>
               <!-- diverge / converge cues along the expanding / narrowing edges -->
-              <text class="dd-cue" x="112" y="84" transform="rotate(-30.5 112 84)" text-anchor="middle">diverge</text>
-              <text class="dd-cue" x="288" y="84" transform="rotate(30.5 288 84)" text-anchor="middle">converge</text>
-              <text class="dd-cue" x="452" y="84" transform="rotate(-30.5 452 84)" text-anchor="middle">diverge</text>
-              <text class="dd-cue" x="628" y="84" transform="rotate(30.5 628 84)" text-anchor="middle">converge</text>
+              <text class="dd-cue" x="112" y="84" transform="rotate(-30.5 112 84)" text-anchor="middle" data-i18n="dd.cue.diverge">diverge</text>
+              <text class="dd-cue" x="288" y="84" transform="rotate(30.5 288 84)" text-anchor="middle" data-i18n="dd.cue.converge">converge</text>
+              <text class="dd-cue" x="452" y="84" transform="rotate(-30.5 452 84)" text-anchor="middle" data-i18n="dd.cue.diverge">diverge</text>
+              <text class="dd-cue" x="628" y="84" transform="rotate(30.5 628 84)" text-anchor="middle" data-i18n="dd.cue.converge">converge</text>
               <!-- phase names, integrated into each segment -->
               <text class="dd-name" x="143" y="149" text-anchor="middle">Discover</text>
               <text class="dd-name" x="256" y="149" text-anchor="middle">Define</text>
@@ -800,12 +801,12 @@
             <!-- Short descriptors, positioned under each triangle centroid (19.3 / 34.6 /
                  65.3 / 80.7% of the same 740 box); the fuller facts live in the prose above. -->
             <div class="dd-diamond__phases">
-              <div class="dd-phase" style="left:19.3%"><span class="dd-phase__d">explore the problem widely</span></div>
-              <div class="dd-phase" style="left:34.6%"><span class="dd-phase__d">narrow to a clear brief</span></div>
-              <div class="dd-phase" style="left:65.3%"><span class="dd-phase__d">prototype the parts + protocol</span></div>
-              <div class="dd-phase" style="left:80.7%"><span class="dd-phase__d">test + ship the working OT-2</span></div>
+              <div class="dd-phase" style="left:19.3%"><span class="dd-phase__d" data-i18n="dd.phase.d1">explore the problem widely</span></div>
+              <div class="dd-phase" style="left:34.6%"><span class="dd-phase__d" data-i18n="dd.phase.d2">narrow to a clear brief</span></div>
+              <div class="dd-phase" style="left:65.3%"><span class="dd-phase__d" data-i18n="dd.phase.d3">prototype the parts + protocol</span></div>
+              <div class="dd-phase" style="left:80.7%"><span class="dd-phase__d" data-i18n="dd.phase.d4">test + ship the working OT-2</span></div>
             </div>
-            <figcaption class="device-frame__cap">the Double Diamond &mdash; explore wide (diverge), then narrow down (converge); once on the problem, once on the solution.</figcaption>
+            <figcaption class="device-frame__cap" data-i18n="dd.diamond.cap">the Double Diamond &mdash; explore wide (diverge), then narrow down (converge); once on the problem, once on the solution.</figcaption>
           </figure>
         </section>
 
@@ -816,10 +817,10 @@
           <span aria-hidden="true" class="section__numeral section__numeral--right">03</span>
           <div class="section__blob proj-sec__blob proj-sec__blob--right"></div>
           <div class="section__head">
-            <span data-reveal="0" class="section__label section__label--intro">the build</span>
+            <span data-reveal="0" class="section__label section__label--intro" data-i18n="dd.s3.label">the build</span>
             <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 data-reveal="0" data-reveal-kind="assemble"><span>Five 3D-printed parts and a custom protocol on the OT-2.</span></h2>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="dd.s3.h2">Five 3D-printed parts and a custom protocol on the OT-2.</span></h2>
 
           <!-- BUILD lede + before-visual paired asymmetrically: text left, the
                "starting point" render offset right (not a centred stack). -->
@@ -833,20 +834,20 @@
                    only. REPLACE with a cleared first-party bench photo or a licensed
                    image — drop the new file over ./assets/media/ot2-platform-stock.png
                    (one-line swap, MEDIA-01). -->
-              <p data-reveal="1" class="dd-p">The first prototype was a fully custom gel-casting cassette designed in Fusion360 with 3D-printed combs. It hit a manufacturability wall &mdash; the comb spacing couldn't meet standard PCR-strip geometry &mdash; so it gave way to a more robust route: mounting the existing <a class="dd-link" href="https://embitec.com/runone-electrophoresis-system/" target="_blank" rel="noopener">RunOne&#8482; MultiCaster&nbsp;&#8599;</a> casting system directly onto the robot's deck.</p>
+              <p data-reveal="1" class="dd-p" data-i18n-rich="dd.s3.intro">The first prototype was a fully custom gel-casting cassette designed in Fusion360 with 3D-printed combs. It hit a manufacturability wall &mdash; the comb spacing couldn't meet standard PCR-strip geometry &mdash; so it gave way to a more robust route: mounting the existing <a class="dd-link" href="https://embitec.com/runone-electrophoresis-system/" target="_blank" rel="noopener">RunOne&#8482; MultiCaster&nbsp;&#8599;</a> casting system directly onto the robot's deck.</p>
             </div>
             <figure data-reveal="1" class="device-frame device-frame--before proj-build__before">
-              <img src="./assets/media/ot2-platform-stock.png" alt="An off-the-shelf Opentrons OT-2 liquid-handling robot — the general-purpose platform this build starts from">
-              <figcaption class="device-frame__cap">the starting point &mdash; a stock, general-purpose OT-2 liquid handler.</figcaption>
+              <img src="./assets/media/ot2-platform-stock.png" data-i18n-attr="alt:dd.s3.beforeAlt" alt="An off-the-shelf Opentrons OT-2 liquid-handling robot — the general-purpose platform this build starts from">
+              <figcaption class="device-frame__cap" data-i18n="dd.s3.beforeCap">the starting point &mdash; a stock, general-purpose OT-2 liquid handler.</figcaption>
             </figure>
           </div>
 
-          <p data-reveal="1" class="dd-p">Five parts followed in Fusion360, each with interlocking cubic mating features so they seat repeatably on the deck:</p>
+          <p data-reveal="1" class="dd-p" data-i18n="dd.s3.listIntro">Five parts followed in Fusion360, each with interlocking cubic mating features so they seat repeatably on the deck:</p>
           <ul class="dd-list">
-            <li data-reveal="2"><span class="dd-list__k">OT-2 deck adapter</span> &mdash; the mechanical interface between MultiCaster and deck.</li>
-            <li data-reveal="3"><span class="dd-list__k">Three PCR strip racks</span> &mdash; positions 1&ndash;48, permanently labelled.</li>
-            <li data-reveal="4"><span class="dd-list__k">Loading-buffer &amp; ladder rack</span> &mdash; reagents where the protocol expects them.</li>
-            <li data-reveal="5"><span class="dd-list__k">Rack holder</span> &mdash; locating the racks precisely.</li>
+            <li data-reveal="2" data-i18n-rich="dd.s3.li1"><span class="dd-list__k">OT-2 deck adapter</span> &mdash; the mechanical interface between MultiCaster and deck.</li>
+            <li data-reveal="3" data-i18n-rich="dd.s3.li2"><span class="dd-list__k">Three PCR strip racks</span> &mdash; positions 1&ndash;48, permanently labelled.</li>
+            <li data-reveal="4" data-i18n-rich="dd.s3.li3"><span class="dd-list__k">Loading-buffer &amp; ladder rack</span> &mdash; reagents where the protocol expects them.</li>
+            <li data-reveal="5" data-i18n-rich="dd.s3.li4"><span class="dd-list__k">Rack holder</span> &mdash; locating the racks precisely.</li>
           </ul>
 
           <!-- Assembly figure (distinct full-width beat): the REAL deck-allocation
@@ -857,14 +858,14 @@
                never stripes behind them. -->
           <figure class="proj-assembly" data-ot2-assembly>
             <figure class="device-frame proj-assembly__deck">
-              <img src="./assets/media/ot2-slots-allocation.png" alt="Sirio's OT-2 deck allocation map for the gel-electrophoresis protocol — the plan for where each rack, reagent and gel tray sits on the robot deck">
-              <figcaption class="device-frame__cap">the deck plan &mdash; where each rack and reagent sits.</figcaption>
+              <img src="./assets/media/ot2-slots-allocation.png" data-i18n-attr="alt:dd.s3.deckAlt" alt="Sirio's OT-2 deck allocation map for the gel-electrophoresis protocol — the plan for where each rack, reagent and gel tray sits on the robot deck">
+              <figcaption class="device-frame__cap" data-i18n="dd.s3.deckCap">the deck plan &mdash; where each rack and reagent sits.</figcaption>
             </figure>
             <div class="blueprint">
-              <img class="blueprint__part" src="./assets/media/ot2-part-adapter.png" alt="CAD render of the 3D-printed adapter Sirio designed for the OT-2 deck">
-              <img class="blueprint__part" src="./assets/media/ot2-part-pcr-strip-racks.png" alt="CAD render of Sirio's 3D-printed PCR strip racks">
-              <img class="blueprint__part" src="./assets/media/ot2-part-buffer-ladder-rack.png" alt="CAD render of Sirio's 3D-printed rack for loading buffer and molecular-weight ladders">
-              <img class="blueprint__part" src="./assets/media/ot2-part-rack-holder.png" alt="CAD render of the 3D-printed rack holder Sirio designed">
+              <img class="blueprint__part" src="./assets/media/ot2-part-adapter.png" data-i18n-attr="alt:work.blueprint.adapter" alt="CAD render of the 3D-printed adapter Sirio designed for the OT-2 deck">
+              <img class="blueprint__part" src="./assets/media/ot2-part-pcr-strip-racks.png" data-i18n-attr="alt:work.blueprint.pcr" alt="CAD render of Sirio's 3D-printed PCR strip racks">
+              <img class="blueprint__part" src="./assets/media/ot2-part-buffer-ladder-rack.png" data-i18n-attr="alt:work.blueprint.buffer" alt="CAD render of Sirio's 3D-printed rack for loading buffer and molecular-weight ladders">
+              <img class="blueprint__part" src="./assets/media/ot2-part-rack-holder.png" data-i18n-attr="alt:work.blueprint.holder" alt="CAD render of the 3D-printed rack holder Sirio designed">
             </div>
           </figure>
 
@@ -872,14 +873,14 @@
                offset opposite — not a centred stack. -->
           <div class="proj-build__protocol">
             <div class="proj-build__protocol-text">
-              <p data-reveal="1" class="dd-p">A custom Opentrons OT-2 protocol drives the run. Rather than a fixed script it is parameterised &mdash; the operator sets how many strips, what volume, whether loading buffer and a molecular-weight ladder are included. Under the hood it loads a split strip across half a column at a time, uses air-gap dispensing to protect small volumes, and lifts the tip slowly from each well so the sample settles cleanly into its lane.</p>
+              <p data-reveal="1" class="dd-p" data-i18n="dd.s3.protocol">A custom Opentrons OT-2 protocol drives the run. Rather than a fixed script it is parameterised &mdash; the operator sets how many strips, what volume, whether loading buffer and a molecular-weight ladder are included. Under the hood it loads a split strip across half a column at a time, uses air-gap dispensing to protect small volumes, and lifts the tip slowly from each well so the sample settles cleanly into its lane.</p>
             </div>
             <!-- First-party screenshot of Sirio's parameterised-run interface (D-14 —
                  what the protocol DOES, not how long it is). Shown whole via
                  .device-frame--portrait (object-fit:contain, never cropped). -->
             <figure data-reveal="1" class="device-frame device-frame--portrait proj-build__ui">
-              <img src="./assets/media/ot2-ui-runner.png" alt="The parameterised-run interface of Sirio's OT-2 protocol — the operator sets the number of strips, the volume, and whether a loading buffer and a molecular-weight ladder are included before the run">
-              <figcaption class="device-frame__cap">the parameterised run &mdash; strips, volume, buffer and ladder, set before the robot starts.</figcaption>
+              <img src="./assets/media/ot2-ui-runner.png" data-i18n-attr="alt:dd.s3.uiAlt" alt="The parameterised-run interface of Sirio's OT-2 protocol — the operator sets the number of strips, the volume, and whether a loading buffer and a molecular-weight ladder are included before the run">
+              <figcaption class="device-frame__cap" data-i18n="dd.s3.uiCap">the parameterised run &mdash; strips, volume, buffer and ladder, set before the robot starts.</figcaption>
             </figure>
           </div>
         </section>
@@ -892,27 +893,27 @@
           <span aria-hidden="true" class="section__numeral section__numeral--left">04</span>
           <div class="section__blob proj-sec__blob proj-sec__blob--left"></div>
           <div class="section__head">
-            <span data-reveal="0" class="section__label section__label--intro">the outcome</span>
+            <span data-reveal="0" class="section__label section__label--intro" data-i18n="dd.s4.label">the outcome</span>
             <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
           </div>
-          <h2 data-reveal="0" data-reveal-kind="assemble"><span>A working prototype &mdash; and a clear next iteration.</span></h2>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="dd.s4.h2">A working prototype &mdash; and a clear next iteration.</span></h2>
           <div class="ot2-stats">
             <div data-reveal="1" class="ot2-stat">
               <span class="ot2-stat__n" data-ot2-stat>144</span>
-              <span class="ot2-stat__l">samples per run &mdash; 3 gels &times; 48</span>
+              <span class="ot2-stat__l" data-i18n="dd.s4.stat1">samples per run &mdash; 3 gels &times; 48</span>
             </div>
             <div data-reveal="2" class="ot2-stat">
               <span class="ot2-stat__n" data-ot2-stat>~10 min</span>
-              <span class="ot2-stat__l">per gel, tested and functional</span>
+              <span class="ot2-stat__l" data-i18n="dd.s4.stat2">per gel, tested and functional</span>
             </div>
             <div data-reveal="3" class="ot2-stat">
               <span class="ot2-stat__n" data-ot2-stat>12/12</span>
-              <span class="ot2-stat__l">final grade</span>
+              <span class="ot2-stat__l" data-i18n="dd.s4.stat3">final grade</span>
             </div>
           </div>
-          <p data-reveal="4" class="dd-p">Tested and confirmed working: up to 144 samples per run across three gels, about ten minutes per gel &mdash; keeping the slab gel's low cost and flexibility while lifting the repetitive pipetting off a person's hands.</p>
-          <p data-reveal="5" class="dd-p">As a prototype, it closes on where it goes next: operator feedback after repeated runs; magnetic or V-groove mating features for faster, more repeatable assembly; a modified comb with a dedicated ladder lane; support for multiple gel sizes; automated covering-buffer dispensing; and short calibration and dry-run checks so the robot verifies its own alignment before a run.</p>
-          <a data-close href="#work" class="proj__back proj__back--foot">&#8592;&nbsp;back to work</a>
+          <p data-reveal="4" class="dd-p" data-i18n="dd.s4.p1">Tested and confirmed working: up to 144 samples per run across three gels, about ten minutes per gel &mdash; keeping the slab gel's low cost and flexibility while lifting the repetitive pipetting off a person's hands.</p>
+          <p data-reveal="5" class="dd-p" data-i18n="dd.s4.p2">As a prototype, it closes on where it goes next: operator feedback after repeated runs; magnetic or V-groove mating features for faster, more repeatable assembly; a modified comb with a dedicated ladder lane; support for multiple gel sizes; automated covering-buffer dispensing; and short calibration and dry-run checks so the robot verifies its own alignment before a run.</p>
+          <a data-close href="#work" class="proj__back proj__back--foot" data-i18n-rich="dd.back">&#8592;&nbsp;back to work</a>
         </section>
 
       </div>
