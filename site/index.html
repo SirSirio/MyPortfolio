@@ -760,17 +760,40 @@
                dashoffset (Safari-safe), drawn on via initOt2Motion(); fully drawn +
                static by default (no JS / reduced motion). All colour derives from --accent. -->
           <figure data-reveal="1" class="dd-diamond-fig">
-            <svg class="dd-diamond" data-ot2-diamond viewBox="0 0 680 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Double Diamond design process: Discover, Define, Develop, Deliver — diverge to explore, then converge to decide, twice.">
-              <line class="dd-diamond__spine" x1="30" y1="150" x2="650" y2="150"/>
-              <path class="dd-diamond__stroke" d="M30 150 L190 50 L350 150 L510 50 L650 150 L510 250 L350 150 L190 250 Z"/>
+            <svg class="dd-diamond" data-ot2-diamond viewBox="0 0 740 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Double Diamond design process: two diamonds, each expanding then narrowing. Diamond one is the problem space (Discover diverges to explore, Define converges to a brief); diamond two is the solution space (Develop diverges to prototype, Deliver converges to the shipped build).">
+              <!-- Problem / solution framing over each diamond -->
+              <text class="dd-frame" x="200" y="18" text-anchor="middle">the problem</text>
+              <text class="dd-frame" x="540" y="18" text-anchor="middle">the solution</text>
+              <!-- Four phase triangles (fills). Diverge halves expand from a point;
+                   converge halves narrow back to a point. -->
+              <polygon class="dd-tri dd-tri--a" points="30,140 200,40 200,240"/>
+              <polygon class="dd-tri dd-tri--b" points="200,40 370,140 200,240"/>
+              <polygon class="dd-tri dd-tri--c" points="370,140 540,40 540,240"/>
+              <polygon class="dd-tri dd-tri--d" points="540,40 710,140 540,240"/>
+              <!-- Top + bottom edges: two paths that BOTH draw left-to-right, so the
+                   outline visibly expands then contracts, twice (initOt2Motion). -->
+              <path class="dd-edge dd-edge--top"    d="M30 140 L200 40 L370 140 L540 40 L710 140"/>
+              <path class="dd-edge dd-edge--bottom" d="M30 140 L200 240 L370 140 L540 240 L710 140"/>
+              <!-- diverge / converge cues along the expanding / narrowing edges -->
+              <text class="dd-cue" x="112" y="84" transform="rotate(-30.5 112 84)" text-anchor="middle">diverge</text>
+              <text class="dd-cue" x="288" y="84" transform="rotate(30.5 288 84)" text-anchor="middle">converge</text>
+              <text class="dd-cue" x="452" y="84" transform="rotate(-30.5 452 84)" text-anchor="middle">diverge</text>
+              <text class="dd-cue" x="628" y="84" transform="rotate(30.5 628 84)" text-anchor="middle">converge</text>
+              <!-- phase names, integrated into each segment -->
+              <text class="dd-name" x="143" y="149" text-anchor="middle">Discover</text>
+              <text class="dd-name" x="256" y="149" text-anchor="middle">Define</text>
+              <text class="dd-name" x="483" y="149" text-anchor="middle">Develop</text>
+              <text class="dd-name" x="597" y="149" text-anchor="middle">Deliver</text>
             </svg>
+            <!-- Short descriptors, positioned under each triangle centroid (19.3 / 34.6 /
+                 65.3 / 80.7% of the same 740 box); the fuller facts live in the prose above. -->
             <div class="dd-diamond__phases">
-              <div class="dd-phase"><span class="dd-phase__k">Discover</span><span class="dd-phase__d">interviews + a 19-system market survey</span></div>
-              <div class="dd-phase"><span class="dd-phase__k">Define</span><span class="dd-phase__d">the brief &mdash; automate the repetitive steps</span></div>
-              <div class="dd-phase"><span class="dd-phase__k">Develop</span><span class="dd-phase__d">prototype the parts + the parameterised protocol</span></div>
-              <div class="dd-phase"><span class="dd-phase__k">Deliver</span><span class="dd-phase__d">a working OT-2 build, graded 12/12</span></div>
+              <div class="dd-phase" style="left:19.3%"><span class="dd-phase__d">explore the problem widely</span></div>
+              <div class="dd-phase" style="left:34.6%"><span class="dd-phase__d">narrow to a clear brief</span></div>
+              <div class="dd-phase" style="left:65.3%"><span class="dd-phase__d">prototype the parts + protocol</span></div>
+              <div class="dd-phase" style="left:80.7%"><span class="dd-phase__d">test + ship the working OT-2</span></div>
             </div>
-            <figcaption class="device-frame__cap">the Double Diamond &mdash; diverge to explore, converge to decide, twice.</figcaption>
+            <figcaption class="device-frame__cap">the Double Diamond &mdash; explore wide (diverge), then narrow down (converge); once on the problem, once on the solution.</figcaption>
           </figure>
         </section>
 

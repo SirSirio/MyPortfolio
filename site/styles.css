@@ -2760,8 +2760,9 @@ section[id] {
    draws on via GSAP (positive stroke-dashoffset) and is fully drawn + static by
    default under reduced motion / no JS. All colour derives from --accent. */
 .dd-diamond-fig {
-  margin: 0;
-  padding: clamp(16px, 2.6vw, 26px);
+  /* Tighter gap between the last reasoning line and the figure (Sirio's note). */
+  margin: clamp(16px, 2.2vw, 24px) 0 0;
+  padding: clamp(22px, 3vw, 34px) clamp(18px, 2.6vw, 30px) clamp(18px, 2.4vw, 26px);
   border: 1px solid rgba(var(--accent), 0.24);
   border-radius: 12px;
   background-color: #08090f;
@@ -2776,49 +2777,89 @@ section[id] {
   max-width: 720px;
   height: auto;
   margin: 0 auto;
+  overflow: visible;
 }
-.dd-diamond__spine {
-  stroke: rgba(var(--accent), 0.22);
-  stroke-width: 1;
-  stroke-dasharray: 2 7;
-}
-.dd-diamond__stroke {
-  stroke: rgba(var(--accent), 0.75);
-  stroke-width: 1.7;
-  stroke-linejoin: round;
+/* Four phase triangles: (a) Discover + (c) Develop are the DIVERGE halves, (b) Define +
+   (d) Deliver the CONVERGE halves. Subtle cyan fills so each phase is its own segment
+   while staying on one accent; JS fades them in left-to-right, but they are visible by
+   default (no JS / reduced motion). */
+.dd-tri { stroke: none; }
+.dd-tri--a { fill: rgba(var(--accent), 0.09); }
+.dd-tri--b { fill: rgba(var(--accent), 0.15); }
+.dd-tri--c { fill: rgba(var(--accent), 0.15); }
+.dd-tri--d { fill: rgba(var(--accent), 0.21); }
+/* The two edges draw on left-to-right (positive dashoffset, Safari-safe). */
+.dd-edge {
   fill: none;
+  stroke: rgba(var(--accent), 0.85);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
 }
-/* The four phase labels are HTML (legible at any width), aligned in a row under the
-   diamond shape and sharing the SVG's max-width so they sit beneath its quarters. */
-.dd-diamond__phases {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(10px, 2vw, 22px);
-  max-width: 720px;
-  margin: clamp(12px, 1.8vw, 20px) auto 0;
-}
-.dd-phase {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(var(--accent), 0.28);
-}
-.dd-phase__k {
+/* Phase names integrated into each segment. */
+.dd-name {
+  fill: rgba(236, 240, 250, 0.98);
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(15px, 1.5vw, 18px);
-  color: rgba(232, 236, 248, 0.96);
+  font-size: 25px;
+  letter-spacing: -0.01em;
+}
+/* diverge / converge cues along the expanding / narrowing edges (the point of the model). */
+.dd-cue {
+  fill: rgba(var(--accent), 0.92);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+/* problem / solution framing over the two diamonds. */
+.dd-frame {
+  fill: rgba(228, 232, 244, 0.5);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
+}
+/* Descriptor boxes: each is absolutely positioned so its centre sits under the matching
+   triangle centroid (the inline left% == the SVG centroid x / 740). The container mirrors
+   the SVG max-width so the percentages line up with the drawing. */
+.dd-diamond__phases {
+  position: relative;
+  max-width: 720px;
+  height: 76px;
+  margin: 16px auto 0;
+}
+.dd-phase {
+  position: absolute;
+  top: 0;
+  width: 16%;
+  transform: translateX(-50%);
+  padding-top: 11px;
+  border-top: 1px solid rgba(var(--accent), 0.30);
+  text-align: center;
 }
 .dd-phase__d {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11.5px;
   line-height: 1.4;
   letter-spacing: 0.01em;
-  color: rgba(228, 232, 244, 0.62);
+  color: rgba(228, 232, 244, 0.68);
 }
-@media (max-width: 640px) {
-  .dd-diamond__phases { grid-template-columns: repeat(2, 1fr); }
+/* Mobile: the SVG scales down (its in-shape names shrink), so the descriptors become a
+   plain 2-column legend under the still-visible diamond, and names get a size bump. */
+@media (max-width: 620px) {
+  .dd-diamond__phases {
+    position: static;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 16px;
+  }
+  .dd-phase {
+    position: static;
+    width: auto;
+    transform: none;
+  }
+  .dd-name { font-size: 31px; }
 }
 
 /* ── BUILD layout diversification ────────────────────────────

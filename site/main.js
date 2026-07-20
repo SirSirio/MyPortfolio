@@ -327,11 +327,17 @@ function initOt2Motion() {
     /* — APPROACH: the hand-built Double Diamond outline draws itself on as the
          section enters, scrub-linked to the overlay scroll (POSITIVE dashoffset,
          Safari-safe). Static + fully drawn by default under reduced motion / no JS. — */
-    seedDraw('.dd-diamond__stroke');
-    gsap.to('.dd-diamond__stroke', {
-      strokeDashoffset: 0, ease: 'none',
-      scrollTrigger: { scroller, trigger: '[data-ot2-diamond]', start: 'top 86%', end: 'top 42%', scrub: 0.6 }
+    seedDraw('.dd-edge');
+    const ddTl = gsap.timeline({
+      scrollTrigger: { scroller, trigger: '[data-ot2-diamond]', start: 'top 88%', end: 'top 40%', scrub: 0.6 }
     });
+    /* Both edges draw on together, LEFT-TO-RIGHT: the outline expands (diverge) then
+       narrows (converge), twice. Fills, cues and phase names fade in in the same order. */
+    ddTl.to('.dd-edge', { strokeDashoffset: 0, ease: 'none', duration: 1 }, 0);
+    ddTl.from('.dd-frame', { opacity: 0, ease: 'none', duration: 0.4 }, 0);
+    ddTl.from('.dd-tri', { opacity: 0, ease: 'none', stagger: 0.25, duration: 0.5 }, 0.1);
+    ddTl.from('.dd-cue', { opacity: 0, ease: 'none', stagger: 0.2, duration: 0.35 }, 0.15);
+    ddTl.from('.dd-name', { opacity: 0, y: 6, ease: 'none', stagger: 0.25, duration: 0.4 }, 0.2);
 
     /* — BUILD: the CAD parts assemble onto the deck-plan plate, part by part,
          scrub-linked to the overlay scroll. — */
