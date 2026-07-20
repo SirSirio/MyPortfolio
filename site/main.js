@@ -10,6 +10,7 @@
 
 import { HeroStar, REDUCED, DPR, tintAt, rgba, clamp, lerp3 } from './star-engine.js';
 import { initMethod } from './method.js';
+import { applyLang, getInitialLang, onLangChange, TERMS } from './i18n.js';
 
 const heroEl = document.querySelector('[data-hero]');
 const deepEl = document.querySelector('[data-deep]');
@@ -515,6 +516,23 @@ function renderStatic() {
   star.frame(now);
 }
 
+/* ---------- language toggle (i18n, quick 260720-p2u) ----------
+
+   The nav EN/IT control switches the whole site. applyLang() (in i18n.js) rewrites
+   every [data-i18n*] node; these two helpers feed it the two DYNAMIC surfaces the
+   dictionary can't reach through markup: the hero typewriter's term list and the
+   toggle's own pressed-state. termsFor() resolves the language's term array (EN falls
+   back if a lang is missing); syncLangButtons() reflects the active language on the
+   two buttons for AT + the CSS active treatment. */
+function termsFor(lang) {
+  return TERMS[lang] || TERMS.en;
+}
+function syncLangButtons(lang) {
+  document.querySelectorAll('.nav__lang-btn').forEach((b) => {
+    b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+  });
+}
+
 function boot() {
   cacheHeroRect();
   syncNav();
@@ -523,6 +541,20 @@ function boot() {
   /* METHOD's calculator choreography. Observer- and timer-driven (D-37): it adds
      no rAF loop and never touches loop()/onScroll(). Inert without #method. */
   initMethod();
+  /* Language wiring (i18n). Register the typewriter subscriber BEFORE the first
+     applyLang so the hero renders in the initial language; method.js registered its
+     own calc subscriber inside initMethod() just above. The toggle uses <button>s
+     (state, not navigation). Then resolve the initial language (stored choice ->
+     browser -> English) and apply it ONCE — after initReveals()/initMethod() so
+     every annotated element and every subscriber already exists. This runs BEFORE
+     the reduced-motion return below, so Italian text ships under reduced motion too. */
+  onLangChange((lang) => star.setLang(termsFor(lang)));
+  document.querySelectorAll('.nav__lang-btn').forEach((b) => {
+    b.addEventListener('click', () => { applyLang(b.dataset.lang); syncLangButtons(b.dataset.lang); });
+  });
+  const initialLang = getInitialLang();
+  applyLang(initialLang);
+  syncLangButtons(initialLang);
   /* Warp open/close wiring (D-04). Wired ONCE here — the site has no per-frame
      acquire(), so no __wired guard is needed. Click + Enter/Space give the OT-2
      card keyboard parity (A11y — it is not a mouse-only trap). This sits BEFORE

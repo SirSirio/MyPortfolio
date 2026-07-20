@@ -505,6 +505,42 @@ section[id] {
   color: rgba(228, 236, 255, 0.95);
 }
 
+/* EN/IT language control (quick 260720-p2u). Reuses the mono nav tokens so it
+   reads as a sibling of CV / LinkedIn: Space Mono 12px, 0.1em tracking, dark-only,
+   one line. Inactive is dimmed like a resting .nav__link; active matches the
+   .nav__link:hover treatment (WCAG-AA on the glass nav). A single hairline divides
+   the two buttons — no decorative dots, no new accent colour. */
+.nav__lang {
+  display: inline-flex;
+  align-items: center;
+}
+.nav__lang-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0 2px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  color: rgba(228, 236, 255, 0.45);
+  transition: color 0.3s ease;
+}
+.nav__lang-btn + .nav__lang-btn {
+  margin-left: 8px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(228, 236, 255, 0.2);
+}
+.nav__lang-btn[aria-pressed="true"] {
+  color: rgba(228, 236, 255, 0.95);
+}
+.nav__lang-btn:hover,
+.nav__lang-btn:focus-visible {
+  color: rgba(228, 236, 255, 0.95);
+}
+
 /* ============================================================
    HERO FURNITURE
    ============================================================ */
