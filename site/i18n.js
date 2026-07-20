@@ -224,7 +224,7 @@ export const STRINGS = {
 
     /* mission (#index) */
     'mission.label': `cosa faccio`,
-    'mission.line': `MSc in Biotecnologie al DTU di Copenaghen. Progetto e costruisco l'<span class="grad">hardware, il software e l'automazione</span> che liberano gli scienziati dal lavoro ripetitivo in laboratorio.`,
+    'mission.line': `MSc in Biotecnologie alla DTU di Copenaghen. Progetto e costruisco l'<span class="grad">hardware, il software e l'automazione</span> che liberano gli scienziati dal lavoro ripetitivo in laboratorio.`,
     'nav.pill.work': `01&nbsp;LAVORI&nbsp;&#8600;`,
     'nav.pill.experience': `02&nbsp;ESPERIENZA&nbsp;&#8600;`,
     'nav.pill.publications': `03&nbsp;PUBBLICAZIONI&nbsp;&#8600;`,
@@ -233,7 +233,7 @@ export const STRINGS = {
     /* origin (About) */
     'origin.label': `// ORIGINI`,
     'origin.h2': `Come sono arrivato qui`,
-    'origin.beat1': `Per cinque anni ho avuto le mani in laboratorio — cellule di mammifero, microbiologia, fermentazione, sistemi cell-free — e ho guidato il wet lab di EndoSense, il biosensore cell-free del team iGEM del DTU. La biotecnologia è dove ho imparato come si fa davvero la buona scienza al bancone, un esperimento accurato alla volta.`,
+    'origin.beat1': `Per cinque anni ho avuto le mani in laboratorio — cellule di mammifero, microbiologia, fermentazione, sistemi cell-free — e ho guidato il wet lab di EndoSense, il biosensore cell-free del team iGEM della DTU. La biotecnologia è dove ho imparato come si fa davvero la buona scienza al bancone, un esperimento accurato alla volta.`,
     'origin.beat2': `Ciò che mi svuota non è il lavoro fisico — è la ripetizione: eseguire lo stesso protocollo decine di volte senza spazio per pensare. Tra questo e infinite nottate passate a riparare strumenti di laboratorio guasti, una cosa è diventata impossibile da ignorare — il lavoro manuale ripetitivo è il vero collo di bottiglia del laboratorio. Ciò che mi dà energia è l'opposto: il livello progettuale, ideare gli strumenti, i supporti e i flussi di lavoro che fanno funzionare meglio il bancone.`,
     'origin.beat3': `Così sono passato al livello progettuale — CAD in Fusion360, parti stampate in 3D, automazione su misura, una tesi magistrale su un dispenser portatile di precisione per liquidi. I miei anni al bancone non sono alle mie spalle; sono il mio vantaggio, e costruisco questi strumenti per le persone che devono usarli. Il product design è la costante, il dominio resta flessibile, e la logica non cambia mai: il lavoro ripetitivo è il collo di bottiglia del laboratorio, quindi lo automatizzo.`,
 
@@ -251,14 +251,14 @@ export const STRINGS = {
     'work.plate2.body': `L'elettroforesi su gel è una delle tecniche più comuni in un laboratorio di biologia molecolare — e caricare un gel significa pipettare campione dopo campione a mano, un processo lento e facile da sbagliare. Ho intervistato gli studenti e i ricercatori del laboratorio e mappato il flusso di lavoro, il che ha confermato che il caricamento manuale era il vero collo di bottiglia. Così l'ho automatizzato: cinque componenti stampati in 3D progettati con lo strumento CAD Fusion360, guidati da un protocollo personalizzato sul robot per la gestione dei liquidi Opentrons OT-2. Realizzato in autonomia al DALSA (DTU Arena for Life Science Automation), il prototipo gestisce fino a 144 campioni per ciclo a ~10 minuti per gel. Valutato 12/12.`,
     'work.plate2.label': `[ video / immagine del progetto ]`,
     'work.plate2.aria': `Apri il caso studio dell'Elettroforesi su Gel Automatizzata`,
-    'work.plate2.videoAria': `Timelapse del robot Opentrons OT-2 per la gestione dei liquidi mentre esegue il protocollo di elettroforesi su gel di Sirio nel laboratorio del DTU, maneggiando i suoi rack verdi stampati in 3D, i rack rosa per strip PCR e un vassoio per gel blu`,
+    'work.plate2.videoAria': `Timelapse del robot Opentrons OT-2 per la gestione dei liquidi mentre esegue il protocollo di elettroforesi su gel di Sirio nel laboratorio della DTU, maneggiando i suoi rack verdi stampati in 3D, i rack rosa per strip PCR e un vassoio per gel blu`,
     'work.blueprint.adapter': `Render CAD dell'adattatore stampato in 3D progettato da Sirio per il deck dell'OT-2`,
     'work.blueprint.pcr': `Render CAD dei rack per strip PCR stampati in 3D di Sirio`,
     'work.blueprint.buffer': `Render CAD del rack stampato in 3D di Sirio per il caricamento di buffer e marcatori di peso molecolare`,
     'work.blueprint.holder': `Render CAD del porta-rack stampato in 3D progettato da Sirio`,
     'work.plate3.meta': `iGEM · 2024`,
     'work.plate3.title': `EndoSense`,
-    'work.plate3.body': `Un biosensore cell-free per rilevare gli interferenti endocrini nell'acqua potabile, realizzato come Wet Lab Lead del team iGEM del DTU. Fattori di trascrizione allosterici fungono da elementi sensibili, con un reporter ad aptamero a RNA Broccoli e una lettura basata sulla luce. Premiato con una Medaglia d'Oro iGEM al Jamboree di Parigi 2024.`,
+    'work.plate3.body': `Un biosensore cell-free per rilevare gli interferenti endocrini nell'acqua potabile, realizzato come Wet Lab Lead del team iGEM della DTU. Fattori di trascrizione allosterici fungono da elementi sensibili, con un reporter ad aptamero a RNA Broccoli e una lettura basata sulla luce. Premiato con una Medaglia d'Oro iGEM al Jamboree di Parigi 2024.`,
     'work.plate3.label': `[ immagine del progetto ]`,
     'work.plate3.imgAlt': `Il biosensore cell-free EndoSense in azione — DTU iGEM 2024; apre il wiki del progetto`,
     'work.plate3.link': `WIKI IGEM&nbsp;&#8599;`,
@@ -345,7 +345,7 @@ export const STRINGS = {
     'dd.eyebrow': `automazione di laboratorio · DALSA (DTU Arena for Life Science Automation) · 2025`,
     'dd.lede': `Un progetto di design thinking che affida il passaggio più ripetitivo del laboratorio — caricare un gel a mano — a un robot Opentrons OT-2, senza rinunciare alla flessibilità e al basso costo del gel a lastra.`,
     'dd.meta': `progetto individuale di 6 mesi &middot; DTU Bioengineering &middot; valutato&nbsp;12/12`,
-    'dd.mastheadCap': `il prototipo che esegue il protocollo reale al DTU — nessuna mano sulla pipetta.`,
+    'dd.mastheadCap': `il prototipo che esegue il protocollo reale alla DTU — nessuna mano sulla pipetta.`,
 
     'dd.s1.label': `il problema`,
     'dd.s1.h2': `Un passaggio di verifica attraverso cui passa quasi ogni esperimento — ancora caricato a mano.`,
@@ -359,7 +359,7 @@ export const STRINGS = {
     'dd.s2.li1': `<span class="dd-list__k">Analisi degli stakeholder</span> &mdash; una mappa Potere &times; Interesse che mette la forza lavoro del laboratorio &mdash; ricercatori, dottorandi, studenti &mdash; al centro, come le persone che vivono l'attrito ogni giorno.`,
     'dd.s2.li2': `<span class="dd-list__k">Interviste semi-strutturate</span> che hanno fatto emergere una netta divisione: chi esegue pochi gel occasionalmente (per loro il manuale va bene), e chi li esegue ogni giorno da venti a oltre cento campioni &mdash; per cui il caricamento è un vero collo di bottiglia.`,
     'dd.s2.li3': `<span class="dd-list__k">Un'indagine di mercato su 19 sistemi</span> &mdash; 12 piattaforme generiche di automazione da laboratorio e 7 sistemi dedicati all'elettroforesi &mdash; individuando il divario tra i gel a lastra manuali e le costose macchine a cartuccia chiusa.`,
-    'dd.s2.brief': `Quella sintesi è diventata un innovation brief con una sola direzione: automatizzare selettivamente i passaggi più ripetitivi e soggetti a errore &mdash; la gestione dei campioni e il caricamento del gel &mdash; mantenendo intatto il flusso di lavoro flessibile e a basso costo del gel a lastra. Realizzato in autonomia al <a class="dd-link" href="https://dalsa.dtu.dk/" target="_blank" rel="noopener">DALSA&nbsp;&#8599;</a>, l'Arena del DTU per l'automazione delle scienze della vita.`,
+    'dd.s2.brief': `Quella sintesi è diventata un innovation brief con una sola direzione: automatizzare selettivamente i passaggi più ripetitivi e soggetti a errore &mdash; la gestione dei campioni e il caricamento del gel &mdash; mantenendo intatto il flusso di lavoro flessibile e a basso costo del gel a lastra. Realizzato in autonomia al <a class="dd-link" href="https://dalsa.dtu.dk/" target="_blank" rel="noopener">DALSA&nbsp;&#8599;</a>, l'Arena della DTU per l'automazione delle scienze della vita.`,
     'dd.diamond.aria': `Il processo di design Double Diamond: due diamanti, ciascuno che si espande poi si restringe. Il primo diamante è lo spazio del problema (Discover diverge per esplorare, Define converge in un brief); il secondo diamante è lo spazio della soluzione (Develop diverge per prototipare, Deliver converge nella build rilasciata).`,
     'dd.diamond.problem': `il problema`,
     'dd.diamond.solution': `la soluzione`,
