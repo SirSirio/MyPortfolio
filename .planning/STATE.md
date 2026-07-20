@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 Phase: 3
 Plan: Not started
 Status: Ready to execute
-Last activity: 2026-07-20
+Last activity: 2026-07-20 - Completed quick task 260720-p2u: Add Italian/English language toggle to portfolio site
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -112,6 +112,7 @@ Recent decisions affecting current work:
 | 260717-oj6 | Add EndoSense gif to media slot, clickable to iGEM wiki | 2026-07-17 | 2ee8a3e | [260717-oj6-add-endosense-gif-to-media-slot-clickabl](./quick/260717-oj6-add-endosense-gif-to-media-slot-clickabl/) |
 | 260718-cnw | Rewrite Automated Gel Electrophoresis card description: problem-first | 2026-07-18 | ea7a091 | [260718-cnw-rewrite-automated-gel-electrophoresis-ca](./quick/260718-cnw-rewrite-automated-gel-electrophoresis-ca/) |
 | 260718-deu | Fill Portable Precision Liquid Dispenser media slot: pump animation + video, clickable to thesis site | 2026-07-18 | dfce6f3 | [260718-deu-fill-portable-precision-liquid-dispenser](./quick/260718-deu-fill-portable-precision-liquid-dispenser/) |
+| 260720-p2u | Add Italian/English language toggle to portfolio site, themed with the site | 2026-07-20 | e18f991 | [260720-p2u-add-italian-english-language-toggle-to-p](./quick/260720-p2u-add-italian-english-language-toggle-to-p/) |
 
 ## Deferred Items
 
