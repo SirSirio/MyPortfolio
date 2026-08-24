@@ -88,7 +88,9 @@ for (const lang of ['en', 'it']) {
 /* The two new namespaces must actually exist and be complete enough to matter. */
 const swKeys = enKeys.filter((k) => k.startsWith('sw.'));
 const plateSwKeys = enKeys.filter((k) => k.startsWith('work.plateSw.'));
-ok(plateSwKeys.length === 5, `work.plateSw.* should have 5 keys, found ${plateSwKeys.length}`);
+/* v5: body split into intro + 3 bulleted examples + outro (Sirio's request) —
+   meta, title, intro, li1, li2, li3, outro, label, aria. */
+ok(plateSwKeys.length === 9, `work.plateSw.* should have 9 keys, found ${plateSwKeys.length}`);
 ok(swKeys.length >= 45, `sw.* should carry the full deep-dive (>=45 keys), found ${swKeys.length}`);
 for (const k of ['work.plateSw.title', 'work.plateSw.aria', 'sw.eyebrow', 'sw.lede',
                  'sw.s1.h2', 'sw.s2.cap1', 'sw.s2.alt1', 'sw.s2.cap4', 'sw.s2.alt4',
