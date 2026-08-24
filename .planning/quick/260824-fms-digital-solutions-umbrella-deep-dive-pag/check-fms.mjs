@@ -289,6 +289,38 @@ has(js, /PROJ_MOTION\[intoId\]\(\)/, 'applyTrans must call PROJ_MOTION[intoId]()
 has(js, /function seedDraw\(gsap, sel\)/, 'seedDraw must be hoisted to module scope as seedDraw(gsap, sel)');
 
 /* ============================================================
+   TASK 4 — the hosted CV
+   ============================================================ */
+
+const cvPath = join(ROOT, 'site/cv/index.html');
+if (ok(existsSync(cvPath), 'MISSING FILE: site/cv/index.html')) {
+  const cv = readFileSync(cvPath, 'utf8');
+  ok(cv.length > 0, 'site/cv/index.html is empty');
+  const cvTitle = (cv.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
+  has(cvTitle, 'Sirio', `CV <title> should name Sirio, got: "${cvTitle}"`);
+  absent(cvTitle, /ALK/i, `CV <title> must not name the employer, got: "${cvTitle}"`);
+  /* The mobile fit must exist AND be screen-scoped — a bare max-width query also
+     matches print on narrow paper and would wreck the A4 output. */
+  has(cv, '@media screen and (max-width', 'CV is missing the screen-only mobile fit (4c)');
+  has(cv, '@media print', 'CV lost its @media print A4 block');
+  has(cv, /@media print\s*\{[\s\S]*?width:\s*210mm/, 'CV print block must still assert 210mm A4');
+  /* The document is self-contained: no scripts, no relative asset refs to break. */
+  absent(cv, /<script/i, 'The hosted CV should stay script-free');
+}
+/* The nav link is repointed, and the contact section still has no CV link (D-12). */
+absent(html, 'canva.link', 'The Canva CV link must be gone from index.html');
+ok(countOf(html, /href="\.\/cv\/"/g) === 1, 'Expected exactly one href="./cv/" in index.html');
+const cvAnchor = (html.match(/<a[^>]*href="\.\/cv\/"[^>]*>/) || [])[0] || '';
+has(cvAnchor, 'target="_blank"', 'The CV nav link must keep target="_blank"');
+has(cvAnchor, 'rel="noopener"', 'The CV nav link must keep rel="noopener" (T-fms-02)');
+const contactStart = html.indexOf('id="contact"');
+ok(contactStart > -1, 'Could not locate the contact section');
+if (contactStart > -1) {
+  const contactHtml = html.slice(contactStart, html.indexOf('</section>', contactStart));
+  absent(contactHtml, /href="[^"]*cv/i, 'D-12: the contact section must NOT carry a CV link');
+}
+
+/* ============================================================
    REPORT
    ============================================================ */
 

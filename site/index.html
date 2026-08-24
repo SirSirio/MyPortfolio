@@ -30,7 +30,16 @@
         <header data-nav class="nav">
           <span class="nav__name">SIRIO VITTORIO FELTRIN</span>
           <div class="nav__links">
-            <a class="nav__link" href="https://canva.link/5a5yj5bdg78axhv" target="_blank" rel="noopener">CV&nbsp;&#8599;</a>
+            <!-- The CV is SELF-HOSTED since quick 260824-fms (D-11): it lives at
+                 site/cv/index.html and serves from GitHub Pages at the clean
+                 directory URL /MyPortfolio/cv/, replacing the old off-site Canva
+                 link. Neither the URL nor the filename names an employer.
+                 Explicitly TEMPORARY: the hosted file is a tailored CV under a
+                 neutral URL, and swapping in a general one later is a single file
+                 replacement at site/cv/index.html with no change anywhere else.
+                 target="_blank" is deliberate — reading the CV must not cost the
+                 visitor the animated landing page they came for. -->
+            <a class="nav__link" href="./cv/" target="_blank" rel="noopener">CV&nbsp;&#8599;</a>
             <a class="nav__link" href="https://www.linkedin.com/in/sirio-vittorio-feltrin/" target="_blank" rel="noopener">LinkedIn&nbsp;&#8599;</a>
             <!-- EN/IT language control (quick 260720-p2u). <button>, not <a> — it
                  toggles state, it does not navigate. main.js wires the click to
