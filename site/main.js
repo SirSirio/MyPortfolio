@@ -387,11 +387,11 @@ function killOt2Motion() {
        scrub-linked to the overlay scroll; no autonomous loop, no new rAF, no
        second IntersectionObserver.
 
-   ⚠ [data-sw-spine] is authored TWICE — once in the work card on the landing
-   page, once in this overlay's masthead. gsap.context(fn, scroller) scopes plain
-   selector strings to `scroller`, so the tweens below only ever touch the
-   overlay's copy and the card's diagram stays untouched. That is why the
-   selectors here are strings and NOT pre-queried global elements. */
+   [data-sw-spine] lives ONLY in this overlay's masthead (since v2 the work card
+   paints its own live-data canvas via sw-card-viz.js instead of a spine copy).
+   gsap.context(fn, scroller) scopes plain selector strings to `scroller` either
+   way, which is why the selectors here are strings and NOT pre-queried global
+   elements. */
 function initSoftMotion() {
   if (REDUCED) return;
   const gsap = window.gsap, ScrollTrigger = window.ScrollTrigger;

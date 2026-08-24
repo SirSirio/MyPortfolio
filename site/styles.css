@@ -1700,11 +1700,12 @@ section[id] {
    Without it the anchor makes the <img> a grandchild and `> img` stops matching.
    `> a > video` does the same for the Pump slot, whose link wraps a <video>
    (+ the animation div) — otherwise the stripes would show through behind them.
-   `> svg` / `> a > svg` (quick 260824-fms) join it for the same reason: the
-   software plate's media is an INLINE <svg> diagram, which is none of the above,
-   so without this the stripes and the [ data-flow diagram ] label would render
-   THROUGH the drawing. */
-.media-slot:not(:has(> img, > video, > a > img, > a > video, > svg, > a > svg)) {
+   `> svg` / `> a > svg` (quick 260824-fms) join it for the same reason: a
+   deep-dive figure's media can be an INLINE <svg> diagram, which is none of the
+   above, so without this the stripes and the label would render THROUGH the
+   drawing. `> .sw-card-viz` (260824-fms v2) is the software plate's canvas host,
+   filled at runtime by sw-card-viz.js — same reason again. */
+.media-slot:not(:has(> img, > video, > a > img, > a > video, > svg, > a > svg, > .sw-card-viz)) {
   background: repeating-linear-gradient(
     135deg,
     rgba(var(--accent), 0.09) 0 11px,
@@ -1714,7 +1715,7 @@ section[id] {
   box-shadow: 0 30px 90px rgba(var(--accent), 0.1);
 }
 
-.media-slot:not(:has(> img, > video, > a > img, > a > video, > svg, > a > svg))::after {
+.media-slot:not(:has(> img, > video, > a > img, > a > video, > svg, > a > svg, > .sw-card-viz))::after {
   content: attr(data-label);
   font-family: var(--font-mono);
   font-size: 12px;
@@ -1743,6 +1744,22 @@ section[id] {
   width: 100%;
   height: 100%;
   display: block;
+}
+
+/* The software plate's live-data canvas host (260824-fms v2). The panel ground
+   echoes .sw-fig-frame / .device-frame; sw-card-viz.js paints into a canvas
+   sized to this box. The canvas itself is absolutely ordinary block content. */
+.media-slot > .sw-card-viz {
+  width: 100%;
+  height: 100%;
+  background-color: #08090f;
+  background-image: radial-gradient(120% 120% at 30% 0%, rgba(var(--accent), 0.08), transparent 62%);
+  box-shadow: inset 0 0 70px rgba(var(--accent), 0.08);
+}
+.sw-card-viz canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .media-slot > a {
@@ -2983,12 +3000,8 @@ section[id] {
     inset 0 0 70px rgba(var(--accent), 0.08),
     0 24px 70px rgba(0, 0, 0, 0.42);
 }
-/* On the work card the diagram sits directly on the plate, with padding so it
-   never touches the slot's rounded edge. */
-.sw-fig--card {
-  padding: clamp(14px, 3vw, 30px);
-  box-sizing: border-box;
-}
+/* (The one-time .sw-fig--card padding rule left with the card's spine SVG,
+   replaced by the .sw-card-viz canvas — 260824-fms v2.) */
 
 /* Nodes: soft accent-filled rounded rects on the .dd-tri alpha ladder. */
 .sw-node {

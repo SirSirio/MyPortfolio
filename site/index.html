@@ -257,49 +257,29 @@
                Enter/Space handler). Inserted BETWEEN the dispenser and the OT-2 so
                the software sits early, and the zig-zag re-alternates from here:
                plate1 / THIS(flip) / OT-2(no flip) / EndoSense(flip).
-               Its media is an INLINE SVG, which is why .media-slot's filled/empty
-               test had to learn `> svg` (styles.css). The same [data-sw-spine]
-               diagram is authored again in the overlay masthead — deliberate
-               duplication, in preference to a build step or JS templating. -->
+               Its media is the "live data" CANVAS painted by sw-card-viz.js
+               (v2, replacing the static spine diagram at Sirio's request): raw
+               signals cross a parse gate and land as records in a decaying grid.
+               Decorative and aria-hidden, like plate 001's #pump-anim — this
+               plate's role="button" aria-label carries the semantics. The slot's
+               filled/empty test had to learn `> .sw-card-viz` (styles.css). The
+               [data-sw-spine] diagram still exists ONCE, in the overlay masthead. -->
           <article data-reveal="1" class="plate plate--flip"
                    data-open="soft" role="button" tabindex="0"
                    data-i18n-attr="aria-label:work.plateSw.aria"
                    aria-label="Open the digital solutions case study">
             <div class="plate__media">
-              <figure data-para="0.05" class="media-slot" data-label="[ data-flow diagram ]" data-i18n-attr="data-label:work.plateSw.label">
-                <svg class="sw-fig sw-fig--card" data-sw-spine viewBox="0 0 740 260" fill="none" xmlns="http://www.w3.org/2000/svg"
-                     preserveAspectRatio="xMidYMid meet" role="img"
-                     data-i18n-attr="aria-label:sw.hero.aria"
-                     aria-label="A data-flow diagram: three source nodes on the left — the testing app, the search engine and the shift app — each curving into a single horizontal spine on the right that ends in one node labelled structured data.">
-                  <!-- Three source nodes (left) -> three curved edges -> one spine
-                       -> one "structured data" node (right). Renders COMPLETE and
-                       static by default; GSAP only adds the draw-on, and only to
-                       the OVERLAY's copy of this diagram (main.js scopes its
-                       context to the overlay, never the card). -->
-                  <g class="sw-src">
-                    <rect class="sw-node" x="16" y="26" width="212" height="52" rx="10"/>
-                    <text class="sw-name" x="122" y="58" text-anchor="middle">the testing app</text>
-                    <rect class="sw-node" x="16" y="104" width="212" height="52" rx="10"/>
-                    <text class="sw-name" x="122" y="136" text-anchor="middle">the search engine</text>
-                    <rect class="sw-node" x="16" y="182" width="212" height="52" rx="10"/>
-                    <text class="sw-name" x="122" y="214" text-anchor="middle">the shift app</text>
-                  </g>
-                  <!-- One continuous stroke each, drawn with POSITIVE dashoffset. -->
-                  <path class="sw-edge" d="M228 52 C300 52 322 130 396 130"/>
-                  <path class="sw-edge" d="M228 130 L396 130"/>
-                  <path class="sw-edge" d="M228 208 C300 208 322 130 396 130"/>
-                  <path class="sw-spine" d="M396 130 L516 130"/>
-                  <g class="sw-out">
-                    <rect class="sw-node sw-node--out" x="516" y="100" width="208" height="60" rx="10"/>
-                    <text class="sw-name" x="620" y="136" text-anchor="middle">structured data</text>
-                  </g>
-                </svg>
+              <figure data-para="0.05" class="media-slot" data-label="[ live data animation ]" data-i18n-attr="data-label:work.plateSw.label">
+                <!-- Populated by sw-card-viz.js; decorative (the plate button
+                     carries the accessible name). Reduced motion gets one
+                     complete static frame painted instead of the loop. -->
+                <div class="sw-card-viz" id="sw-card-viz" aria-hidden="true"></div>
               </figure>
             </div>
             <div class="plate__body">
               <div class="plate__meta" data-i18n="work.plateSw.meta">Software · 2024 — 2026</div>
               <h3 data-i18n="work.plateSw.title">Digital Solutions for the Lab</h3>
-              <p data-i18n="work.plateSw.body">Repetitive digital work is the same bottleneck as repetitive bench work &mdash; it just sits at a desk. So I build the tools that remove it. Pump Validator runs my thesis' randomised test campaign and writes every measurement straight into a structured record, so the analysis is a parse and not a retype. A search engine fuses seven scientific literature APIs into one ranked list and feeds the papers I approve into the bibliography. And a shift app for my department at AGC Biologics does what nothing off the shelf could do. Three tools, one instinct: structure the data where it is captured.</p>
+              <p data-i18n="work.plateSw.body">Repetitive digital work is the same bottleneck as repetitive bench work &mdash; it just happens behind a screen. To eliminate it, I design and build custom software tools that automate manual overhead and capture clean data at the source. Pump Validator automates randomised test campaigns for hardware validation, logging measurements straight into structured records. A literature search engine aggregates and ranks results from seven scientific APIs into one unified feed. And an operations and shift web app, built for AGC Biologics, solves scheduling constraints off-the-shelf platforms could not handle. Hardware control, workflow automation or data pipelines &mdash; the philosophy is the same: structure data at the point of capture and remove friction from the process.</p>
             </div>
           </article>
 
@@ -1269,6 +1249,7 @@
   <script src="./assets/vendor/gsap.min.js"></script>
   <script src="./assets/vendor/ScrollTrigger.min.js"></script>
   <script src="./pump-anim.js"></script>
+  <script src="./sw-card-viz.js"></script>
   <script type="module" src="./main.js"></script>
 </body>
 </html>

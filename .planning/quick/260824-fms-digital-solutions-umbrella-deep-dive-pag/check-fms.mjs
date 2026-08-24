@@ -223,8 +223,12 @@ for (const rel of siteFiles) {
   absent(readFileSync(p, 'utf8'), /\bALK\b/, `"ALK" must not appear in ${rel} (D-08 / D-11)`);
 }
 
-/* The two authored diagrams ship, and the cancelled one does NOT (D-10). */
-ok(countOf(html, /data-sw-spine/g) === 2, 'The spine diagram must be authored twice (card + masthead)');
+/* The authored diagrams ship, and the cancelled one does NOT (D-10).
+   v2 (Sirio's review): the CARD's spine copy was replaced by the live-data
+   canvas (sw-card-viz.js) — the spine now ships exactly once, in the masthead. */
+ok(countOf(html, /data-sw-spine/g) === 1, 'The spine diagram must be authored exactly once (masthead only, v2)');
+has(html, 'id="sw-card-viz"', 'The card\'s live-data canvas host #sw-card-viz is missing (v2)');
+has(html, 'src="./sw-card-viz.js"', 'sw-card-viz.js must be loaded by index.html (v2)');
 has(html, 'data-sw-fusion', 'The chapter-two fusion diagram [data-sw-fusion] is missing');
 has(html, 'data-sw-shots', 'The chapter-one capture group [data-sw-shots] is missing');
 absent(html, 'data-sw-doe', 'The [data-sw-doe] run-matrix SVG was CANCELLED by D-10 and must not ship');
@@ -248,8 +252,8 @@ has(css, '[data-open]:focus-visible', '[data-open]:focus-visible ring is missing
 has(css, /\.device-frame\s*\{[^}]*border:\s*1px solid rgba\(var\(--accent\)/,
     '.device-frame must keep its accent hairline border (see <asset_findings>)');
 /* The media-slot filled/empty test must accept an inline <svg> (the card diagram). */
-ok(countOf(css, /:not\(:has\(> img, > video, > a > img, > a > video, > svg, > a > svg\)\)/g) === 2,
-   '.media-slot empty-state selectors must both accept > svg and > a > svg');
+ok(countOf(css, /:not\(:has\(> img, > video, > a > img, > a > video, > svg, > a > svg, > \.sw-card-viz\)\)/g) === 2,
+   '.media-slot empty-state selectors must both accept > svg, > a > svg and > .sw-card-viz (v2)');
 /* The overlay chrome must cover BOTH overlays, or the new one loses its ground. */
 for (const sel of ['[data-proj="soft"]::before', '[data-proj="soft"]::after',
                    '[data-proj="soft"] .proj-sec > h2']) {

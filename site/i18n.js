@@ -82,8 +82,8 @@ export const STRINGS = {
        first-party Pump Validator screenshots. */
     'work.plateSw.meta': `Software · 2024 — 2026`,
     'work.plateSw.title': `Digital Solutions for the Lab`,
-    'work.plateSw.body': `Repetitive digital work is the same bottleneck as repetitive bench work — it just sits at a desk. So I build the tools that remove it. Pump Validator runs my thesis' randomised test campaign and writes every measurement straight into a structured record, so the analysis is a parse and not a retype. A search engine fuses seven scientific literature APIs into one ranked list and feeds the papers I approve into the bibliography. And a shift app for my department at AGC Biologics does what nothing off the shelf could do. Three tools, one instinct: structure the data where it is captured.`,
-    'work.plateSw.label': `[ data-flow diagram ]`,
+    'work.plateSw.body': `Repetitive digital work is the same bottleneck as repetitive bench work — it just happens behind a screen. To eliminate it, I design and build custom software tools that automate manual overhead and capture clean data at the source. Pump Validator automates randomised test campaigns for hardware validation, logging measurements straight into structured records. A literature search engine aggregates and ranks results from seven scientific APIs into one unified feed. And an operations and shift web app, built for AGC Biologics, solves scheduling constraints off-the-shelf platforms could not handle. Hardware control, workflow automation or data pipelines — the philosophy is the same: structure data at the point of capture and remove friction from the process.`,
+    'work.plateSw.label': `[ live data animation ]`,
     'work.plateSw.aria': `Open the digital solutions case study`,
 
     /* experience (#experience) */
@@ -344,8 +344,8 @@ export const STRINGS = {
     /* Plate 004 — la scheda software (quick 260824-fms, D-07). */
     'work.plateSw.meta': `Software · 2024 — 2026`,
     'work.plateSw.title': `Soluzioni Digitali per il Laboratorio`,
-    'work.plateSw.body': `Il lavoro digitale ripetitivo è lo stesso collo di bottiglia del lavoro ripetitivo al bancone — solo che sta a una scrivania. Così costruisco gli strumenti che lo eliminano. Pump Validator esegue la campagna di test randomizzata della mia tesi e scrive ogni misura direttamente in un record strutturato, così l'analisi è una lettura e non una ridigitazione. Un motore di ricerca fonde sette API di letteratura scientifica in un'unica lista ordinata e porta nella bibliografia gli articoli che approvo. E un'app per la gestione dei turni del mio reparto ad AGC Biologics fa ciò che nessuna soluzione pronta riusciva a fare. Tre strumenti, un solo istinto: strutturare i dati dove vengono raccolti.`,
-    'work.plateSw.label': `[ diagramma di flusso dati ]`,
+    'work.plateSw.body': `Il lavoro digitale ripetitivo è lo stesso collo di bottiglia del lavoro ripetitivo al bancone — solo che avviene dietro uno schermo. Per eliminarlo, progetto e costruisco strumenti software su misura che automatizzano il lavoro manuale e catturano dati puliti alla fonte. Pump Validator automatizza campagne di test randomizzate per la validazione dell'hardware, registrando ogni misura direttamente in record strutturati. Un motore di ricerca aggrega e classifica i risultati di sette API di letteratura scientifica in un unico elenco. E una web app per turni e operazioni, costruita per AGC Biologics, risolve vincoli di pianificazione che nessuna piattaforma pronta all'uso riusciva a gestire. Controllo hardware, automazione dei flussi di lavoro o pipeline di dati — la filosofia è la stessa: strutturare i dati nel punto in cui vengono catturati ed eliminare l'attrito dal processo.`,
+    'work.plateSw.label': `[ animazione di dati in tempo reale ]`,
     'work.plateSw.aria': `Apri il caso studio delle soluzioni digitali`,
 
     /* experience (#experience) */
