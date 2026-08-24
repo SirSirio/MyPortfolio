@@ -1642,6 +1642,21 @@ section[id] {
   color: rgba(var(--accent), 1);
 }
 
+/* Clickable-plate affordance (quick 260824-fms). Both warp cards are
+   role="button" + tabindex="0", but until now neither showed a pointer cursor nor
+   a focus ring — a keyboard visitor tabbing through Selected Work had no way to
+   see where they were. Written against [data-open] rather than a plate class, so
+   it covers the OT-2 card (which shipped without it) and every future one.
+   The ring matches the .plate__link:focus-visible accent treatment. */
+[data-open] {
+  cursor: pointer;
+}
+[data-open]:focus-visible {
+  outline: 2px solid rgba(var(--accent), 0.9);
+  outline-offset: 6px;
+  border-radius: 20px;
+}
+
 /* ============================================================
    THE SWAPPABLE MEDIA SLOT (MEDIA-01)
    The design supplies the slot's SHAPE only — it hard-codes a
@@ -1684,8 +1699,12 @@ section[id] {
    <a>, e.g. EndoSense links to the iGEM wiki) also switches the placeholder off.
    Without it the anchor makes the <img> a grandchild and `> img` stops matching.
    `> a > video` does the same for the Pump slot, whose link wraps a <video>
-   (+ the animation div) — otherwise the stripes would show through behind them. */
-.media-slot:not(:has(> img, > video, > a > img, > a > video)) {
+   (+ the animation div) — otherwise the stripes would show through behind them.
+   `> svg` / `> a > svg` (quick 260824-fms) join it for the same reason: the
+   software plate's media is an INLINE <svg> diagram, which is none of the above,
+   so without this the stripes and the [ data-flow diagram ] label would render
+   THROUGH the drawing. */
+.media-slot:not(:has(> img, > video, > a > img, > a > video, > svg, > a > svg)) {
   background: repeating-linear-gradient(
     135deg,
     rgba(var(--accent), 0.09) 0 11px,
@@ -1695,7 +1714,7 @@ section[id] {
   box-shadow: 0 30px 90px rgba(var(--accent), 0.1);
 }
 
-.media-slot:not(:has(> img, > video, > a > img, > a > video))::after {
+.media-slot:not(:has(> img, > video, > a > img, > a > video, > svg, > a > svg))::after {
   content: attr(data-label);
   font-family: var(--font-mono);
   font-size: 12px;
@@ -1713,6 +1732,16 @@ section[id] {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+/* An inline <svg> diagram fills the slot the same way (quick 260824-fms), but
+   WITHOUT object-fit: that property does not apply to inline SVG. The SVG's own
+   preserveAspectRatio does the fitting instead — see [data-sw-spine]. */
+.media-slot > svg,
+.media-slot > a > svg {
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
@@ -2357,13 +2386,24 @@ section[id] {
 
    ⚠ --accent is REQUIRED here, not polish (Pitfall 6 / styles.css:625-628):
    without a resolved --accent every accent surface renders transparent with NO
-   console error. It is set to --star-rigel (the cyan technical accent). This is
-   a SECTION-style accent variable ONLY — it must NEVER be added to PAL in
-   star-engine.js (styles.css:13-20), which would re-tint the whole starfield.
+   console error. This is a SECTION-style accent variable ONLY — it must NEVER be
+   added to PAL in star-engine.js (styles.css:13-20), which would re-tint the
+   whole starfield.
+
+   Since quick 260824-fms there are TWO overlays sharing this chrome, so the
+   ground rules below are a selector list and the ACCENT is split out per overlay
+   (immediately under this comment). Each overlay must resolve its own --accent or
+   it renders every accent surface invisible, silently.
    ============================================================ */
 
-[data-proj="ot2"] {
-  --accent: var(--star-rigel);
+/* Per-overlay accent (D-09). Rigel cyan reads "engineering room"; Vega violet
+   reads "data / software" and is deliberately far from it in the palette, so the
+   two deep-dives are never mistaken for each other mid-warp. */
+[data-proj="ot2"] { --accent: var(--star-rigel); }
+[data-proj="soft"] { --accent: var(--star-vega); }
+
+[data-proj="ot2"],
+[data-proj="soft"] {
   color: var(--text-body);
   /* Engineering-room ground as LAYERED DEPTH (not a flat wallpaper grid): a solid
      dark base, a soft cyan glow up behind the masthead, and a top vignette so the
@@ -2381,7 +2421,8 @@ section[id] {
    vignette so it fades toward the edges and behind the reading column, never a
    flat even grid. Fixed to the viewport (the overlay is itself position:fixed and
    sets no transform, so this pins while the content scrolls above it). */
-[data-proj="ot2"]::before {
+[data-proj="ot2"]::before,
+[data-proj="soft"]::before {
   content: '';
   position: fixed;
   inset: 0;
@@ -2404,7 +2445,8 @@ section[id] {
    a SEPARATE cheap CSS layer — the paused canvas star engine stays paused (D-20).
    Static by default; a very slow transform drift is added only when motion is
    allowed (see the near layer + reduced-motion guard). */
-[data-proj="ot2"]::after {
+[data-proj="ot2"]::after,
+[data-proj="soft"]::after {
   content: '';
   position: fixed;
   inset: 0;
@@ -2615,7 +2657,8 @@ section[id] {
 .proj-sec:first-of-type { border-top: 0; }
 
 /* The overlay's section headline reuses the landing .section h2 scale/weight. */
-[data-proj="ot2"] .proj-sec > h2 {
+[data-proj="ot2"] .proj-sec > h2,
+[data-proj="soft"] .proj-sec > h2 {
   margin: 14px 0 26px;
   font: 300 clamp(34px, 5vw, 68px) var(--font-display);
   letter-spacing: -0.035em;
@@ -2704,7 +2747,15 @@ section[id] {
    blueprint grid, an accent hairline border and an inner accent glow, so each
    reads as a framed instrument panel / schematic. ALL colour derives from the
    section's --accent (never a hard-coded hue); it is drop-in swappable
-   (MEDIA-01): the <img> is a direct child, so replacing the file is one line. */
+   (MEDIA-01): the <img> is a direct child, so replacing the file is one line.
+
+   ⚠ INVERSION, quick 260824-fms — do NOT "clean up" the border. The four Pump
+   Validator captures are the opposite case from the OT-2's white PNGs: they are
+   DARK (#0B0D12), which is within a few units of this frame's #08090f ground and
+   of the overlay's #05070e. Dropped raw they do not punch a hole, they VANISH.
+   The accent hairline and the inner glow are the only things giving them a
+   visible edge, so the frame is doing MORE work here, not less. Removing it
+   makes those beats read as broken layout. */
 .device-frame {
   margin: 8px 0 26px;
   padding: clamp(12px, 2.4vw, 20px);
@@ -2898,6 +2949,193 @@ section[id] {
   .dd-name { font-size: 31px; }
 }
 
+/* ============================================================
+   SOFT DEEP-DIVE DIAGRAMS + LAYOUT (quick 260824-fms)
+   The vocabulary for the [data-proj="soft"] umbrella page. Mirrors the .dd-*
+   conventions above (accent-derived fills on the same 0.09 / 0.15 / 0.21 alpha
+   ladder, --font-mono labels, non-scaling strokes) so the second deep-dive is
+   indistinguishable in quality from the first. NO hard-coded hue anywhere: every
+   colour derives from rgba(var(--accent), …), which the overlay resolves to
+   --star-vega.
+
+   Both diagrams render COMPLETE and static by default. GSAP only adds a draw-on
+   at runtime via gsap.from()/.to(), so a no-JS or reduced-motion visitor sees the
+   finished drawing — never a blank box.
+   ============================================================ */
+
+/* Shared SVG frame. On the CARD the SVG fills a .media-slot directly (see the
+   `> svg` rules in the MEDIA SLOT block); in the masthead it sits in this framed
+   panel, echoing .dd-diamond-fig / .device-frame. */
+.sw-fig {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.sw-fig-frame {
+  margin: 0;
+  padding: clamp(16px, 2.4vw, 26px);
+  border: 1px solid rgba(var(--accent), 0.24);
+  border-radius: 12px;
+  background-color: #08090f;
+  background-image: radial-gradient(120% 120% at 30% 0%, rgba(var(--accent), 0.08), transparent 62%);
+  box-shadow:
+    inset 0 0 70px rgba(var(--accent), 0.08),
+    0 24px 70px rgba(0, 0, 0, 0.42);
+}
+/* On the work card the diagram sits directly on the plate, with padding so it
+   never touches the slot's rounded edge. */
+.sw-fig--card {
+  padding: clamp(14px, 3vw, 30px);
+  box-sizing: border-box;
+}
+
+/* Nodes: soft accent-filled rounded rects on the .dd-tri alpha ladder. */
+.sw-node {
+  fill: rgba(var(--accent), 0.09);
+  stroke: rgba(var(--accent), 0.42);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.sw-node--out {
+  fill: rgba(var(--accent), 0.21);
+  stroke: rgba(var(--accent), 0.7);
+}
+/* Drawn connectors. One continuous stroke each; GSAP seeds a POSITIVE
+   stroke-dashoffset at runtime (Safari mishandles negative offsets). */
+.sw-edge,
+.sw-spine {
+  fill: none;
+  stroke: rgba(var(--accent), 0.85);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.sw-spine {
+  stroke-width: 2.4;
+}
+/* Node labels. 20px in viewBox units — SVG <text> scales DOWN with the drawing,
+   and the OT-2 page already learned that small in-shape type becomes unreadable
+   in a narrow column (index.html, the Double Diamond note). The 620px bump below
+   keeps them legible on a phone. */
+.sw-name {
+  fill: rgba(236, 240, 250, 0.96);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+}
+.sw-src-name {
+  fill: rgba(228, 232, 244, 0.78);
+  font-family: var(--font-mono);
+  font-size: 17px;
+  letter-spacing: 0.02em;
+}
+.sw-col-label {
+  fill: rgba(var(--accent), 0.9);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+/* The fused ranked column: weight decreases down the list, so rank reads from
+   position and emphasis rather than from a printed number. */
+.sw-rank {
+  stroke: rgba(var(--accent), 0.4);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.sw-rank--1 { fill: rgba(var(--accent), 0.21); }
+.sw-rank--2 { fill: rgba(var(--accent), 0.17); }
+.sw-rank--3 { fill: rgba(var(--accent), 0.13); }
+.sw-rank--4 { fill: rgba(var(--accent), 0.09); }
+.sw-rank--5 { fill: rgba(var(--accent), 0.06); }
+
+.sw-fusion-fig {
+  margin: clamp(16px, 2.2vw, 24px) 0 clamp(22px, 3vw, 32px);
+  padding: clamp(22px, 3vw, 34px) clamp(18px, 2.6vw, 30px) clamp(18px, 2.4vw, 26px);
+  border: 1px solid rgba(var(--accent), 0.24);
+  border-radius: 12px;
+  background-color: #08090f;
+  background-image: radial-gradient(120% 120% at 30% 0%, rgba(var(--accent), 0.08), transparent 62%);
+  box-shadow:
+    inset 0 0 70px rgba(var(--accent), 0.08),
+    0 24px 70px rgba(0, 0, 0, 0.42);
+}
+
+/* ── CHAPTER-ONE layout beats ────────────────────────────────
+   Three distinct families in one section, driven by the captures' real aspect
+   ratios: an asymmetric text+shot pair (BEAT A), a full-width table (BEAT B),
+   then a two-up pair (BEAT C). No two adjacent beats share a family. */
+.sw-beat {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+  gap: clamp(22px, 4vw, 48px);
+  align-items: center;
+  margin: 8px 0 26px;
+}
+.sw-beat__text > .dd-p:last-child {
+  margin-bottom: 0;
+}
+.sw-beat__shot {
+  margin: 0;
+  align-self: center;
+}
+/* BEAT B — the Design of Experiments table needs the full measure to stay
+   readable; its type is the smallest on the page. Do not column this. */
+.sw-shot--wide {
+  margin: 8px 0 26px;
+}
+/* BEAT C — the two analysis screens, side by side. Its OWN grid rather than
+   .media-slot--composite, whose aspect rules are tuned for the OT-2's portrait
+   video + blueprint pairing and would drag those in. */
+.sw-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2.6vw, 28px);
+  margin: 8px 0 26px;
+  align-items: start;
+}
+.sw-pair > .device-frame {
+  margin: 0;
+}
+
+/* The confidentiality line closing chapter three — a quiet aside, not an
+   apology: indented off an accent rule, one step down in emphasis from .dd-p. */
+.sw-note {
+  margin: 26px 0 0;
+  padding: 2px 0 2px 18px;
+  border-left: 2px solid rgba(var(--accent), 0.38);
+  max-width: 62ch;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(14.5px, 1.5vw, 16px);
+  line-height: 1.68;
+  color: rgba(228, 232, 244, 0.62);
+}
+/* Chapter three carries no media at all, so its reading column can run slightly
+   wider without a figure to balance against. */
+.proj-sec--text .dd-p {
+  max-width: 68ch;
+}
+
+@media (max-width: 860px) {
+  .sw-beat {
+    grid-template-columns: 1fr;
+  }
+  .sw-pair {
+    grid-template-columns: 1fr;
+  }
+}
+/* Phone: the SVGs scale down and their in-shape type shrinks with them, so both
+   label scales get a bump — the same fix the Double Diamond needed at :2885. */
+@media (max-width: 620px) {
+  .sw-name { font-size: 26px; }
+  .sw-src-name { font-size: 22px; }
+  .sw-col-label { font-size: 20px; }
+}
+
 /* ── BUILD layout diversification ────────────────────────────
    Two asymmetric text+media pairings (intro before-visual on the RIGHT, protocol
    UI on the RIGHT but narrower) framing a full-width assembly figure — so BUILD
@@ -2945,7 +3183,8 @@ section[id] {
 }
 
 /* will-change only on the handful of GSAP-animated elements (R-01). */
-[data-proj="ot2"] .blueprint__part {
+[data-proj="ot2"] .blueprint__part,
+[data-proj="soft"] .blueprint__part {
   will-change: transform;
 }
 
