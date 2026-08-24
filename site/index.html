@@ -30,7 +30,16 @@
         <header data-nav class="nav">
           <span class="nav__name">SIRIO VITTORIO FELTRIN</span>
           <div class="nav__links">
-            <a class="nav__link" href="https://canva.link/5a5yj5bdg78axhv" target="_blank" rel="noopener">CV&nbsp;&#8599;</a>
+            <!-- The CV is SELF-HOSTED since quick 260824-fms (D-11): it lives at
+                 site/cv/index.html and serves from GitHub Pages at the clean
+                 directory URL /MyPortfolio/cv/, replacing the old off-site Canva
+                 link. Neither the URL nor the filename names an employer.
+                 Explicitly TEMPORARY: the hosted file is a tailored CV under a
+                 neutral URL, and swapping in a general one later is a single file
+                 replacement at site/cv/index.html with no change anywhere else.
+                 target="_blank" is deliberate — reading the CV must not cost the
+                 visitor the animated landing page they came for. -->
+            <a class="nav__link" href="./cv/" target="_blank" rel="noopener">CV&nbsp;&#8599;</a>
             <a class="nav__link" href="https://www.linkedin.com/in/sirio-vittorio-feltrin/" target="_blank" rel="noopener">LinkedIn&nbsp;&#8599;</a>
             <!-- EN/IT language control (quick 260720-p2u). <button>, not <a> — it
                  toggles state, it does not navigate. main.js wires the click to
@@ -241,14 +250,70 @@
             </div>
           </article>
 
-          <!-- Plate 002 — leads with the quantified automation win, the most
+          <!-- Plate 002 — the software umbrella (quick 260824-fms, D-01/D-07).
+               The SECOND clickable plate: it warps to [data-proj="soft"] below,
+               exactly as the OT-2 plate warps to [data-proj="ot2"], following that
+               plate's accessibility pattern (role/tabindex/aria-label + the boot
+               Enter/Space handler). Inserted BETWEEN the dispenser and the OT-2 so
+               the software sits early, and the zig-zag re-alternates from here:
+               plate1 / THIS(flip) / OT-2(no flip) / EndoSense(flip).
+               Its media is an INLINE SVG, which is why .media-slot's filled/empty
+               test had to learn `> svg` (styles.css). The same [data-sw-spine]
+               diagram is authored again in the overlay masthead — deliberate
+               duplication, in preference to a build step or JS templating. -->
+          <article data-reveal="1" class="plate plate--flip"
+                   data-open="soft" role="button" tabindex="0"
+                   data-i18n-attr="aria-label:work.plateSw.aria"
+                   aria-label="Open the digital solutions case study">
+            <div class="plate__media">
+              <figure data-para="0.05" class="media-slot" data-label="[ data-flow diagram ]" data-i18n-attr="data-label:work.plateSw.label">
+                <svg class="sw-fig sw-fig--card" data-sw-spine viewBox="0 0 740 260" fill="none" xmlns="http://www.w3.org/2000/svg"
+                     preserveAspectRatio="xMidYMid meet" role="img"
+                     data-i18n-attr="aria-label:sw.hero.aria"
+                     aria-label="A data-flow diagram: three source nodes on the left — the testing app, the search engine and the shift app — each curving into a single horizontal spine on the right that ends in one node labelled structured data.">
+                  <!-- Three source nodes (left) -> three curved edges -> one spine
+                       -> one "structured data" node (right). Renders COMPLETE and
+                       static by default; GSAP only adds the draw-on, and only to
+                       the OVERLAY's copy of this diagram (main.js scopes its
+                       context to the overlay, never the card). -->
+                  <g class="sw-src">
+                    <rect class="sw-node" x="16" y="26" width="212" height="52" rx="10"/>
+                    <text class="sw-name" x="122" y="58" text-anchor="middle">the testing app</text>
+                    <rect class="sw-node" x="16" y="104" width="212" height="52" rx="10"/>
+                    <text class="sw-name" x="122" y="136" text-anchor="middle">the search engine</text>
+                    <rect class="sw-node" x="16" y="182" width="212" height="52" rx="10"/>
+                    <text class="sw-name" x="122" y="214" text-anchor="middle">the shift app</text>
+                  </g>
+                  <!-- One continuous stroke each, drawn with POSITIVE dashoffset. -->
+                  <path class="sw-edge" d="M228 52 C300 52 322 130 396 130"/>
+                  <path class="sw-edge" d="M228 130 L396 130"/>
+                  <path class="sw-edge" d="M228 208 C300 208 322 130 396 130"/>
+                  <path class="sw-spine" d="M396 130 L516 130"/>
+                  <g class="sw-out">
+                    <rect class="sw-node sw-node--out" x="516" y="100" width="208" height="60" rx="10"/>
+                    <text class="sw-name" x="620" y="136" text-anchor="middle">structured data</text>
+                  </g>
+                </svg>
+              </figure>
+            </div>
+            <div class="plate__body">
+              <div class="plate__meta" data-i18n="work.plateSw.meta">Software · 2024 — 2026</div>
+              <h3 data-i18n="work.plateSw.title">Digital Solutions for the Lab</h3>
+              <p data-i18n="work.plateSw.body">Repetitive digital work is the same bottleneck as repetitive bench work &mdash; it just sits at a desk. So I build the tools that remove it. Pump Validator runs my thesis' randomised test campaign and writes every measurement straight into a structured record, so the analysis is a parse and not a retype. A search engine fuses seven scientific literature APIs into one ranked list and feeds the papers I approve into the bibliography. And a shift app for my department at AGC Biologics does what nothing off the shelf could do. Three tools, one instinct: structure the data where it is captured.</p>
+            </div>
+          </article>
+
+          <!-- Plate 003 — leads with the quantified automation win, the most
                concrete result in the profile. profile.md:87-103. Acronyms
                expanded and tool descriptors added per profile.md:8-9. -->
-          <!-- D-04 / NAV-03 — ONLY this card is clickable (never the :200 dispenser
-               plate). data-open wires the warp in main.js; role/tabindex/aria-label
-               make it keyboard- and screen-reader-accessible (the Enter/Space handler
-               is wired at boot). It warps to the [data-proj="ot2"] deep-dive below. -->
-          <article data-reveal="1" class="plate plate--flip"
+          <!-- D-04 / NAV-03 — one of the TWO clickable cards (never the :200
+               dispenser plate). data-open wires the warp in main.js;
+               role/tabindex/aria-label make it keyboard- and screen-reader-accessible
+               (the Enter/Space handler is wired at boot). It warps to the
+               [data-proj="ot2"] deep-dive below.
+               No .plate--flip since 260824-fms: the new software plate above took
+               the even slot, so this one returns to the un-mirrored side. -->
+          <article data-reveal="1" class="plate"
                    data-open="ot2" role="button" tabindex="0"
                    data-i18n-attr="aria-label:work.plate2.aria"
                    aria-label="Open the Automated Gel Electrophoresis case study">
@@ -287,11 +352,13 @@
             </div>
           </article>
 
-          <!-- Plate 003 — the biotech hint. profile.md:193-204. The iGEM wiki
+          <!-- Plate 004 — the biotech hint. profile.md:193-204. The iGEM wiki
                URL is mandatory whenever EndoSense is listed (profile.md:11):
                it is a public, verifiable record. This is the only plate with a
-               link, and it goes somewhere real. -->
-          <article data-reveal="1" class="plate">
+               link, and it goes somewhere real.
+               .plate--flip added by 260824-fms: with four plates the zig-zag is
+               [no-flip, flip, no-flip, flip], and this is the fourth. -->
+          <article data-reveal="1" class="plate plate--flip">
             <div class="plate__media">
               <figure data-para="0.05" class="media-slot" data-label="[ project image ]" data-i18n-attr="data-label:work.plate3.label"><a href="https://2024.igem.wiki/DTU-Denmark/" target="_blank" rel="noopener"><img src="./assets/media/endosense.gif" data-i18n-attr="alt:work.plate3.imgAlt" alt="EndoSense cell-free biosensor in action — DTU iGEM 2024; opens the project wiki"></a></figure>
             </div>
@@ -913,6 +980,276 @@
           </div>
           <p data-reveal="4" class="dd-p" data-i18n="dd.s4.p1">Tested and confirmed working: up to 144 samples per run across three gels, about ten minutes per gel &mdash; keeping the slab gel's low cost and flexibility while lifting the repetitive pipetting off a person's hands.</p>
           <p data-reveal="5" class="dd-p" data-i18n="dd.s4.p2">As a prototype, it closes on where it goes next: operator feedback after repeated runs; magnetic or V-groove mating features for faster, more repeatable assembly; a modified comb with a dedicated ladder lane; support for multiple gel sizes; automated covering-buffer dispensing; and short calibration and dry-run checks so the robot verifies its own alignment before a run.</p>
+          <a data-close href="#work" class="proj__back proj__back--foot" data-i18n-rich="dd.back">&#8592;&nbsp;back to work</a>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- ================= DIGITAL-SOLUTIONS DEEP-DIVE (quick 260824-fms) =========
+         The second [data-proj] overlay, and a sibling of [data-field] in the same
+         overlay band as the OT-2 one. Structurally its twin: own scroll container
+         (overflow:auto — the GSAP scroller, NEVER the window, which is frozen while
+         an overlay is open), starts hidden, revealed by openProj() at the warp's
+         midpoint.
+         data-pos="0.72" is the warp's palette destination (the violet stop) and
+         data-accent + the [data-proj="soft"] CSS rule both resolve --accent to
+         --star-vega — deliberately distinct from the OT-2's Rigel cyan, and reading
+         as "data / software" rather than "engineering room" (D-09).
+         An UMBRELLA page (D-01): one framing section, then three chapters, each
+         problem-first (D-06). Every factual claim traces to ../00_Profile/profile.md
+         (:58, :196-199, :336-361) or to the four first-party Pump Validator
+         screenshots. Chapter three is TEXT ONLY by decision (D-04). -->
+    <div data-proj="soft" data-accent="171,140,255" data-pos="0.72" class="proj"
+         style="position:fixed; inset:0; z-index:30; overflow-x:hidden; overflow-y:auto; visibility:hidden; opacity:0;">
+      <div data-proj-inner class="proj__inner" style="min-height:100%; will-change:transform,opacity,filter; transform-origin:50% 42%;">
+
+        <!-- Same atmosphere contract as the OT-2 overlay: a near starfield that
+             drifts with the content plus three accent nebula glows, layered over the
+             fixed far starfield + whisper grid on [data-proj="soft"]::after/::before.
+             Pointer-events:none, aria-hidden — pure depth. Engine stays paused (D-20). -->
+        <div class="proj__atmos" aria-hidden="true">
+          <span class="proj__stars"></span>
+          <span class="proj__glow proj__glow--a"></span>
+          <span class="proj__glow proj__glow--b"></span>
+          <span class="proj__glow proj__glow--c"></span>
+        </div>
+
+        <a data-close href="#work" class="proj__back" data-i18n-rich="dd.back">&#8592;&nbsp;back to work</a>
+
+        <!-- MASTHEAD — asymmetric split (anti-centre): title column left, the
+             umbrella spine diagram right. The diagram is authored a second time here
+             (the card carries the first copy); GSAP draws only THIS one, because
+             initSoftMotion scopes its context to this overlay. -->
+        <header class="proj__masthead">
+          <div class="proj__masthead-text">
+            <div data-reveal="0" class="proj__eyebrow" data-i18n="sw.eyebrow">software · MSc thesis tooling and AGC Biologics · 2024 — 2026</div>
+            <h1 data-reveal="1" class="proj__title" data-i18n="work.plateSw.title">Digital Solutions for the Lab</h1>
+            <p data-reveal="2" class="proj__lede" data-i18n="sw.lede">Three tools built for the reason I build the hardware &mdash; the repetitive part of the work should not need a person. One runs my thesis' test campaign, one reads the literature, one runs a department's shifts.</p>
+            <div data-reveal="3" class="proj__meta" data-i18n-rich="sw.meta">three tools &middot; Python, REST APIs, relational databases &middot; built solo</div>
+          </div>
+          <div data-reveal="2" class="proj__masthead-visual">
+            <figure class="sw-fig-frame">
+              <svg class="sw-fig sw-fig--hero" data-sw-spine viewBox="0 0 740 260" fill="none" xmlns="http://www.w3.org/2000/svg"
+                   preserveAspectRatio="xMidYMid meet" role="img"
+                   data-i18n-attr="aria-label:sw.hero.aria"
+                   aria-label="A data-flow diagram: three source nodes on the left — the testing app, the search engine and the shift app — each curving into a single horizontal spine on the right that ends in one node labelled structured data.">
+                <g class="sw-src">
+                  <rect class="sw-node" x="16" y="26" width="212" height="52" rx="10"/>
+                  <text class="sw-name" x="122" y="58" text-anchor="middle">the testing app</text>
+                  <rect class="sw-node" x="16" y="104" width="212" height="52" rx="10"/>
+                  <text class="sw-name" x="122" y="136" text-anchor="middle">the search engine</text>
+                  <rect class="sw-node" x="16" y="182" width="212" height="52" rx="10"/>
+                  <text class="sw-name" x="122" y="214" text-anchor="middle">the shift app</text>
+                </g>
+                <path class="sw-edge" d="M228 52 C300 52 322 130 396 130"/>
+                <path class="sw-edge" d="M228 130 L396 130"/>
+                <path class="sw-edge" d="M228 208 C300 208 322 130 396 130"/>
+                <path class="sw-spine" d="M396 130 L516 130"/>
+                <g class="sw-out">
+                  <rect class="sw-node sw-node--out" x="516" y="100" width="208" height="60" rx="10"/>
+                  <text class="sw-name" x="620" y="136" text-anchor="middle">structured data</text>
+                </g>
+              </svg>
+            </figure>
+            <p class="device-frame__cap proj__masthead-cap" data-i18n="sw.heroCap">three tools, one instinct &mdash; structure the data at the moment it is captured.</p>
+          </div>
+        </header>
+
+        <!-- 01 — THE FRAMING (problem-first, D-06). Prose only: the umbrella thesis
+             gets one uninterrupted reading column before any chapter opens. -->
+        <section class="proj-sec" data-proj-sec>
+          <span aria-hidden="true" class="section__numeral section__numeral--right">01</span>
+          <div class="section__blob proj-sec__blob proj-sec__blob--right"></div>
+          <div class="section__head">
+            <span data-reveal="0" class="section__label section__label--intro" data-i18n="sw.s1.label">the problem</span>
+            <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
+          </div>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="sw.s1.h2">The same bottleneck, one layer up.</span></h2>
+          <p data-reveal="1" class="dd-p" data-i18n="sw.s1.p1">Five years at the bench taught me what actually drains a scientist. Not the physical work &mdash; the repetition: running the same protocol dozens of times with no room left to think. Everything else on this site exists because of that.</p>
+          <p data-reveal="2" class="dd-p" data-i18n="sw.s1.p2">The desk has a twin of it. Transcribing a run into a spreadsheet by hand. Chasing one query across a dozen databases that each index and rank differently. Running a department's shifts out of a file somebody has to remember to update. None of it is science, and all of it stands between a person and the science.</p>
+          <p data-reveal="3" class="dd-p" data-i18n="sw.s1.p3">So the fix is the same fix, one layer up &mdash; find the step that repeats, and hand it to something that does not mind repeating. These three tools are that instinct applied to software instead of hardware.</p>
+        </section>
+
+        <!-- 02 — CHAPTER ONE: the Pump Validator thesis app. Four REAL first-party
+             captures in THREE distinct layout beats, driven by their measured aspect
+             ratios: an asymmetric text+shot pair, then a full-width table, then a
+             two-up pair. No two adjacent beats share a layout family.
+             ⚠ The dashboards show DEMONSTRATION data ("Demo Experiments" vs "Lab
+             Syringe Pump"). The copy says what the dashboard DOES; it never quotes a
+             value and never implies a thesis result (T-fms-06).
+             ⚠ The captures are #0B0D12 on a #08090f frame — .device-frame's accent
+             hairline is the ONLY thing giving them a visible edge. Do not remove it. -->
+        <section class="proj-sec" data-proj-sec>
+          <span aria-hidden="true" class="section__numeral section__numeral--left">02</span>
+          <div class="section__blob proj-sec__blob proj-sec__blob--left"></div>
+          <div class="section__head">
+            <span data-reveal="0" class="section__label section__label--intro" data-i18n="sw.s2.label">chapter one — the testing app</span>
+            <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
+          </div>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="sw.s2.h2">A test campaign that writes itself down.</span></h2>
+          <p data-reveal="1" class="dd-p" data-i18n="sw.s2.problem">A Design of Experiments campaign means running the same measurement many times over, in an order deliberately randomised so that drift cannot pass itself off as an effect. Done by hand it is slow, easy to run out of order and easy to mis-key &mdash; and every one of those mistakes only surfaces later, in the analysis, when the run is long over.</p>
+
+          <div data-sw-shots>
+            <!-- BEAT A — asymmetric two-column: the introduction beside the identity
+                 shot (1.88:1, so it earns the wider column). -->
+            <div class="sw-beat">
+              <div class="sw-beat__text">
+                <p data-reveal="1" class="dd-p" data-i18n="sw.s2.build">So the thesis got its own instrument. Pump Validator sets a campaign up, runs it, and analyses it, and I use it to test the dispenser I am building.</p>
+              </div>
+              <figure data-reveal="1" class="device-frame sw-beat__shot">
+                <img src="./assets/media/pv-landing.png" loading="lazy" decoding="async"
+                     data-i18n-attr="alt:sw.s2.alt1"
+                     alt="The Pump Validator landing screen: the app name and the subtitle &quot;Precision flow measurement &amp; analysis pipeline&quot; under a hexagonal mark, above four module cards — Data Collection, Analysis &amp; Dashboard, Run Campaign and Gravimetric Analysis">
+                <figcaption class="device-frame__cap" data-i18n="sw.s2.cap1">four modules &mdash; set up a campaign, run it, analyse it, or weigh it.</figcaption>
+              </figure>
+            </div>
+
+            <ul class="dd-list">
+              <li data-reveal="2" data-i18n-rich="sw.s2.li1"><span class="dd-list__k">Data Collection</span> &mdash; the experiment is defined before anything is measured: operator, hardware configuration, and a Design of Experiments table of target volumes, flow rates and replicates that pastes straight in from a spreadsheet. It generates the randomised run order and lays out the data folders.</li>
+              <li data-reveal="3" data-i18n-rich="sw.s2.li2"><span class="dd-list__k">Analysis &amp; Dashboard</span> &mdash; loads an experiment folder and scores a pump on accuracy and precision across volume and flow-rate categories, with interactive charts.</li>
+              <li data-reveal="4" data-i18n-rich="sw.s2.li3"><span class="dd-list__k">Run Campaign</span> &mdash; the automated route: the runner drives the pump through the campaign and logs the flow unattended.</li>
+              <li data-reveal="5" data-i18n-rich="sw.s2.li4"><span class="dd-list__k">Gravimetric Analysis</span> &mdash; a sensor-free campaign measured by mass instead: per-stroke volume, calibration slopes, precision and evaporation.</li>
+            </ul>
+
+            <!-- BEAT B — FULL WIDTH, and it must stay that way: this capture carries
+                 the Design of Experiments table, its type is the smallest on the page,
+                 and it is the artefact that proves the randomised-run-order claim.
+                 In a column it would be unreadable. -->
+            <figure data-reveal="1" class="device-frame sw-shot--wide">
+              <img src="./assets/media/pv-data-collection.png" loading="lazy" decoding="async"
+                   data-i18n-attr="alt:sw.s2.alt2"
+                   alt="The Data Collection setup screen: an experiment-info panel with base folder, operator, experiment title, configuration and description fields, above a Design of Experiments table with columns for row index, target volume in microlitres, target flow rate in microlitres per minute, and replicates">
+              <figcaption class="device-frame__cap" data-i18n="sw.s2.cap2">the run order is decided before a single measurement is taken &mdash; and pastes straight in from a spreadsheet.</figcaption>
+            </figure>
+
+            <!-- BEAT C — two-up pair. Both are ~1.47:1 and read fine at half width;
+                 they are a natural pair (the same analysis, two views). Own .sw-pair
+                 grid, NOT .media-slot--composite (whose aspect rules are tuned for the
+                 OT-2's portrait video + blueprint pairing). -->
+            <div class="sw-pair">
+              <figure data-reveal="1" class="device-frame">
+                <img src="./assets/media/pv-analysis-charts.png" loading="lazy" decoding="async"
+                     data-i18n-attr="alt:sw.s2.alt3"
+                     alt="The analysis dashboard: a volume-accuracy bar chart and a CV-percent precision bar chart across volume and flow-rate conditions, plus an accuracy-versus-precision scatter plot, comparing two series labelled Demo Experiments and Lab Syringe Pump">
+                <figcaption class="device-frame__cap" data-i18n="sw.s2.cap3">accuracy and precision, condition by condition &mdash; the two questions a dispenser has to answer. Shown with demonstration data.</figcaption>
+              </figure>
+              <figure data-reveal="2" class="device-frame">
+                <img src="./assets/media/pv-analysis-scores.png" loading="lazy" decoding="async"
+                     data-i18n-attr="alt:sw.s2.alt4"
+                     alt="The category score breakdown: a matrix scoring each pump by volume category (small, medium, large) against flow-rate category (slow, medium, fast), with an overall score per pump, for two series labelled Demo Experiments and Lab Syringe Pump">
+                <figcaption class="device-frame__cap" data-i18n="sw.s2.cap4">one score per volume and flow-rate band, so a weak corner is visible at a glance. Shown with demonstration data.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <p data-reveal="1" class="dd-p" data-i18n="sw.s2.outcome">The charts are not really the point. The point is that the data arrives structured at the moment it is captured &mdash; a run order, a folder layout, one record per measurement &mdash; so the analysis is a parse and not a retype.</p>
+        </section>
+
+        <!-- 03 — CHAPTER TWO: the multi-API literature search engine. A different
+             layout family again: prose + list + ONE full-width authored diagram
+             (no photographic media at all in this chapter). profile.md:336-361.
+             No line count, per the OT-2 page's D-10 lesson. -->
+        <section class="proj-sec" data-proj-sec>
+          <span aria-hidden="true" class="section__numeral section__numeral--right">03</span>
+          <div class="section__blob proj-sec__blob proj-sec__blob--right"></div>
+          <div class="section__head">
+            <span data-reveal="0" class="section__label section__label--intro" data-i18n="sw.s3.label">chapter two — the search engine</span>
+            <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
+          </div>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="sw.s3.h2">Seven databases, one ranked list.</span></h2>
+          <p data-reveal="1" class="dd-p" data-i18n="sw.s3.problem">Literature discovery means running the same query across databases that each index differently and each rank differently, reading past the overlap between them, and then retyping whatever survives into a bibliography. It is the mechanical half of a thesis, and it eats the time meant for the reading.</p>
+          <p data-reveal="2" class="dd-p" data-i18n="sw.s3.build">So it became a pipeline. A Python toolchain queries every source at once, fuses their disagreeing rankings into a single list, and writes the papers I approve straight into the LaTeX bibliography.</p>
+
+          <!-- Fusion diagram, FULL WIDTH (the .dd-diamond-fig pattern): seven real
+               source names on the left fan into one fused ranked column. Renders
+               COMPLETE and static by default — GSAP only adds the draw-on, positive
+               stroke-dashoffset, Safari-safe. All colour derives from --accent.
+               The ranked column carries NO numbers: rank is shown by position and
+               weight, so nothing on it can be read as a fabricated metric. -->
+          <figure data-reveal="1" class="sw-fusion-fig">
+            <svg class="sw-fig" data-sw-fusion viewBox="0 0 740 300" fill="none" xmlns="http://www.w3.org/2000/svg"
+                 preserveAspectRatio="xMidYMid meet" role="img"
+                 data-i18n-attr="aria-label:sw.s3.figAria"
+                 aria-label="A ranking diagram: seven labelled source ticks on the left — PubMed, Semantic Scholar, OpenAlex, Scopus, IEEE Xplore, arXiv and bioRxiv — each curving to the right into a single fused, ranked column of results.">
+              <g class="sw-srcs">
+                <text class="sw-src-name" x="0" y="31">PubMed</text>
+                <text class="sw-src-name" x="0" y="73">Semantic Scholar</text>
+                <text class="sw-src-name" x="0" y="115">OpenAlex</text>
+                <text class="sw-src-name" x="0" y="157">Scopus</text>
+                <text class="sw-src-name" x="0" y="199">IEEE Xplore</text>
+                <text class="sw-src-name" x="0" y="241">arXiv</text>
+                <text class="sw-src-name" x="0" y="283">bioRxiv</text>
+              </g>
+              <!-- Seven curves, one continuous stroke each, all converging on x=440. -->
+              <path class="sw-edge" d="M214 26 C330 26 340 150 440 150"/>
+              <path class="sw-edge" d="M214 68 C330 68 340 150 440 150"/>
+              <path class="sw-edge" d="M214 110 C330 110 340 150 440 150"/>
+              <path class="sw-edge" d="M214 152 L440 150"/>
+              <path class="sw-edge" d="M214 194 C330 194 340 150 440 150"/>
+              <path class="sw-edge" d="M214 236 C330 236 340 150 440 150"/>
+              <path class="sw-edge" d="M214 278 C330 278 340 150 440 150"/>
+              <!-- The fused ranked column: five rows, weight decreasing down the list. -->
+              <text class="sw-col-label" x="470" y="26">ranked</text>
+              <rect class="sw-rank sw-rank--1" x="470" y="40" width="254" height="38" rx="8"/>
+              <rect class="sw-rank sw-rank--2" x="470" y="90" width="254" height="38" rx="8"/>
+              <rect class="sw-rank sw-rank--3" x="470" y="140" width="254" height="38" rx="8"/>
+              <rect class="sw-rank sw-rank--4" x="470" y="190" width="254" height="38" rx="8"/>
+              <rect class="sw-rank sw-rank--5" x="470" y="240" width="254" height="38" rx="8"/>
+            </svg>
+            <figcaption class="device-frame__cap" data-i18n="sw.s3.figCap">seven sources that rank differently &mdash; fused into one list, not stacked end to end.</figcaption>
+          </figure>
+
+          <ul class="dd-list">
+            <li data-reveal="2" data-i18n-rich="sw.s3.li1"><span class="dd-list__k">Seven scientific APIs under one interface</span> &mdash; PubMed (NCBI), Semantic Scholar, OpenAlex, Scopus (Elsevier), IEEE Xplore, arXiv and bioRxiv via Europe PMC, each with its own authentication and key management, rate-limit handling, institutional-IP entitlement for Scopus, and graceful self-skipping when a source is down.</li>
+            <li data-reveal="3" data-i18n-rich="sw.s3.li2"><span class="dd-list__k">Reciprocal Rank Fusion</span> &mdash; the sources disagree, so their ranked lists get fused rather than concatenated, scoring each paper on recency, citation count and how well its title and abstract match the query.</li>
+            <li data-reveal="4" data-i18n-rich="sw.s3.li3"><span class="dd-list__k">Citation snowballing</span> &mdash; forward and backward traversal from a seed paper, deliberately fusing two indices that disagree: OpenAlex returns the most cited, Semantic Scholar the newest, and both halves survive the merge.</li>
+            <li data-reveal="5" data-i18n-rich="sw.s3.li4"><span class="dd-list__k">A BibTeX pipeline</span> &mdash; claim extraction from abstracts, deterministic citation keys, append-with-diff-confirmation, and deduplication by key, by DOI and by near-duplicate title.</li>
+          </ul>
+          <p data-reveal="1" class="dd-p" data-i18n="sw.s3.outcome">Human-in-the-loop by design: nothing is written to disk without explicit approval. The pipeline does the fetching, the merging and the formatting. The judgement about what belongs in the thesis stays mine.</p>
+          <a class="dd-link" href="https://sirsirio.github.io/thesis-tools/" target="_blank" rel="noopener" data-i18n-rich="sw.s3.link">the thesis tools&nbsp;&#8599;</a>
+        </section>
+
+        <!-- 04 — CHAPTER THREE: the AGC shift app. ⚠ D-04 HARD GATE — this section
+             carries NO <img>, NO <figure>, NO <svg>, NO .media-slot, NO .device-frame
+             and NO .blueprint. The app is internal to AGC Biologics; what ships here
+             is the shape of the work, not the tool. Everything below traces to
+             profile.md:196-199 and nothing further: no headcount, no internal process
+             detail, no data. The app is IN PROGRESS ("Designing and developing"), so
+             the copy stays present-progressive and claims no deployment.
+             Layout family: a wider text measure with no media at all, which is itself
+             the variance beat between two heavily-illustrated chapters. -->
+        <section class="proj-sec proj-sec--text" data-proj-sec>
+          <span aria-hidden="true" class="section__numeral section__numeral--left">04</span>
+          <div class="section__blob proj-sec__blob proj-sec__blob--left"></div>
+          <div class="section__head">
+            <span data-reveal="0" class="section__label section__label--intro" data-i18n="sw.s4.label">chapter three — the shift app</span>
+            <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
+          </div>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="sw.s4.h2">The first decision was whether to build it at all.</span></h2>
+          <p data-reveal="1" class="dd-p" data-i18n="sw.s4.problem">My department at AGC Biologics needed shift management, and nothing off the shelf fitted the way the team actually works. So the real first question was not how to build it &mdash; it was whether to. That is a decision you make by looking at what already exists before you write anything, and here the answer came back build.</p>
+          <p data-reveal="2" class="dd-p" data-i18n="sw.s4.build">I am designing and developing it end to end, on my own initiative.</p>
+          <ul class="dd-list">
+            <li data-reveal="3" data-i18n-rich="sw.s4.li1"><span class="dd-list__k">Full infrastructure design</span> &mdash; the system architecture, the relational data model and the user flow.</li>
+            <li data-reveal="4" data-i18n-rich="sw.s4.li2"><span class="dd-list__k">Azure-hosted, Python back end</span> &mdash; database-driven and mobile-friendly, because a shift app gets opened on a phone, not at a desk.</li>
+            <li data-reveal="5" data-i18n-rich="sw.s4.li3"><span class="dd-list__k">An API between the layers</span> &mdash; I designed the request and response flow between the front end and the back end.</li>
+            <li data-reveal="5" data-i18n-rich="sw.s4.li4"><span class="dd-list__k">Through corporate IT, independently</span> &mdash; I approached the IT department to map what infrastructure and services already existed internally, learned their intake and approval process for new applications, and took the project through that dialogue. Getting a solution accepted inside a regulated pharma IT landscape is its own piece of engineering.</li>
+          </ul>
+          <p data-reveal="1" class="sw-note" data-i18n="sw.s4.note">The app lives inside AGC Biologics, so what is on this page is the shape of the work rather than the tool &mdash; the decisions, the architecture, the process. No screenshot, no internal detail. Knowing where that line sits is part of the job.</p>
+        </section>
+
+        <!-- 05 — THE THREAD: the umbrella's closing beat. Short by design; it ties
+             the three chapters back to the hardware elsewhere on the site. -->
+        <section class="proj-sec" data-proj-sec>
+          <span aria-hidden="true" class="section__numeral section__numeral--right">05</span>
+          <div class="section__blob proj-sec__blob proj-sec__blob--right"></div>
+          <div class="section__head">
+            <span data-reveal="0" class="section__label section__label--intro" data-i18n="sw.s5.label">the thread</span>
+            <span data-reveal="0" data-reveal-kind="draw" class="section__rule"></span>
+          </div>
+          <h2 data-reveal="0" data-reveal-kind="assemble"><span data-i18n="sw.s5.h2">Three tools, one instinct.</span></h2>
+          <p data-reveal="1" class="dd-p" data-i18n="sw.s5.p1">They share three habits. Structure the data at the moment it is captured, never afterwards. Put one interface over many sources, so the mess stays on my side of it and not the user's. And decide honestly what to build and what to buy, because the wrong answer to that costs more than any of the code.</p>
+          <p data-reveal="2" class="dd-p" data-i18n="sw.s5.p2">It is the same instinct as the hardware elsewhere on this site, in a different medium. Find the step that repeats, and take it off a person's hands.</p>
           <a data-close href="#work" class="proj__back proj__back--foot" data-i18n-rich="dd.back">&#8592;&nbsp;back to work</a>
         </section>
 

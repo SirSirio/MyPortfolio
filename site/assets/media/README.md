@@ -115,6 +115,41 @@ by the project owner's **informed, deliberate decision**:
 The two first-party diagrams beside it (`ot2-slots-allocation.png`,
 `ot2-ui-runner.png`) are Sirio's own work product and are **not** exceptions.
 
+---
+
+## Pump Validator captures — `pv-*.png`
+
+Four assets added by quick task 260824-fms for the digital-solutions deep-dive's
+first chapter. These are **exactly what the first-party rule asks for**: they are
+screenshots of **Sirio's own thesis testing app**, captured August 2026. No stock,
+no AI, no exception, nothing waived.
+
+| File | What it shows |
+|------|---------------|
+| `pv-landing.png` | The app's landing screen and its four modules |
+| `pv-data-collection.png` | The Design of Experiments setup table |
+| `pv-analysis-charts.png` | The accuracy / precision dashboard |
+| `pv-analysis-scores.png` | The category score breakdown |
+
+Two things about them are load-bearing:
+
+- **They are DARK — background `#0B0D12`.** That is within a few units of
+  `.device-frame`'s `#08090f` ground and the overlay's `#05070e`. This is the
+  *inverse* of the problem `.device-frame` was originally written for (containing
+  opaque-white PNGs that punch a hole): dropped raw, these do not punch a hole,
+  they **disappear**. The frame's accent hairline border and inner glow are the
+  only things giving them a visible edge. **Do not remove that border** thinking
+  the frame is unnecessary here.
+- **The alpha channel was stripped.** All four arrived RGBA with a verified
+  constant-255 (fully opaque) alpha, i.e. dead weight. Re-saved as RGB with
+  `optimize=True`, dimensions unchanged: **812,376 → 602,075 bytes, 25.9% saved**.
+  No resize, no crop, no format change, no quality change.
+
+The dashboards in `pv-analysis-*.png` show **demonstration data** (the compared
+series are labelled "Demo Experiments" and "Lab Syringe Pump"). The page copy
+describes what the dashboard *does* and must never quote a value from them or
+present one as a thesis result.
+
 ## Naming
 
 - Lowercase, hyphenated, matching the project slug: `liquid-dispenser.jpg`,

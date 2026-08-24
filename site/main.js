@@ -230,6 +230,7 @@ let trans = null;     /* the active warp transition, or null when idle */
 let burst = null;     /* a short scroll-jump burst (inert until a [data-jump] wires it) */
 let _wt = performance.now();
 let ot2Ctx = null;    /* the OT-2 deep-dive GSAP context (Plan 03), or null when torn down */
+let softCtx = null;   /* the digital-solutions GSAP context (quick 260824-fms), or null */
 
 /* The warp starfield: points stream out of the centre as their z shrinks toward 0
    (ported from .dc.html:337-338). spawn seeds one at a random angle and radius. */
@@ -263,11 +264,12 @@ function openProj(id) {
 function closeProj() {
   if (trans || !curProj) return;
   const id = curProj;
-  /* Tear down the OT-2 scroll-telling before the return warp — ctx.revert() kills
-     every tween + ScrollTrigger and restores inline styles, so a reopen rebuilds
-     cleanly (no leaked/duplicate triggers). No-ops when nothing was built (reduced
-     motion, or a different overlay). Covers both the reduced and animated paths. */
-  killOt2Motion();
+  /* Tear down the open deep-dive's scroll-telling before the return warp —
+     ctx.revert() kills every tween + ScrollTrigger and restores inline styles, so a
+     reopen rebuilds cleanly (no leaked/duplicate triggers). Each killer no-ops when
+     nothing was built (reduced motion, or the other overlay), so this is safe to
+     call unconditionally. Covers both the reduced and animated paths. */
+  killProjMotion();
   if (REDUCED) {
     const p = projEl(id); if (p) { p.style.visibility = 'hidden'; p.style.opacity = '0'; }
     document.body.style.overflow = ''; curProj = null; return;
@@ -283,6 +285,19 @@ function closeProj() {
 function startBurst() {
   if (REDUCED || trans) return;
   burst = { start: performance.now(), dur: 950, live: true, max: 0.0075 * WARP_INT };
+}
+
+/* Seed a draw-on: dasharray = dashoffset = path length, so the stroke starts
+   hidden and tweens to 0. POSITIVE offset only — Safari mishandles negative.
+   Hoisted to module scope (quick 260824-fms) so both deep-dives share ONE
+   implementation; behaviour is unchanged from the copy that lived inside
+   initOt2Motion. Selector text resolves inside whichever gsap.context() is
+   calling, so each overlay only ever seeds its own paths. */
+function seedDraw(gsap, sel) {
+  gsap.utils.toArray(sel).forEach((el) => {
+    const len = (el.getTotalLength && el.getTotalLength()) || 0;
+    if (len) gsap.set(el, { strokeDasharray: len, strokeDashoffset: len });
+  });
 }
 
 /* ---------- OT-2 deep-dive scroll-telling (Plan 02.1-03) ----------
@@ -318,17 +333,10 @@ function initOt2Motion() {
   gsap.registerPlugin(ScrollTrigger);
 
   ot2Ctx = gsap.context(() => {
-    /* Seed a draw-on: dasharray = dashoffset = path length, so the stroke starts
-       hidden and tweens to 0 (positive offset only — Safari mishandles negative). */
-    const seedDraw = (sel) => gsap.utils.toArray(sel).forEach((el) => {
-      const len = (el.getTotalLength && el.getTotalLength()) || 0;
-      if (len) gsap.set(el, { strokeDasharray: len, strokeDashoffset: len });
-    });
-
     /* — APPROACH: the hand-built Double Diamond outline draws itself on as the
          section enters, scrub-linked to the overlay scroll (POSITIVE dashoffset,
          Safari-safe). Static + fully drawn by default under reduced motion / no JS. — */
-    seedDraw('.dd-edge');
+    seedDraw(gsap, '.dd-edge');
     const ddTl = gsap.timeline({
       scrollTrigger: { scroller, trigger: '[data-ot2-diamond]', start: 'top 88%', end: 'top 40%', scrub: 0.6 }
     });
@@ -360,6 +368,90 @@ function initOt2Motion() {
 function killOt2Motion() {
   if (ot2Ctx) { ot2Ctx.revert(); ot2Ctx = null; }
 }
+
+/* ---------- digital-solutions scroll-telling (quick 260824-fms) ----------
+
+   Structurally a twin of initOt2Motion above, for the [data-proj="soft"] overlay,
+   and it obeys exactly the same rules:
+     - REDUCED is the single reduced-motion source; nothing is built under it and
+       every diagram already renders COMPLETE and static, so a reduced / no-JS
+       visitor sees the finished drawing rather than a blank frame.
+     - The scroller is the OVERLAY element, never the window — the window is
+       frozen (body overflow:hidden) for as long as a deep-dive is open, so a
+       window-scoped ScrollTrigger would simply never fire.
+     - Built only from applyTrans() at t >= 1, after `trans` is cleared, so
+       ScrollTrigger never measures the still-scaled, still-blurred inner.
+     - Everything lives in gsap.context(fn, scroller); killSoftMotion() reverts it
+       so reopening rebuilds cleanly and cannot leak or duplicate triggers.
+     - Vocabulary is transform / opacity / stroke-dashoffset only. Every tween is
+       scrub-linked to the overlay scroll; no autonomous loop, no new rAF, no
+       second IntersectionObserver.
+
+   ⚠ [data-sw-spine] is authored TWICE — once in the work card on the landing
+   page, once in this overlay's masthead. gsap.context(fn, scroller) scopes plain
+   selector strings to `scroller`, so the tweens below only ever touch the
+   overlay's copy and the card's diagram stays untouched. That is why the
+   selectors here are strings and NOT pre-queried global elements. */
+function initSoftMotion() {
+  if (REDUCED) return;
+  const gsap = window.gsap, ScrollTrigger = window.ScrollTrigger;
+  if (!gsap || !ScrollTrigger) return;   /* vendored globals must be live at runtime */
+  const scroller = document.querySelector('[data-proj="soft"]');
+  if (!scroller) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  softCtx = gsap.context(() => {
+    /* — MASTHEAD: the three sources draw into one spine, then the nodes and their
+         labels settle in. This is the umbrella argument made visible, so it earns
+         its motion: the page's whole claim is "three things, one outcome". — */
+    seedDraw(gsap, '[data-sw-spine] .sw-edge, [data-sw-spine] .sw-spine');
+    const spineTl = gsap.timeline({
+      scrollTrigger: { scroller, trigger: '[data-sw-spine]', start: 'top 88%', end: 'top 34%', scrub: 0.6 }
+    });
+    spineTl.to('[data-sw-spine] .sw-edge, [data-sw-spine] .sw-spine',
+      { strokeDashoffset: 0, ease: 'none', duration: 1 }, 0);
+    spineTl.from('[data-sw-spine] .sw-node', { opacity: 0, ease: 'none', stagger: 0.18, duration: 0.5 }, 0.1);
+    spineTl.from('[data-sw-spine] .sw-name', { opacity: 0, y: 6, ease: 'none', stagger: 0.18, duration: 0.45 }, 0.2);
+
+    /* — CHAPTER ONE: the four real captures. Deliberately RESTRAINED — the
+         screenshots are the content, not the effect, so this is a short rise and
+         fade with a stagger, and nothing else. No scale, no blur, no rotation. — */
+    gsap.from('[data-sw-shots] .device-frame', {
+      y: 24, opacity: 0, ease: 'none', stagger: 0.1,
+      scrollTrigger: { scroller, trigger: '[data-sw-shots]', start: 'top 86%', end: 'top 30%', scrub: 0.6 }
+    });
+
+    /* — CHAPTER TWO: the seven sources draw left-to-right into the fused column,
+         then the ranked rows arrive top-down. The drawing IS the explanation of
+         Reciprocal Rank Fusion, so the order of the motion carries the meaning. — */
+    seedDraw(gsap, '[data-sw-fusion] .sw-edge');
+    const fuseTl = gsap.timeline({
+      scrollTrigger: { scroller, trigger: '[data-sw-fusion]', start: 'top 86%', end: 'top 36%', scrub: 0.6 }
+    });
+    fuseTl.to('[data-sw-fusion] .sw-edge', { strokeDashoffset: 0, ease: 'none', stagger: 0.06, duration: 1 }, 0);
+    fuseTl.from('[data-sw-fusion] .sw-src-name', { opacity: 0, x: -8, ease: 'none', stagger: 0.06, duration: 0.4 }, 0);
+    fuseTl.from('[data-sw-fusion] .sw-col-label', { opacity: 0, ease: 'none', duration: 0.3 }, 0.35);
+    fuseTl.from('[data-sw-fusion] .sw-rank', { opacity: 0, y: 10, ease: 'none', stagger: 0.12, duration: 0.5 }, 0.45);
+  }, scroller);
+
+  ScrollTrigger.refresh();   /* recompute now the warp transform/filter are cleared */
+}
+
+function killSoftMotion() {
+  if (softCtx) { softCtx.revert(); softCtx = null; }
+}
+
+/* Tear down whichever overlay's motion was built. Both killers no-op when their
+   context was never created (reduced motion, or the other overlay), so closeProj
+   can call this unconditionally without knowing which deep-dive is open. */
+function killProjMotion() {
+  killOt2Motion();
+  killSoftMotion();
+}
+
+/* Arrival dispatch: which motion layer to build for the overlay being warped INTO.
+   Declared after both initialisers so neither is referenced before definition. */
+const PROJ_MOTION = { ot2: initOt2Motion, soft: initSoftMotion };
 
 /* palette position of the current scroll — the warp inherits the gradient the page is at */
 function scrollPos() {
@@ -414,8 +506,10 @@ function applyTrans(now) {
     const intoId = tr.into.id;
     trans = null;   /* clear FIRST so the engine-pause guard is active and ScrollTrigger
                        measures a settled, transform-free inner (RESEARCH § R-03). */
-    /* Build the OT-2 scroll-telling only once the warp INTO ot2 has fully landed. */
-    if (intoId === 'ot2') initOt2Motion();
+    /* Build the arriving overlay's scroll-telling only once the warp has fully
+       landed. Table-driven since quick 260824-fms — a third deep-dive is one
+       PROJ_MOTION entry, not another branch here. */
+    if (intoId && PROJ_MOTION[intoId]) PROJ_MOTION[intoId]();
   }
 }
 
