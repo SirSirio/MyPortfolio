@@ -75,6 +75,17 @@ export const STRINGS = {
     'work.plate3.imgAlt': `EndoSense cell-free biosensor in action — DTU iGEM 2024; opens the project wiki`,
     'work.plate3.link': `IGEM WIKI&nbsp;&#8599;`,
 
+    /* Plate 004 — the software plate (quick 260824-fms, D-07). Its OWN namespace
+       (work.plateSw.*) rather than a renumber, so plate2/plate3 stay byte-identical
+       and no other file has to change. Facts: profile.md:58 (the thesis testing app),
+       :196-199 (the AGC shift app), :336-361 (the search engine), plus the four
+       first-party Pump Validator screenshots. */
+    'work.plateSw.meta': `Software · 2024 — 2026`,
+    'work.plateSw.title': `Digital Solutions for the Lab`,
+    'work.plateSw.body': `Repetitive digital work is the same bottleneck as repetitive bench work — it just sits at a desk. So I build the tools that remove it. Pump Validator runs my thesis' randomised test campaign and writes every measurement straight into a structured record, so the analysis is a parse and not a retype. A search engine fuses seven scientific literature APIs into one ranked list and feeds the papers I approve into the bibliography. And a shift app for my department at AGC Biologics does what nothing off the shelf could do. Three tools, one instinct: structure the data where it is captured.`,
+    'work.plateSw.label': `[ data-flow diagram ]`,
+    'work.plateSw.aria': `Open the digital solutions case study`,
+
     /* experience (#experience) */
     'exp.label': `where I've worked and studied`,
     'exp.h2': `Experience`,
@@ -205,7 +216,74 @@ export const STRINGS = {
     'dd.s4.stat2': `per gel, tested and functional`,
     'dd.s4.stat3': `final grade`,
     'dd.s4.p1': `Tested and confirmed working: up to 144 samples per run across three gels, about ten minutes per gel — keeping the slab gel's low cost and flexibility while lifting the repetitive pipetting off a person's hands.`,
-    'dd.s4.p2': `As a prototype, it closes on where it goes next: operator feedback after repeated runs; magnetic or V-groove mating features for faster, more repeatable assembly; a modified comb with a dedicated ladder lane; support for multiple gel sizes; automated covering-buffer dispensing; and short calibration and dry-run checks so the robot verifies its own alignment before a run.`
+    'dd.s4.p2': `As a prototype, it closes on where it goes next: operator feedback after repeated runs; magnetic or V-groove mating features for faster, more repeatable assembly; a modified comb with a dedicated ladder lane; support for multiple gel sizes; automated covering-buffer dispensing; and short calibration and dry-run checks so the robot verifies its own alignment before a run.`,
+
+    /* Digital-solutions deep-dive (data-proj="soft") — quick 260824-fms.
+       An UMBRELLA case study (D-01): one overall framing, then three chapters.
+       Mirrors the dd.* structure exactly and REUSES dd.back for both back links.
+       ⚠ Chapter one's four captures show DEMONSTRATION data ("Demo Experiments"
+       vs "Lab Syringe Pump") — the copy describes what the dashboard DOES and
+       never quotes a value or implies a thesis result (T-fms-06).
+       ⚠ Chapter three is text-only and says nothing beyond profile.md:196-199
+       (D-04): no screenshot, no internal detail, no headcount, no deployment
+       claim. The app is IN PROGRESS, so it stays present-progressive. */
+    'sw.eyebrow': `software · MSc thesis tooling and AGC Biologics · 2024 — 2026`,
+    'sw.lede': `Three tools built for the reason I build the hardware — the repetitive part of the work should not need a person. One runs my thesis' test campaign, one reads the literature, one runs a department's shifts.`,
+    'sw.meta': `three tools &middot; Python, REST APIs, relational databases &middot; built solo`,
+    'sw.heroCap': `three tools, one instinct — structure the data at the moment it is captured.`,
+    'sw.hero.aria': `A data-flow diagram: three source nodes on the left — the testing app, the search engine and the shift app — each curving into a single horizontal spine on the right that ends in one node labelled structured data.`,
+
+    'sw.s1.label': `the problem`,
+    'sw.s1.h2': `The same bottleneck, one layer up.`,
+    'sw.s1.p1': `Five years at the bench taught me what actually drains a scientist. Not the physical work — the repetition: running the same protocol dozens of times with no room left to think. Everything else on this site exists because of that.`,
+    'sw.s1.p2': `The desk has a twin of it. Transcribing a run into a spreadsheet by hand. Chasing one query across a dozen databases that each index and rank differently. Running a department's shifts out of a file somebody has to remember to update. None of it is science, and all of it stands between a person and the science.`,
+    'sw.s1.p3': `So the fix is the same fix, one layer up — find the step that repeats, and hand it to something that does not mind repeating. These three tools are that instinct applied to software instead of hardware.`,
+
+    'sw.s2.label': `chapter one — the testing app`,
+    'sw.s2.h2': `A test campaign that writes itself down.`,
+    'sw.s2.problem': `A Design of Experiments campaign means running the same measurement many times over, in an order deliberately randomised so that drift cannot pass itself off as an effect. Done by hand it is slow, easy to run out of order and easy to mis-key — and every one of those mistakes only surfaces later, in the analysis, when the run is long over.`,
+    'sw.s2.build': `So the thesis got its own instrument. Pump Validator sets a campaign up, runs it, and analyses it, and I use it to test the dispenser I am building.`,
+    'sw.s2.li1': `<span class="dd-list__k">Data Collection</span> &mdash; the experiment is defined before anything is measured: operator, hardware configuration, and a Design of Experiments table of target volumes, flow rates and replicates that pastes straight in from a spreadsheet. It generates the randomised run order and lays out the data folders.`,
+    'sw.s2.li2': `<span class="dd-list__k">Analysis &amp; Dashboard</span> &mdash; loads an experiment folder and scores a pump on accuracy and precision across volume and flow-rate categories, with interactive charts.`,
+    'sw.s2.li3': `<span class="dd-list__k">Run Campaign</span> &mdash; the automated route: the runner drives the pump through the campaign and logs the flow unattended.`,
+    'sw.s2.li4': `<span class="dd-list__k">Gravimetric Analysis</span> &mdash; a sensor-free campaign measured by mass instead: per-stroke volume, calibration slopes, precision and evaporation.`,
+    'sw.s2.outcome': `The charts are not really the point. The point is that the data arrives structured at the moment it is captured — a run order, a folder layout, one record per measurement — so the analysis is a parse and not a retype.`,
+    'sw.s2.cap1': `four modules — set up a campaign, run it, analyse it, or weigh it.`,
+    'sw.s2.alt1': `The Pump Validator landing screen: the app name and the subtitle "Precision flow measurement & analysis pipeline" under a hexagonal mark, above four module cards — Data Collection, Analysis & Dashboard, Run Campaign and Gravimetric Analysis`,
+    'sw.s2.cap2': `the run order is decided before a single measurement is taken — and pastes straight in from a spreadsheet.`,
+    'sw.s2.alt2': `The Data Collection setup screen: an experiment-info panel with base folder, operator, experiment title, configuration and description fields, above a Design of Experiments table with columns for row index, target volume in microlitres, target flow rate in microlitres per minute, and replicates`,
+    'sw.s2.cap3': `accuracy and precision, condition by condition — the two questions a dispenser has to answer. Shown with demonstration data.`,
+    'sw.s2.alt3': `The analysis dashboard: a volume-accuracy bar chart and a CV-percent precision bar chart across volume and flow-rate conditions, plus an accuracy-versus-precision scatter plot, comparing two series labelled Demo Experiments and Lab Syringe Pump`,
+    'sw.s2.cap4': `one score per volume and flow-rate band, so a weak corner is visible at a glance. Shown with demonstration data.`,
+    'sw.s2.alt4': `The category score breakdown: a matrix scoring each pump by volume category (small, medium, large) against flow-rate category (slow, medium, fast), with an overall score per pump, for two series labelled Demo Experiments and Lab Syringe Pump`,
+
+    'sw.s3.label': `chapter two — the search engine`,
+    'sw.s3.h2': `Seven databases, one ranked list.`,
+    'sw.s3.problem': `Literature discovery means running the same query across databases that each index differently and each rank differently, reading past the overlap between them, and then retyping whatever survives into a bibliography. It is the mechanical half of a thesis, and it eats the time meant for the reading.`,
+    'sw.s3.build': `So it became a pipeline. A Python toolchain queries every source at once, fuses their disagreeing rankings into a single list, and writes the papers I approve straight into the LaTeX bibliography.`,
+    'sw.s3.li1': `<span class="dd-list__k">Seven scientific APIs under one interface</span> &mdash; PubMed (NCBI), Semantic Scholar, OpenAlex, Scopus (Elsevier), IEEE Xplore, arXiv and bioRxiv via Europe PMC, each with its own authentication and key management, rate-limit handling, institutional-IP entitlement for Scopus, and graceful self-skipping when a source is down.`,
+    'sw.s3.li2': `<span class="dd-list__k">Reciprocal Rank Fusion</span> &mdash; the sources disagree, so their ranked lists get fused rather than concatenated, scoring each paper on recency, citation count and how well its title and abstract match the query.`,
+    'sw.s3.li3': `<span class="dd-list__k">Citation snowballing</span> &mdash; forward and backward traversal from a seed paper, deliberately fusing two indices that disagree: OpenAlex returns the most cited, Semantic Scholar the newest, and both halves survive the merge.`,
+    'sw.s3.li4': `<span class="dd-list__k">A BibTeX pipeline</span> &mdash; claim extraction from abstracts, deterministic citation keys, append-with-diff-confirmation, and deduplication by key, by DOI and by near-duplicate title.`,
+    'sw.s3.outcome': `Human-in-the-loop by design: nothing is written to disk without explicit approval. The pipeline does the fetching, the merging and the formatting. The judgement about what belongs in the thesis stays mine.`,
+    'sw.s3.link': `the thesis tools&nbsp;&#8599;`,
+    'sw.s3.figCap': `seven sources that rank differently — fused into one list, not stacked end to end.`,
+    'sw.s3.figAria': `A ranking diagram: seven labelled source ticks on the left — PubMed, Semantic Scholar, OpenAlex, Scopus, IEEE Xplore, arXiv and bioRxiv — each curving to the right into a single fused, ranked column of results.`,
+
+    'sw.s4.label': `chapter three — the shift app`,
+    'sw.s4.h2': `The first decision was whether to build it at all.`,
+    'sw.s4.problem': `My department at AGC Biologics needed shift management, and nothing off the shelf fitted the way the team actually works. So the real first question was not how to build it — it was whether to. That is a decision you make by looking at what already exists before you write anything, and here the answer came back build.`,
+    'sw.s4.build': `I am designing and developing it end to end, on my own initiative.`,
+    'sw.s4.li1': `<span class="dd-list__k">Full infrastructure design</span> &mdash; the system architecture, the relational data model and the user flow.`,
+    'sw.s4.li2': `<span class="dd-list__k">Azure-hosted, Python back end</span> &mdash; database-driven and mobile-friendly, because a shift app gets opened on a phone, not at a desk.`,
+    'sw.s4.li3': `<span class="dd-list__k">An API between the layers</span> &mdash; I designed the request and response flow between the front end and the back end.`,
+    'sw.s4.li4': `<span class="dd-list__k">Through corporate IT, independently</span> &mdash; I approached the IT department to map what infrastructure and services already existed internally, learned their intake and approval process for new applications, and took the project through that dialogue. Getting a solution accepted inside a regulated pharma IT landscape is its own piece of engineering.`,
+    'sw.s4.note': `The app lives inside AGC Biologics, so what is on this page is the shape of the work rather than the tool — the decisions, the architecture, the process. No screenshot, no internal detail. Knowing where that line sits is part of the job.`,
+
+    'sw.s5.label': `the thread`,
+    'sw.s5.h2': `Three tools, one instinct.`,
+    'sw.s5.p1': `They share three habits. Structure the data at the moment it is captured, never afterwards. Put one interface over many sources, so the mess stays on my side of it and not the user's. And decide honestly what to build and what to buy, because the wrong answer to that costs more than any of the code.`,
+    'sw.s5.p2': `It is the same instinct as the hardware elsewhere on this site, in a different medium. Find the step that repeats, and take it off a person's hands.`
   },
 
   it: {
@@ -262,6 +340,13 @@ export const STRINGS = {
     'work.plate3.label': `[ immagine del progetto ]`,
     'work.plate3.imgAlt': `Il biosensore cell-free EndoSense in azione — DTU iGEM 2024; apre il wiki del progetto`,
     'work.plate3.link': `WIKI IGEM&nbsp;&#8599;`,
+
+    /* Plate 004 — la scheda software (quick 260824-fms, D-07). */
+    'work.plateSw.meta': `Software · 2024 — 2026`,
+    'work.plateSw.title': `Soluzioni Digitali per il Laboratorio`,
+    'work.plateSw.body': `Il lavoro digitale ripetitivo è lo stesso collo di bottiglia del lavoro ripetitivo al bancone — solo che sta a una scrivania. Così costruisco gli strumenti che lo eliminano. Pump Validator esegue la campagna di test randomizzata della mia tesi e scrive ogni misura direttamente in un record strutturato, così l'analisi è una lettura e non una ridigitazione. Un motore di ricerca fonde sette API di letteratura scientifica in un'unica lista ordinata e porta nella bibliografia gli articoli che approvo. E un'app per la gestione dei turni del mio reparto ad AGC Biologics fa ciò che nessuna soluzione pronta riusciva a fare. Tre strumenti, un solo istinto: strutturare i dati dove vengono raccolti.`,
+    'work.plateSw.label': `[ diagramma di flusso dati ]`,
+    'work.plateSw.aria': `Apri il caso studio delle soluzioni digitali`,
 
     /* experience (#experience) */
     'exp.label': `dove ho lavorato e studiato`,
@@ -393,7 +478,69 @@ export const STRINGS = {
     'dd.s4.stat2': `per gel, testato e funzionante`,
     'dd.s4.stat3': `voto finale`,
     'dd.s4.p1': `Testato e confermato funzionante: fino a 144 campioni per ciclo su tre gel, circa dieci minuti per gel — mantenendo il basso costo e la flessibilità del gel a lastra mentre solleva il pipettaggio ripetitivo dalle mani di una persona.`,
-    'dd.s4.p2': `Come prototipo, si chiude su dove andrà poi: feedback degli operatori dopo esecuzioni ripetute; incastri magnetici o a V per un assemblaggio più rapido e ripetibile; un pettine modificato con una corsia dedicata al ladder; supporto per più dimensioni di gel; dosaggio automatizzato del buffer di copertura; e brevi controlli di calibrazione e prova a vuoto così che il robot verifichi il proprio allineamento prima di un'esecuzione.`
+    'dd.s4.p2': `Come prototipo, si chiude su dove andrà poi: feedback degli operatori dopo esecuzioni ripetute; incastri magnetici o a V per un assemblaggio più rapido e ripetibile; un pettine modificato con una corsia dedicata al ladder; supporto per più dimensioni di gel; dosaggio automatizzato del buffer di copertura; e brevi controlli di calibrazione e prova a vuoto così che il robot verifichi il proprio allineamento prima di un'esecuzione.`,
+
+    /* Approfondimento soluzioni digitali (data-proj="soft") — quick 260824-fms.
+       ⚠ In IT valgono gli STESSI vincoli della versione EN: nessun valore dei
+       grafici presentato come risultato di tesi (sono dati dimostrativi), e il
+       capitolo tre resta solo testo, senza alcun dettaglio interno (D-04). */
+    'sw.eyebrow': `software · strumenti per la tesi magistrale e AGC Biologics · 2024 — 2026`,
+    'sw.lede': `Tre strumenti costruiti per la stessa ragione per cui costruisco l'hardware — la parte ripetitiva del lavoro non dovrebbe richiedere una persona. Uno esegue la campagna di test della mia tesi, uno legge la letteratura, uno gestisce i turni di un reparto.`,
+    'sw.meta': `tre strumenti &middot; Python, API REST, database relazionali &middot; realizzati in autonomia`,
+    'sw.heroCap': `tre strumenti, un solo istinto — strutturare i dati nel momento in cui vengono raccolti.`,
+    'sw.hero.aria': `Un diagramma di flusso dati: tre nodi sorgente a sinistra — l'app di test, il motore di ricerca e l'app dei turni — ciascuno che curva verso un'unica dorsale orizzontale a destra, che termina in un nodo etichettato dati strutturati.`,
+
+    'sw.s1.label': `il problema`,
+    'sw.s1.h2': `Stesso collo di bottiglia, un livello più su.`,
+    'sw.s1.p1': `Cinque anni al bancone mi hanno insegnato cosa svuota davvero uno scienziato. Non il lavoro fisico — la ripetizione: eseguire lo stesso protocollo decine di volte senza più spazio per pensare. Tutto il resto di questo sito esiste per questo.`,
+    'sw.s1.p2': `La scrivania ne ha un gemello. Trascrivere a mano un'esecuzione in un foglio di calcolo. Inseguire la stessa query su una dozzina di database che indicizzano e ordinano ciascuno a modo suo. Gestire i turni di un reparto in un file che qualcuno deve ricordarsi di aggiornare. Nulla di tutto ciò è scienza, e tutto si frappone tra una persona e la scienza.`,
+    'sw.s1.p3': `Quindi la soluzione è la stessa, un livello più su — trovare il passaggio che si ripete, e affidarlo a qualcosa a cui ripetere non pesa. Questi tre strumenti sono quell'istinto applicato al software invece che all'hardware.`,
+
+    'sw.s2.label': `capitolo uno — l'app di test`,
+    'sw.s2.h2': `Una campagna di test che si trascrive da sola.`,
+    'sw.s2.problem': `Una campagna Design of Experiments significa ripetere la stessa misura molte volte, in un ordine deliberatamente randomizzato perché la deriva non possa spacciarsi per un effetto. Fatta a mano è lenta, è facile sbagliare l'ordine ed è facile digitare male un numero — ed è solo dopo, nell'analisi, che ognuno di quegli errori viene a galla, quando l'esecuzione è finita da un pezzo.`,
+    'sw.s2.build': `Così la tesi si è fatta il suo strumento. Pump Validator imposta una campagna, la esegue e la analizza, e lo uso per testare il dispenser che sto costruendo.`,
+    'sw.s2.li1': `<span class="dd-list__k">Data Collection</span> &mdash; l'esperimento è definito prima che si misuri qualsiasi cosa: operatore, configurazione hardware, e una tabella Design of Experiments con volumi target, portate e repliche che si incolla direttamente da un foglio di calcolo. Genera l'ordine di esecuzione randomizzato e predispone le cartelle dei dati.`,
+    'sw.s2.li2': `<span class="dd-list__k">Analysis &amp; Dashboard</span> &mdash; carica la cartella di un esperimento e valuta una pompa su accuratezza e precisione per categorie di volume e portata, con grafici interattivi.`,
+    'sw.s2.li3': `<span class="dd-list__k">Run Campaign</span> &mdash; la via automatizzata: il runner guida la pompa lungo tutta la campagna e registra il flusso senza supervisione.`,
+    'sw.s2.li4': `<span class="dd-list__k">Gravimetric Analysis</span> &mdash; una campagna senza sensore, misurata invece per massa: volume per singola corsa, rette di calibrazione, precisione ed evaporazione.`,
+    'sw.s2.outcome': `I grafici non sono davvero il punto. Il punto è che i dati arrivano già strutturati nel momento in cui vengono raccolti — un ordine di esecuzione, una struttura di cartelle, un record per misura — così l'analisi è una lettura e non una ridigitazione.`,
+    'sw.s2.cap1': `quattro moduli — imposta una campagna, eseguila, analizzala, o pesala.`,
+    'sw.s2.alt1': `La schermata iniziale di Pump Validator: il nome dell'app e il sottotitolo "Precision flow measurement & analysis pipeline" sotto un marchio esagonale, sopra quattro schede di modulo — Data Collection, Analysis & Dashboard, Run Campaign e Gravimetric Analysis`,
+    'sw.s2.cap2': `l'ordine di esecuzione si decide prima di prendere una sola misura — e si incolla direttamente da un foglio di calcolo.`,
+    'sw.s2.alt2': `La schermata di configurazione Data Collection: un pannello con le informazioni dell'esperimento — cartella base, operatore, titolo dell'esperimento, configurazione e descrizione — sopra una tabella Design of Experiments con le colonne indice di riga, volume target in microlitri, portata target in microlitri al minuto, e repliche`,
+    'sw.s2.cap3': `accuratezza e precisione, condizione per condizione — le due domande a cui un dispenser deve rispondere. Mostrato con dati dimostrativi.`,
+    'sw.s2.alt3': `La dashboard di analisi: un grafico a barre dell'accuratezza di volume e uno della precisione in CV percentuale lungo le condizioni di volume e portata, più un grafico a dispersione accuratezza contro precisione, che confrontano due serie etichettate Demo Experiments e Lab Syringe Pump`,
+    'sw.s2.cap4': `un punteggio per ogni fascia di volume e portata, così un angolo debole si vede a colpo d'occhio. Mostrato con dati dimostrativi.`,
+    'sw.s2.alt4': `La ripartizione dei punteggi per categoria: una matrice che valuta ogni pompa per categoria di volume (piccolo, medio, grande) contro categoria di portata (lenta, media, veloce), con un punteggio complessivo per pompa, per due serie etichettate Demo Experiments e Lab Syringe Pump`,
+
+    'sw.s3.label': `capitolo due — il motore di ricerca`,
+    'sw.s3.h2': `Sette database, una sola lista ordinata.`,
+    'sw.s3.problem': `Cercare in letteratura significa eseguire la stessa query su database che indicizzano ciascuno a modo suo e ordinano ciascuno a modo suo, leggere oltre la sovrapposizione tra loro, e poi ridigitare in bibliografia ciò che sopravvive. È la metà meccanica di una tesi, e si mangia il tempo destinato alla lettura.`,
+    'sw.s3.build': `Così è diventato una pipeline. Una toolchain Python interroga tutte le fonti insieme, fonde i loro ordinamenti discordanti in un'unica lista, e scrive gli articoli che approvo direttamente nella bibliografia LaTeX.`,
+    'sw.s3.li1': `<span class="dd-list__k">Sette API scientifiche sotto un'unica interfaccia</span> &mdash; PubMed (NCBI), Semantic Scholar, OpenAlex, Scopus (Elsevier), IEEE Xplore, arXiv e bioRxiv tramite Europe PMC, ciascuna con la propria autenticazione e gestione delle chiavi, gestione dei rate limit, accesso per IP istituzionale per Scopus, e auto-esclusione controllata quando una fonte non risponde.`,
+    'sw.s3.li2': `<span class="dd-list__k">Reciprocal Rank Fusion</span> &mdash; le fonti non concordano, quindi le loro liste ordinate vengono fuse anziché concatenate, valutando ogni articolo su attualità, numero di citazioni e quanto titolo e abstract corrispondono alla query.`,
+    'sw.s3.li3': `<span class="dd-list__k">Citation snowballing</span> &mdash; percorso in avanti e all'indietro a partire da un articolo seme, fondendo deliberatamente due indici che non concordano: OpenAlex restituisce i più citati, Semantic Scholar i più recenti, ed entrambe le metà sopravvivono alla fusione.`,
+    'sw.s3.li4': `<span class="dd-list__k">Una pipeline BibTeX</span> &mdash; estrazione delle affermazioni dagli abstract, chiavi di citazione deterministiche, aggiunta con conferma delle differenze, e deduplicazione per chiave, per DOI e per titolo quasi duplicato.`,
+    'sw.s3.outcome': `Human-in-the-loop per scelta progettuale: nulla viene scritto su disco senza un'approvazione esplicita. La pipeline si occupa del recupero, della fusione e della formattazione. Il giudizio su cosa meriti di stare nella tesi resta mio.`,
+    'sw.s3.link': `gli strumenti della tesi&nbsp;&#8599;`,
+    'sw.s3.figCap': `sette fonti che ordinano diversamente — fuse in una lista, non messe una in coda all'altra.`,
+    'sw.s3.figAria': `Un diagramma di ordinamento: sette sorgenti etichettate a sinistra — PubMed, Semantic Scholar, OpenAlex, Scopus, IEEE Xplore, arXiv e bioRxiv — ciascuna che curva verso destra in un'unica colonna di risultati fusa e ordinata.`,
+
+    'sw.s4.label': `capitolo tre — l'app dei turni`,
+    'sw.s4.h2': `La prima decisione era se costruirla o no.`,
+    'sw.s4.problem': `Il mio reparto ad AGC Biologics aveva bisogno di gestire i turni, e nessuna soluzione pronta si adattava al modo in cui il team lavora davvero. Quindi la vera prima domanda non era come costruirla — era se costruirla. È una decisione che si prende guardando cosa esiste già prima di scrivere qualsiasi cosa, e qui la risposta è stata costruire.`,
+    'sw.s4.build': `La sto progettando e sviluppando dall'inizio alla fine, di mia iniziativa.`,
+    'sw.s4.li1': `<span class="dd-list__k">Progettazione completa dell'infrastruttura</span> &mdash; l'architettura di sistema, il modello dati relazionale e il flusso utente.`,
+    'sw.s4.li2': `<span class="dd-list__k">Hosting su Azure, back end in Python</span> &mdash; basata su database e pensata per il mobile, perché un'app dei turni si apre dal telefono, non da una scrivania.`,
+    'sw.s4.li3': `<span class="dd-list__k">Un'API tra i due livelli</span> &mdash; ho progettato il flusso di richiesta e risposta tra il front end e il back end.`,
+    'sw.s4.li4': `<span class="dd-list__k">Attraverso l'IT aziendale, in autonomia</span> &mdash; mi sono rivolto al reparto IT per mappare quali infrastrutture e servizi esistessero già internamente, ho imparato il loro processo di richiesta e approvazione per le nuove applicazioni, e ho portato il progetto attraverso quel dialogo. Far accettare una soluzione dentro un panorama IT farmaceutico regolamentato è a sua volta un lavoro di ingegneria.`,
+    'sw.s4.note': `L'app vive dentro AGC Biologics, quindi ciò che sta su questa pagina è la forma del lavoro e non lo strumento — le decisioni, l'architettura, il processo. Nessuno screenshot, nessun dettaglio interno. Sapere dove passa quel confine fa parte del mestiere.`,
+
+    'sw.s5.label': `il filo conduttore`,
+    'sw.s5.h2': `Tre strumenti, un solo istinto.`,
+    'sw.s5.p1': `Condividono tre abitudini. Strutturare i dati nel momento in cui vengono raccolti, mai dopo. Mettere un'unica interfaccia sopra molte fonti, così che il disordine resti dalla mia parte e non da quella di chi usa lo strumento. E decidere onestamente cosa costruire e cosa comprare, perché la risposta sbagliata a quella domanda costa più di tutto il codice.`,
+    'sw.s5.p2': `È lo stesso istinto dell'hardware che sta altrove su questo sito, in un altro mezzo. Trovare il passaggio che si ripete, e toglierlo dalle mani di una persona.`
   }
 };
 
