@@ -177,6 +177,32 @@ for (const img of softImgs) {
 /* No remote media anywhere on the landing page (T-fms-03). */
 absent(html, /src="http/, 'index.html must never reference a remote src');
 
+/* Every new element ships its English value INLINE as well as a key. If the two
+   drift apart, a visitor sees stale text for the moment before applyLang() runs
+   (and permanently if JS never runs at all). Entities are normalised first, since
+   the markup writes &mdash; where the dictionary writes a literal em-dash. */
+const deEnt = (s) => s
+  .replace(/&mdash;/g, '—').replace(/&middot;/g, '·')
+  .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+  .replace(/&times;/g, '×').replace(/&ndash;/g, '–')
+  .replace(/&#8599;/g, '↗').replace(/&#8592;/g, '←')
+  .replace(/\s+/g, ' ').trim();
+let fallbacksChecked = 0;
+for (const [re, kind] of [
+  [/<(\w+)[^>]*\bdata-i18n="([^"]+)"[^>]*>([^<]*)<\/\1>/g, 'plain'],
+  [/<(\w+)[^>]*\bdata-i18n-rich="([^"]+)"[^>]*>([\s\S]*?)<\/\1>/g, 'rich']
+]) {
+  for (const m of html.matchAll(re)) {
+    const key = m[2];
+    if (!/^(sw\.|work\.plateSw\.)/.test(key)) continue;
+    fallbacksChecked++;
+    ok(deEnt(m[3]) === deEnt(STRINGS.en[key] ?? ''),
+       `Inline ${kind} fallback has drifted from STRINGS.en for ${key}`);
+  }
+}
+ok(fallbacksChecked >= 45, `Expected >=45 inline fallbacks to verify, checked ${fallbacksChecked}`);
+notes.push(`${fallbacksChecked} inline English fallbacks match the dictionary`);
+
 /* D-04 hard gate — section 04 of the soft overlay carries NO visual element. */
 const s4Start = softHtml.indexOf('sw.s4.label');
 const s5Start = softHtml.indexOf('sw.s5.label');
