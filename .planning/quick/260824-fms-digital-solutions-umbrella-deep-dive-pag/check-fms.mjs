@@ -243,6 +243,52 @@ if (swCssStart > -1) {
 }
 
 /* ============================================================
+   TASK 3 — the motion layer
+   ============================================================ */
+
+const rawJs = readSite('site/main.js');
+/* Strip block comments so a comment mentioning a token cannot satisfy or break a
+   gate — these functions are heavily documented and name each other in prose. */
+const js = rawJs.replace(/\/\*[\s\S]*?\*\//g, '');
+
+for (const sym of ['initSoftMotion', 'killSoftMotion', 'killProjMotion', 'PROJ_MOTION',
+                   'killOt2Motion', 'initOt2Motion', 'seedDraw']) {
+  has(js, sym, `main.js must define/use ${sym}`);
+}
+/* The OT-2's three original triggers must survive untouched. */
+for (const sel of ['[data-ot2-diamond]', '[data-ot2-assembly] .blueprint', '[data-ot2-outcome] .ot2-stats']) {
+  has(js, sel, `OT-2 REGRESSION: initOt2Motion lost its trigger selector ${sel}`);
+}
+/* The new overlay's three triggers. */
+for (const sel of ['[data-sw-spine]', '[data-sw-shots]', '[data-sw-fusion]']) {
+  has(js, sel, `initSoftMotion is missing its ${sel} trigger`);
+}
+/* ONE rAF loop (T-fms-07 — the new motion layer must not add a second).
+   NOTE: the invariant is one LOOP, which is TWO call sites in the shipped code and
+   was two before this task: loop() reschedules itself, and boot() kicks it off
+   once. The plan's "exactly one call" wording assumed a shape main.js never had.
+   Asserting 2 keeps the real guarantee (no third call site = no new loop) instead
+   of failing on pre-existing, correct code. */
+const rafCount = countOf(js, /requestAnimationFrame\(loop\)/g);
+ok(rafCount === 2,
+   `Expected 2 requestAnimationFrame(loop) call sites (loop's self-reschedule + boot's single kickoff), found ${rafCount}`);
+ok(countOf(js, /function loop\(/g) === 1, 'There must be exactly one loop() definition');
+/* Every ScrollTrigger config must set a scroller — the window is frozen while an
+   overlay is open, so a window-scoped trigger would silently never fire. */
+const stConfigs = [...js.matchAll(/scrollTrigger:\s*\{([^}]*)\}/g)].map((m) => m[1]);
+ok(stConfigs.length >= 6, `Expected at least 6 scrollTrigger configs, found ${stConfigs.length}`);
+for (const cfg of stConfigs) {
+  ok(/\bscroller\b/.test(cfg), `A scrollTrigger config does not set scroller: {${cfg.trim().slice(0, 70)}...}`);
+}
+/* The close path must tear DOWN both overlays' motion, not just the OT-2's. */
+has(js, /killProjMotion\(\)/, 'closeProj must call killProjMotion()');
+/* And the arrival dispatch must be table-driven, not a hard-coded ot2 branch. */
+absent(js, /if \(intoId === 'ot2'\)/, "applyTrans must dispatch via PROJ_MOTION, not an `intoId === 'ot2'` branch");
+has(js, /PROJ_MOTION\[intoId\]\(\)/, 'applyTrans must call PROJ_MOTION[intoId]()');
+/* seedDraw is shared, so it must live at module scope and take gsap explicitly. */
+has(js, /function seedDraw\(gsap, sel\)/, 'seedDraw must be hoisted to module scope as seedDraw(gsap, sel)');
+
+/* ============================================================
    REPORT
    ============================================================ */
 
