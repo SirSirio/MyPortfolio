@@ -627,6 +627,47 @@ function syncLangButtons(lang) {
   });
 }
 
+/* ---------- capture lightbox (260824-fms v3) ---------- */
+
+/* The four Pump Validator captures open full-view: their UI type is unreadable
+   at column width. [data-zoom] buttons (index.html) trigger it; closing returns
+   focus to the button that opened it. The Escape listener runs in the CAPTURE
+   phase and stops propagation, so a future overlay-level Esc handler cannot
+   close the deep-dive underneath in the same keypress. Works under reduced
+   motion too (the CSS open animation is flattened globally, not the feature). */
+function initLightbox() {
+  const lb = document.querySelector('[data-lightbox]');
+  if (!lb) return;
+  const img = lb.querySelector('.lightbox__img');
+  const closeBtn = lb.querySelector('[data-lightbox-close]');
+  let lastTrigger = null;
+
+  function open(fromBtn) {
+    const src = fromBtn.querySelector('img');
+    if (!src) return;
+    img.src = src.currentSrc || src.src;
+    img.alt = src.alt;
+    lb.hidden = false;
+    lastTrigger = fromBtn;
+    closeBtn.focus();
+  }
+  function close() {
+    lb.hidden = true;
+    img.removeAttribute('src');
+    img.alt = '';
+    if (lastTrigger) { lastTrigger.focus(); lastTrigger = null; }
+  }
+
+  document.querySelectorAll('[data-zoom]').forEach((b) => {
+    b.addEventListener('click', () => open(b));
+  });
+  lb.addEventListener('click', close);                      /* anywhere = out */
+  closeBtn.addEventListener('click', (e) => { e.stopPropagation(); close(); });
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !lb.hidden) { e.stopPropagation(); close(); }
+  }, true);
+}
+
 function boot() {
   cacheHeroRect();
   syncNav();
@@ -664,6 +705,9 @@ function boot() {
   document.querySelectorAll('[data-close]').forEach((b) => {
     b.addEventListener('click', (e) => { e.preventDefault(); closeProj(); });
   });
+  /* Capture lightbox — before the reduced-motion return below on purpose:
+     enlarging a screenshot is a feature, not a motion effect. */
+  initLightbox();
   /* MOTION-02 — media-slot clips carry no autoplay attribute (see index.html).
      Start every one here only when motion is allowed; reduced-motion visitors
      keep the static poster and get manual controls instead. querySelectorAll (not

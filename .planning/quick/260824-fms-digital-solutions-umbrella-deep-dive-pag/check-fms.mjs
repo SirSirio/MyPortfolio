@@ -164,8 +164,11 @@ const softStart = html.indexOf('<div data-proj="soft"');
 const softHtml = softStart > -1 ? html.slice(softStart) : '';
 ok(softHtml.length > 0, 'Could not locate the [data-proj="soft"] overlay');
 
-/* Every <img> inside the soft overlay: relative pv-* src, non-empty alt, i18n alt key. */
-const softImgs = [...softHtml.matchAll(/<img\b[^>]*>/g)].map((m) => m[0]);
+/* Every <img> inside the soft overlay: relative pv-* src, non-empty alt, i18n alt key.
+   The slice runs to EOF, so exclude the document-level lightbox's dynamic <img>
+   (v3): it is chrome that receives src/alt at open time, not overlay content. */
+const softImgs = [...softHtml.matchAll(/<img\b[^>]*>/g)].map((m) => m[0])
+  .filter((img) => !img.includes('lightbox__img'));
 ok(softImgs.length === 4, `Expected 4 <img> in the soft overlay, found ${softImgs.length}`);
 for (const img of softImgs) {
   has(img, /src="\.\/assets\/media\/pv-/, `soft overlay <img> must use a relative ./assets/media/pv- src: ${img.slice(0, 90)}`);

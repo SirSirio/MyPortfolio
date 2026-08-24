@@ -2788,12 +2788,69 @@ section[id] {
     inset 0 0 60px rgba(var(--accent), 0.09),
     0 24px 70px rgba(0, 0, 0, 0.42);
 }
-.device-frame > img {
+.device-frame > img,
+.device-frame > .sw-zoom > img {
   display: block;
   width: 100%;
   height: auto;
   object-fit: contain;   /* never crop a diagram / screenshot */
   border-radius: 6px;
+}
+
+/* ZOOMABLE captures (260824-fms v3): the four Pump Validator screenshots sit in
+   a .sw-zoom button that opens the lightbox — their UI type is too small to
+   read at column width. The hover motion lives on the BUTTON/IMG, never on the
+   .device-frame: GSAP's reveal scrub leaves an inline transform on the frame,
+   and an inline style would silently beat any CSS :hover transform there. */
+.sw-zoom {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  border-radius: 6px;
+  cursor: zoom-in;
+  position: relative;
+  overflow: hidden;
+}
+.sw-zoom > img {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), filter 0.55s ease;
+}
+.sw-zoom:hover > img,
+.sw-zoom:focus-visible > img {
+  transform: scale(1.018);
+  filter: brightness(1.12);
+}
+/* The mono hint badge, in the site's [ bracket-label ] voice; i18n fills
+   data-zoom-hint. Fades in on hover/focus only — no resting chrome. */
+.sw-zoom::after {
+  content: attr(data-zoom-hint);
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 5px 9px;
+  border-radius: 6px;
+  border: 1px solid rgba(var(--accent), 0.4);
+  background: rgba(5, 7, 14, 0.78);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(var(--accent), 0.9);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+.sw-zoom:hover::after,
+.sw-zoom:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+.sw-zoom:focus-visible {
+  outline: 2px solid rgba(var(--accent), 0.8);
+  outline-offset: 3px;
 }
 /* Mono caption — keeps the site's em-dash mono-label voice (D-28). */
 .device-frame__cap {
@@ -3240,6 +3297,64 @@ section[id] {
     grid-template-columns: 1fr;
     gap: 20px;
   }
+}
+
+/* ============================================================
+   LIGHTBOX (260824-fms v3)
+   Full-view layer for the deep-dive's zoomable captures. Document-level
+   sibling of the overlays, above both bands (warp is 40, deep-dives 30).
+   Neutral chrome on purpose: it can serve any future project's captures, so
+   it does not borrow one overlay's accent. The open animation is flattened by
+   the global reduced-motion block below.
+   ============================================================ */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(14px, 4vw, 48px);
+  background: rgba(3, 4, 9, 0.92);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  cursor: zoom-out;
+}
+.lightbox[hidden] {
+  display: none;
+}
+.lightbox__img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(228, 232, 244, 0.2);
+  box-shadow: 0 40px 140px rgba(0, 0, 0, 0.65);
+  animation: lightbox-in 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes lightbox-in {
+  from { opacity: 0; transform: scale(0.965); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.lightbox__close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(228, 232, 244, 0.28);
+  background: rgba(5, 7, 14, 0.7);
+  color: rgba(228, 232, 244, 0.85);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+.lightbox__close:hover,
+.lightbox__close:focus-visible {
+  border-color: rgba(228, 232, 244, 0.7);
+  color: rgba(255, 255, 255, 1);
 }
 
 /* ============================================================
