@@ -1097,7 +1097,10 @@
               <div class="sw-beat__text">
                 <p data-reveal="1" class="dd-p" data-i18n="sw.s2.build">So the thesis got its own instrument. Pump Validator sets a campaign up, runs it, and analyses it, and I use it to test the dispenser I am building.</p>
               </div>
-              <figure data-reveal="1" class="device-frame sw-beat__shot">
+              <!-- No data-reveal on the [data-sw-shots] figures: their reveal is the
+                   GSAP scrub in initSoftMotion. Carrying both wirings pins them at the
+                   reveal system's hidden state (gsap.from records it as the end state). -->
+              <figure class="device-frame sw-beat__shot">
                 <img src="./assets/media/pv-landing.png" loading="lazy" decoding="async"
                      data-i18n-attr="alt:sw.s2.alt1"
                      alt="The Pump Validator landing screen: the app name and the subtitle &quot;Precision flow measurement &amp; analysis pipeline&quot; under a hexagonal mark, above four module cards — Data Collection, Analysis &amp; Dashboard, Run Campaign and Gravimetric Analysis">
@@ -1116,7 +1119,7 @@
                  the Design of Experiments table, its type is the smallest on the page,
                  and it is the artefact that proves the randomised-run-order claim.
                  In a column it would be unreadable. -->
-            <figure data-reveal="1" class="device-frame sw-shot--wide">
+            <figure class="device-frame sw-shot--wide">
               <img src="./assets/media/pv-data-collection.png" loading="lazy" decoding="async"
                    data-i18n-attr="alt:sw.s2.alt2"
                    alt="The Data Collection setup screen: an experiment-info panel with base folder, operator, experiment title, configuration and description fields, above a Design of Experiments table with columns for row index, target volume in microlitres, target flow rate in microlitres per minute, and replicates">
@@ -1128,13 +1131,13 @@
                  grid, NOT .media-slot--composite (whose aspect rules are tuned for the
                  OT-2's portrait video + blueprint pairing). -->
             <div class="sw-pair">
-              <figure data-reveal="1" class="device-frame">
+              <figure class="device-frame">
                 <img src="./assets/media/pv-analysis-charts.png" loading="lazy" decoding="async"
                      data-i18n-attr="alt:sw.s2.alt3"
                      alt="The analysis dashboard: a volume-accuracy bar chart and a CV-percent precision bar chart across volume and flow-rate conditions, plus an accuracy-versus-precision scatter plot, comparing two series labelled Demo Experiments and Lab Syringe Pump">
                 <figcaption class="device-frame__cap" data-i18n="sw.s2.cap3">accuracy and precision, condition by condition &mdash; the two questions a dispenser has to answer. Shown with demonstration data.</figcaption>
               </figure>
-              <figure data-reveal="2" class="device-frame">
+              <figure class="device-frame">
                 <img src="./assets/media/pv-analysis-scores.png" loading="lazy" decoding="async"
                      data-i18n-attr="alt:sw.s2.alt4"
                      alt="The category score breakdown: a matrix scoring each pump by volume category (small, medium, large) against flow-rate category (slow, medium, fast), with an overall score per pump, for two series labelled Demo Experiments and Lab Syringe Pump">
