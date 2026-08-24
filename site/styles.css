@@ -1593,6 +1593,15 @@ section[id] {
   min-width: 280px;
 }
 
+/* The software plate (260824-fms v4): the text leads and the live-data canvas
+   is the accent, so this plate alone inverts the shared media/body ratio. */
+[data-open="soft"] > .plate__media {
+  flex: 0.85 1 330px;
+}
+[data-open="soft"] > .plate__body {
+  flex: 1.3 1 340px;
+}
+
 .plate__meta {
   font: 400 12px var(--font-mono);
   /* Was 0.2em for the old "PLATE 00N" all-caps code; the tag now carries a real
