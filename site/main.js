@@ -243,15 +243,64 @@ const wstars = Array.from({ length: Math.round(340 * WARP_DENS) }, () => spawn(M
 
 function projEl(id) { return document.querySelector('[data-proj="' + id + '"]'); }
 
-function openProj(id) {
+/* ---------- deep-dive links (hash routing) ----------
+   Each deep-dive has its own shareable URL: /#gel-electrophoresis, /#digital-solutions.
+   The URL is the source of truth for which overlay is open:
+     - opening from a card pushes the hash (so browser Back closes the deep-dive);
+     - Back / Forward / a typed hash fire popstate|hashchange → syncRoute();
+     - a direct link opens its deep-dive instantly on load (no warp, see boot()).
+   Slugs must never equal a section id (#work, #index …) — those stay plain anchors.
+   A new deep-dive needs one PROJ_SLUG entry here, next to its PROJ_MOTION entry. */
+const PROJ_SLUG = { ot2: 'gel-electrophoresis', soft: 'digital-solutions' };
+const SLUG_PROJ = Object.fromEntries(Object.entries(PROJ_SLUG).map(([id, s]) => [s, id]));
+
+function projFromHash() {
+  let h = location.hash.slice(1);
+  try { h = decodeURIComponent(h); } catch (e) { /* malformed hash: treat as-is */ }
+  return SLUG_PROJ[h.toLowerCase()] || null;
+}
+function pushRoute(id) {
+  const hash = '#' + PROJ_SLUG[id];
+  if (PROJ_SLUG[id] && location.hash !== hash) history.pushState({ proj: id }, '', hash);
+}
+function clearRoute() {
+  history.replaceState(null, '', location.pathname + location.search);
+}
+/* Bring the overlays in line with the URL. Idempotent; while a warp is running it
+   does nothing and applyTrans() calls it again once the warp has landed, so a Back
+   press mid-warp is honoured instead of lost. */
+function syncRoute() {
+  if (trans) return;
+  const want = projFromHash();
+  if (want === curProj) return;
+  if (want) openProj(want, { fromRoute: true });
+  else closeProj();
+}
+/* UI close (back-to-work links, Esc). If opening pushed a history entry, step back
+   through it so Back and the on-page link behave the same; popstate does the close.
+   Arrived by direct link (no entry of ours to pop): drop the hash and close here. */
+function requestClose() {
+  if (trans || !curProj) return;
+  if (history.state && history.state.proj === curProj) { history.back(); return; }
+  clearRoute();
+  closeProj();
+}
+
+/* opts.fromRoute — the URL already says this (don't push a history entry);
+   opts.instant  — swap without the warp (direct-link arrival), motion still built. */
+function openProj(id, opts) {
+  opts = opts || {};
   if (trans) return;
   const target = projEl(id); if (!target) return;
   const fromId = curProj && curProj !== id ? curProj : null;
   const pos = parseFloat(target.dataset.pos); /* palette position of the destination */
-  if (REDUCED) {
-    if (fromId) { const f = projEl(fromId); if (f) { f.style.visibility = 'hidden'; f.style.opacity = '0'; } }
+  if (!opts.fromRoute) pushRoute(id);
+  if (REDUCED || opts.instant) {
+    if (fromId) { killProjMotion(); const f = projEl(fromId); if (f) { f.style.visibility = 'hidden'; f.style.opacity = '0'; } }
     target.style.visibility = 'visible'; target.style.opacity = '1'; target.scrollTop = 0;
-    document.body.style.overflow = 'hidden'; curProj = id; return;
+    document.body.style.overflow = 'hidden'; curProj = id;
+    if (!REDUCED && PROJ_MOTION[id]) PROJ_MOTION[id]();
+    return;
   }
   trans = {
     start: performance.now(), dur: JUMP_MS, pos: isNaN(pos) ? 0 : pos, max: 0.016 * WARP_INT,
@@ -510,6 +559,8 @@ function applyTrans(now) {
        landed. Table-driven since quick 260824-fms — a third deep-dive is one
        PROJ_MOTION entry, not another branch here. */
     if (intoId && PROJ_MOTION[intoId]) PROJ_MOTION[intoId]();
+    /* The URL may have moved on while the warp ran (Back pressed mid-warp). */
+    syncRoute();
   }
 }
 
@@ -703,8 +754,23 @@ function boot() {
     });
   });
   document.querySelectorAll('[data-close]').forEach((b) => {
-    b.addEventListener('click', (e) => { e.preventDefault(); closeProj(); });
+    b.addEventListener('click', (e) => { e.preventDefault(); requestClose(); });
   });
+  /* Deep-dive links (see PROJ_SLUG). Esc closes an open deep-dive; the lightbox's
+     capture-phase Esc handler stops propagation, so Esc on an enlarged capture
+     closes only the capture. */
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && curProj) requestClose();
+  });
+  window.addEventListener('popstate', syncRoute);
+  window.addEventListener('hashchange', syncRoute);
+  /* Direct link: open instantly. Reset history.state so a reload of a pushed entry
+     can't send "back to work" through history.back() off the site. */
+  const linkedProj = projFromHash();
+  if (linkedProj) {
+    history.replaceState(null, '', location.href);
+    openProj(linkedProj, { instant: true, fromRoute: true });
+  }
   /* Capture lightbox — before the reduced-motion return below on purpose:
      enlarging a screenshot is a feature, not a motion effect. */
   initLightbox();
