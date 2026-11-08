@@ -4,3 +4,6 @@ _Archive/
 
 # Ephemeral Playwright MCP browser artifacts (screenshots, console logs, snapshots).
 .playwright-mcp/
+
+# Humanize pipeline handoff files (draft / Gemini / final / review); the site copy itself lives in site/i18n.js.
+Humanize/

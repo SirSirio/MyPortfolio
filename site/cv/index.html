@@ -59,7 +59,7 @@
             display: block;
             font-size: 18px;
             font-weight: 300;
-            letter-spacing: 6px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             color: rgba(255,255,255,0.52);
             line-height: 1;
@@ -127,7 +127,7 @@
             white-space: nowrap;
             font-size: 13px;
             font-weight: 600;
-            letter-spacing: 2.5px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             color: white;
         }
@@ -148,6 +148,8 @@
             padding: 20px 38px 30px;
             overflow: hidden;
             min-height: 0;
+            display: flex;
+            flex-direction: column;
         }
 
         /* ── SECTION TITLES ─────────────────────────────── */
@@ -157,7 +159,7 @@
             gap: 10px;
             font-size: 9.5px;
             font-weight: 700;
-            letter-spacing: 2.8px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             color: var(--accent);
             background: var(--sec-bg);
@@ -197,15 +199,15 @@
             font-size: 12px;
             color: var(--body-text);
             padding-left: 13px;
-            position: relative;
             margin-bottom: 1px;
             line-height: 1.48;
         }
         .entry-bullets li::before {
             content: '▸';
-            position: absolute; left: 0;
+            display: inline-block;
+            width: 13px; margin-left: -13px;
             color: var(--accent);
-            font-size: 9px; top: 3px;
+            font-size: 9px; vertical-align: 1px;
         }
 
         /* ── PROFILE PARAGRAPH ──────────────────────────── */
@@ -251,6 +253,11 @@
         .sk-label { font-weight: 600; color: var(--text); }
         .sk-value { color: var(--body-text); }
 
+        /* ── PUBLICATIONS ───────────────────────────────── */
+        .pub-text { font-size: 11.5px; line-height: 1.5; color: var(--body-text); padding-left: 5px; }
+        .pub-text strong { color: var(--text); }
+        .pub-note { font-size: 11px; color: var(--muted); font-style: italic; margin-top: 2px; padding-left: 5px; }
+
         /* ── AWARDS ─────────────────────────────────────── */
         .award-row {
             display: flex;
@@ -263,18 +270,32 @@
         .award-title { font-weight: 600; color: var(--text); }
         .award-meta  { color: var(--muted); white-space: nowrap; margin-left: 10px; flex-shrink: 0; font-size: 11.5px; }
 
+        /* ── GDPR FOOTER LINE ───────────────────────────── */
+        .gdpr {
+            margin-top: auto;
+            padding-top: 10px;
+            font-size: 9px;
+            line-height: 1.4;
+            color: var(--muted);
+            text-align: center;
+        }
+
         /* ── PRINT ──────────────────────────────────────── */
         @media print {
             body { background: white; padding: 0; }
             html, body { width: 210mm; margin: 0; padding: 0; }
-            .page { box-shadow: none; margin: 0; width: 210mm; height: 297mm; min-height: 0; overflow: hidden; display: block; }
-            .page > .cv-body { display: block; }
+            .page { box-shadow: none; margin: 0; width: 210mm; height: 297mm; min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
             @page { size: A4; margin: 0; }
         }
-
+        .ci-date { margin-top: 5px; font-size: 9.5px; color: #7f9aab; }
+        /* one-page variant: slightly tighter vertical rhythm (font sizes unchanged) */
+        .entry { margin-bottom: 7px; }
+        .st { margin-top: 10px; }
+        .cv-body { padding: 16px 38px 28px; }
+        .gdpr { padding-top: 6px; }
         /* ── SCREEN-ONLY MOBILE FIT ─────────────────────────
            Added when this CV became a portfolio subpage at /cv/ (quick
-           260824-fms). It is the ONLY change to the file; the application-folder
+           260824-fms; content swapped to CV_General_v4 on 8 Nov 2026). It is the ONLY change to the file; the application-folder
            original is byte-identical.
 
            The A4 shell is fixed at 210mm (about 794 CSS px), so on a phone the
@@ -311,19 +332,20 @@
 </head>
 <body>
 <!-- ═══════════════════════════════════════════════
-     PAGE 1 · Header · Profile · Experience · Automation Projects · Education
+     ONE PAGE · general CV (talent pools, candidate profiles)
      ═══════════════════════════════════════════════ -->
 <div class="page"><header class="cv-header">
-<div class="header-name"><span class="fn">Sirio Vittorio</span> <span class="ln">Feltrin</span> <span class="ci ci-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Copenhagen, Denmark</span></div>
+<div class="header-name"><span class="fn">Sirio Vittorio</span> <span class="ln">Feltrin</span> <span class="ci ci-loc"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Copenhagen, Denmark</span> <span class="ci ci-date"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> CV updated 7 November 2026</span></div>
 <div class="header-right">
-<div class="header-title"><span class="ht-main">MSc Biotechnology &middot; DTU</span> <span class="ht-sub">Lab Automation, Data &amp; Digital Solutions</span></div>
+<div class="header-title"><span class="ht-main">MSc Biotechnology &middot; DTU</span> <span class="ht-sub">Lab Automation &amp; Digital Solutions for Life Science</span></div>
 <div class="contact-bar"><a class="ci" href="mailto:sirio.feltrin@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i> sirio.feltrin@gmail.com</a> <a class="ci" href="https://www.linkedin.com/in/sirio-vittorio-feltrin/"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> linkedin.com/in/sirio-vittorio-feltrin</a> <a class="ci" href="https://sirsirio.github.io/MyPortfolio/"><i class="fa-solid fa-globe" aria-hidden="true"></i> sirsirio.github.io/MyPortfolio</a></div>
 </div>
 </header>
 <div class="cv-body">
 <section>
-<h2 class="st">Profile</h2>
-<p class="profile-text">MSc Biotechnology student at DTU focusing on <strong>laboratory automation and digital workflows</strong>. Years of hands-on bench experience convinced me that routine manual tasks represent biotech&rsquo;s most overlooked bottleneck. I bridge both halves of the solution&mdash;<strong>combining instrument hardware and physical automation with robust data architectures and custom applications</strong>&mdash;grounded in a firsthand understanding of the science.</p>
+<h2 class="st">Profile &amp; Goal</h2>
+<p class="profile-text" data-h="C1">Biotechnologist (MSc, DTU) who designs and builds tools that make lab work faster and more reproducible. Five years at the bench across molecular biology, cell-free systems and fermentation showed me where routine lab time is lost. I have since built physical automation (liquid-handling robots, 3D-printed hardware) and digital lab tools.</p>
+<p class="profile-text" style="margin-top:5px"><strong>Goal: </strong><span data-h="C2">a role in <strong>lab automation or lab digitalisation in pharma and biotech</strong>, turning manual workflows into automated ones.</span></p>
 </section>
 <section>
 <h2 class="st">Professional Experience</h2>
@@ -331,137 +353,60 @@
 <div class="entry-head"><span class="entry-role">Student Assistant &mdash; Project Management Team</span> <span class="entry-period">Jun 2024 &ndash; Present</span></div>
 <div class="entry-org">AGC Biologics (global CDMO, GxP biopharma manufacturing), Copenhagen</div>
 <ul class="entry-bullets">
-<li><strong>Power BI Reporting &amp; Data Models: </strong>Build and maintain end-to-end Power BI dashboards with advanced custom visuals, including design of relational data modeling and underlying SQL queries.</li>
-<li><strong>Automate Recurring Manual Processes</strong>: Build Power Automate workflows to streamline routine tasks and data extraction.</li>
-<li><b data-path-to-node="1,0,0" data-index-in-node="0">Custom Application Development:</b> Independently develop a database-driven Python web application to automate departmental shift assignments, collaborating with IT for infrastructure integration and compliance.</li>
-<li><b data-path-to-node="2,0,0" data-index-in-node="0">On-Site Client Facilitation:</b> Lead client facility plant visits and bridge direct communication between production, project management and customers &mdash; stakeholders on both sides of the site.</li>
+<li data-h="C3">Build SQL-backed <strong>Power BI</strong> dashboards and <strong>Power Automate</strong> workflows for recurring routines.</li>
+<li data-h="C4">Developing, on my own initiative, a database-driven <strong>Python web app</strong> for shift management, with IT.</li>
+<li data-h="C5">Take minutes in technical client meetings and schedule customer visits to the manufacturing process with clients and AGC teams.</li>
 </ul>
 </div>
 </section>
 <section>
-<h2 class="st">Laboratory Automation &amp; Engineering Projects</h2>
+<h2 class="st">Automation &amp; Research Projects</h2>
+<div class="entry">
+<div class="entry-head"><span class="entry-role">MSc Thesis &mdash; Portable Precision Liquid-Dispensing System</span> <span class="entry-period">2026</span></div>
+<div class="entry-org">DTU &ndash; Technical University of Denmark, Copenhagen</div>
+<div class="entry-sub" data-h="C6">Self-designed point-of-care dispensing device combining Fusion360 CAD, 3D printing, Arduino, and Design of Experiments.</div>
+</div>
 <div class="entry">
 <div class="entry-head"><span class="entry-role">Lab Automation Design &mdash; DALSA (DTU Arena for Life Science Automation)</span> <span class="entry-period">Fall 2025 &middot; 12/12</span></div>
 <div class="entry-org">DTU &ndash; Technical University of Denmark, Copenhagen</div>
-<div class="entry-sub">Automated gel electrophoresis on the Opentrons OT-2 liquid-handling robot &mdash; solo 6-month project, with requirements drawn from interviews with the end users and a survey of 19 commercial systems.</div>
-<ul class="entry-bullets">
-<li>Wrote a full custom <strong>Python</strong> parametrised protocol.</li>
-<li>Designed and 3D-printed five custom hardware components in Fusion360 CAD; prototype built and functional.</li>
-</ul>
+<div class="entry-sub" data-h="C7">Automated gel electrophoresis on the Opentrons OT-2: user interviews, custom Python protocol, five 3D-printed parts.</div>
 </div>
 <div class="entry">
-<div class="entry-head"><span class="entry-role">MSc Thesis &mdash; Design of Automated Portable Precision Liquid-Dispensing System</span> <span class="entry-period">2026</span></div>
-<div class="entry-org">DTU &ndash; Technical University of Denmark, Copenhagen</div>
-<div class="entry-sub">Modular, field-deployable dispensing device for point-of-care diagnostics and field research.</div>
-<ul class="entry-bullets">
-<li>Fusion360 CAD, 3D printing, Arduino electronics and motor control integrated into a working device &mdash; plus a custom <strong>automated testing application</strong> running experiments and analysis.</li>
-</ul>
+<div class="entry-head"><span class="entry-role">iGEM Wet Lab Lead &mdash; EndoSense Biosensor</span> <span class="entry-period">Feb &ndash; Oct 2024</span></div>
+<div class="entry-org">DTU &middot; <em>iGEM Gold Medal, 2024 Paris Jamboree</em> &middot; <a href="https://2024.igem.wiki/DTU-Denmark/">2024.igem.wiki/DTU-Denmark</a></div>
+<div class="entry-sub" data-h="C8">Led the biosensor track, developing a cell-free system with an RNA aptamer reporter for endocrine disruptors.</div>
+</div>
+<div class="entry">
+<div class="entry-head"><span class="entry-role">Research Intern &mdash; BSc Thesis, SMAD2 Protein Phosphorylation</span> <span class="entry-period">Feb &ndash; Sep 2023</span></div>
+<div class="entry-org">CIBIO, University of Trento, Italy &middot; <em>published in The EMBO Journal, 2025</em></div>
 </div>
 </section>
 <section>
 <h2 class="st">Education</h2>
 <div class="entry">
-<div class="entry-head"><span class="entry-role">MSc Biotechnology</span> <span class="entry-period">Jan 2024 &ndash; Sep 2026 (exp.)</span></div>
+<div class="entry-head"><span class="entry-role">MSc Biotechnology</span> <span class="entry-period">Jan 2024 &ndash; Sep 2026</span></div>
 <div class="entry-org">DTU &ndash; Technical University of Denmark, Copenhagen</div>
-<div class="entry-sub">Coursework: <span>GMP and Quality in Pharma, Biotech and Food - Practical (12/12), </span>IoT Prototyping, Statistical Design of Experiments, and general focus in fermentation-based processes.</div>
+<div class="entry-sub">Coursework: Lab Automation Design (12/12), GMP and Quality in Pharma (12/12), Design of Experiments, IoT Prototyping.</div>
 </div>
 <div class="entry">
-<div class="entry-head"><span class="entry-role">BSc Science and Biomolecular Technology</span> <span class="entry-period">2020 &ndash; 2023 &middot; 110 cum laude/110</span></div>
+<div class="entry-head"><span class="entry-role">BSc Science and Biomolecular Technology</span> <span class="entry-period">2020 &ndash; 2023 &middot; 110/110 cum laude</span></div>
 <div class="entry-org">University of Trento, Italy</div>
-<div class="entry-sub">Focus on molecular biology, bioinformatics and immunology, with extensive laboratory hours across a wide range of techniques.</div>
 </div>
 <div class="entry">
-<div class="entry-head"><span class="entry-role">Automation of New Approach Methodologies &mdash; summer school</span> <span class="entry-period">Jul 2026 &middot; 3 ECTS</span></div>
+<div class="entry-head"><span class="entry-role">Automation of New Approach Methodologies &mdash; Summer School</span> <span class="entry-period">Jul 2026 &middot; 3 ECTS</span></div>
 <div class="entry-org">Utrecht University, Netherlands</div>
-<div class="entry-sub">Facility design, device selection and total cost of ownership, integration architecture, lab standards; demos with Tecan and robotic arm platforms.</div>
-</div>
-</section>
-</div>
-</div>
-<!-- /page 1 --><!-- ═══════════════════════════════════════════════
-     PAGE 2 · Software Projects · Laboratory Experience · Skills · Awards · Languages · Interests
-     ═══════════════════════════════════════════════ -->
-<div class="page">
-<div class="p2-bar"><span class="p2-name">Sirio Vittorio Feltrin</span>
-<div class="p2-contacts"><a class="p2-ci" href="mailto:sirio.feltrin@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i> sirio.feltrin@gmail.com</a> <a class="p2-ci" href="https://sirsirio.github.io/MyPortfolio/"><i class="fa-solid fa-globe" aria-hidden="true"></i> sirsirio.github.io/MyPortfolio</a></div>
-</div>
-<div class="cv-body">
-<section>
-<h2 class="st">Software, Data &amp; Systems Projects</h2>
-<div class="entry">
-<div class="entry-head"><span class="entry-role">Self-Hosted Home Server &amp; Backup Infrastructure</span> <span class="entry-period">2026 &ndash; Present</span></div>
-<div class="entry-org">Self-directed &middot; Proxmox VE, Docker, Linux</div>
-<ul class="entry-bullets">
-<li>Built from zero as an IT beginner: hypervisor, containers and virtual machines services running, remote access over VPN, scheduled backups, used as photos cloud storage alternative and much more.</li>
-</ul>
-</div>
-<div class="entry">
-<div class="entry-head"><span class="entry-role">Multi-API Literature Search Engine &mdash; MSc Thesis Tooling</span> <span class="entry-period">2026</span></div>
-<div class="entry-org">Self-directed &middot; Python</div>
-<ul class="entry-bullets">
-<li>Built to run my own thesis literature search: <strong>seven scientific APIs</strong> (PubMed, Scopus, OpenAlex, Semantic Scholar and others) behind one interface, with a ranking algorithm scoring results on relevance, recency and citations.</li>
-</ul>
-</div>
-<div class="entry">
-<div class="entry-head"><span class="entry-role">Web Development &mdash; Personal Projects</span> <span class="entry-period">Ongoing</span></div>
-<div class="entry-org">Self-directed &middot; hobby</div>
-<ul class="entry-bullets">
-<li>Design and deploy small websites for fun, including my own portfolio at <a href="https://sirsirio.github.io/MyPortfolio/">sirsirio.github.io/MyPortfolio</a> &mdash; the most recent is backed by a hosted database and talks to it over an API, so guests can sign up and upload photos.</li>
-</ul>
+<div class="entry-sub" data-h="C9">Automating animal-free in vitro methods, covering facility design, device selection and assay automation.</div>
 </div>
 </section>
 <section>
-<h2 class="st">Laboratory &amp; Research Experience</h2>
-<div class="entry">
-<div class="entry-head"><span class="entry-role">iGEM Wet Lab Lead &mdash; EndoSense Biosensor</span> <span class="entry-period">Feb &ndash; Oct 2024</span></div>
-<div class="entry-org">DTU &ndash; Technical University of Denmark, Copenhagen &middot; <em>iGEM Gold Medal, 2024</em></div>
-<ul class="entry-bullets">
-<li>Head of wetlab for the biosensor development track over 6+ months &mdash; experimental design, procurement, facility coordination and workarounds on failing equipment. <a href="https://2024.igem.wiki/DTU-Denmark/">2024.igem.wiki/DTU-Denmark</a></li>
-</ul>
-</div>
-<div class="entry">
-<div class="entry-head"><span class="entry-role">Research Intern &mdash; BSc Thesis, Computational and <em>In Vitro</em> Protein Study</span> <span class="entry-period">Feb &ndash; Sep 2023</span></div>
-<div class="entry-org">CIBIO, University of Trento, Italy &middot; <em>published in The EMBO Journal, 2025</em></div>
-<ul class="entry-bullets">
-<li>Ran all molecular dynamics simulations (GROMACS) and wrote the Python analysis scripts; <em>in vitro</em> validation by Western blot.</li>
-</ul>
-</div>
+<h2 class="st">Skills &amp; Languages</h2>
+<div class="skill-row"><span class="sk-label">Lab Automation &amp; Hardware: </span><span class="sk-value">Opentrons OT-2 liquid-handling robot (Python), Fusion360 CAD, 3D printing, Arduino</span></div>
+<div class="skill-row"><span class="sk-label">Software &amp; Data: </span><span class="sk-value">Python, SQL, REST APIs, Power Platform (BI &amp; Automate), HTML/CSS/JavaScript, Git, Microsoft Office Suite</span></div>
+<div class="skill-row"><span class="sk-label">Wet Lab: </span><span class="sk-value">Experience working with cell-free systems, microbial, and mammalian cells integrated with classical techniques (cloning, PCR/qPCR, electrophoresis, transformation, and transfection)</span></div>
+<div class="skill-row"><span class="sk-label">Languages: </span><span class="sk-value">Italian native &middot; English full professional (FCE certified) &middot; Danish A2 certified &middot; French elementary</span></div>
 </section>
-<section>
-<h2 class="st">Working with AI</h2>
-<div class="skill-row"><span class="sk-label">Approach &amp; Strategy: </span><span class="sk-value">Use AI across various workflows by mapping the problem and technical direction first, letting tools speed up execution without losing control.</span></div>
-<div class="skill-row"><span class="sk-label">Method: </span><span class="sk-value">Build with a clear specification-first process framework across software and hardware. Use AI throughout each project to speed up the research, engineering, data analysis, and decision-making while keeping documentation updated in real time.</span></div>
-<div class="skill-row"><span class="sk-label">Built this way: </span><span class="sk-value">Used throughout my personal projects and my Master's thesis &mdash; <a href="https://sirsirio.github.io/thesis-tools/">sirsirio.github.io/thesis-tools</a>.</span></div>
-</section>
-<section>
-<h2 class="st">Technical Skills</h2>
-<div class="skill-row"><span class="sk-label">Programming: </span><span class="sk-value">Python, SQL, MATLAB, HTML/CSS, C++; R, Git and version control</span></div>
-<div class="skill-row"><span class="sk-label">Databases &amp; Integration: </span><span class="sk-value">SQL and relational databases, working with APIs, data mapping, transfer pipelines and file handling (CSV, XML, JSON)</span></div>
-<div class="skill-row"><span class="sk-label">Data &amp; Automation: </span><span class="sk-value">Power Platform (BI &amp; Automate) &mdash; reporting, dashboards and visualisation, data models, automated workflows; Microsoft Office Suite; GraphPad Prism</span></div>
-<div class="skill-row"><span class="sk-label">Quality &amp; Compliance: </span><span class="sk-value"><span>GMP and Quality in Pharma, Biotech and Food - Practical course (12/12)</span></span></div>
-<div class="skill-row"><span class="sk-label">Lab Automation &amp; Instrumentation: </span><span class="sk-value">Opentrons OT-2 liquid-handling robot, instrument control and calibration, bioreactor instrumentation (pH, dissolved oxygen, off-gas), Arduino, Fusion360 CAD and 3D printing</span></div>
-<div class="skill-row"><span class="sk-label">Wet Lab: </span><span class="sk-value">Five years across cancer and rare-disease research, fermentation and pharmaceutical manufacturing &mdash; cell-free systems, microbial, and mammalian cells integrated with classical techniques (cloning, PCR/qPCR, electrophoresis, transformation, and transfection); pilot-scale fermentation and bioinformatics</span></div>
-</section>
-<section>
-<h2 class="st">Languages &amp; Interests</h2>
-<div class="skill-row"><span class="sk-value"><span class="sk-label">Italian</span> native &nbsp;&middot;&nbsp; <span class="sk-label">English</span> full professional (FCE certified) &nbsp;&middot;&nbsp; <span class="sk-label">Danish</span> A2 certified &nbsp;&middot;&nbsp; <span class="sk-label">French</span> elementary<br></span><span class="sk-value"></span></div>
-<div class="passion-row">
-<div class="passion-item">
-<div class="passion-icon" aria-hidden="true"><i class="fa-solid fa-user-ninja"></i></div>
-<div><span class="passion-label">Martial Arts</span> <span class="passion-sub">Viet Vo Dao &mdash; Best Athlete Cup</span></div>
-</div>
-<div class="passion-item">
-<div class="passion-icon" aria-hidden="true"><i class="fa-solid fa-cube"></i></div>
-<div><span class="passion-label">Learning</span> <span class="passion-sub"><span>Science, technology &amp; beyond</span><br></span></div>
-</div>
-<div class="passion-item">
-<div class="passion-icon" aria-hidden="true"><i class="fa-solid fa-pen-ruler"></i></div>
-<div><span class="passion-label">Digital &amp; Hardware Design</span> <span class="passion-sub">Interfaces, tools and objects</span></div>
+<p class="gdpr">I hereby authorise the processing of my personal data contained in this CV, including for any future recruitment processes conducted by the controller, in accordance with Regulation (EU) 2016/679 (GDPR).</p>
 </div>
 </div>
-</section>
-</div>
-</div>
-<!-- /page 2 -->
 </body>
 </html>
