@@ -7,3 +7,19 @@ _Archive/
 
 # Humanize pipeline handoff files (draft / Gemini / final / review); the site copy itself lives in site/i18n.js.
 Humanize/
+
+# Private application notes — never in a public repo.
+ALK_Application_Context.md
+
+# Raw media originals; the site uses optimised copies in site/assets/.
+Media/
+Opentrons-OT2 DALSA media/
+
+# Local tooling (GSD install, skills, hooks) and tool caches — not site content.
+# Files already tracked under .claude/ stay tracked.
+.claude/
+.out-of-code-insights/
+.planning/research/.cache/
+
+# One-off layout-check screenshots.
+dd-*.jpeg
