@@ -78,7 +78,16 @@ Built 15 Nov 2026 (draft copy, not yet humanized, not committed):
 - [x] **Title chosen: "Practical tools for AI Fluency"** (Gemini proposal 4; IT *Strumenti pratici per AI Fluency*); hero subtitle drops "practical" to avoid the repeat; OG card regenerated
 - [x] **View ↗** buttons: the PDFs open in a new tab (sheet images clickable too)
 - [x] Main-page band made prominent (`/fluency-levels 1`): clay box contrasting with the section's blue, bigger title, glowing 4D chips that light up in sequence on scroll, a clay button, the real sheets beside the text
-- [ ] Checkpoint 2: Sirio reviews on the page → fixes → go-live (commit + push)
+- [x] Checkpoint 2: Sirio approved → **live 15 Nov 2026** at https://sirsirio.github.io/MyPortfolio/ai.html (Italian preview links checked too)
+- [x] Cache: CSS/JS carry `?v=20261115`. **On the next change to styles.css, main.js, i18n.js, ai.css or ai.js, bump the tag**, and keep the `i18n.js?v=…` import identical in main.js, method.js and ai.js (two different tags = two copies of the language engine = broken EN/IT toggle)
+
+## Still to do
+
+- [ ] Test both skills on a real task; then "built for" can become "I use" on the page (`ai.use.p2`, `ai.use.p3`)
+- [ ] Wall photo → replace the renders in *Where it lives*
+- [ ] Course certificate → `00_Profile/Certificates/03_Courses_and_Training/`
+- [ ] Copy the final `downloads/skills/*` to `~/.claude/skills/` (Sirio: once the skills are final)
+- [ ] LinkedIn post (section 5)
 
 - [ ] Build directly in the main chat. **No GSD** for this page (Sirio's call, 15 Nov 2026: too heavy for a simple page). Plan and checkpoints: [process/fluency-levels-run.md](process/fluency-levels-run.md)
 - [ ] Link it from the main page and the nav; add the IT copy to `site/i18n.js` if the page is bilingual
