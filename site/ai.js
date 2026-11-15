@@ -6,7 +6,7 @@
    - reader: SKILL.md files shown in a <dialog> via fetch + textContent
    No scroll listeners: IntersectionObserver only. Reduced motion = no typing,
    no streaming, no blinking (CSS gates the rest). */
-import { applyLang, getInitialLang, onLangChange, t } from './i18n.js';
+import { applyLang, getInitialLang, onLangChange, t } from './i18n.js?v=20261115';
 
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 window.__aiReady = true;
