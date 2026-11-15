@@ -20,7 +20,7 @@
        A built an HTML string — that is NOT the locked variant, not ported from. */
 
 import { REDUCED } from './star-engine.js';
-import { onLangChange, t } from './i18n.js?v=20261115';
+import { onLangChange, t } from './i18n.js?v=20261115-2';
 
 /* Every calculator timing lives in ONE object, at the top, so re-pacing is a
    numbers-only edit. Timing IS the point of this rebuild: Sirio could not read

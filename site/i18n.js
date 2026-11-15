@@ -395,8 +395,8 @@ export const STRINGS = {
 
     'ai.use.h2': `Where it lives`,
     'ai.use.p1': `Printed sheets pinned beside the desk, ready for a quick glance while working with AI.`,
-    'ai.use.p2': `fluency-levels is built for important tasks: Quick handles smaller jobs, while Deep serves work that is costly to redo.`,
-    'ai.use.p3': `prompt-4d-review is built for a single moment: verifying a prompt before hitting send.`,
+    'ai.use.p2': `fluency-levels runs before important tasks: Quick handles smaller jobs, while Deep serves work that is costly to redo.`,
+    'ai.use.p3': `prompt-4d-review steps in at a single moment: verifying a prompt before hitting send.`,
     'ai.use.cap': `the five sheets and the one-pager, rendered`,
 
     'ai.dil.h2': `How AI was used`,
@@ -782,8 +782,8 @@ export const STRINGS = {
 
     'ai.use.h2': `Dove vive`,
     'ai.use.p1': `Le schede sono affisse accanto alla scrivania, pronte per una rapida consultazione mentre si lavora con l'IA.`,
-    'ai.use.p2': `fluency-levels è pensata per compiti critici: Rapida per attività brevi, Approfondita quando rifare il lavoro costa caro.`,
-    'ai.use.p3': `prompt-4d-review è pensata per un passaggio chiave: revisionare accuratamente un prompt prima dell'invio.`,
+    'ai.use.p2': `fluency-levels entra in gioco prima dei compiti critici: Rapida per attività brevi, Approfondita quando rifare il lavoro costa caro.`,
+    'ai.use.p3': `prompt-4d-review interviene in un passaggio chiave: revisionare accuratamente un prompt prima dell'invio.`,
     'ai.use.cap': `le cinque schede e la sintesi in pagina singola`,
 
     'ai.dil.h2': `Come è stata usata l'IA`,

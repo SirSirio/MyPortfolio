@@ -83,9 +83,10 @@ Built 15 Nov 2026 (draft copy, not yet humanized, not committed):
 
 ## Still to do
 
-- [ ] Test both skills on a real task; then "built for" can become "I use" on the page (`ai.use.p2`, `ai.use.p3`)
-- [ ] Wall photo → replace the renders in *Where it lives*
-- [ ] Course certificate → `00_Profile/Certificates/03_Courses_and_Training/`
+- [x] Test both skills on a real task (Sirio, 15 Nov 2026); page now says they *run* / *step in* (`ai.use.p2`, `ai.use.p3`, EN + IT)
+- [ ] Wall photo → replace the renders in *Where it lives* (Sirio: in a few days)
+- [x] Course certificate: `00_Profile/Certificates/claude-academy-badge-ai-fluency-framework-foundations.pdf`
+- [x] Cache tags now set in one go: `python ai-fluency/export/bump-cache.py <tag>` (current `20261115-2`)
 - [ ] Copy the final `downloads/skills/*` to `~/.claude/skills/` (Sirio: once the skills are final)
 - [ ] LinkedIn post (section 5)
 

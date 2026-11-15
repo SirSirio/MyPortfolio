@@ -9,8 +9,8 @@
    both canvases. Do not add a second loop. */
 
 import { HeroStar, REDUCED, DPR, tintAt, rgba, clamp, lerp3 } from './star-engine.js';
-import { initMethod } from './method.js';
-import { applyLang, getInitialLang, onLangChange, TERMS } from './i18n.js?v=20261115';
+import { initMethod } from './method.js?v=20261115-2';
+import { applyLang, getInitialLang, onLangChange, TERMS } from './i18n.js?v=20261115-2';
 
 const heroEl = document.querySelector('[data-hero]');
 const deepEl = document.querySelector('[data-deep]');
