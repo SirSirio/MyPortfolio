@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-title-key="ai.meta.title">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Practical tools for AI Fluency · Sirio Feltrin</title>
+  <meta name="description" content="A practical AI Fluency toolkit built from Anthropic's course: five printable cheat sheets, a one-page summary and two Claude skills, free to download." />
+  <meta name="theme-color" content="#04050c" />
+  <!-- Social preview card (LinkedIn, messaging apps). Absolute URLs: scrapers do not resolve relative paths. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Practical tools for AI Fluency · Sirio Feltrin" />
+  <meta property="og:description" content="Five printable cheat sheets, a one-page summary and two Claude skills built from Anthropic's AI Fluency course. Free to download." />
+  <meta property="og:url" content="https://sirsirio.github.io/MyPortfolio/ai.html" />
+  <meta property="og:image" content="https://sirsirio.github.io/MyPortfolio/assets/ai/og-ai-fluency.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Hanken+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./ai.css" />
+  <!-- Arm the streaming reveal before first paint. If ai.js never runs, the safety
+       timer removes the class, so the content can never stay hidden. -->
+  <script>
+    document.documentElement.classList.add('ai-js');
+    setTimeout(function () { if (!window.__aiReady) document.documentElement.classList.remove('ai-js'); }, 2500);
+  </script>
+</head>
+<body>
+  <a class="ai-skip" href="#main">Skip to content</a>
+  <div class="ai-sky" aria-hidden="true"></div>
+
+  <header class="ai-nav">
+    <div class="ai-wrap ai-nav__in">
+      <a class="ai-nav__name" href="./">SIRIO VITTORIO FELTRIN</a>
+      <div class="ai-nav__links">
+        <a class="ai-nav__link" href="./#method" data-i18n-rich="ai.nav.back">&#8592;&nbsp;Portfolio</a>
+        <div class="ai-lang" role="group" aria-label="Language / Lingua">
+          <button type="button" class="ai-lang__btn" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" class="ai-lang__btn" data-lang="it" aria-pressed="false">IT</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1 · HERO. The request types itself into the composer; the page below is the reply. -->
+    <section class="ai-hero">
+      <div class="ai-wrap">
+        <h1 class="ai-hero__h1" data-stream data-i18n-rich="ai.hero.h1">Practical tools for <span class="ai-em">AI Fluency</span></h1>
+        <p class="ai-hero__sub" data-stream data-i18n="ai.hero.sub">A toolkit drawn from Anthropic's AI Fluency course: printable sheets and two skills, free to download.</p>
+
+        <div class="ai-composer" data-stream>
+          <p class="ai-composer__text"><span class="ai-composer__typed" data-typed data-i18n="ai.hero.ask">Build my AI Fluency page. This work matters, so ask me the key questions first.</span><span class="ai-caret" aria-hidden="true"></span></p>
+          <div class="ai-composer__bar">
+            <span class="ai-chip" data-i18n="ai.hero.chip">using my fluency-levels skill · deep mode</span>
+            <a class="ai-send" href="#framework" data-i18n-attr="aria-label:ai.hero.send;title:ai.hero.send" aria-label="Show the answer" title="Show the answer"><span aria-hidden="true">&#8593;</span></a>
+          </div>
+        </div>
+
+        <a class="ai-link ai-hero__cta" href="#toolkit" data-stream data-i18n-rich="ai.hero.cta">Download the toolkit&nbsp;&#8595;</a>
+      </div>
+    </section>
+
+    <!-- 2 · THE 4Ds. Mirrors the Map sheet: Delegation first, Description and Discernment in a loop, Diligence underneath. -->
+    <section id="framework" class="ai-sec ai-fw">
+      <div class="ai-wrap">
+        <h2 class="ai-h2" data-stream data-i18n="ai.fw.h2">Four competencies, one loop</h2>
+        <p class="ai-lede" data-stream data-i18n="ai.fw.p">AI Fluency means working with AI effectively, efficiently, ethically and safely. Developed by Rick Dakan and Joseph Feller with Anthropic, the framework rests on four core competencies.</p>
+
+        <div class="ai-fw__grid">
+          <article class="ai-d ai-d--del" data-stream>
+            <h3 class="ai-d__name">Delegation</h3>
+            <p class="ai-d__q" data-i18n="ai.fw.del.q">What the AI handles, and what stays human</p>
+            <p class="ai-d__d" data-i18n="ai.fw.del.d">Plan the work, then divide it.</p>
+            <p class="ai-d__when" data-i18n-rich="ai.fw.del.when"><b>Plan first</b> whenever a task has 3+ steps, or if redoing it carries high cost.</p>
+          </article>
+
+          <div class="ai-fw__loop" data-stream>
+            <article class="ai-d ai-d--des">
+              <h3 class="ai-d__name">Description</h3>
+              <p class="ai-d__q" data-i18n="ai.fw.des.q">Stating clearly what is needed</p>
+              <p class="ai-d__d" data-i18n="ai.fw.des.d">Define the output, the method and the behaviour.</p>
+            </article>
+            <article class="ai-d ai-d--dis">
+              <h3 class="ai-d__name">Discernment</h3>
+              <p class="ai-d__q" data-i18n="ai.fw.dis.q">Is the generated output any good?</p>
+              <p class="ai-d__d" data-i18n="ai.fw.dis.d">Check the result, the reasoning and the exchange.</p>
+            </article>
+            <div class="ai-fw__cycle">
+              <p class="ai-fw__steps" data-i18n-rich="ai.fw.loop">Describe&nbsp;&#8594; Discern&nbsp;&#8594; Refine&nbsp;&#8594; Decide</p>
+              <p class="ai-fw__note" data-i18n="ai.fw.loopNote">Description and Discernment iterate until the output is right.</p>
+            </div>
+          </div>
+
+          <article class="ai-d ai-d--dil" data-stream>
+            <h3 class="ai-d__name">Diligence</h3>
+            <p class="ai-d__q" data-i18n="ai.fw.dil.q">Is it being used responsibly?</p>
+            <p class="ai-d__d" data-i18n="ai.fw.dil.d">Protect data, disclose the AI's role, own the result.</p>
+          </article>
+        </div>
+
+        <a class="ai-link ai-fw__course" href="https://academy.claude.com/courses/ai-fluency-framework-foundations" target="_blank" rel="noopener" data-stream data-i18n-rich="ai.fw.course">The course on Anthropic Academy&nbsp;&#8599;</a>
+      </div>
+    </section>
+
+    <!-- 3 · TRY IT. A recorded comparison, not a live AI: the questions each depth asks for this same request. -->
+    <section id="try" class="ai-sec ai-try">
+      <div class="ai-wrap">
+        <h2 class="ai-h2" data-stream data-i18n="ai.try.h2">The same request, three depths</h2>
+        <p class="ai-lede" data-stream data-i18n="ai.try.p">The fluency-levels skill clarifies more upfront when the stakes are higher. Toggle the depth to compare.</p>
+
+        <div class="ai-demo" data-stream data-demo>
+          <div class="ai-demo__tabs" role="tablist" data-i18n-attr="aria-label:ai.try.tabs" aria-label="Depth">
+            <button type="button" role="tab" class="ai-tab" id="tab-l1" aria-controls="panel-l1" aria-selected="false" tabindex="-1" data-i18n="ai.try.t1">Quick</button>
+            <button type="button" role="tab" class="ai-tab" id="tab-l2" aria-controls="panel-l2" aria-selected="false" tabindex="-1" data-i18n="ai.try.t2">Standard</button>
+            <button type="button" role="tab" class="ai-tab" id="tab-l3" aria-controls="panel-l3" aria-selected="true" tabindex="0" data-i18n="ai.try.t3">Deep</button>
+            <span class="ai-tab__ink" aria-hidden="true"></span>
+          </div>
+
+          <div class="ai-demo__panel" role="tabpanel" id="panel-l1" aria-labelledby="tab-l1" hidden>
+            <div class="ai-demo__ask">
+              <p class="ai-demo__meta" data-i18n="ai.try.l1.meta">1 round · 3 questions</p>
+              <p class="ai-demo__who" data-i18n="ai.try.l1.who">The AI makes most decisions.</p>
+              <p class="ai-demo__label" data-i18n="ai.try.asks">It asks, for example</p>
+              <ol class="ai-demo__qs">
+                <li data-i18n="ai.try.l1.q1">What is this page for, and what does success look like?</li>
+                <li data-i18n="ai.try.l1.q2">Format, length, and who will read it?</li>
+                <li data-i18n="ai.try.l1.q3">Anything it must never do, or must include?</li>
+              </ol>
+              <p class="ai-demo__end" data-i18n="ai.try.l1.end">Concludes with two or three "Verify" flags on points most prone to error.</p>
+            </div>
+            <div class="ai-demo__out">
+              <p class="ai-demo__label" data-i18n="ai.try.promptLabel">What the answers add up to</p>
+              <pre class="ai-prompt" data-i18n-rich="ai.try.l1.prompt">## Task<br>Build an AI Fluency page.<br>## Output<br>One page, short, for recruiters.<br>## Must never<br>Overclaim.</pre>
+            </div>
+          </div>
+
+          <div class="ai-demo__panel" role="tabpanel" id="panel-l2" aria-labelledby="tab-l2" hidden>
+            <div class="ai-demo__ask">
+              <p class="ai-demo__meta" data-i18n="ai.try.l2.meta">2 rounds · 7 questions</p>
+              <p class="ai-demo__who" data-i18n="ai.try.l2.who">Decisions are shared, requiring an initial outline to be approved.</p>
+              <p class="ai-demo__label" data-i18n="ai.try.asks">It asks, for example</p>
+              <ol class="ai-demo__qs">
+                <li data-i18n="ai.try.l2.q1">Which parts stay with you, and which go to the AI?</li>
+                <li data-i18n="ai.try.l2.q2">What should be attached or known before starting?</li>
+                <li data-i18n="ai.try.l2.q3">Narrow or explore? Challenge or follow? Detailed or concise?</li>
+              </ol>
+              <p class="ai-demo__end" data-i18n="ai.try.l2.end">Closes with a red-flag check on names, numbers, dates and absolute claims.</p>
+            </div>
+            <div class="ai-demo__out">
+              <p class="ai-demo__label" data-i18n="ai.try.promptLabel">What the answers add up to</p>
+              <pre class="ai-prompt" data-i18n-rich="ai.try.l2.prompt">## Task · ## Output · ## Must never<br>## Context and sources<br>The brief, the sheets, the existing site.<br>## Process<br>Sketch first; plan before building.<br>## Thinking partner<br>Concise; challenge where it matters.</pre>
+            </div>
+          </div>
+
+          <div class="ai-demo__panel" role="tabpanel" id="panel-l3" aria-labelledby="tab-l3">
+            <div class="ai-demo__ask">
+              <p class="ai-demo__meta" data-i18n="ai.try.l3.meta">3 rounds · 13 questions</p>
+              <p class="ai-demo__who" data-i18n="ai.try.l3.who">The human makes the key decisions, while the AI challenges the plan.</p>
+              <p class="ai-demo__label" data-i18n="ai.try.asks">It asks, for example</p>
+              <ol class="ai-demo__qs">
+                <li data-i18n="ai.try.l3.q1">Which parts need human judgment and must stay with you?</li>
+                <li data-i18n="ai.try.l3.q2">Is this a familiar field? If not, a short coaching round comes first.</li>
+                <li data-i18n="ai.try.l3.q3">Who will see the result, and do they need to know AI helped?</li>
+              </ol>
+              <p class="ai-demo__end" data-i18n="ai.try.l3.end">Ends with a critical challenge, a staged plan with checkpoints, and a 4D self-grade.</p>
+            </div>
+            <div class="ai-demo__out">
+              <p class="ai-demo__label" data-i18n="ai.try.promptLabel">What the answers add up to</p>
+              <pre class="ai-prompt" data-i18n-rich="ai.try.l3.prompt">## Goal<br>A recruiter gets it in 30 seconds; a friend installs a skill in 2 minutes.<br>## Must never<br>Use Anthropic's logo · call an AI live · invent numbers.<br>## Checkpoints<br>Sketches · the finished page.</pre>
+            </div>
+          </div>
+
+          <p class="ai-demo__note" data-i18n="ai.try.note">Captured from the session that built this page. Nothing here calls an AI.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · TOOLKIT. Bento from sketch 2. Skills: prompt-4d-review first (Sirio's call). -->
+    <section id="toolkit" class="ai-sec ai-tk">
+      <div class="ai-wrap">
+        <h2 class="ai-h2" data-stream data-i18n="ai.tk.h2">The toolkit</h2>
+        <p class="ai-lede" data-stream data-i18n="ai.tk.p">Printable wall sheets alongside two skills that bring the framework into a chat. Free to use and share under CC BY-NC-SA 4.0.</p>
+
+        <div class="ai-bento">
+          <article class="ai-tile ai-tile--sheets" data-stream>
+            <a class="ai-stack" href="./downloads/ai-fluency/ai-fluency-cheat-sheet.pdf" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+              <img class="ai-paper" src="./assets/ai/cheat-sheet-3-description.webp" alt="" width="600" height="849" loading="lazy" decoding="async" />
+              <img class="ai-paper" src="./assets/ai/cheat-sheet-2-delegation.webp" alt="" width="600" height="849" loading="lazy" decoding="async" />
+              <img class="ai-paper" src="./assets/ai/cheat-sheet-1-map.webp" alt="" width="600" height="849" loading="lazy" decoding="async" />
+            </a>
+            <div class="ai-tile__body">
+              <h3 class="ai-tile__h" data-i18n="ai.tk.sheet.h">Cheat sheet · 5 pages</h3>
+              <p class="ai-tile__p" data-i18n="ai.tk.sheet.p">Map, Delegation, Description, Discernment, Diligence. One A4 sheet each.</p>
+              <div class="ai-tile__row">
+                <a class="ai-btn" href="./downloads/ai-fluency/ai-fluency-cheat-sheet.pdf" download data-i18n-rich="ai.tk.sheet.dl">PDF · 5 pages&nbsp;&#8595;</a>
+                <a class="ai-btn ai-btn--ghost" href="./downloads/ai-fluency/ai-fluency-cheat-sheet.pdf" target="_blank" rel="noopener" data-i18n-rich="ai.tk.view">View&nbsp;&#8599;</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="ai-tile ai-tile--one" data-stream>
+            <a class="ai-paper-link" href="./downloads/ai-fluency/ai-fluency-one-page.pdf" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img class="ai-paper ai-paper--one" src="./assets/ai/one-page.webp" alt="" width="600" height="849" loading="lazy" decoding="async" /></a>
+            <div class="ai-tile__body">
+              <h3 class="ai-tile__h" data-i18n="ai.tk.one.h">One page</h3>
+              <p class="ai-tile__p" data-i18n="ai.tk.one.p">The complete process on a single A4 sheet.</p>
+              <div class="ai-tile__row">
+                <a class="ai-btn" href="./downloads/ai-fluency/ai-fluency-one-page.pdf" download data-i18n-rich="ai.tk.one.dl">PDF · 1 page&nbsp;&#8595;</a>
+                <a class="ai-btn ai-btn--ghost" href="./downloads/ai-fluency/ai-fluency-one-page.pdf" target="_blank" rel="noopener" data-i18n-rich="ai.tk.view">View&nbsp;&#8599;</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="ai-tile ai-tile--skill" data-stream>
+            <pre class="ai-code" aria-hidden="true"><b>---</b>
+name: prompt-4d-review
+description: Grades an existing
+  prompt on the AI Fluency 4Ds…
+<b>---</b></pre>
+            <div class="ai-tile__body">
+              <h3 class="ai-tile__h" data-i18n="ai.tk.rev.h">Prompt 4D review</h3>
+              <p class="ai-tile__p" data-i18n="ai.tk.rev.p">Evaluates an existing prompt against the 4Ds, clarifies any gaps, and returns a refined version.</p>
+              <div class="ai-tile__row">
+                <a class="ai-btn" href="./downloads/ai-fluency/prompt-4d-review.zip" download data-i18n-rich="ai.tk.zip">.zip for Claude&nbsp;&#8595;</a>
+                <button type="button" class="ai-btn ai-btn--ghost" data-read="./downloads/ai-fluency/prompt-4d-review.SKILL.md" data-read-title="prompt-4d-review/SKILL.md" data-i18n="ai.tk.read">Read it</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="ai-tile ai-tile--skill" data-stream>
+            <pre class="ai-code" aria-hidden="true"><b>---</b>
+name: fluency-levels
+description: Turns a task into a
+  well-described prompt at 3…
+<b>---</b></pre>
+            <div class="ai-tile__body">
+              <h3 class="ai-tile__h" data-i18n="ai.tk.lev.h">Fluency levels</h3>
+              <p class="ai-tile__p" data-i18n="ai.tk.lev.p">Shapes a task into a structured prompt across three depths, then executes it.</p>
+              <div class="ai-tile__row">
+                <a class="ai-btn" href="./downloads/ai-fluency/fluency-levels.zip" download data-i18n-rich="ai.tk.zip">.zip for Claude&nbsp;&#8595;</a>
+                <button type="button" class="ai-btn ai-btn--ghost" data-read="./downloads/ai-fluency/fluency-levels.SKILL.md" data-read-title="fluency-levels/SKILL.md" data-i18n="ai.tk.read">Read it</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <details class="ai-inst" data-stream>
+          <summary class="ai-inst__sum"><span data-i18n="ai.tk.install">How to install</span><span class="ai-inst__plus" aria-hidden="true"></span></summary>
+          <div class="ai-inst__grid">
+            <div>
+              <h3 class="ai-inst__h" data-i18n="ai.inst.claude.h">Claude apps</h3>
+              <p data-i18n-rich="ai.inst.claude.p">Turn on code execution in Settings &gt; Capabilities. Then open Customize &gt; Skills, choose + and Create skill, upload the .zip and switch it on.</p>
+            </div>
+            <div>
+              <h3 class="ai-inst__h" data-i18n="ai.inst.code.h">Claude Code</h3>
+              <p data-i18n="ai.inst.code.p">Unzip into ~/.claude/skills/ for every project, or into .claude/skills/ for one. Then type /prompt-4d-review or /fluency-levels.</p>
+            </div>
+            <div>
+              <h3 class="ai-inst__h" data-i18n="ai.inst.ag.h">Antigravity</h3>
+              <p data-i18n="ai.inst.ag.p">Unzip into .agents/skills/ in the workspace, or into ~/.gemini/config/skills/ for every project. Then type /fluency-levels, or simply ask.</p>
+            </div>
+          </div>
+          <p class="ai-inst__note" data-i18n="ai.inst.note">Checked against the official documentation in November 2026.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 5 · HOW IT WAS MADE. Each step tagged by who did it (the Delegation markup from the sheets). -->
+    <section id="made" class="ai-sec ai-made">
+      <div class="ai-wrap ai-made__in">
+        <div class="ai-made__head">
+          <h2 class="ai-h2" data-stream data-i18n="ai.made.h2">How it was made</h2>
+          <p class="ai-lede" data-stream data-i18n="ai.made.p">Two AI tools and one human directing decisions. Each step below shows who did the work.</p>
+        </div>
+        <ol class="ai-steps">
+          <li class="ai-step" data-stream><span class="ai-tag ai-tag--human" data-i18n="ai.made.human">Human</span><p data-i18n="ai.made.s1">Working through the course lesson by lesson, noting key insights along the way.</p></li>
+          <li class="ai-step" data-stream><span class="ai-tag ai-tag--together" data-i18n="ai.made.together">Together</span><p data-i18n="ai.made.s2">Claude parsed each lesson into structured notes, while choosing what mattered remained human.</p></li>
+          <li class="ai-step" data-stream><span class="ai-tag ai-tag--together" data-i18n="ai.made.together">Together</span><p data-i18n="ai.made.s3">Claude drafted the content and layouts. Final design rules and the sign-off on each sheet remained human.</p></li>
+          <li class="ai-step" data-stream><span class="ai-tag ai-tag--ai" data-i18n="ai.made.ai">AI</span><p data-i18n="ai.made.s4">Gemini rewrote the copy, while Claude verified every line against the course material for meaning.</p></li>
+          <li class="ai-step" data-stream><span class="ai-tag ai-tag--human" data-i18n="ai.made.human">Human</span><p data-i18n="ai.made.s5">Copy and formatting adjusted by hand until every sheet read cleanly on the wall.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6 · WHERE IT LIVES. Renders of the sheets until a wall photo exists (TODO.md: photo slot). -->
+    <section id="use" class="ai-sec ai-use">
+      <div class="ai-wrap ai-use__in">
+        <figure class="ai-wall" data-stream>
+          <div class="ai-wall__board" aria-hidden="true">
+            <img class="ai-paper" src="./assets/ai/cheat-sheet-1-map.webp" alt="" width="600" height="849" loading="lazy" decoding="async" />
+            <img class="ai-paper" src="./assets/ai/cheat-sheet-2-delegation.webp" alt="" width="600" height="849" loading="lazy" decoding="async" />
+            <img class="ai-paper" src="./assets/ai/cheat-sheet-3-description.webp" alt="" width="600" height="849" loading="lazy" decoding="async" />
+            <img class="ai-paper" src="./assets/ai/cheat-sheet-4-discernment.webp" alt="" width="600" height="849" loading="lazy" decoding="async" />
+            <img class="ai-paper" src="./assets/ai/cheat-sheet-5-diligence.webp" alt="" width="600" height="849" loading="lazy" decoding="async" />
+            <img class="ai-paper" src="./assets/ai/one-page.webp" alt="" width="600" height="849" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="ai-wall__cap" data-i18n="ai.use.cap">the five sheets and the one-pager, rendered</figcaption>
+        </figure>
+        <div class="ai-use__text">
+          <h2 class="ai-h2" data-stream data-i18n="ai.use.h2">Where it lives</h2>
+          <p data-stream data-i18n="ai.use.p1">Printed sheets pinned beside the desk, ready for a quick glance while working with AI.</p>
+          <p data-stream data-i18n="ai.use.p2">fluency-levels is built for important tasks: Quick handles smaller jobs, while Deep serves work that is costly to redo.</p>
+          <p data-stream data-i18n="ai.use.p3">prompt-4d-review is built for a single moment: verifying a prompt before hitting send.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · DILIGENCE STATEMENT. Final text from brief.md, first person; p4 added with Sirio's approval. Not sent to Gemini except p4. -->
+    <section id="statement" class="ai-sec ai-dil">
+      <div class="ai-wrap">
+        <div class="ai-dil__box" data-stream>
+          <h2 class="ai-h2 ai-dil__h" data-i18n="ai.dil.h2">How AI was used</h2>
+          <p data-i18n-rich="ai.dil.p1">I made these cheat sheets and skills while taking Anthropic Academy's <em>AI Fluency: Framework and foundations</em> course, working with two AI tools:</p>
+          <ul class="ai-dil__list">
+            <li data-i18n-rich="ai.dil.li1"><b>Claude</b> (Anthropic): read the course pages and transcripts, kept structured notes, proposed the content, and built the layouts and the two skills.</li>
+            <li data-i18n-rich="ai.dil.li2"><b>Gemini</b> (Google, in Antigravity): paraphrased the sheet text so it reads naturally.</li>
+          </ul>
+          <p data-i18n="ai.dil.p2">Icons come from open-source sets (Phosphor, Lucide, Tabler).</p>
+          <p data-i18n="ai.dil.p3">I chose what goes on each sheet, set the design rules, and wrote or rewrote key phrases. I reviewed every sheet and every line by hand. Claude checked each paraphrased line against the course material for meaning. The final result reflects my understanding of the framework and my own choices, and I take full responsibility for its content, accuracy and presentation.</p>
+          <p data-i18n="ai.dil.p4">This page was designed and created with Claude using this exact process; I made the decisions and reviewed the result.</p>
+          <p data-i18n="ai.dil.p5">I'm sharing this disclosure because transparency about AI's role is one of the principles the course teaches.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ai-foot">
+    <div class="ai-wrap">
+      <p class="ai-foot__lic" data-i18n="ai.foot.lic">Based on the AI Fluency Framework by Rick Dakan and Joseph Feller and the Anthropic Academy course, CC BY-NC-SA 4.0. These resources are shared under the same licence.</p>
+      <details class="ai-credits">
+        <summary data-i18n="ai.foot.credits">Credits</summary>
+        <ul>
+          <li data-i18n-rich="ai.foot.c1">Course and framework: <a href="https://academy.claude.com/courses/ai-fluency-framework-foundations" target="_blank" rel="noopener">AI Fluency: Framework and foundations</a>, by Rick Dakan, Joseph Feller and Anthropic (CC BY-NC-SA 4.0).</li>
+          <li data-i18n-rich="ai.foot.c2">prompt-4d-review: the idea of grading each D as Strong, Adequate or Weak comes from <a href="https://www.agensi.io/skills/4d-analyzer" target="_blank" rel="noopener">4d-analyzer</a> (agensi.io). Concept only; its content was not seen.</li>
+          <li data-i18n-rich="ai.foot.c3">fluency-levels: ideas from <a href="https://github.com/Yeachan-Heo/oh-my-claudecode" target="_blank" rel="noopener">deep-interview</a> (oh-my-claudecode, MIT), the <a href="https://gist.github.com/xthezealot/c873effd9e74225ef3fcfbb9c3a341da" target="_blank" rel="noopener">Lyra prompt optimizer</a> and <a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">brainstorming</a> (obra/superpowers, MIT). Ideas only, in its own words.</li>
+          <li data-i18n="ai.foot.c4">Sheet icons: Phosphor, Lucide, Tabler (MIT, ISC). Fonts: Inter, Space Grotesk (SIL OFL 1.1).</li>
+        </ul>
+      </details>
+      <a class="ai-foot__home" href="./">SIRIO VITTORIO FELTRIN</a>
+    </div>
+  </footer>
+
+  <!-- SKILL.md reader. Filled by ai.js with fetch() + textContent (never innerHTML). -->
+  <dialog class="ai-reader" data-reader aria-labelledby="ai-reader-title">
+    <div class="ai-reader__bar">
+      <p class="ai-reader__title" id="ai-reader-title"></p>
+      <button type="button" class="ai-btn ai-btn--ghost" data-reader-close data-i18n="ai.tk.close">Close</button>
+    </div>
+    <pre class="ai-reader__body" data-reader-body></pre>
+  </dialog>
+
+  <script type="module" src="./ai.js"></script>
+</body>
+</html>

@@ -3399,3 +3399,141 @@ section[id] {
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================================
+   METHOD · the everyday layer (AI Fluency band, Nov 2026)
+   Between Act 1 (story) and Act 2 (tracks). Links to ai.html.
+   Deliberately CONTRASTS with the section's blue: it wears the AI page's
+   clay accent (Sirio's call), so it reads as a door to another room.
+   The 4D chips use the printed sheets' colours, lifted for the dark theme.
+   Motion: main.js adds .is-lit once in view -> the four chips flare in
+   sequence and settle. Nothing is hidden before that, so no-JS and
+   reduced motion show the final state.
+   ============================================================ */
+.fluency-band {
+  --clay: 224, 138, 104;
+}
+.fluency-band__box {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  border-radius: 24px;
+  padding: clamp(28px, 4vw, 48px);
+  border: 1px solid rgba(var(--clay), 0.42);
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(var(--clay), 0.2), transparent 60%),
+    linear-gradient(160deg, rgba(var(--clay), 0.1), rgba(var(--clay), 0.02) 70%),
+    rgba(8, 6, 10, 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 220, 200, 0.08),
+    0 40px 90px -40px rgba(var(--clay), 0.45);
+}
+.fluency-band__h {
+  margin: 0;
+  font: 500 clamp(28px, 3.4vw, 42px) / 1.08 var(--font-display);
+  letter-spacing: -0.025em;
+  color: var(--text-hi);
+}
+.fluency-band__p {
+  margin: 16px 0 0;
+  font-family: var(--font-body);
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.6;
+  color: var(--text-body);
+  max-width: 54ch;
+}
+.fluency-band__ds {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.fluency-band__d {
+  --d: 132, 168, 255;
+  --k: 0;
+  font: 500 15px/1 var(--font-display);
+  padding: 11px 16px;
+  border-radius: 999px;
+  color: rgb(var(--d));
+  border: 1px solid rgba(var(--d), 0.5);
+  background: rgba(var(--d), 0.1);
+  box-shadow: 0 0 22px -8px rgba(var(--d), 0.55);
+}
+.fluency-band__d--des { --d: 240, 150, 104; --k: 1; }
+.fluency-band__d--dis { --d: 86, 206, 186; --k: 2; }
+.fluency-band__d--dil { --d: 178, 150, 255; --k: 3; }
+.fluency-band__btn {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 28px;
+  min-height: 48px;
+  padding: 13px 24px;
+  border-radius: 999px;
+  background: rgb(var(--clay));
+  color: #1a0f0a;
+  font: 600 16px/1 var(--font-display);
+  text-decoration: none;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
+}
+.fluency-band__btn:hover {
+  color: #1a0f0a;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -10px rgba(var(--clay), 0.75);
+}
+.fluency-band__btn:focus-visible { outline: 2px solid rgb(var(--clay)); outline-offset: 3px; }
+.fluency-band__sheets {
+  position: relative;
+  display: block;
+  height: clamp(260px, 26vw, 330px);
+}
+.fluency-band__sheets img {
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: min(190px, 58%);
+  height: auto;        /* styles.css has no global img reset; without this the 849px height attribute wins */
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 26px 50px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 60px -16px rgba(var(--clay), 0.35);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fluency-band__sheets img:nth-child(1) { transform: translateX(-50%) translate(-42px, 16px) rotate(-8deg); }
+.fluency-band__sheets img:nth-child(2) { transform: translateX(-50%) translate(42px, 10px) rotate(6deg); }
+.fluency-band__sheets img:nth-child(3) { transform: translateX(-50%) rotate(-1deg); }
+.fluency-band__box:hover .fluency-band__sheets img:nth-child(1) { transform: translateX(-50%) translate(-62px, 22px) rotate(-11deg); }
+.fluency-band__box:hover .fluency-band__sheets img:nth-child(2) { transform: translateX(-50%) translate(62px, 14px) rotate(9deg); }
+.fluency-band__box:hover .fluency-band__sheets img:nth-child(3) { transform: translateX(-50%) translateY(-6px) rotate(0deg); }
+.fluency-band__tracks {
+  margin: clamp(40px, 5vw, 56px) 0 0;
+  font: 400 clamp(18px, 1.8vw, 21px) / 1.4 var(--font-display);
+  color: var(--text-hi);
+}
+/* the tracks follow the intro line directly */
+.fluency-band + .method__act--tracks .tracks { margin-top: clamp(28px, 4vw, 44px); }
+
+@media (max-width: 860px) {
+  .fluency-band__box { grid-template-columns: 1fr; }
+  .fluency-band__sheets { height: 250px; order: -1; }
+  .fluency-band__sheets img { width: 150px; }
+}
+
+/* The four chips light up in sequence (Delegation -> Diligence), once. */
+@media (prefers-reduced-motion: no-preference) {
+  .fluency-band.is-lit .fluency-band__d {
+    animation: fluencyLight 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--k) * 220ms + 150ms);
+  }
+}
+@keyframes fluencyLight {
+  0% { opacity: 0.35; transform: translateY(6px); box-shadow: 0 0 0 0 rgba(var(--d), 0); }
+  45% { opacity: 1; transform: none; background: rgba(var(--d), 0.28); box-shadow: 0 0 34px 2px rgba(var(--d), 0.6); }
+  100% { opacity: 1; transform: none; background: rgba(var(--d), 0.1); box-shadow: 0 0 22px -8px rgba(var(--d), 0.55); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fluency-band__btn, .fluency-band__sheets img { transition: none; }
+}

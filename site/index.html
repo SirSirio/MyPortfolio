@@ -523,6 +523,34 @@
             </div>
           </div>
 
+          <!-- The everyday layer (AI Fluency page, Nov 2026). Sits between the story and
+               the two tracks: AI Fluency is the base under every AI task; GSD and the
+               physical loop are workflows on top of it for bigger builds. Links to
+               ai.html. Deliberately NOT wired to data-reveal: static, always visible. -->
+          <div class="method__act fluency-band" data-fluency-band>
+            <div class="fluency-band__box">
+              <div class="fluency-band__text">
+                <h3 class="fluency-band__h" data-i18n="method.fl.h">The everyday layer: AI Fluency</h3>
+                <p class="fluency-band__p" data-i18n="method.fl.p">Behind every AI task I take on, from quick questions to full projects, sits one framework: the four competencies from Anthropic's AI Fluency course.</p>
+                <ul class="fluency-band__ds" aria-label="The 4Ds">
+                  <li class="fluency-band__d fluency-band__d--del">Delegation</li>
+                  <li class="fluency-band__d fluency-band__d--des">Description</li>
+                  <li class="fluency-band__d fluency-band__d--dis">Discernment</li>
+                  <li class="fluency-band__d fluency-band__d--dil">Diligence</li>
+                </ul>
+                <a class="fluency-band__btn" href="./ai.html" data-i18n-rich="method.fl.link">The AI Fluency toolkit&nbsp;&#8594;</a>
+              </div>
+              <!-- The real sheets, as visual proof. Decorative (the button carries the link
+                   for keyboard and screen-reader users), so it is hidden from AT. -->
+              <a class="fluency-band__sheets" href="./ai.html" tabindex="-1" aria-hidden="true">
+                <img src="./assets/ai/cheat-sheet-3-description.webp" alt="" width="600" height="849" loading="lazy" decoding="async" />
+                <img src="./assets/ai/cheat-sheet-2-delegation.webp" alt="" width="600" height="849" loading="lazy" decoding="async" />
+                <img src="./assets/ai/cheat-sheet-1-map.webp" alt="" width="600" height="849" loading="lazy" decoding="async" />
+              </a>
+            </div>
+            <p class="fluency-band__tracks" data-i18n="method.fl.tracks">For larger builds, two practical workflows sit on top:</p>
+          </div>
+
           <!-- Act 2: the two tracks. ONE section, a second .method__act (not a
                second section element — the sketch split it only because it was a
                sketch). DIGITAL is a LINE that ships; PHYSICAL is a LOOP that comes

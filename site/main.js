@@ -719,6 +719,22 @@ function initLightbox() {
   }, true);
 }
 
+/* ---------- AI Fluency band (Nov 2026) ----------
+   One IntersectionObserver: when the band in #method comes into view it gets
+   .is-lit once, and CSS lights the four 4D chips in sequence. Nothing is hidden
+   before that (no-JS and reduced motion show the final state), so there is no
+   reveal-gate risk. Inert without the band. */
+function initFluencyBand() {
+  const band = document.querySelector('[data-fluency-band]');
+  if (!band || REDUCED || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { band.classList.add('is-lit'); io.disconnect(); }
+    });
+  }, { threshold: 0.45 });
+  io.observe(band);
+}
+
 function boot() {
   cacheHeroRect();
   syncNav();
@@ -727,6 +743,7 @@ function boot() {
   /* METHOD's calculator choreography. Observer- and timer-driven (D-37): it adds
      no rAF loop and never touches loop()/onScroll(). Inert without #method. */
   initMethod();
+  initFluencyBand();
   /* Language wiring (i18n). Register the typewriter subscriber BEFORE the first
      applyLang so the hero renders in the initial language; method.js registered its
      own calc subscriber inside initMethod() just above. The toggle uses <button>s
