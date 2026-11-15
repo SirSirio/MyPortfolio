@@ -1,6 +1,6 @@
 ---
 name: prompt-4d-review
-description: Review and improve an existing prompt against the AI Fluency 4D framework (Delegation, Description, Discernment, Diligence). Use when given a prompt to check, grade, critique or improve before sending it to an AI.
+description: Grades an existing prompt on the AI Fluency 4Ds (Delegation, Description, Discernment, Diligence) and returns an improved version. Use to check or improve a prompt before sending it.
 ---
 
 # Prompt 4D review
@@ -49,3 +49,6 @@ Also flag prompt mistakes from the course where they appear:
 - Grade the prompt, not the person.
 - Never invent the user's goals, data or constraints. Unknown means a question, or a labelled assumption.
 - Keep the review short: the grades table, the questions, and the improved prompt.
+
+---
+Made with Claude and Gemini; content chosen and reviewed by Sirio Feltrin. Full AI statement: https://sirsirio.github.io/MyPortfolio/ai.html. Based on the AI Fluency Framework (Dakan & Feller) and the Anthropic Academy course, CC BY-NC-SA 4.0.

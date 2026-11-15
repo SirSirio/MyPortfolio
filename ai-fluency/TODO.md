@@ -19,21 +19,34 @@ The skills are also installed globally in `~/.claude/skills/`. Edit `downloads/s
 
 ## 1. Decide the page style (next)
 
-- [ ] Choose a direction: a full sub-page with the star-engine background, or a calmer reading page that keeps the site's nav and type
-- [ ] Decide how the "on my wall" proof shows: a real photo of the sheets by the desk is best
-- [ ] Decide who comes first: recruiter (proof up top) or peer (downloads up top)
-- [ ] Decide how the skills appear: download cards only, or with a short sample run
-- [ ] Section mockups (one image per section) to react to before any code
+Decided 15 Nov 2026:
+
+- **Direction: A · Prompt as page.** Dark site with a warm accent. The hero is a prompt that types itself (`/fluency-levels 3 …`); the page then answers section by section like a structured AI reply. The sheets appear as lit paper objects in the downloads. Evokes Claude's feel, never Anthropic's logo or spark mark.
+- **Placement: its own page** (e.g. `site/ai.html`), with its own link to share, linked from the main page and nav.
+- **Skill demo: playable.** Pick Level 1/2/3 and a sample task, then see the question batches and the finished prompt. Pre-written, runs in the browser, no AI calls.
+- **Wall photo: not now.** Use sheet renders; leave a slot for a photo later.
+
+- **Accent: warm clay** (soft terracotta) on the prompt cursor, buttons and links only. The 4D colours appear only on 4D content.
+- **Hero prompt: `/fluency-levels 3 build my How I work with AI page`.** To keep it true, the build actually runs through the skill at Level 3, and the demo shows those real batches.
+- **Language: EN + IT at launch** (the site's toggle; the copy gets a humanize pass per language).
+- **Order:** 1 Hero (prompt + *Download the toolkit* jump) · 2 The 4Ds · 3 Try it (demo) · 4 Toolkit (downloads) · 5 How I made it (steps tagged Human / Together / AI) · 6 How I use it (photo slot) · 7 Diligence statement · footer (credits + licence).
+
+Still open:
+
+- [x] Run `/fluency-levels 3` on this build; real batches, finished prompt and approved plan in [process/fluency-levels-run.md](process/fluency-levels-run.md)
+- [x] Checkpoint 1: **Sketch 2 · The Composer** chosen (15 Nov 2026): big title with "AI" in clay, the request typing into a wide message box with a send button, toolkit as a tile grid (big stacked-sheets tile, wide one-pager tile, two skill tiles showing SKILL.md's opening lines). Sketch files: scratchpad `sketches/s2-composer.html`, to be rebuilt properly in `site/`.
 
 ## 2. Downloads
 
-- [ ] Export the 5 sheets to `downloads/ai-fluency-cheat-sheet.pdf` (A4) and the one-pager to `downloads/ai-fluency-one-page.pdf`
-- [ ] Check the boxes print white, not dark
-- [ ] PNG previews of each sheet for the page's thumbnail cards
-- [ ] Add the short AI statement and the licence line to each PDF footer and to the end of each `SKILL.md` (wording in brief.md, *Where it goes*)
+- [x] Export the 5 sheets to `downloads/ai-fluency-cheat-sheet.pdf` (A4) and the one-pager to `downloads/ai-fluency-one-page.pdf` (vector; content scaled to 97% for a bigger bottom margin, same layout). Re-export: [export/README.md](export/README.md)
+- [x] Check the boxes print white, not dark (light boxes stay light)
+- [x] PNG/WebP previews of each sheet in `downloads/previews/`
+- [x] One-line footer on every PDF page: *Made with Claude & Gemini, reviewed by Sirio Feltrin · Based on the AI Fluency Framework (Dakan & Feller), CC BY-NC-SA 4.0 · sirsirio.github.io/MyPortfolio/ai.html*; AI/licence line at the end of each download `SKILL.md`
+- [x] Skill descriptions shortened under claude.ai's 200-character limit; zips rebuilt
+- [ ] After the skills are final: copy `downloads/skills/*` to `~/.claude/skills/` (Sirio: "finish work on them first")
+- [x] Install notes: [downloads/INSTALL.md](downloads/INSTALL.md) (Claude apps, Claude Code, Antigravity; checked 15 Nov 2026)
 - [ ] Decide between "eliminates" and "100%" on the Diligence line, and apply it to both sets
 - [ ] Optional: copy the new Prompt coach line 1 to the one-pager
-- [ ] Write the install notes for the skills (Claude chat, Claude Code, Antigravity); check the current instructions first
 - [ ] Optional: the full 8-sheet poster as a "long version"
 
 ## 3. Proof that I use it
@@ -45,7 +58,29 @@ The skills are also installed globally in `~/.claude/skills/`. Edit `downloads/s
 
 ## 4. Build the page
 
-- [ ] Build through GSD (`/gsd-quick` or a new phase), per the portfolio's CLAUDE.md
+Decided 15 Nov 2026, after the run:
+
+- **The main page's *How I work with AI* section gets a new band** between the calculator story and the two workflow cards: *The everyday layer: AI Fluency*, the 4Ds as chips, and a link to the new page. A one-line intro then frames GSD and the physical loop as "for bigger builds, two workflows on top". Sirio's framing: GSD is for complex tasks; the fluency framework is general and for everyday use. The existing text stays.
+- **The new page needs its own title** (not *How I work with AI*, which the main section keeps). Working title *AI Fluency, in practice*. **In the humanize handoff, explicitly ask Gemini for 5 title proposals; Sirio picks one.** The hero request follows the title ("Build my AI Fluency page…").
+- **Toolkit order: present *prompt-4d-review* before *fluency-levels*.**
+- **Copy flow for the site:** build with draft strings in `site/i18n.js` → `site_i18n.py extract` (EN + `--lang=it`) → `/humanize` → fact check → apply → Sirio reviews on the page.
+
+Built 15 Nov 2026 (draft copy, not yet humanized, not committed):
+
+- [x] `site/ai.html`, `site/ai.css`, `site/ai.js`; strings `ai.*` + `method.fl.*` in `site/i18n.js` (EN + IT); `i18n.js` now honours `<html data-title-key>`
+- [x] Main page: AI Fluency band in `#method` (index.html + styles.css, end of file)
+- [x] Downloads copied to `site/downloads/ai-fluency/`, previews to `site/assets/ai/` (source of truth stays `ai-fluency/downloads/`)
+- [x] Social preview card `site/assets/ai/og-ai-fluency.png` (**regenerate after the title is chosen**)
+- [x] Checks: no console errors; no horizontal scroll at 1440 / 390 px; tabs (click + arrow keys), SKILL.md reader, install notes, all 4 downloads (200); IT version; zero em/en dashes
+- [x] Humanize drafts: `05_Portfolio/Humanize/Humanize_AIPage_v1.draft.md` (EN, + T0 block: Gemini proposes 5 titles) and `Humanize_AIPage_IT_v1.draft.md`; keys in `Humanize/keys_ai.txt`
+- [x] **Sirio:** ran `/humanize` on both drafts in Antigravity
+- [x] Claude: checked, 6 fixes per language (FIX lines in the `.final.md` files), applied EN + IT, synced the band fallbacks in `index.html`; review files `Humanize_AIPage_v1.review.md` and `Humanize_AIPage_IT_v1.review.md`
+- [x] **Title chosen: "Practical tools for AI Fluency"** (Gemini proposal 4; IT *Strumenti pratici per AI Fluency*); hero subtitle drops "practical" to avoid the repeat; OG card regenerated
+- [x] **View ↗** buttons: the PDFs open in a new tab (sheet images clickable too)
+- [x] Main-page band made prominent (`/fluency-levels 1`): clay box contrasting with the section's blue, bigger title, glowing 4D chips that light up in sequence on scroll, a clay button, the real sheets beside the text
+- [ ] Checkpoint 2: Sirio reviews on the page → fixes → go-live (commit + push)
+
+- [ ] Build directly in the main chat. **No GSD** for this page (Sirio's call, 15 Nov 2026: too heavy for a simple page). Plan and checkpoints: [process/fluency-levels-run.md](process/fluency-levels-run.md)
 - [ ] Link it from the main page and the nav; add the IT copy to `site/i18n.js` if the page is bilingual
 - [ ] Optional: add one sentence to the statement saying the skills borrow ideas from other published skills (the Credits table already covers it)
 - [ ] Replace every placeholder (name, links, file sizes, dates)

@@ -1,6 +1,6 @@
 ---
 name: fluency-levels
-description: Structured prompting at three effort levels (1 Quick, 2 Standard, 3 Deep), built on the AI Fluency 4D framework. Use when called with a level and a task, e.g. "/fluency-levels 2 write the lab report intro", or asked to run the fluency process on a task.
+description: Turns a task into a well-described prompt at 3 effort levels (Quick, Standard, Deep) using the AI Fluency 4Ds, then does it. Use with a level and a task, e.g. /fluency-levels 2 <task>.
 ---
 
 # Fluency levels
@@ -138,3 +138,6 @@ At every level, end with **Confidence** (high, medium or low, and why) and any *
 - Never invent the user's preferences. A missing answer becomes a stated assumption.
 - Keep the user's own words in the finished prompt where possible.
 - If the user switches level mid-way ("go to 1", "make it 3"), adjust the remaining batches and say what changes.
+
+---
+Made with Claude and Gemini; content chosen and reviewed by Sirio Feltrin. Full AI statement: https://sirsirio.github.io/MyPortfolio/ai.html. Based on the AI Fluency Framework (Dakan & Feller) and the Anthropic Academy course, CC BY-NC-SA 4.0.
